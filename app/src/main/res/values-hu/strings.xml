@@ -270,7 +270,7 @@ Az internetes forgalom nem érkezik meg a távoli VPN kiszolgálóhoz.</string>
     <string name="title_pro_unavailable">Nem érhető el</string>
     <string name="title_pro_details">Érintse meg a címet további információért</string>
     <string name="title_pro_challenge">Hívás</string>
-    <string name="title_pro_reponse">Válasz</string>
+    <string name="title_pro_response">Válasz</string>
     <string name="title_pro_feature">Ez egy pro szolgáltatás</string>
     <string name="title_pro_subscription">        Egy havi 1 vagy 2 eurós előfizetéssel (hely adók levonásával) lehet aktiválni a pro funkciókat.
         Az előfizetést a Play Áruház előfizetések oldalán tudja megszüntetni vagy kezelni.

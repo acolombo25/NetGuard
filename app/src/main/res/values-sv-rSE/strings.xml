@@ -272,7 +272,7 @@ Din internettrafik skickas inte till en avlägsen VPN-server.</string>
     <string name="title_pro_unavailable">Otillgängligt</string>
     <string name="title_pro_details">Tryck på en titel för mer information</string>
     <string name="title_pro_challenge">Utmaning</string>
-    <string name="title_pro_reponse">Svar</string>
+    <string name="title_pro_response">Svar</string>
     <string name="title_pro_feature">Detta är en pro-funktion</string>
     <string name="title_pro_subscription">        Ett månatlig abonnemang på 1 eller 2 euro (exklusive lokala skatter) aktiverar alla profunktioner.
         Du kan avbryta eller hantera ett abonnemang via abonnemangsfliken i appen Play store.

@@ -272,7 +272,7 @@ Aktivér venligst indstillingerne \"Baggrundsdata\" og \"Ubegrænset dataforbrug
     <string name="title_pro_unavailable">Utilgængelig</string>
     <string name="title_pro_details">Tryk på en titel for yderligere oplysninger</string>
     <string name="title_pro_challenge">Udfordring</string>
-    <string name="title_pro_reponse">Svar</string>
+    <string name="title_pro_response">Svar</string>
     <string name="title_pro_feature">Dette er en Pro-funktion</string>
     <string name="title_pro_subscription">        Et månedligt abonnement på 1 eller 2 euro (ekskl. lokal moms) vil aktivere alle Pro-funktioner.
         Du kan afmelde eller håndtere et abonnement via fanen Abonnementer i Play Butik-appen.
