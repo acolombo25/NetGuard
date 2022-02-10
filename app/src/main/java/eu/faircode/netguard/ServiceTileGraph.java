@@ -54,7 +54,6 @@ public class ServiceTileGraph extends TileService implements SharedPreferences.O
         Tile tile = getQsTile();
         if (tile != null) {
             tile.setState(stats ? Tile.STATE_ACTIVE : Tile.STATE_INACTIVE);
-            tile.setIcon(Icon.createWithResource(this, stats ? R.drawable.ic_equalizer_white_24dp : R.drawable.ic_equalizer_white_24dp_60));
             tile.updateTile();
         }
     }

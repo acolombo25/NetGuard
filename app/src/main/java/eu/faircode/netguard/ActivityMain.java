@@ -686,9 +686,7 @@ public class ActivityMain extends AppCompatActivity implements SharedPreferences
 
             if (adapter != null)
                 if (intent.hasExtra(EXTRA_CONNECTED) && intent.hasExtra(EXTRA_METERED)) {
-                    ivIcon.setImageResource(Util.isNetworkActive(ActivityMain.this)
-                            ? R.drawable.ic_security_white_24dp
-                            : R.drawable.ic_security_white_24dp_60);
+                    ivIcon.setAlpha(Util.isNetworkActive(ActivityMain.this) ? 1.0f : 0.6f);
                     if (intent.getBooleanExtra(EXTRA_CONNECTED, false)) {
                         if (intent.getBooleanExtra(EXTRA_METERED, false))
                             adapter.setMobileActive();
@@ -801,10 +799,8 @@ public class ActivityMain extends AppCompatActivity implements SharedPreferences
 
     private void markPro(MenuItem menu, String sku) {
         if (sku == null || !IAB.isPurchased(sku, this)) {
-            SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
-            boolean dark = prefs.getBoolean("dark_theme", false);
             SpannableStringBuilder ssb = new SpannableStringBuilder("  " + menu.getTitle());
-            ssb.setSpan(new ImageSpan(this, dark ? R.drawable.ic_shopping_cart_white_24dp : R.drawable.ic_shopping_cart_black_24dp), 0, 1, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+            ssb.setSpan(new ImageSpan(this, R.drawable.ic_shopping_cart), 0, 1, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
             menu.setTitle(ssb);
         }
     }
@@ -1119,47 +1115,8 @@ public class ActivityMain extends AppCompatActivity implements SharedPreferences
     }
 
     private void menu_legend() {
-        TypedValue tv = new TypedValue();
-        getTheme().resolveAttribute(R.attr.colorOn, tv, true);
-        int colorOn = tv.data;
-        getTheme().resolveAttribute(R.attr.colorOff, tv, true);
-        int colorOff = tv.data;
-
-        // Create view
-        LayoutInflater inflater = LayoutInflater.from(this);
-        View view = inflater.inflate(R.layout.legend, null, false);
-        ImageView ivLockdownOn = view.findViewById(R.id.ivLockdownOn);
-        ImageView ivWifiOn = view.findViewById(R.id.ivWifiOn);
-        ImageView ivWifiOff = view.findViewById(R.id.ivWifiOff);
-        ImageView ivOtherOn = view.findViewById(R.id.ivOtherOn);
-        ImageView ivOtherOff = view.findViewById(R.id.ivOtherOff);
-        ImageView ivScreenOn = view.findViewById(R.id.ivScreenOn);
-        ImageView ivHostAllowed = view.findViewById(R.id.ivHostAllowed);
-        ImageView ivHostBlocked = view.findViewById(R.id.ivHostBlocked);
-        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
-            Drawable wrapLockdownOn = DrawableCompat.wrap(ivLockdownOn.getDrawable());
-            Drawable wrapWifiOn = DrawableCompat.wrap(ivWifiOn.getDrawable());
-            Drawable wrapWifiOff = DrawableCompat.wrap(ivWifiOff.getDrawable());
-            Drawable wrapOtherOn = DrawableCompat.wrap(ivOtherOn.getDrawable());
-            Drawable wrapOtherOff = DrawableCompat.wrap(ivOtherOff.getDrawable());
-            Drawable wrapScreenOn = DrawableCompat.wrap(ivScreenOn.getDrawable());
-            Drawable wrapHostAllowed = DrawableCompat.wrap(ivHostAllowed.getDrawable());
-            Drawable wrapHostBlocked = DrawableCompat.wrap(ivHostBlocked.getDrawable());
-
-            DrawableCompat.setTint(wrapLockdownOn, colorOff);
-            DrawableCompat.setTint(wrapWifiOn, colorOn);
-            DrawableCompat.setTint(wrapWifiOff, colorOff);
-            DrawableCompat.setTint(wrapOtherOn, colorOn);
-            DrawableCompat.setTint(wrapOtherOff, colorOff);
-            DrawableCompat.setTint(wrapScreenOn, colorOn);
-            DrawableCompat.setTint(wrapHostAllowed, colorOn);
-            DrawableCompat.setTint(wrapHostBlocked, colorOff);
-        }
-
-
-        // Show dialog
         dialogLegend = new AlertDialog.Builder(this)
-                .setView(view)
+                .setView(LayoutInflater.from(this).inflate(R.layout.legend, null, false))
                 .setCancelable(true)
                 .setOnDismissListener(new DialogInterface.OnDismissListener() {
                     @Override

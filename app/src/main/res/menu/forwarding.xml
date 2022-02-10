@@ -3,7 +3,7 @@
     xmlns:netguard="http://schemas.android.com/apk/res-auto">
     <item
         android:id="@+id/menu_add"
-        android:icon="@drawable/ic_add_circle_outline_white_24dp"
+        android:icon="@drawable/ic_add_circle"
         android:title="@string/menu_add"
         netguard:showAsAction="always|collapseActionView" />
 </menu>

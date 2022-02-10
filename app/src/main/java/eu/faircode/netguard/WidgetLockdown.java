@@ -49,9 +49,9 @@ public class WidgetLockdown extends AppWidgetProvider {
                 intent.setPackage(context.getPackageName());
                 PendingIntent pi = PendingIntent.getBroadcast(context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_MUTABLE);
                 for (int id : appWidgetIds) {
-                    RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.widgetlockdown);
+                    RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.widget);
                     views.setOnClickPendingIntent(R.id.ivEnabled, pi);
-                    views.setImageViewResource(R.id.ivEnabled, lockdown ? R.drawable.ic_lock_outline_white_24dp : R.drawable.ic_lock_open_white_24dp);
+                    views.setImageViewResource(R.id.ivEnabled, lockdown ? R.drawable.ic_outline_lock : R.drawable.ic_outline_lock_open);
                     appWidgetManager.updateAppWidget(id, views);
                 }
             } catch (Throwable ex) {

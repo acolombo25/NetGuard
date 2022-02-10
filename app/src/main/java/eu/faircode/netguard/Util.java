@@ -57,6 +57,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.core.net.ConnectivityManagerCompat;
 import androidx.preference.PreferenceManager;
 
@@ -508,21 +509,30 @@ public class Util {
     public static void setTheme(Context context) {
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
         boolean dark = prefs.getBoolean("dark_theme", false);
+        AppCompatDelegate.setDefaultNightMode(dark? AppCompatDelegate.MODE_NIGHT_YES : AppCompatDelegate.MODE_NIGHT_NO);
         String theme = prefs.getString("theme", "teal");
-        if (theme.equals("teal"))
-            context.setTheme(dark ? R.style.AppThemeTealDark : R.style.AppThemeTeal);
-        else if (theme.equals("blue"))
-            context.setTheme(dark ? R.style.AppThemeBlueDark : R.style.AppThemeBlue);
-        else if (theme.equals("purple"))
-            context.setTheme(dark ? R.style.AppThemePurpleDark : R.style.AppThemePurple);
-        else if (theme.equals("amber"))
-            context.setTheme(dark ? R.style.AppThemeAmberDark : R.style.AppThemeAmber);
-        else if (theme.equals("orange"))
-            context.setTheme(dark ? R.style.AppThemeOrangeDark : R.style.AppThemeOrange);
-        else if (theme.equals("green"))
-            context.setTheme(dark ? R.style.AppThemeGreenDark : R.style.AppThemeGreen);
+        switch (theme) {
+            case "teal":
+                context.setTheme(R.style.AppThemeTeal);
+                break;
+            case "blue":
+                context.setTheme(R.style.AppThemeBlue);
+                break;
+            case "purple":
+                context.setTheme(R.style.AppThemePurple);
+                break;
+            case "amber":
+                context.setTheme(R.style.AppThemeAmber);
+                break;
+            case "orange":
+                context.setTheme(R.style.AppThemeOrange);
+                break;
+            case "green":
+                context.setTheme(R.style.AppThemeGreen);
+                break;
+        }
 
-        if (context instanceof Activity && Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP)
+        if (context instanceof Activity)
             setTaskColor(context);
     }
 

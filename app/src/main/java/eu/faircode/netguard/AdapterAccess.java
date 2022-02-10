@@ -121,11 +121,7 @@ public class AdapterAccess extends CursorAdapter {
         if (block < 0)
             ivBlock.setImageDrawable(null);
         else {
-            ivBlock.setImageResource(block > 0 ? R.drawable.host_blocked : R.drawable.host_allowed);
-            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
-                Drawable wrap = DrawableCompat.wrap(ivBlock.getDrawable());
-                DrawableCompat.setTint(wrap, block > 0 ? colorOff : colorOn);
-            }
+            ivBlock.setImageResource(block > 0 ? R.drawable.ic_close : R.drawable.ic_check);
         }
 
         String dest = Util.getProtocolName(protocol, version, true) +

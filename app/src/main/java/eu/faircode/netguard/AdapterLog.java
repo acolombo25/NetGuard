@@ -164,27 +164,19 @@ public class AdapterLog extends CursorAdapter {
 
         // Show connection type
         if (connection <= 0)
-            ivConnection.setImageResource(allowed > 0 ? R.drawable.host_allowed : R.drawable.host_blocked);
+            ivConnection.setImageResource(allowed > 0 ? R.drawable.ic_check : R.drawable.ic_close);
         else {
             if (allowed > 0)
-                ivConnection.setImageResource(connection == 1 ? R.drawable.wifi_on : R.drawable.other_on);
+                ivConnection.setImageResource(connection == 1 ? R.drawable.ic_signal_wifi_4_bar : R.drawable.ic_signal_cellular_4_bar);
             else
-                ivConnection.setImageResource(connection == 1 ? R.drawable.wifi_off : R.drawable.other_off);
-        }
-        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
-            Drawable wrap = DrawableCompat.wrap(ivConnection.getDrawable());
-            DrawableCompat.setTint(wrap, allowed > 0 ? colorOn : colorOff);
+                ivConnection.setImageResource(connection == 1 ? R.drawable.ic_signal_wifi_off : R.drawable.ic_signal_cellular_off);
         }
 
         // Show if screen on
         if (interactive <= 0)
             ivInteractive.setImageDrawable(null);
         else {
-            ivInteractive.setImageResource(R.drawable.screen_on);
-            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
-                Drawable wrap = DrawableCompat.wrap(ivInteractive.getDrawable());
-                DrawableCompat.setTint(wrap, colorOn);
-            }
+            ivInteractive.setImageResource(R.drawable.ic_perm_identity);
         }
 
         // Show protocol name

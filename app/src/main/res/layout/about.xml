@@ -16,10 +16,10 @@
         android:orientation="horizontal">
 
         <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="@dimen/icon_dialog"
+            android:layout_height="@dimen/icon_dialog"
             android:layout_gravity="center_vertical"
-            android:src="@drawable/ic_security_color_24dp" />
+            android:src="@drawable/ic_twotone_security" />
 
         <LinearLayout
             android:layout_width="wrap_content"

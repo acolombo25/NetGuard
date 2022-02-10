@@ -54,7 +54,6 @@ public class ServiceTileFilter extends TileService implements SharedPreferences.
         Tile tile = getQsTile();
         if (tile != null) {
             tile.setState(filter ? Tile.STATE_ACTIVE : Tile.STATE_INACTIVE);
-            tile.setIcon(Icon.createWithResource(this, filter ? R.drawable.ic_filter_list_white_24dp : R.drawable.ic_filter_list_white_24dp_60));
             tile.updateTile();
         }
     }

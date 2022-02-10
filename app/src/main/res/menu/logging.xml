@@ -3,14 +3,14 @@
     xmlns:netguard="http://schemas.android.com/apk/res-auto">
     <item
         android:id="@+id/menu_search"
-        android:icon="@drawable/ic_search_white_24dp"
+        android:icon="@drawable/ic_search"
         android:title="@string/menu_search"
         netguard:actionViewClass="androidx.appcompat.widget.SearchView"
         netguard:showAsAction="always|collapseActionView" />
 
     <item
         android:id="@+id/menu_filter"
-        android:icon="@drawable/ic_filter_list_white_24dp"
+        android:icon="@drawable/ic_filter_list"
         android:title="@string/menu_filter"
         netguard:showAsAction="always|collapseActionView">
         <menu>
