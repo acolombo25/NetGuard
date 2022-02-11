@@ -1,7 +1,7 @@
 <shortcuts xmlns:android="http://schemas.android.com/apk/res/android">
     <shortcut
         android:enabled="true"
-        android:icon="@android:drawable/ic_menu_preferences"
+        android:icon="@drawable/ic_settings"
         android:shortcutDisabledMessage="@string/menu_settings"
         android:shortcutId="settings"
         android:shortcutLongLabel="@string/menu_settings"
@@ -14,7 +14,7 @@
     </shortcut>
     <shortcut
         android:enabled="true"
-        android:icon="@android:drawable/ic_menu_recent_history"
+        android:icon="@drawable/ic_view_headline"
         android:shortcutDisabledMessage="@string/menu_log"
         android:shortcutId="log"
         android:shortcutLongLabel="@string/menu_log"
