@@ -68,10 +68,6 @@ import androidx.core.graphics.drawable.DrawableCompat;
 import androidx.core.widget.CompoundButtonCompat;
 import androidx.preference.PreferenceManager;
 import androidx.recyclerview.widget.RecyclerView;
-
-import com.bumptech.glide.load.DecodeFormat;
-import com.bumptech.glide.request.RequestOptions;
-
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -361,18 +357,7 @@ public class AdapterRule extends RecyclerView.Adapter<AdapterRule.ViewHolder> im
         holder.ivExpander.setImageLevel(rule.expanded ? 1 : 0);
 
         // Show application icon
-        if (rule.icon <= 0)
-            holder.ivIcon.setImageResource(android.R.drawable.sym_def_app_icon);
-        else {
-            Uri uri = Uri.parse("android.resource://" + rule.packageName + "/" + rule.icon);
-            GlideApp.with(holder.itemView.getContext())
-                    .applyDefaultRequestOptions(new RequestOptions().format(DecodeFormat.PREFER_RGB_565))
-                    .load(uri)
-                    //.diskCacheStrategy(DiskCacheStrategy.NONE)
-                    //.skipMemoryCache(true)
-                    .override(iconSize, iconSize)
-                    .into(holder.ivIcon);
-        }
+        holder.ivIcon.setImageDrawable(Util.getAppIconDrawable(context, rule));
 
         // Show application label
         holder.tvName.setText(rule.name);

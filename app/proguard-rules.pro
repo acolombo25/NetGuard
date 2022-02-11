@@ -49,14 +49,5 @@
 -keep class androidx.appcompat.app.AppCompatViewInflater { <init>(...); }
 -keepclassmembers class * implements android.os.Parcelable { static ** CREATOR; }
 
-#Glide
--keep public class * implements com.bumptech.glide.module.GlideModule
--keep public class * extends com.bumptech.glide.module.AppGlideModule
--keep enum com.bumptech.glide.** {*;}
-#-keep public enum com.bumptech.glide.load.resource.bitmap.ImageHeaderParser$** {
-#    **[] $VALUES;
-#    public *;
-#}
-
 #AdMob
 -dontwarn com.google.android.gms.internal.**

@@ -35,6 +35,7 @@ import android.content.res.Resources;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.drawable.Drawable;
 import android.net.ConnectivityManager;
 import android.net.LinkProperties;
 import android.net.Network;
@@ -56,7 +57,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatDelegate;
+import androidx.core.content.ContextCompat;
 import androidx.core.net.ConnectivityManagerCompat;
 import androidx.preference.PreferenceManager;
 
@@ -838,6 +843,23 @@ public class Util {
             sb.setLength(sb.length() - 2);
 
         return sb.toString();
+    }
+
+    public static @Nullable Drawable getAppIconDrawable(Context context, Rule rule) {
+        return getAppIconDrawable(context, rule.packageName);
+    }
+
+    public static @Nullable Drawable getAppIconDrawable(Context context, ApplicationInfo info) {
+        return getAppIconDrawable(context, info.packageName);
+    }
+
+    private static @Nullable Drawable getAppIconDrawable(Context context, String packageName) {
+        try {
+            return context.getPackageManager().getApplicationIcon(packageName);
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
+            return ContextCompat.getDrawable(context, android.R.drawable.sym_def_app_icon);
+        }
     }
 
     @TargetApi(Build.VERSION_CODES.M)
