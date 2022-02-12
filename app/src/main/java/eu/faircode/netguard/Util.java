@@ -404,11 +404,11 @@ public class Util {
 
     public static List<String> getApplicationNames(int uid, Context context) {
         List<String> listResult = new ArrayList<>();
-        if (uid == 0)
+        if (uid == Uid.Root.getCode())
             listResult.add(context.getString(R.string.title_root));
-        else if (uid == 1013)
+        else if (uid == Uid.Media.getCode())
             listResult.add(context.getString(R.string.title_mediaserver));
-        else if (uid == 9999)
+        else if (uid == Uid.Nobody.getCode())
             listResult.add(context.getString(R.string.title_nobody));
         else {
             PackageManager pm = context.getPackageManager();

@@ -1229,12 +1229,12 @@ public class ActivitySettings extends AppCompatActivity implements SharedPrefere
     }
 
     private String[] getPackages(int uid) {
-        if (uid == 0)
-            return new String[]{"root"};
-        else if (uid == 1013)
-            return new String[]{"mediaserver"};
-        else if (uid == 9999)
-            return new String[]{"nobody"};
+        if (uid == Uid.Root.getCode())
+            return new String[]{Uid.Root.getId()};
+        else if (uid == Uid.Media.getCode())
+            return new String[]{Uid.Media.getId()};
+        else if (uid == Uid.Nobody.getCode())
+            return new String[]{Uid.Nobody.getId()};
         else {
             String pkgs[] = getPackageManager().getPackagesForUid(uid);
             if (pkgs == null)
@@ -1447,18 +1447,18 @@ public class ActivitySettings extends AppCompatActivity implements SharedPrefere
         }
 
         private int getUid(String pkg) throws PackageManager.NameNotFoundException {
-            if ("root".equals(pkg))
-                return 0;
-            else if ("android.media".equals(pkg))
-                return 1013;
-            else if ("android.multicast".equals(pkg))
-                return 1020;
-            else if ("android.gps".equals(pkg))
-                return 1021;
-            else if ("android.dns".equals(pkg))
-                return 1051;
-            else if ("nobody".equals(pkg))
-                return 9999;
+            if (Uid.Root.getPackageName().equals(pkg))
+                return Uid.Root.getCode();
+            else if (Uid.Media.getPackageName().equals(pkg))
+                return Uid.Media.getCode();
+            else if (Uid.Multicast.getPackageName().equals(pkg))
+                return Uid.Multicast.getCode();
+            else if (Uid.Gps.getPackageName().equals(pkg))
+                return Uid.Gps.getCode();
+            else if (Uid.Dns.getPackageName().equals(pkg))
+                return Uid.Dns.getCode();
+            else if (Uid.Nobody.getPackageName().equals(pkg))
+                return Uid.Nobody.getCode();
             else
                 return getPackageManager().getApplicationInfo(pkg, 0).uid;
         }

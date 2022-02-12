@@ -232,13 +232,13 @@ public class AdapterLog extends CursorAdapter {
         boolean we = (android.os.Process.myUid() == uid);
 
         // https://android.googlesource.com/platform/system/core/+/master/include/private/android_filesystem_config.h
-        uid = uid % 100000; // strip off user ID
+        uid = uid % Uid.USER_FACTOR; // strip off user ID
         if (uid == -1)
             tvUid.setText("");
-        else if (uid == 0)
+        else if (uid == Uid.Root.getCode())
             tvUid.setText(context.getString(R.string.title_root));
-        else if (uid == 9999)
-            tvUid.setText("-"); // nobody
+        else if (uid == Uid.Nobody.getCode())
+            tvUid.setText("-");
         else
             tvUid.setText(Integer.toString(uid));
 

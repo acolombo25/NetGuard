@@ -140,37 +140,37 @@ public class Rule {
         this.packageName = info.packageName;
         this.icon = info.applicationInfo.icon;
         this.version = info.versionName;
-        if (info.applicationInfo.uid == 0) {
+        if (info.applicationInfo.uid == Uid.Root.getCode()) {
             this.name = context.getString(R.string.title_root);
             this.system = true;
             this.internet = true;
             this.enabled = true;
             this.pkg = false;
-        } else if (info.applicationInfo.uid == 1013) {
+        } else if (info.applicationInfo.uid == Uid.Media.getCode()) {
             this.name = context.getString(R.string.title_mediaserver);
             this.system = true;
             this.internet = true;
             this.enabled = true;
             this.pkg = false;
-        } else if (info.applicationInfo.uid == 1020) {
-            this.name = "MulticastDNSResponder";
+        } else if (info.applicationInfo.uid == Uid.Multicast.getCode()) {
+            this.name = context.getString(R.string.title_multicast);
             this.system = true;
             this.internet = true;
             this.enabled = true;
             this.pkg = false;
-        } else if (info.applicationInfo.uid == 1021) {
+        } else if (info.applicationInfo.uid == Uid.Gps.getCode()) {
             this.name = context.getString(R.string.title_gpsdaemon);
             this.system = true;
             this.internet = true;
             this.enabled = true;
             this.pkg = false;
-        } else if (info.applicationInfo.uid == 1051) {
+        } else if (info.applicationInfo.uid == Uid.Dns.getCode()) {
             this.name = context.getString(R.string.title_dnsdaemon);
             this.system = true;
             this.internet = true;
             this.enabled = true;
             this.pkg = false;
-        } else if (info.applicationInfo.uid == 9999) {
+        } else if (info.applicationInfo.uid == Uid.Nobody.getCode()) {
             this.name = context.getString(R.string.title_nobody);
             this.system = true;
             this.internet = true;
@@ -274,66 +274,69 @@ public class Rule {
             List<Rule> listRules = new ArrayList<>();
             List<PackageInfo> listPI = getPackages(context);
 
-            int userId = Process.myUid() / 100000;
+            int userId = Process.myUid() / Uid.USER_FACTOR;
+            int userUid = userId * Uid.USER_FACTOR;
+            int icon = 0;
 
             // Add root
             PackageInfo root = new PackageInfo();
-            root.packageName = "root";
+            root.packageName = Uid.Root.getPackageName();
             root.versionCode = Build.VERSION.SDK_INT;
             root.versionName = Build.VERSION.RELEASE;
             root.applicationInfo = new ApplicationInfo();
             root.applicationInfo.uid = 0;
-            root.applicationInfo.icon = 0;
+            root.applicationInfo.icon = icon;
             listPI.add(root);
+
 
             // Add mediaserver
             PackageInfo media = new PackageInfo();
-            media.packageName = "android.media";
+            media.packageName = Uid.Media.getPackageName();
             media.versionCode = Build.VERSION.SDK_INT;
             media.versionName = Build.VERSION.RELEASE;
             media.applicationInfo = new ApplicationInfo();
-            media.applicationInfo.uid = 1013 + userId * 100000;
-            media.applicationInfo.icon = 0;
+            media.applicationInfo.uid = Uid.Media.getCode() + userUid;
+            media.applicationInfo.icon = icon;
             listPI.add(media);
 
             // MulticastDNSResponder
             PackageInfo mdr = new PackageInfo();
-            mdr.packageName = "android.multicast";
+            mdr.packageName = Uid.Multicast.getPackageName();
             mdr.versionCode = Build.VERSION.SDK_INT;
             mdr.versionName = Build.VERSION.RELEASE;
             mdr.applicationInfo = new ApplicationInfo();
-            mdr.applicationInfo.uid = 1020 + userId * 100000;
-            mdr.applicationInfo.icon = 0;
+            mdr.applicationInfo.uid = Uid.Multicast.getCode() + userUid;
+            mdr.applicationInfo.icon = icon;
             listPI.add(mdr);
 
             // Add GPS daemon
             PackageInfo gps = new PackageInfo();
-            gps.packageName = "android.gps";
+            gps.packageName = Uid.Gps.getPackageName();
             gps.versionCode = Build.VERSION.SDK_INT;
             gps.versionName = Build.VERSION.RELEASE;
             gps.applicationInfo = new ApplicationInfo();
-            gps.applicationInfo.uid = 1021 + userId * 100000;
-            gps.applicationInfo.icon = 0;
+            gps.applicationInfo.uid = Uid.Gps.getCode() + userUid;
+            gps.applicationInfo.icon = icon;
             listPI.add(gps);
 
             // Add DNS daemon
             PackageInfo dns = new PackageInfo();
-            dns.packageName = "android.dns";
+            dns.packageName = Uid.Dns.getPackageName();
             dns.versionCode = Build.VERSION.SDK_INT;
             dns.versionName = Build.VERSION.RELEASE;
             dns.applicationInfo = new ApplicationInfo();
-            dns.applicationInfo.uid = 1051 + userId * 100000;
-            dns.applicationInfo.icon = 0;
+            dns.applicationInfo.uid = Uid.Dns.getCode() + userUid;
+            dns.applicationInfo.icon = icon;
             listPI.add(dns);
 
             // Add nobody
             PackageInfo nobody = new PackageInfo();
-            nobody.packageName = "nobody";
+            nobody.packageName = Uid.Nobody.getPackageName();
             nobody.versionCode = Build.VERSION.SDK_INT;
             nobody.versionName = Build.VERSION.RELEASE;
             nobody.applicationInfo = new ApplicationInfo();
-            nobody.applicationInfo.uid = 9999;
-            nobody.applicationInfo.icon = 0;
+            nobody.applicationInfo.uid = Uid.Nobody.getCode();
+            nobody.applicationInfo.icon = icon;
             listPI.add(nobody);
 
             DatabaseHelper dh = DatabaseHelper.getInstance(context);
