@@ -142,7 +142,7 @@ public class ActivitySettings extends AppCompatActivity implements SharedPrefere
 
         // Handle theme
         Preference pref_screen_theme = screen.findPreference("theme");
-        String theme = prefs.getString("theme", "teal");
+        String theme = prefs.getString("theme", Theme.Teal.getValue());
         String[] themeNames = getResources().getStringArray(R.array.themeNames);
         String[] themeValues = getResources().getStringArray(R.array.themeValues);
         for (int i = 0; i < themeNames.length; i++)
@@ -500,9 +500,9 @@ public class ActivitySettings extends AppCompatActivity implements SharedPrefere
     public void onSharedPreferenceChanged(SharedPreferences prefs, String name) {
         // Pro features
         if ("theme".equals(name)) {
-            if (!"teal".equals(prefs.getString(name, "teal")) && !IAB.isPurchased(ActivityPro.SKU_THEME, this)) {
-                prefs.edit().putString(name, "teal").apply();
-                ((ListPreference) getPreferenceScreen().findPreference(name)).setValue("teal");
+            if (!Theme.Teal.getValue().equals(prefs.getString(name, Theme.Teal.getValue())) && !IAB.isPurchased(ActivityPro.SKU_THEME, this)) {
+                prefs.edit().putString(name, Theme.Teal.getValue()).apply();
+                ((ListPreference) getPreferenceScreen().findPreference(name)).setValue(Theme.Teal.getValue());
                 startActivity(new Intent(this, ActivityPro.class));
                 return;
             }

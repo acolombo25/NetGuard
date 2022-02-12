@@ -508,18 +508,18 @@ public class Util {
     public static void setTheme(Context context) {
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
         boolean dark = prefs.getBoolean("dark_theme", false);
-        String theme = prefs.getString("theme", "teal");
-        if (theme.equals("teal"))
+        String theme = prefs.getString("theme", Theme.Teal.getValue());
+        if (theme.equals(Theme.Teal.getValue()))
             context.setTheme(dark ? R.style.AppThemeTealDark : R.style.AppThemeTeal);
-        else if (theme.equals("blue"))
+        else if (theme.equals(Theme.Blue.getValue()))
             context.setTheme(dark ? R.style.AppThemeBlueDark : R.style.AppThemeBlue);
-        else if (theme.equals("purple"))
+        else if (theme.equals(Theme.Purple.getValue()))
             context.setTheme(dark ? R.style.AppThemePurpleDark : R.style.AppThemePurple);
-        else if (theme.equals("amber"))
+        else if (theme.equals(Theme.Amber.getValue()))
             context.setTheme(dark ? R.style.AppThemeAmberDark : R.style.AppThemeAmber);
-        else if (theme.equals("orange"))
+        else if (theme.equals(Theme.Orange.getValue()))
             context.setTheme(dark ? R.style.AppThemeOrangeDark : R.style.AppThemeOrange);
-        else if (theme.equals("green"))
+        else if (theme.equals(Theme.Green.getValue()))
             context.setTheme(dark ? R.style.AppThemeGreenDark : R.style.AppThemeGreen);
 
         if (context instanceof Activity && Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP)
