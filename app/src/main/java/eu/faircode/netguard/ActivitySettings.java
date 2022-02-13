@@ -1151,37 +1151,29 @@ public class ActivitySettings extends AppCompatActivity implements SharedPrefere
             if (Preferences.IMPORTED.getKey().equals(key))
                 continue;
 
+            SerializerType type;
+            String serializedValue;
             if (value instanceof Boolean) {
-                serializer.startTag(null, "setting");
-                serializer.attribute(null, "key", key);
-                serializer.attribute(null, "type", "boolean");
-                serializer.attribute(null, "value", value.toString());
-                serializer.endTag(null, "setting");
-
+                type = SerializerType.Boolean;
+                serializedValue = value.toString();
             } else if (value instanceof Integer) {
-                serializer.startTag(null, "setting");
-                serializer.attribute(null, "key", key);
-                serializer.attribute(null, "type", "integer");
-                serializer.attribute(null, "value", value.toString());
-                serializer.endTag(null, "setting");
-
+                type = SerializerType.Integer;
+                serializedValue = value.toString();
             } else if (value instanceof String) {
-                serializer.startTag(null, "setting");
-                serializer.attribute(null, "key", key);
-                serializer.attribute(null, "type", "string");
-                serializer.attribute(null, "value", value.toString());
-                serializer.endTag(null, "setting");
-
+                type = SerializerType.String;
+                serializedValue = value.toString();
             } else if (value instanceof Set) {
-                Set<String> set = (Set<String>) value;
-                serializer.startTag(null, "setting");
-                serializer.attribute(null, "key", key);
-                serializer.attribute(null, "type", "set");
-                serializer.attribute(null, "value", TextUtils.join("\n", set));
-                serializer.endTag(null, "setting");
-
-            } else
+                type = SerializerType.Set;
+                serializedValue = TextUtils.join("\n", (Set<String>) value);
+            } else {
                 Log.e(TAG, "Unknown key=" + key);
+                continue;
+            }
+            serializer.startTag(null, Serializer.Tag.SETTING);
+            serializer.attribute(null, Serializer.Attribute.KEY, key);
+            serializer.attribute(null, Serializer.Attribute.TYPE, type.getValue());
+            serializer.attribute(null, Serializer.Attribute.VALUE, serializedValue);
+            serializer.endTag(null, Serializer.Tag.SETTING);
         }
     }
 
