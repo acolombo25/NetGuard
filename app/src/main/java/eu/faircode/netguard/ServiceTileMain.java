@@ -85,9 +85,9 @@ public class ServiceTileMain extends TileService implements SharedPreferences.On
         boolean enabled = !prefs.getBoolean(Preferences.ENABLED.getKey(), Preferences.ENABLED.getDefaultValue());
         prefs.edit().putBoolean(Preferences.ENABLED.getKey(), enabled).apply();
         if (enabled)
-            ServiceSinkhole.start("tile", this);
+            ServiceSinkhole.start(Reason.Tile.INSTANCE, this);
         else {
-            ServiceSinkhole.stop("tile", this, false);
+            ServiceSinkhole.stop(Reason.Tile.INSTANCE, this, false);
 
             // Auto enable
             int auto = prefs.getInt(Preferences.AUTO_ENABLE.getKey(), Preferences.AUTO_ENABLE.getDefaultValue());

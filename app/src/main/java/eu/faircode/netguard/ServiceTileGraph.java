@@ -75,6 +75,6 @@ public class ServiceTileGraph extends TileService implements SharedPreferences.O
             Toast.makeText(this, R.string.title_pro_feature, Toast.LENGTH_SHORT).show();
         else
             prefs.edit().putBoolean(Preferences.SHOW_STATS.getKey(), stats).apply();
-        ServiceSinkhole.reloadStats("tile", this);
+        ServiceSinkhole.reloadStats(Reason.Tile.INSTANCE, this);
     }
 }

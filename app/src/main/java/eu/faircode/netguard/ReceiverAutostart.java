@@ -47,12 +47,12 @@ public class ReceiverAutostart extends BroadcastReceiver {
                 // Start service
                 SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
                 if (prefs.getBoolean(Preferences.ENABLED.getKey(), Preferences.ENABLED.getDefaultValue()))
-                    ServiceSinkhole.start("receiver", context);
+                    ServiceSinkhole.start(Reason.Receiver.INSTANCE, context);
                 else if (prefs.getBoolean(Preferences.SHOW_STATS.getKey(), false))
-                    ServiceSinkhole.run("receiver", context);
+                    ServiceSinkhole.run(Reason.Receiver.INSTANCE, context);
 
                 if (Util.isInteractive(context))
-                    ServiceSinkhole.reloadStats("receiver", context);
+                    ServiceSinkhole.reloadStats(Reason.Receiver.INSTANCE, context);
             } catch (Throwable ex) {
                 Log.e(TAG, ex.toString() + "\n" + Log.getStackTraceString(ex));
             }

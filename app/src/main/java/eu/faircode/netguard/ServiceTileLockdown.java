@@ -69,7 +69,7 @@ public class ServiceTileLockdown extends TileService implements SharedPreference
 
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
         prefs.edit().putBoolean(Preferences.LOCKDOWN.getKey(), !prefs.getBoolean(Preferences.LOCKDOWN.getKey(), Preferences.LOCKDOWN.getDefaultValue())).apply();
-        ServiceSinkhole.reload("tile", this, false);
+        ServiceSinkhole.reload(Reason.Tile.INSTANCE, this, false);
         WidgetLockdown.updateWidgets(this);
     }
 }

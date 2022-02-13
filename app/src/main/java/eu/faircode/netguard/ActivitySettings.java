@@ -386,7 +386,7 @@ public class ActivitySettings extends AppCompatActivity implements SharedPrefere
                                     Toast.makeText(ActivitySettings.this, R.string.msg_downloaded, Toast.LENGTH_LONG).show();
                                 }
 
-                                ServiceSinkhole.reload("hosts file download", ActivitySettings.this, false);
+                                ServiceSinkhole.reload(Reason.HostsFileDownload.INSTANCE, ActivitySettings.this, false);
                             }
 
                             @Override
@@ -527,18 +527,18 @@ public class ActivitySettings extends AppCompatActivity implements SharedPrefere
 
         // Dependencies
         if (Preferences.SCREEN_ON.getKey().equals(name))
-            ServiceSinkhole.reload("changed " + name, this, false);
+            ServiceSinkhole.reload(new Reason.Changed(name), this, false);
 
         else if (Preferences.WHITELIST_WIFI.getKey().equals(name) ||
                 Preferences.SCREEN_WIFI.getKey().equals(name))
-            ServiceSinkhole.reload("changed " + name, this, false);
+            ServiceSinkhole.reload(new Reason.Changed(name), this, false);
 
         else if (Preferences.WHITELIST_OTHER.getKey().equals(name) ||
                 Preferences.SCREEN_OTHER.getKey().equals(name))
-            ServiceSinkhole.reload("changed " + name, this, false);
+            ServiceSinkhole.reload(new Reason.Changed(name), this, false);
 
         else if (Preferences.WHITELIST_ROAMING.getKey().equals(name))
-            ServiceSinkhole.reload("changed " + name, this, false);
+            ServiceSinkhole.reload(new Reason.Changed(name), this, false);
 
         else if (Preferences.AUTO_ENABLE.getKey().equals(name))
             getPreferenceScreen().findPreference(name).setTitle(getString(R.string.setting_auto, prefs.getInt(name, Preferences.AUTO_ENABLE.getDefaultValue())));
@@ -550,16 +550,16 @@ public class ActivitySettings extends AppCompatActivity implements SharedPrefere
             recreate();
 
         else if (Preferences.SUBNET.getKey().equals(name))
-            ServiceSinkhole.reload("changed " + name, this, false);
+            ServiceSinkhole.reload(new Reason.Changed(name), this, false);
 
         else if (Preferences.TETHERING.getKey().equals(name))
-            ServiceSinkhole.reload("changed " + name, this, false);
+            ServiceSinkhole.reload(new Reason.Changed(name), this, false);
 
         else if (Preferences.LAN.getKey().equals(name))
-            ServiceSinkhole.reload("changed " + name, this, false);
+            ServiceSinkhole.reload(new Reason.Changed(name), this, false);
 
         else if (Preferences.IP6.getKey().equals(name))
-            ServiceSinkhole.reload("changed " + name, this, false);
+            ServiceSinkhole.reload(new Reason.Changed(name), this, false);
 
         else if (Preferences.WIFI_HOMES.getKey().equals(name)) {
             MultiSelectListPreference pref_wifi_homes = (MultiSelectListPreference) getPreferenceScreen().findPreference(name);
@@ -568,45 +568,45 @@ public class ActivitySettings extends AppCompatActivity implements SharedPrefere
                 pref_wifi_homes.setTitle(getString(R.string.setting_wifi_home, TextUtils.join(", ", ssid)));
             else
                 pref_wifi_homes.setTitle(getString(R.string.setting_wifi_home, "-"));
-            ServiceSinkhole.reload("changed " + name, this, false);
+            ServiceSinkhole.reload(new Reason.Changed(name), this, false);
 
         } else if (Preferences.USE_METERED.getKey().equals(name))
-            ServiceSinkhole.reload("changed " + name, this, false);
+            ServiceSinkhole.reload(new Reason.Changed(name), this, false);
 
         else if (Preferences.UNMETERED_2G.getKey().equals(name) ||
                 Preferences.UNMETERED_3G.getKey().equals(name) ||
                 Preferences.UNMETERED_4G.getKey().equals(name))
-            ServiceSinkhole.reload("changed " + name, this, false);
+            ServiceSinkhole.reload(new Reason.Changed(name), this, false);
 
         else if (Preferences.NATIONAL.getKey().equals(name))
-            ServiceSinkhole.reload("changed " + name, this, false);
+            ServiceSinkhole.reload(new Reason.Changed(name), this, false);
 
         else if (Preferences.EU.getKey().equals(name))
-            ServiceSinkhole.reload("changed " + name, this, false);
+            ServiceSinkhole.reload(new Reason.Changed(name), this, false);
 
         else if (Preferences.DISABLE_ON_CALL.getKey().equals(name)) {
             if (prefs.getBoolean(name, false)) {
                 if (checkPermissions(name))
-                    ServiceSinkhole.reload("changed " + name, this, false);
+                    ServiceSinkhole.reload(new Reason.Changed(name), this, false);
             } else
-                ServiceSinkhole.reload("changed " + name, this, false);
+                ServiceSinkhole.reload(new Reason.Changed(name), this, false);
 
         } else if (Preferences.LOCKDOWN_WIFI.getKey().equals(name) || Preferences.LOCKDOWN_OTHER.getKey().equals(name))
-            ServiceSinkhole.reload("changed " + name, this, false);
+            ServiceSinkhole.reload(new Reason.Changed(name), this, false);
 
         else if (Preferences.MANAGE_SYSTEM.getKey().equals(name)) {
             boolean manage = prefs.getBoolean(name, false);
             if (!manage) prefs.edit().putBoolean(Preferences.SHOW_USER.getKey(), Preferences.SHOW_USER.getDefaultValue()).apply();
             prefs.edit().putBoolean(Preferences.SHOW_SYSTEM.getKey(), manage).apply();
-            ServiceSinkhole.reload("changed " + name, this, false);
+            ServiceSinkhole.reload(new Reason.Changed(name), this, false);
 
         } else if (Preferences.LOG_APP.getKey().equals(name)) {
             Intent ruleset = new Intent(ActivityMain.ACTION_RULES_CHANGED);
             LocalBroadcastManager.getInstance(this).sendBroadcast(ruleset);
-            ServiceSinkhole.reload("changed " + name, this, false);
+            ServiceSinkhole.reload(new Reason.Changed(name), this, false);
 
         } else if (Preferences.NOTIFY_ACCESS.getKey().equals(name))
-            ServiceSinkhole.reload("changed " + name, this, false);
+            ServiceSinkhole.reload(new Reason.Changed(name), this, false);
 
         else if (Preferences.FILTER.getKey().equals(name)) {
             // Show dialog
@@ -637,10 +637,10 @@ public class ActivitySettings extends AppCompatActivity implements SharedPrefere
 
             ((TwoStatePreference) getPreferenceScreen().findPreference(name)).setChecked(prefs.getBoolean(name, false));
 
-            ServiceSinkhole.reload("changed " + name, this, false);
+            ServiceSinkhole.reload(new Reason.Changed(name), this, false);
 
         } else if (Preferences.USE_HOSTS.getKey().equals(name))
-            ServiceSinkhole.reload("changed " + name, this, false);
+            ServiceSinkhole.reload(new Reason.Changed(name), this, false);
 
         else if (Preferences.VPN4.getKey().equals(name)) {
             String vpn4 = prefs.getString(name, null);
@@ -654,7 +654,7 @@ public class ActivitySettings extends AppCompatActivity implements SharedPrefere
                     Toast.makeText(ActivitySettings.this, ex.toString(), Toast.LENGTH_LONG).show();
             }
             getPreferenceScreen().findPreference(name).setTitle(getString(R.string.setting_vpn4, prefs.getString(name, Preferences.VPN4.getDefaultValue())));
-            ServiceSinkhole.reload("changed " + name, this, false);
+            ServiceSinkhole.reload(new Reason.Changed(name), this, false);
 
         } else if (Preferences.VPN6.getKey().equals(name)) {
             String vpn6 = prefs.getString(name, null);
@@ -668,7 +668,7 @@ public class ActivitySettings extends AppCompatActivity implements SharedPrefere
                     Toast.makeText(ActivitySettings.this, ex.toString(), Toast.LENGTH_LONG).show();
             }
             getPreferenceScreen().findPreference(name).setTitle(getString(R.string.setting_vpn6, prefs.getString(name, Preferences.VPN6.getDefaultValue())));
-            ServiceSinkhole.reload("changed " + name, this, false);
+            ServiceSinkhole.reload(new Reason.Changed(name), this, false);
 
         } else if (Preferences.DNS1.getKey().equals(name) || Preferences.DNS2.getKey().equals(name)) {
             String dns = prefs.getString(name, null);
@@ -682,7 +682,7 @@ public class ActivitySettings extends AppCompatActivity implements SharedPrefere
                     Toast.makeText(ActivitySettings.this, ex.toString(), Toast.LENGTH_LONG).show();
             }
             getPreferenceScreen().findPreference(name).setTitle(getString(R.string.setting_dns, prefs.getString(name, Preferences.DNS1.getDefaultValue())));
-            ServiceSinkhole.reload("changed " + name, this, false);
+            ServiceSinkhole.reload(new Reason.Changed(name), this, false);
 
         } else if (Preferences.VALIDATE.getDefaultValue().equals(name)) {
             String host = prefs.getString(name, Preferences.VALIDATE.getDefaultValue());
@@ -696,17 +696,17 @@ public class ActivitySettings extends AppCompatActivity implements SharedPrefere
                     Toast.makeText(ActivitySettings.this, ex.toString(), Toast.LENGTH_LONG).show();
             }
             getPreferenceScreen().findPreference(name).setTitle(getString(R.string.setting_validate, prefs.getString(name, Preferences.VALIDATE.getDefaultValue())));
-            ServiceSinkhole.reload("changed " + name, this, false);
+            ServiceSinkhole.reload(new Reason.Changed(name), this, false);
 
         } else if (Preferences.TTL.getKey().equals(name))
             getPreferenceScreen().findPreference(name).setTitle(getString(R.string.setting_ttl, prefs.getString(name, Preferences.TTL.getDefaultValue())));
 
         else if (Preferences.R_CODE.getKey().equals(name)) {
             getPreferenceScreen().findPreference(name).setTitle(getString(R.string.setting_rcode, prefs.getInt(name, Preferences.R_CODE.getDefaultValue())));
-            ServiceSinkhole.reload("changed " + name, this, false);
+            ServiceSinkhole.reload(new Reason.Changed(name), this, false);
 
         } else if (Preferences.SOCKS_5_ENABLED.getKey().equals(name))
-            ServiceSinkhole.reload("changed " + name, this, false);
+            ServiceSinkhole.reload(new Reason.Changed(name), this, false);
 
         else if (Preferences.SOCKS_5_ADDR.getKey().equals(name)) {
             String socks5_addr = prefs.getString(name, null);
@@ -720,19 +720,19 @@ public class ActivitySettings extends AppCompatActivity implements SharedPrefere
                     Toast.makeText(ActivitySettings.this, ex.toString(), Toast.LENGTH_LONG).show();
             }
             getPreferenceScreen().findPreference(name).setTitle(getString(R.string.setting_socks5_addr, prefs.getString(name, Preferences.SOCKS_5_ADDR.getDefaultValue())));
-            ServiceSinkhole.reload("changed " + name, this, false);
+            ServiceSinkhole.reload(new Reason.Changed(name), this, false);
 
         } else if (Preferences.SOCKS_5_PORT.getKey().equals(name)) {
             getPreferenceScreen().findPreference(name).setTitle(getString(R.string.setting_socks5_port, prefs.getString(name, Preferences.SOCKS_5_PORT.getDefaultValue())));
-            ServiceSinkhole.reload("changed " + name, this, false);
+            ServiceSinkhole.reload(new Reason.Changed(name), this, false);
 
         } else if (Preferences.SOCKS_5_USERNAME.getKey().equals(name)) {
             getPreferenceScreen().findPreference(name).setTitle(getString(R.string.setting_socks5_username, prefs.getString(name, Preferences.SOCKS_5_USERNAME.getDefaultValue())));
-            ServiceSinkhole.reload("changed " + name, this, false);
+            ServiceSinkhole.reload(new Reason.Changed(name), this, false);
 
         } else if (Preferences.SOCKS_5_PASSWORD.getKey().equals(name)) {
             getPreferenceScreen().findPreference(name).setTitle(getString(R.string.setting_socks5_password, TextUtils.isEmpty(Preferences.SOCKS_5_PASSWORD.getDefaultValue()) ? "-" : "*****"));
-            ServiceSinkhole.reload("changed " + name, this, false);
+            ServiceSinkhole.reload(new Reason.Changed(name), this, false);
 
         } else if ("pcap_record_size".equals(name) || "pcap_file_size".equals(name)) {
             if ("pcap_record_size".equals(name))
@@ -751,10 +751,10 @@ public class ActivitySettings extends AppCompatActivity implements SharedPrefere
 
         } else if ("watchdog".equals(name)) {
             getPreferenceScreen().findPreference(name).setTitle(getString(R.string.setting_watchdog, prefs.getString(name, "0")));
-            ServiceSinkhole.reload("changed " + name, this, false);
+            ServiceSinkhole.reload(new Reason.Changed(name), this, false);
 
         } else if (Preferences.SHOW_STATS.getKey().equals(name))
-            ServiceSinkhole.reloadStats("changed " + name, this);
+            ServiceSinkhole.reloadStats(new Reason.Changed(name), this);
 
         else if ("stats_frequency".equals(name))
             getPreferenceScreen().findPreference(name).setTitle(getString(R.string.setting_stats_frequency, prefs.getString(name, "1000")));
@@ -766,7 +766,7 @@ public class ActivitySettings extends AppCompatActivity implements SharedPrefere
             getPreferenceScreen().findPreference(name).setSummary(prefs.getString(name, BuildConfig.HOSTS_FILE_URI));
 
         else if (Preferences.LOG_LEVEL.getKey().equals(name))
-            ServiceSinkhole.reload("changed " + name, this, false);
+            ServiceSinkhole.reload(new Reason.Changed(name), this, false);
     }
 
     @TargetApi(Build.VERSION_CODES.M)
@@ -802,7 +802,7 @@ public class ActivitySettings extends AppCompatActivity implements SharedPrefere
         }
 
         if (granted)
-            ServiceSinkhole.reload("permission granted", this, false);
+            ServiceSinkhole.reload(Reason.PermissionGranted.INSTANCE, this, false);
     }
 
     private void checkAddress(String address, boolean allow_local) throws IllegalArgumentException, UnknownHostException {
@@ -1027,7 +1027,7 @@ public class ActivitySettings extends AppCompatActivity implements SharedPrefere
                             Toast.makeText(ActivitySettings.this, R.string.msg_completed, Toast.LENGTH_LONG).show();
                         }
 
-                        ServiceSinkhole.reload("hosts import", ActivitySettings.this, false);
+                        ServiceSinkhole.reload(Reason.HostsImport.INSTANCE, ActivitySettings.this, false);
                     } else
                         Toast.makeText(ActivitySettings.this, ex.toString(), Toast.LENGTH_LONG).show();
                 }
@@ -1067,7 +1067,7 @@ public class ActivitySettings extends AppCompatActivity implements SharedPrefere
                 if (running) {
                     if (ex == null) {
                         Toast.makeText(ActivitySettings.this, R.string.msg_completed, Toast.LENGTH_LONG).show();
-                        ServiceSinkhole.reloadStats("import", ActivitySettings.this);
+                        ServiceSinkhole.reloadStats(Reason.Import.INSTANCE, ActivitySettings.this);
                         // Update theme, request permissions
                         recreate();
                     } else
@@ -1249,7 +1249,7 @@ public class ActivitySettings extends AppCompatActivity implements SharedPrefere
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
         prefs.unregisterOnSharedPreferenceChangeListener(this);
         prefs.edit().putBoolean(Preferences.ENABLED.getKey(), Preferences.ENABLED.getDefaultValue()).apply();
-        ServiceSinkhole.stop("import", this, false);
+        ServiceSinkhole.stop(Reason.Import.INSTANCE, this, false);
 
         XMLReader reader = SAXParserFactory.newInstance().newSAXParser().getXMLReader();
         XmlImportHandler handler = new XmlImportHandler(this);

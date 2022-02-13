@@ -660,7 +660,7 @@ public class AdapterRule extends RecyclerView.Adapter<AdapterRule.ViewHolder> im
                             cbNotify.setChecked(false);
                             prefs.edit().putBoolean(Preferences.NOTIFY_ACCESS.getKey(), Preferences.NOTIFY_ACCESS.getDefaultValue()).apply();
                         }
-                        ServiceSinkhole.reload("changed notify", context, false);
+                        ServiceSinkhole.reload(Reason.ChangedNotify.INSTANCE, context, false);
                         AdapterRule.this.notifyDataSetChanged();
                     }
                 });
@@ -671,7 +671,7 @@ public class AdapterRule extends RecyclerView.Adapter<AdapterRule.ViewHolder> im
                         if (checked)
                             cbLogging.setChecked(true);
                         prefs.edit().putBoolean(Preferences.FILTER.getKey(), checked).apply();
-                        ServiceSinkhole.reload("changed filter", context, false);
+                        ServiceSinkhole.reload(Reason.ChangedFilter.INSTANCE, context, false);
                         AdapterRule.this.notifyDataSetChanged();
                     }
                 });
@@ -680,7 +680,7 @@ public class AdapterRule extends RecyclerView.Adapter<AdapterRule.ViewHolder> im
                     @Override
                     public void onCheckedChanged(CompoundButton compoundButton, boolean checked) {
                         prefs.edit().putBoolean(Preferences.NOTIFY_ACCESS.getKey(), checked).apply();
-                        ServiceSinkhole.reload("changed notify", context, false);
+                        ServiceSinkhole.reload(Reason.ChangedNotify.INSTANCE, context, false);
                         AdapterRule.this.notifyDataSetChanged();
                     }
                 });
@@ -772,7 +772,7 @@ public class AdapterRule extends RecyclerView.Adapter<AdapterRule.ViewHolder> im
                                 case R.id.menu_allow:
                                     if (IAB.isPurchased(ActivityPro.SKU_FILTER, context)) {
                                         DatabaseHelper.getInstance(context).setAccess(id, 0);
-                                        ServiceSinkhole.reload("allow host", context, false);
+                                        ServiceSinkhole.reload(Reason.AllowHost.INSTANCE, context, false);
                                     } else
                                         context.startActivity(new Intent(context, ActivityPro.class));
                                     result = true;
@@ -781,7 +781,7 @@ public class AdapterRule extends RecyclerView.Adapter<AdapterRule.ViewHolder> im
                                 case R.id.menu_block:
                                     if (IAB.isPurchased(ActivityPro.SKU_FILTER, context)) {
                                         DatabaseHelper.getInstance(context).setAccess(id, 1);
-                                        ServiceSinkhole.reload("block host", context, false);
+                                        ServiceSinkhole.reload(Reason.BlockHost.INSTANCE, context, false);
                                     } else
                                         context.startActivity(new Intent(context, ActivityPro.class));
                                     result = true;
@@ -789,7 +789,7 @@ public class AdapterRule extends RecyclerView.Adapter<AdapterRule.ViewHolder> im
 
                                 case R.id.menu_reset:
                                     DatabaseHelper.getInstance(context).setAccess(id, -1);
-                                    ServiceSinkhole.reload("reset host", context, false);
+                                    ServiceSinkhole.reload(Reason.ResetHost.INSTANCE, context, false);
                                     result = true;
                                     break;
 
@@ -967,7 +967,7 @@ public class AdapterRule extends RecyclerView.Adapter<AdapterRule.ViewHolder> im
         if (root) {
             notifyDataSetChanged();
             NotificationManagerCompat.from(context).cancel(rule.uid);
-            ServiceSinkhole.reload("rule changed", context, false);
+            ServiceSinkhole.reload(Reason.RuleChanged.INSTANCE, context, false);
         }
     }
 

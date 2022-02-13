@@ -97,7 +97,7 @@ public class ActivityForwarding extends AppCompatActivity {
                     public boolean onMenuItemClick(MenuItem menuItem) {
                         if (menuItem.getItemId() == R.id.menu_delete) {
                             DatabaseHelper.getInstance(ActivityForwarding.this).deleteForward(protocol, dport);
-                            ServiceSinkhole.reload("forwarding", ActivityForwarding.this, false);
+                            ServiceSinkhole.reload(ServiceSinkhole.Reason.Forwarding, ActivityForwarding.this, false);
                             adapter = new AdapterForwarding(ActivityForwarding.this,
                                     DatabaseHelper.getInstance(ActivityForwarding.this).getForwarding());
                             lvForwarding.setAdapter(adapter);
@@ -215,7 +215,7 @@ public class ActivityForwarding extends AppCompatActivity {
                                         protected void onPostExecute(Throwable ex) {
                                             if (running)
                                                 if (ex == null) {
-                                                    ServiceSinkhole.reload("forwarding", ActivityForwarding.this, false);
+                                                    ServiceSinkhole.reload(ServiceSinkhole.Reason.Forwarding, ActivityForwarding.this, false);
                                                     adapter = new AdapterForwarding(ActivityForwarding.this,
                                                             DatabaseHelper.getInstance(ActivityForwarding.this).getForwarding());
                                                     lvForwarding.setAdapter(adapter);

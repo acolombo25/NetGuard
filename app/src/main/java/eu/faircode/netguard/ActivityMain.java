@@ -145,9 +145,9 @@ public class ActivityMain extends AppCompatActivity implements SharedPreferences
 
         if (!getIntent().hasExtra(EXTRA_APPROVE)) {
             if (enabled)
-                ServiceSinkhole.start("UI", this);
+                ServiceSinkhole.start(Reason.UI.INSTANCE, this);
             else
-                ServiceSinkhole.stop("UI", this, false);
+                ServiceSinkhole.stop(Reason.UI.INSTANCE, this, false);
         }
 
         // Action bar
@@ -265,7 +265,7 @@ public class ActivityMain extends AppCompatActivity implements SharedPreferences
                     }
 
                 } else
-                    ServiceSinkhole.stop("switch off", ActivityMain.this, false);
+                    ServiceSinkhole.stop(Reason.SwitchOff.INSTANCE, ActivityMain.this, false);
             }
         });
         if (enabled)
@@ -313,7 +313,7 @@ public class ActivityMain extends AppCompatActivity implements SharedPreferences
             @Override
             public void onRefresh() {
                 Rule.clearCache(ActivityMain.this);
-                ServiceSinkhole.reload("pull", ActivityMain.this, false);
+                ServiceSinkhole.reload(Reason.Pull.INSTANCE, ActivityMain.this, false);
                 updateApplicationList(null);
             }
         });
@@ -577,7 +577,7 @@ public class ActivityMain extends AppCompatActivity implements SharedPreferences
             SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
             prefs.edit().putBoolean(Preferences.ENABLED.getKey(), resultCode == RESULT_OK).apply();
             if (resultCode == RESULT_OK) {
-                ServiceSinkhole.start("prepared", this);
+                ServiceSinkhole.start(Reason.Prepared.INSTANCE, this);
 
                 Toast on = Toast.makeText(ActivityMain.this, R.string.msg_on, Toast.LENGTH_LONG);
                 on.setGravity(Gravity.CENTER, 0, 0);
@@ -610,7 +610,7 @@ public class ActivityMain extends AppCompatActivity implements SharedPreferences
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         if (requestCode == REQUEST_ROAMING)
             if (grantResults[0] == PackageManager.PERMISSION_GRANTED)
-                ServiceSinkhole.reload("permission granted", this, false);
+                ServiceSinkhole.reload(Reason.PermissionGranted.INSTANCE, this, false);
     }
 
     @Override
@@ -1173,7 +1173,7 @@ public class ActivityMain extends AppCompatActivity implements SharedPreferences
         item.setChecked(!item.isChecked());
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
         prefs.edit().putBoolean(Preferences.LOCKDOWN.getKey(), item.isChecked()).apply();
-        ServiceSinkhole.reload("lockdown", this, false);
+        ServiceSinkhole.reload(Reason.Lockdown.INSTANCE, this, false);
         WidgetLockdown.updateWidgets(this);
     }
 
