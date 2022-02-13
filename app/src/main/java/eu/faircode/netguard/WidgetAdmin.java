@@ -70,14 +70,14 @@ public class WidgetAdmin extends ReceiverAutostart {
         try {
             if (INTENT_ON.equals(intent.getAction()) || INTENT_OFF.equals(intent.getAction())) {
                 boolean enabled = INTENT_ON.equals(intent.getAction());
-                prefs.edit().putBoolean("enabled", enabled).apply();
+                prefs.edit().putBoolean(Preferences.ENABLED.getKey(), enabled).apply();
                 if (enabled)
                     ServiceSinkhole.start("widget", context);
                 else
                     ServiceSinkhole.stop("widget", context, false);
 
                 // Auto enable
-                int auto = Integer.parseInt(prefs.getString("auto_enable", "0"));
+                int auto = prefs.getInt(Preferences.AUTO_ENABLE.getKey(), Preferences.AUTO_ENABLE.getDefaultValue());
                 if (!enabled && auto > 0) {
                     Log.i(TAG, "Scheduling enabled after minutes=" + auto);
                     if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M)
@@ -88,7 +88,7 @@ public class WidgetAdmin extends ReceiverAutostart {
 
             } else if (INTENT_LOCKDOWN_ON.equals(intent.getAction()) || INTENT_LOCKDOWN_OFF.equals(intent.getAction())) {
                 boolean lockdown = INTENT_LOCKDOWN_ON.equals(intent.getAction());
-                prefs.edit().putBoolean("lockdown", lockdown).apply();
+                prefs.edit().putBoolean(Preferences.LOCKDOWN.getKey(), lockdown).apply();
                 ServiceSinkhole.reload("widget", context, false);
                 WidgetLockdown.updateWidgets(context);
             }

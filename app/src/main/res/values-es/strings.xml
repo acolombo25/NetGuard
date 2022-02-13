@@ -60,8 +60,8 @@
     <string name="setting_dark">Usar tema oscuro</string>
     <string name="setting_install">Notificar nuevas instalaciones</string>
     <string name="setting_screen_on">Aplicar reglas \'cuando pantalla encendida\'</string>
-    <string name="setting_auto">Activar automáticamente después de %1$s minutos</string>
-    <string name="setting_delay">Retardar apagado de pantalla en %1$s minutos</string>
+    <string name="setting_auto">Activar automáticamente después de %1$d minutos</string>
+    <string name="setting_delay">Retardar apagado de pantalla en %1$d minutos</string>
     <string name="setting_update">Buscar actualizaciones</string>
     <string name="setting_network_options">Opciones de red</string>
     <string name="setting_subnet">Enrutamiento de subred</string>
@@ -92,7 +92,7 @@
     <string name="setting_reset_usage">Restablecer uso de red</string>
     <string name="setting_show_resolved">Mostrar nombres de dominio resueltos</string>
     <string name="setting_block_domains">Bloquear nombres de dominio</string>
-    <string name="setting_rcode">Código de respuesta DNS: %s</string>
+    <string name="setting_rcode">Código de respuesta DNS: %d</string>
     <string name="setting_forwarding">Redirección de puertos</string>
     <string name="setting_vpn4">VPN IPv4: %s</string>
     <string name="setting_vpn6">VPN IPv6: %s</string>

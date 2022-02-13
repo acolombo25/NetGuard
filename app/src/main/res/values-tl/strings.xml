@@ -60,8 +60,8 @@
     <string name="setting_dark">Gamitin ang madilim na theme</string>
     <string name="setting_install">Abisuhan sa bagong install</string>
     <string name="setting_screen_on">Gamitin ang mga \'kung buhay ang screen\' na tuntunin</string>
-    <string name="setting_auto">Awtomatikong paganahin matapos ang %1$s minuto</string>
-    <string name="setting_delay">Ipagpaliban ang pagpatay ng screen ng %1$s minuto</string>
+    <string name="setting_auto">Awtomatikong paganahin matapos ang %1$d minuto</string>
+    <string name="setting_delay">Ipagpaliban ang pagpatay ng screen ng %1$d minuto</string>
     <string name="setting_update">Magsaliksik ng mga update</string>
     <string name="setting_network_options">Mga opsyon para sa Network</string>
     <string name="setting_subnet">Pag-route gamit ang subnet</string>
@@ -92,7 +92,7 @@
     <string name="setting_reset_usage">I-reset and paggamit ng network</string>
     <string name="setting_show_resolved">Ipakita ang mga pangalan ng naresolbang domain</string>
     <string name="setting_block_domains">Harangan ang mga domain name</string>
-    <string name="setting_rcode">Code para sa sagot ng DNS: %s</string>
+    <string name="setting_rcode">Code para sa sagot ng DNS: %d</string>
     <string name="setting_forwarding">Pagpasa ng Port</string>
     <string name="setting_vpn4">VPN IPv4: %s</string>
     <string name="setting_vpn6">VPN IPv6: %s</string>

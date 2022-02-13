@@ -60,8 +60,8 @@
     <string name="setting_dark">Tünd temanı işlət</string>
     <string name="setting_install">Yeni quraşdırmada bildir</string>
     <string name="setting_screen_on">\'Ekran açıq olanda\' qaydalarını tətbiq et</string>
-    <string name="setting_auto">%1$s dəqiqə sonra avtomatik fəallaşdır</string>
-    <string name="setting_delay">Ekran sönməsini %1$s dəqiqə gecikdir</string>
+    <string name="setting_auto">%1$d dəqiqə sonra avtomatik fəallaşdır</string>
+    <string name="setting_delay">Ekran sönməsini %1$d dəqiqə gecikdir</string>
     <string name="setting_update">Yeniləmələri yoxla</string>
     <string name="setting_network_options">Şəbəkə seçimləri</string>
     <string name="setting_subnet">Alt şəbəkə marşrutu</string>
@@ -92,7 +92,7 @@
     <string name="setting_reset_usage">Şəbəkə istifadəsini sıfırla</string>
     <string name="setting_show_resolved">Həll edilmiş domen adlarını göstər</string>
     <string name="setting_block_domains">Domen adlarını əngəllə</string>
-    <string name="setting_rcode">DNS cavab kodu: %s</string>
+    <string name="setting_rcode">DNS cavab kodu: %d</string>
     <string name="setting_forwarding">Bağlantı nöqtəsi yönləndirmə</string>
     <string name="setting_vpn4">VPN IPv4: %s</string>
     <string name="setting_vpn6">VPN IPv6: %s</string>

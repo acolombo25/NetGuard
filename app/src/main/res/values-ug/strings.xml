@@ -60,8 +60,8 @@
     <string name="setting_dark">قاراڭغۇ ئۆرنەك ئىشلەت</string>
     <string name="setting_install">يېڭى قاچىلاشتا ئۇقتۇرۇش</string>
     <string name="setting_screen_on">\'ئېكران ئوچۇق\' قائىدىسنى ئىشلىتىش</string>
-    <string name="setting_auto">ئاپتۇماتىك يول قويۇش %1$s مىنۇتتىن كېيىن</string>
-    <string name="setting_delay">ئېكران ئۆچۈش %1$s مىنۇت كىچكىش</string>
+    <string name="setting_auto">ئاپتۇماتىك يول قويۇش %1$d مىنۇتتىن كېيىن</string>
+    <string name="setting_delay">ئېكران ئۆچۈش %1$d مىنۇت كىچكىش</string>
     <string name="setting_update">يېڭىلانمىنى تەكشۈرۈش</string>
     <string name="setting_network_options">تور تاللاش</string>
     <string name="setting_subnet">روتىر</string>
@@ -92,7 +92,7 @@
     <string name="setting_reset_usage">تور ئىشلىتىشقا قايتا تەڭشىەش</string>
     <string name="setting_show_resolved">يەشكەن ئادرېس كۆرۈنۈش</string>
     <string name="setting_block_domains">توسۇلغان ئادىرس نام</string>
-    <string name="setting_rcode">DNS كود: %s</string>
+    <string name="setting_rcode">DNS كود: %d</string>
     <string name="setting_forwarding">يۆتكەش ئېغىز</string>
     <string name="setting_vpn4">VPN IPv4: %s</string>
     <string name="setting_vpn6">VPN IPv6: %s</string>

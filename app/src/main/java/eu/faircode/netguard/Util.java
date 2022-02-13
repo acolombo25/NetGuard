@@ -507,8 +507,8 @@ public class Util {
 
     public static void setTheme(Context context) {
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
-        boolean dark = prefs.getBoolean("dark_theme", false);
-        String theme = prefs.getString("theme", Theme.Teal.getValue());
+        boolean dark = prefs.getBoolean(Preferences.DARK.getKey(), false);
+        String theme = prefs.getString(Preferences.THEME.getKey(), Preferences.THEME.getDefaultValue().getValue());
         if (theme.equals(Theme.Teal.getValue()))
             context.setTheme(dark ? R.style.AppThemeTealDark : R.style.AppThemeTeal);
         else if (theme.equals(Theme.Blue.getValue()))

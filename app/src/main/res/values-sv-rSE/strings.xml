@@ -60,8 +60,8 @@
     <string name="setting_dark">Använd mörkt tema</string>
     <string name="setting_install">Meddela vid ny installation</string>
     <string name="setting_screen_on">Tillämpa regler \'när skärmen är påslagen\'</string>
-    <string name="setting_auto">Aktivera automatiskt efter %1$s minuter</string>
-    <string name="setting_delay">Dröj skärmavstängning i %1$s minuter</string>
+    <string name="setting_auto">Aktivera automatiskt efter %1$d minuter</string>
+    <string name="setting_delay">Dröj skärmavstängning i %1$d minuter</string>
     <string name="setting_update">Sök efter uppdateringar</string>
     <string name="setting_network_options">Nätverksinställningar</string>
     <string name="setting_subnet">Subnet routing</string>
@@ -92,7 +92,7 @@
     <string name="setting_reset_usage">Återställ nätverksanvändning</string>
     <string name="setting_show_resolved">Visa lösta domännamn</string>
     <string name="setting_block_domains">Blockera domännamn</string>
-    <string name="setting_rcode">DNS-svarskod: %s</string>
+    <string name="setting_rcode">DNS-svarskod: %d</string>
     <string name="setting_forwarding">Vidarebefordring av port</string>
     <string name="setting_vpn4">VPN-IPv4: %s</string>
     <string name="setting_vpn6">VPN-IPv6: %s</string>

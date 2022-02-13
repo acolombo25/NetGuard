@@ -60,8 +60,8 @@
     <string name="setting_dark">Dunkles Design verwenden</string>
     <string name="setting_install">Benachrichtigung bei neuer Installation</string>
     <string name="setting_screen_on">\'Wenn Bildschirm an\' Regeln anwenden</string>
-    <string name="setting_auto">Automatisch nach %1$s-Minuten aktivieren</string>
-    <string name="setting_delay">Bildschirmabschaltung um %1$s Minuten verzögern</string>
+    <string name="setting_auto">Automatisch nach %1$d-Minuten aktivieren</string>
+    <string name="setting_delay">Bildschirmabschaltung um %1$d Minuten verzögern</string>
     <string name="setting_update">Nach Aktualisierungen suchen</string>
     <string name="setting_network_options">Netzwerkoptionen</string>
     <string name="setting_subnet">Subnet-Routing</string>
@@ -92,7 +92,7 @@
     <string name="setting_reset_usage">Netzwerknutzung zurücksetzen</string>
     <string name="setting_show_resolved">Aufgelöste Domainnamen anzeigen</string>
     <string name="setting_block_domains">Domainnamen blockieren</string>
-    <string name="setting_rcode">DNS-Rückantwortcode: %s</string>
+    <string name="setting_rcode">DNS-Rückantwortcode: %d</string>
     <string name="setting_forwarding">Portweiterleitung</string>
     <string name="setting_vpn4">VPN-IPv4: %s</string>
     <string name="setting_vpn6">VPN-IPv6: %s</string>

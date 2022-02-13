@@ -60,8 +60,8 @@
     <string name="setting_dark">使用深色主题</string>
     <string name="setting_install">安装新应用时通知我</string>
     <string name="setting_screen_on">使用亮屏时的规则</string>
-    <string name="setting_auto">%1$s分钟后自动启用</string>
-    <string name="setting_delay">推迟%1$s分钟关屏</string>
+    <string name="setting_auto">%1$d分钟后自动启用</string>
+    <string name="setting_delay">推迟%1$d分钟关屏</string>
     <string name="setting_update">检查更新</string>
     <string name="setting_network_options">网络选项</string>
     <string name="setting_subnet">子网路由</string>
@@ -92,7 +92,7 @@
     <string name="setting_reset_usage">清空网络使用记录</string>
     <string name="setting_show_resolved">显示已解析的主机名称</string>
     <string name="setting_block_domains">屏蔽域名</string>
-    <string name="setting_rcode">DNS回应码：%s</string>
+    <string name="setting_rcode">DNS回应码：%d</string>
     <string name="setting_forwarding">端口转发</string>
     <string name="setting_vpn4">VPN IPv4：%s</string>
     <string name="setting_vpn6">VPN IPv6：%s</string>

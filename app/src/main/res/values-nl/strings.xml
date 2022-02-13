@@ -60,8 +60,8 @@
     <string name="setting_dark">Gebruik donker thema</string>
     <string name="setting_install">Notificatie bij nieuwe installatie</string>
     <string name="setting_screen_on">Pas \'wanneer scherm aan\'-regels toe</string>
-    <string name="setting_auto">Automatisch inschakelen na %1$s minuten</string>
-    <string name="setting_delay">Vertraag schermuitzetten met %1$s minuten</string>
+    <string name="setting_auto">Automatisch inschakelen na %1$d minuten</string>
+    <string name="setting_delay">Vertraag schermuitzetten met %1$d minuten</string>
     <string name="setting_update">Controleer op updates</string>
     <string name="setting_network_options">Netwerkopties</string>
     <string name="setting_subnet">Subnet-routering</string>
@@ -92,7 +92,7 @@
     <string name="setting_reset_usage">Reset netwerkgebruik</string>
     <string name="setting_show_resolved">Toon opgeloste domeinnamen</string>
     <string name="setting_block_domains">Blokkeer domeinnamen</string>
-    <string name="setting_rcode">DNS-antwoordcode: %s</string>
+    <string name="setting_rcode">DNS-antwoordcode: %d</string>
     <string name="setting_forwarding">Port-forwarding</string>
     <string name="setting_vpn4">VPN-IPv4: %s</string>
     <string name="setting_vpn6">VPN-IPv6: %s</string>

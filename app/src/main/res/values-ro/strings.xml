@@ -60,8 +60,8 @@
     <string name="setting_dark">Folosește tema întunecată</string>
     <string name="setting_install">Notificare la o instalare nouă</string>
     <string name="setting_screen_on">Aplică regulile pentru \'ecran pornit\'</string>
-    <string name="setting_auto">Activează automat după %1$s minute</string>
-    <string name="setting_delay">Întârzie regulile pentru \"ecran oprit\" %1$s minute</string>
+    <string name="setting_auto">Activează automat după %1$d minute</string>
+    <string name="setting_delay">Întârzie regulile pentru \"ecran oprit\" %1$d minute</string>
     <string name="setting_update">Verificați dacă există actualizări</string>
     <string name="setting_network_options">Opțiuni rețea</string>
     <string name="setting_subnet">Rutare subrețea</string>
@@ -92,7 +92,7 @@
     <string name="setting_reset_usage">Resetează folosirea conexiunii</string>
     <string name="setting_show_resolved">Arată numele de domenii rezolvate</string>
     <string name="setting_block_domains">Blochează domenii</string>
-    <string name="setting_rcode">Cod de răspuns DNS: %s</string>
+    <string name="setting_rcode">Cod de răspuns DNS: %d</string>
     <string name="setting_forwarding">Redirecționare port</string>
     <string name="setting_vpn4">VPN IPv4: %s</string>
     <string name="setting_vpn6">VPN IPv6: %s</string>

@@ -60,8 +60,8 @@
     <string name="setting_dark">Gunakan tema gelap</string>
     <string name="setting_install">Beritahu pada aplikasi baru</string>
     <string name="setting_screen_on">Terapkan aturan \'ketika layar menyala\'</string>
-    <string name="setting_auto">Otomatis aktif setelah %1$s menit</string>
-    <string name="setting_delay">Tundaan layar mati %1$s menit</string>
+    <string name="setting_auto">Otomatis aktif setelah %1$d menit</string>
+    <string name="setting_delay">Tundaan layar mati %1$d menit</string>
     <string name="setting_update">Periksa pembaruan</string>
     <string name="setting_network_options">Opsi jaringan</string>
     <string name="setting_subnet">Routing subnet</string>
@@ -92,7 +92,7 @@
     <string name="setting_reset_usage">Set ulang penggunaan jaringan</string>
     <string name="setting_show_resolved">Tampilkan nama domain asli</string>
     <string name="setting_block_domains">Blokir nama domain</string>
-    <string name="setting_rcode">Kode respons DNS: %s</string>
+    <string name="setting_rcode">Kode respons DNS: %d</string>
     <string name="setting_forwarding">Port forwarding</string>
     <string name="setting_vpn4">IPv4 VPN: %s</string>
     <string name="setting_vpn6">IPv6 VPN: %s</string>

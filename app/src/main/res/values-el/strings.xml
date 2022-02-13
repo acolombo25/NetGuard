@@ -60,8 +60,8 @@
     <string name="setting_dark">Χρήση σκοτεινού θέματος</string>
     <string name="setting_install">Ειδοποίηση για νέα εγκατάσταση</string>
     <string name="setting_screen_on">Εφαρμογή κανόνων «ενεργή οθόνη»</string>
-    <string name="setting_auto">Αυτόματη ενεργοποίηση μετά από %1$s λεπτά</string>
-    <string name="setting_delay">Καθυστέρηση μετά το σβήσιμο της οθόνης για %1$s λεπτά</string>
+    <string name="setting_auto">Αυτόματη ενεργοποίηση μετά από %1$d λεπτά</string>
+    <string name="setting_delay">Καθυστέρηση μετά το σβήσιμο της οθόνης για %1$d λεπτά</string>
     <string name="setting_update">Έλεγχος Ενημερώσεων</string>
     <string name="setting_network_options">Επιλογές δικτύου</string>
     <string name="setting_subnet">Δρομολόγηση υποδικτύου</string>
@@ -92,7 +92,7 @@
     <string name="setting_reset_usage">Επαναφορά μετρητή χρήσης δικτύου</string>
     <string name="setting_show_resolved">Εμφάνιση επιλυμένων ονομάτων τομέα</string>
     <string name="setting_block_domains">Φραγή ονομάτων τομέα</string>
-    <string name="setting_rcode">Κωδικός απόκρισης DNS: %s</string>
+    <string name="setting_rcode">Κωδικός απόκρισης DNS: %d</string>
     <string name="setting_forwarding">Προώθηση θυρών</string>
     <string name="setting_vpn4">VPN IPv4: %s</string>
     <string name="setting_vpn6">VPN IPv6: %s</string>

@@ -41,7 +41,7 @@ public class WidgetLockdown extends AppWidgetProvider {
 
     private static void update(int[] appWidgetIds, AppWidgetManager appWidgetManager, Context context) {
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
-        boolean lockdown = prefs.getBoolean("lockdown", false);
+        boolean lockdown = prefs.getBoolean(Preferences.LOCKDOWN.getKey(), Preferences.LOCKDOWN.getDefaultValue());
 
         try {
             try {

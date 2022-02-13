@@ -60,8 +60,8 @@
     <string name="setting_dark">Використовувати темну тему</string>
     <string name="setting_install">Сповіщати про нове встановлення</string>
     <string name="setting_screen_on">Застосувати правила «коли екран увімкнено»</string>
-    <string name="setting_auto">Автоматично увімкнути через %1$s хв</string>
-    <string name="setting_delay">Затримка вимкення екрана — %1$s хв</string>
+    <string name="setting_auto">Автоматично увімкнути через %1$d хв</string>
+    <string name="setting_delay">Затримка вимкення екрана — %1$d хв</string>
     <string name="setting_update">Перевірити наявність оновлень</string>
     <string name="setting_network_options">Налаштування мережі</string>
     <string name="setting_subnet">Маршрутизація підмережі</string>
@@ -92,7 +92,7 @@
     <string name="setting_reset_usage">Скинути використання мережі</string>
     <string name="setting_show_resolved">Показати вирішені доменні імена</string>
     <string name="setting_block_domains">Блокувати доменні імена</string>
-    <string name="setting_rcode">Код відповіді DNS: %s</string>
+    <string name="setting_rcode">Код відповіді DNS: %d</string>
     <string name="setting_forwarding">Перенаправлення портів</string>
     <string name="setting_vpn4">VPN IPv4: %s</string>
     <string name="setting_vpn6">VPN IPv6: %s</string>

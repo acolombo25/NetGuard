@@ -48,7 +48,7 @@ public class AdapterDns extends CursorAdapter {
 
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
 
-        if (prefs.getBoolean("dark_theme", false))
+        if (prefs.getBoolean(Preferences.DARK.getKey(), Preferences.DARK.getDefaultValue()))
             colorExpired = Color.argb(128, Color.red(Color.DKGRAY), Color.green(Color.DKGRAY), Color.blue(Color.DKGRAY));
         else
             colorExpired = Color.argb(128, Color.red(Color.LTGRAY), Color.green(Color.LTGRAY), Color.blue(Color.LTGRAY));

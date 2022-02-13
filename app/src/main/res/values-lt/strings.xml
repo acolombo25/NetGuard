@@ -60,8 +60,8 @@
     <string name="setting_dark">Naudoti tamsią temą</string>
     <string name="setting_install">Pranešti naujo įdiegimo metu</string>
     <string name="setting_screen_on">Taikyti „aktyvaus ekrano“ taisykles</string>
-    <string name="setting_auto">Automatiškai įjungti po %1$s min.</string>
-    <string name="setting_delay">Uždelsti ekrano užrakinimą %1$s minučių</string>
+    <string name="setting_auto">Automatiškai įjungti po %1$d min.</string>
+    <string name="setting_delay">Uždelsti ekrano užrakinimą %1$d minučių</string>
     <string name="setting_update">Naujinių tikrinimas</string>
     <string name="setting_network_options">Tinklo nustatymai</string>
     <string name="setting_subnet">Potinklio nukreipimas</string>
@@ -92,7 +92,7 @@
     <string name="setting_reset_usage">Atstatyti tinklo naudojimą</string>
     <string name="setting_show_resolved">Rodyti išspręstus domenų vardus</string>
     <string name="setting_block_domains">Blokuoti domenų vardus</string>
-    <string name="setting_rcode">DNS atsakymo kodas: %s</string>
+    <string name="setting_rcode">DNS atsakymo kodas: %d</string>
     <string name="setting_forwarding">Prievado nukreipimas</string>
     <string name="setting_vpn4">VPN IPv4: %s</string>
     <string name="setting_vpn6">VPN IPv6: %s</string>

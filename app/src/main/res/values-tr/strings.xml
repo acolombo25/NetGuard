@@ -60,8 +60,8 @@
     <string name="setting_dark">Karanlık tema kullan</string>
     <string name="setting_install">Yeni uygulamaları bildir</string>
     <string name="setting_screen_on">Ekranın açıklığına bağlı kurallar uygulansın</string>
-    <string name="setting_auto">%1$s dakika sonra otomatik etkinleştir</string>
-    <string name="setting_delay">Ekranın kapalı olarak algılanmasını %1$s dakika ertele</string>
+    <string name="setting_auto">%1$d dakika sonra otomatik etkinleştir</string>
+    <string name="setting_delay">Ekranın kapalı olarak algılanmasını %1$d dakika ertele</string>
     <string name="setting_update">Güncellemeleri kontrol et</string>
     <string name="setting_network_options">Ağ seçenekleri</string>
     <string name="setting_subnet">Alt ağ yönlendirmesi</string>
@@ -92,7 +92,7 @@
     <string name="setting_reset_usage">Veri kullanımını sıfırla</string>
     <string name="setting_show_resolved">Çözümlenmiş alan adlarını göster</string>
     <string name="setting_block_domains">Alan adlarını engelle</string>
-    <string name="setting_rcode">DNS yanıt kodu: %s</string>
+    <string name="setting_rcode">DNS yanıt kodu: %d</string>
     <string name="setting_forwarding">Bağlantı noktası yönlendirme</string>
     <string name="setting_vpn4">VPN IPv4: %s</string>
     <string name="setting_vpn6">VPN IPv6: %s</string>

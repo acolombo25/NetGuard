@@ -60,8 +60,8 @@
     <string name="setting_dark">Erabili azal iluna</string>
     <string name="setting_install">Jakinarazi instalazio berria</string>
     <string name="setting_screen_on">Aplikatu \'pantaila piztuta dagoenean\' arauak</string>
-    <string name="setting_auto">Automatikoki gaitu %1$s minutura</string>
-    <string name="setting_delay">Atzeratu pantaila itzaltzea %1$s minutu</string>
+    <string name="setting_auto">Automatikoki gaitu %1$d minutura</string>
+    <string name="setting_delay">Atzeratu pantaila itzaltzea %1$d minutu</string>
     <string name="setting_update">Egiaztatu eguneraketarik dagoen</string>
     <string name="setting_network_options">Sare-aukerak</string>
     <string name="setting_subnet">Azpisarea bideratzea</string>
@@ -92,7 +92,7 @@
     <string name="setting_reset_usage">Berrezarri sare-erabilera</string>
     <string name="setting_show_resolved">Erakutsi ebatzitako domeinu izenak</string>
     <string name="setting_block_domains">Blokeatu domeinu izenak</string>
-    <string name="setting_rcode">DNS erantzun kodea: %s</string>
+    <string name="setting_rcode">DNS erantzun kodea: %d</string>
     <string name="setting_forwarding">Atakak birbidaltzea</string>
     <string name="setting_vpn4">VPN IPv4: %s</string>
     <string name="setting_vpn6">VPN IPv6: %s</string>

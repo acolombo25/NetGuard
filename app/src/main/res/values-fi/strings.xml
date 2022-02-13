@@ -60,8 +60,8 @@
     <string name="setting_dark">Käytä tummaa teemaa</string>
     <string name="setting_install">Ilmoita uusista asennuksista</string>
     <string name="setting_screen_on">Käytä \'näyttö päällä\'-sääntöjä</string>
-    <string name="setting_auto">Automaattinen käyttöönotto %1$s minuutin jälkeen</string>
-    <string name="setting_delay">Näyttö pois päältä viive %1$s minuuttia</string>
+    <string name="setting_auto">Automaattinen käyttöönotto %1$d minuutin jälkeen</string>
+    <string name="setting_delay">Näyttö pois päältä viive %1$d minuuttia</string>
     <string name="setting_update">Tarkasta päivitykset</string>
     <string name="setting_network_options">Verkkoasetukset</string>
     <string name="setting_subnet">Aliverkon reititys</string>
@@ -92,7 +92,7 @@
     <string name="setting_reset_usage">Nollaa verkon käyttö</string>
     <string name="setting_show_resolved">Näytä selvitetyt verkkotunnukset</string>
     <string name="setting_block_domains">Estä verkkotunnuksia</string>
-    <string name="setting_rcode">DNS-vastauskoodi: %s</string>
+    <string name="setting_rcode">DNS-vastauskoodi: %d</string>
     <string name="setting_forwarding">Porttien uudelleenohjaus</string>
     <string name="setting_vpn4">VPN IPv4: %s</string>
     <string name="setting_vpn6">VPN IPv6: %s</string>

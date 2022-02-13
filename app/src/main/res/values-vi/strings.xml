@@ -60,8 +60,8 @@
     <string name="setting_dark">Sử dụng chủ đề tối</string>
     <string name="setting_install">Thông báo khi có ứng dụng mới</string>
     <string name="setting_screen_on">Áp dụng quy tắc (khi bật màn hình)</string>
-    <string name="setting_auto">Tự động kích hoạt sau %1$s phút</string>
-    <string name="setting_delay">Trì hoãn màn hình tắt %1$s phút</string>
+    <string name="setting_auto">Tự động kích hoạt sau %1$d phút</string>
+    <string name="setting_delay">Trì hoãn màn hình tắt %1$d phút</string>
     <string name="setting_update">Kiểm tra cập Nhật</string>
     <string name="setting_network_options">Tùy chọn mạng</string>
     <string name="setting_subnet">Định tuyến mạng con</string>
@@ -92,7 +92,7 @@
     <string name="setting_reset_usage">Đặt lại sử dụng mạng</string>
     <string name="setting_show_resolved">Hiển thị tên miền giải quyết</string>
     <string name="setting_block_domains">Chặn tên miền</string>
-    <string name="setting_rcode">Mã phản hồi DNS: %s</string>
+    <string name="setting_rcode">Mã phản hồi DNS: %d</string>
     <string name="setting_forwarding">Cổng chuyển tiếp</string>
     <string name="setting_vpn4">VPN IPv4: %s</string>
     <string name="setting_vpn6">VPN IPv6: %s</string>

@@ -60,8 +60,8 @@
     <string name="setting_dark">استفاده از پوسته تیره</string>
     <string name="setting_install">آگاه‌سازی هنگام نصب جدید</string>
     <string name="setting_screen_on">اعمال قوانین هنگام روشن بودن صفحه</string>
-    <string name="setting_auto">فعال‌سازی خودکار بعد از %1$s دقیقه</string>
-    <string name="setting_delay">تأخیر در خاموش کردن صفحه %1$s دقیقه</string>
+    <string name="setting_auto">فعال‌سازی خودکار بعد از %1$d دقیقه</string>
+    <string name="setting_delay">تأخیر در خاموش کردن صفحه %1$d دقیقه</string>
     <string name="setting_update">بررسی برای بروز‌رسانی‌ها</string>
     <string name="setting_network_options">گزینه‌های شبکه</string>
     <string name="setting_subnet">مسیریابی زیرشبکه</string>
@@ -92,7 +92,7 @@
     <string name="setting_reset_usage">بازنشانی مصرف شبکه</string>
     <string name="setting_show_resolved">نمایش نام‌های دامنه پیدا شده</string>
     <string name="setting_block_domains">نام‌های دامنه را مسدود کن</string>
-    <string name="setting_rcode">کد واکنش DNS: %s</string>
+    <string name="setting_rcode">کد واکنش DNS: %d</string>
     <string name="setting_forwarding">هدایت درگاه</string>
     <string name="setting_vpn4">VPN IPv4: %s</string>
     <string name="setting_vpn6">VPN IPv6: %s</string>

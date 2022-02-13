@@ -60,8 +60,8 @@
     <string name="setting_dark">使用深色主題</string>
     <string name="setting_install">有新安裝動作時通知</string>
     <string name="setting_screen_on">套用 \"當螢幕亮起\" 規則</string>
-    <string name="setting_auto">在 %1$s 分鐘後自動啟用</string>
-    <string name="setting_delay">延遲 %1$s 分鐘關閉螢幕</string>
+    <string name="setting_auto">在 %1$d 分鐘後自動啟用</string>
+    <string name="setting_delay">延遲 %1$d 分鐘關閉螢幕</string>
     <string name="setting_update">檢查更新</string>
     <string name="setting_network_options">網路選項</string>
     <string name="setting_subnet">子網路路由</string>
@@ -92,7 +92,7 @@
     <string name="setting_reset_usage">重置網路用量記錄</string>
     <string name="setting_show_resolved">顯示已解析的網域名稱</string>
     <string name="setting_block_domains">封鎖網域名稱</string>
-    <string name="setting_rcode">DNS 回應碼：%s</string>
+    <string name="setting_rcode">DNS 回應碼：%d</string>
     <string name="setting_forwarding">埠轉接</string>
     <string name="setting_vpn4">VPN IPv4: %s</string>
     <string name="setting_vpn6">VPN IPv6: %s</string>

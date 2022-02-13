@@ -60,8 +60,8 @@
     <string name="setting_dark">Користи тамну тему</string>
     <string name="setting_install">Обавести при новим инсталацијама</string>
     <string name="setting_screen_on">Примени правило \'укљученог екрана\'</string>
-    <string name="setting_auto">Сам укључи након %1$s мин.</string>
-    <string name="setting_delay">Одложи угашен екран %1$s мин.</string>
+    <string name="setting_auto">Сам укључи након %1$d мин.</string>
+    <string name="setting_delay">Одложи угашен екран %1$d мин.</string>
     <string name="setting_update">Провери ажурирања</string>
     <string name="setting_network_options">Мрежне опције</string>
     <string name="setting_subnet">Подмрежно рутирање</string>
@@ -92,7 +92,7 @@
     <string name="setting_reset_usage">Ресетуј коришћење мреже</string>
     <string name="setting_show_resolved">Прикажи разрешене називе домена</string>
     <string name="setting_block_domains">Блокирај домене</string>
-    <string name="setting_rcode">ДНС код одговора: %s</string>
+    <string name="setting_rcode">ДНС код одговора: %d</string>
     <string name="setting_forwarding">Прослеђивање порта</string>
     <string name="setting_vpn4">ВПН ИПв4: %s</string>
     <string name="setting_vpn6">ВПН ИПв6: %s</string>

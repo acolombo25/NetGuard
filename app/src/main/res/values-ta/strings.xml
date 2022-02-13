@@ -60,8 +60,8 @@
     <string name="setting_dark">கருத்த கருப்பொருளை உபயோகி</string>
     <string name="setting_install">புதிய நிறுவல்களை தெரிவி</string>
     <string name="setting_screen_on">\'ஸ்கிரீன் ஆன்\' விதிகளைப் பயன்படுத்துங்கள்</string>
-    <string name="setting_auto">%1$s நிமிடங்களுக்கு பிறகு தானாக இயக்கு</string>
-    <string name="setting_delay">அணை %1$s நிமிடங்கள் தாமதம் திரை</string>
+    <string name="setting_auto">%1$d நிமிடங்களுக்கு பிறகு தானாக இயக்கு</string>
+    <string name="setting_delay">அணை %1$d நிமிடங்கள் தாமதம் திரை</string>
     <string name="setting_update">மேம்படுத்தலுக்கு சோதி</string>
     <string name="setting_network_options">பிணைய விருப்பங்கள்</string>
     <string name="setting_subnet">துணைவலை வழியமை</string>
@@ -92,7 +92,7 @@
     <string name="setting_reset_usage">பிணைய பயன்பாடு மீட்டமை</string>
     <string name="setting_show_resolved">தீர்க்கப்பட்ட டொமைன் பெயர்களைக் காட்டு</string>
     <string name="setting_block_domains">டொமைன் பெயர்களை தடு</string>
-    <string name="setting_rcode">டிஎன்எஸ் மறுமொழி குறியீடு:%s</string>
+    <string name="setting_rcode">டிஎன்எஸ் மறுமொழி குறியீடு:%d</string>
     <string name="setting_forwarding">முணையம் மேலனுப்ப</string>
     <string name="setting_vpn4">VPN IPv4: %s</string>
     <string name="setting_vpn6">VPN IPv6: %s</string>

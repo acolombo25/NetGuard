@@ -60,8 +60,8 @@
     <string name="setting_dark">Sötét téma használata</string>
     <string name="setting_install">Értesítés új alkalmazás telepítésekor</string>
     <string name="setting_screen_on">Az \'amikor a képernyő be van kapcsolva\' szabályok alkalmazása</string>
-    <string name="setting_auto">Automatikus engedélyezés %1$s perc után</string>
-    <string name="setting_delay">%1$s perc várakozás a képernyő kikapcsolása után</string>
+    <string name="setting_auto">Automatikus engedélyezés %1$d perc után</string>
+    <string name="setting_delay">%1$d perc várakozás a képernyő kikapcsolása után</string>
     <string name="setting_update">Frissítések ellenőrzése</string>
     <string name="setting_network_options">Hálózati beállítások</string>
     <string name="setting_subnet">Alhálózati útválasztó</string>
@@ -92,7 +92,7 @@
     <string name="setting_reset_usage">Hálózat használat alaphelyzetbe</string>
     <string name="setting_show_resolved">Mutassa a feloldott domain neveket</string>
     <string name="setting_block_domains">Domain nevek letiltása</string>
-    <string name="setting_rcode">DNS válasz kód: %s</string>
+    <string name="setting_rcode">DNS válasz kód: %d</string>
     <string name="setting_forwarding">Port forward</string>
     <string name="setting_vpn4">VPN IPv4: %s</string>
     <string name="setting_vpn6">VPN IPv6: %s</string>

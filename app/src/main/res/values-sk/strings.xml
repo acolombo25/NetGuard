@@ -60,8 +60,8 @@
     <string name="setting_dark">Použiť tmavú tému</string>
     <string name="setting_install">Upozorniť na novú inštaláciu</string>
     <string name="setting_screen_on">Apply \'when screen on\' rules</string>
-    <string name="setting_auto">Automaticky zapnúť po %1$s minútach</string>
-    <string name="setting_delay">Oneskoriť vypnutie obrazovky o %1$s minút</string>
+    <string name="setting_auto">Automaticky zapnúť po %1$d minútach</string>
+    <string name="setting_delay">Oneskoriť vypnutie obrazovky o %1$d minút</string>
     <string name="setting_update">Skontrolovať aktualizácie</string>
     <string name="setting_network_options">Možnosti siete</string>
     <string name="setting_subnet">Podsieťové smerovanie</string>
@@ -92,7 +92,6 @@
     <string name="setting_reset_usage">Resetovať využitie siete</string>
     <string name="setting_show_resolved">Show resolved domain names</string>
     <string name="setting_block_domains">Blokovať názvy domén</string>
-    <string name="setting_rcode">DNS response code: %s</string>
     <string name="setting_forwarding">Presmerovanie portu</string>
     <string name="setting_vpn4">VPN IPv4: %s</string>
     <string name="setting_vpn6">VPN IPv6: %s</string>

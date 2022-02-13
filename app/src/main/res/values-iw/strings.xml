@@ -61,8 +61,8 @@
     <string name="setting_dark">השתמש בערכת נושא כהה</string>
     <string name="setting_install">הצג התראה על התקנה חדשה</string>
     <string name="setting_screen_on">החל כללי \'מסך דולק\'</string>
-    <string name="setting_auto">אפשר אוטומטית לאחר %1$s דקות</string>
-    <string name="setting_delay">השהה כיבוי מסך לאחרי %1$s דקות</string>
+    <string name="setting_auto">אפשר אוטומטית לאחר %1$d דקות</string>
+    <string name="setting_delay">השהה כיבוי מסך לאחרי %1$d דקות</string>
     <string name="setting_update">בדוק האם קיימים עדכונים</string>
     <string name="setting_network_options">אפשרויות רשת</string>
     <string name="setting_subnet">ניתוב רשת משנה</string>
@@ -93,7 +93,7 @@
     <string name="setting_reset_usage">אפס את מונה השימוש ברשת</string>
     <string name="setting_show_resolved">הצג שמות דומיין</string>
     <string name="setting_block_domains">חסום שמות מתחם (דומיין)</string>
-    <string name="setting_rcode">קוד תגובת DNS: %s</string>
+    <string name="setting_rcode">קוד תגובת DNS: %d</string>
     <string name="setting_forwarding">הפניית פורטים</string>
     <string name="setting_vpn4">VPN IPv4: %s</string>
     <string name="setting_vpn6">VPN IPv6: %s</string>

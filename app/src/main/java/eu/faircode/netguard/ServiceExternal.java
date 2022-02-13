@@ -61,7 +61,7 @@ public class ServiceExternal extends IntentService {
             if (ACTION_DOWNLOAD_HOSTS_FILE.equals(intent.getAction())) {
                 final SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
 
-                String hosts_url = prefs.getString("hosts_url", null);
+                String hosts_url = prefs.getString(Preferences.HOSTS_URL.getKey(), Preferences.HOSTS_URL.getDefaultValue());
                 if ("https://www.netguard.me/hosts".equals(hosts_url))
                     hosts_url = BuildConfig.HOSTS_FILE_URI;
 

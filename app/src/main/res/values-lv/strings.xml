@@ -60,8 +60,8 @@
     <string name="setting_dark">Izmantot tumšo tēmu</string>
     <string name="setting_install">Paziņot par jaunu instalāciju</string>
     <string name="setting_screen_on">Pielietot \'kad ekrāns ieslēgts\' noteikumus</string>
-    <string name="setting_auto">Automātiski iespējot pēc %1$s minūtēm</string>
-    <string name="setting_delay">Aizturēt ekrāna izslēgšanu %1$s minūtes</string>
+    <string name="setting_auto">Automātiski iespējot pēc %1$d minūtēm</string>
+    <string name="setting_delay">Aizturēt ekrāna izslēgšanu %1$d minūtes</string>
     <string name="setting_update">Pārbaudīt atjauninājumus</string>
     <string name="setting_network_options">Tīkla iespējas</string>
     <string name="setting_subnet">Apakštīkla maršrutēšana</string>
@@ -92,7 +92,7 @@
     <string name="setting_reset_usage">Atiestatīt tīkla lietojuma statistiku</string>
     <string name="setting_show_resolved">Rādīt atļautos domēna vārdus</string>
     <string name="setting_block_domains">Bloķēt domēna vārdus</string>
-    <string name="setting_rcode">DNS atbildes kods: %s</string>
+    <string name="setting_rcode">DNS atbildes kods: %d</string>
     <string name="setting_forwarding">Porta pāradresācija</string>
     <string name="setting_vpn4">VPN IPv4: %s</string>
     <string name="setting_vpn6">VPN IPv6: %s</string>

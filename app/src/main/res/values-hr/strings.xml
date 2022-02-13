@@ -60,8 +60,8 @@
     <string name="setting_dark">Koristi tamnu temu</string>
     <string name="setting_install">Obavijesti o novoj instalaciji</string>
     <string name="setting_screen_on">Primjeni \'kada je zaslon uključen\' pravila</string>
-    <string name="setting_auto">Automatski omogući nakon %1$s minuta</string>
-    <string name="setting_delay">Odgodi isključivanje zaslona za %1$s minuta</string>
+    <string name="setting_auto">Automatski omogući nakon %1$d minuta</string>
+    <string name="setting_delay">Odgodi isključivanje zaslona za %1$d minuta</string>
     <string name="setting_update">Provjeri ažuriranja</string>
     <string name="setting_network_options">Mrežne postavke</string>
     <string name="setting_subnet">Podmrežno usmjeravanje</string>
@@ -92,7 +92,7 @@
     <string name="setting_reset_usage">Resetiraj korištenje mreže</string>
     <string name="setting_show_resolved">Prikaži riješena imena domena</string>
     <string name="setting_block_domains">Blokiraj nazive domena</string>
-    <string name="setting_rcode">Kod odgovora DNS-a: %s</string>
+    <string name="setting_rcode">Kod odgovora DNS-a: %d</string>
     <string name="setting_forwarding">Prosljeđivanje porta</string>
     <string name="setting_vpn4">VPN IPv4: %s</string>
     <string name="setting_vpn6">VPN IPv6: %s</string>

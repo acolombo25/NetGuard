@@ -60,8 +60,8 @@
     <string name="setting_dark">어두운 테마 사용</string>
     <string name="setting_install">새 앱을 설치할 때 알림</string>
     <string name="setting_screen_on">\'화면이 켜져 있을 때\' 규칙 적용</string>
-    <string name="setting_auto">%1$s분 후 자동 활성화</string>
-    <string name="setting_delay">%1$s분 간 화면 꺼짐 지연</string>
+    <string name="setting_auto">%1$d분 후 자동 활성화</string>
+    <string name="setting_delay">%1$d분 간 화면 꺼짐 지연</string>
     <string name="setting_update">업데이트 확인</string>
     <string name="setting_network_options">네트워크 옵션</string>
     <string name="setting_subnet">서브넷 라우팅</string>
@@ -92,7 +92,7 @@
     <string name="setting_reset_usage">네트워크 사용량 초기화</string>
     <string name="setting_show_resolved">확인된 도메인 이름 표시</string>
     <string name="setting_block_domains">도메인 이름 차단</string>
-    <string name="setting_rcode">DNS 응답 코드: %s</string>
+    <string name="setting_rcode">DNS 응답 코드: %d</string>
     <string name="setting_forwarding">포트 포워딩</string>
     <string name="setting_vpn4">VPN IPv4: %s</string>
     <string name="setting_vpn6">VPN IPv6: %s</string>

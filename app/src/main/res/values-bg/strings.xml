@@ -60,8 +60,8 @@
     <string name="setting_dark">Използване на тъмна тема</string>
     <string name="setting_install">Уведомяване при нова инсталация</string>
     <string name="setting_screen_on">Apply \'when screen on\' rules</string>
-    <string name="setting_auto">Автоматично активитане след %1$s минути</string>
-    <string name="setting_delay">Отлагане изключването на екрана с %1$s минути</string>
+    <string name="setting_auto">Автоматично активитане след %1$d минути</string>
+    <string name="setting_delay">Отлагане изключването на екрана с %1$d минути</string>
     <string name="setting_update">Проверка за актуализация</string>
     <string name="setting_network_options">Мрежови опции</string>
     <string name="setting_subnet">Маршрутизиране на подмрежа</string>
@@ -92,7 +92,6 @@
     <string name="setting_reset_usage">Нулиране на данните за достъп до мрежа</string>
     <string name="setting_show_resolved">Show resolved domain names</string>
     <string name="setting_block_domains">Блокиране на домейни</string>
-    <string name="setting_rcode">DNS response code: %s</string>
     <string name="setting_forwarding">Пренасочване на порт</string>
     <string name="setting_vpn4">VPN IPv4: %s</string>
     <string name="setting_vpn6">VPN IPv6: %s</string>

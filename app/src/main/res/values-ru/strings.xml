@@ -60,8 +60,8 @@
     <string name="setting_dark">Использовать темную тему</string>
     <string name="setting_install">Уведомлять о новой установке</string>
     <string name="setting_screen_on">Применить правила при вкл. экране</string>
-    <string name="setting_auto">Авто запуск через %1$s минут</string>
-    <string name="setting_delay">Задержка экрана %1$s минут</string>
+    <string name="setting_auto">Авто запуск через %1$d минут</string>
+    <string name="setting_delay">Задержка экрана %1$d минут</string>
     <string name="setting_update">Проверять наличие обновлений</string>
     <string name="setting_network_options">Параметры сети</string>
     <string name="setting_subnet">Маршрутизация подсети</string>
@@ -92,7 +92,7 @@
     <string name="setting_reset_usage">Сброс сетевого использования</string>
     <string name="setting_show_resolved">Показать разрешенные доменные имена</string>
     <string name="setting_block_domains">Блокировать доменные имена</string>
-    <string name="setting_rcode">Код ответа DNS: %s</string>
+    <string name="setting_rcode">Код ответа DNS: %d</string>
     <string name="setting_forwarding">Перенаправление портов</string>
     <string name="setting_vpn4">VPN IPv4: %s</string>
     <string name="setting_vpn6">VPN IPv6: %s</string>

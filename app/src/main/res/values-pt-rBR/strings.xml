@@ -60,8 +60,8 @@
     <string name="setting_dark">Utilizar tema escuro</string>
     <string name="setting_install">Notificar sobre novas instalações</string>
     <string name="setting_screen_on">Aplicar regras \'quando tela estiver ligada\'</string>
-    <string name="setting_auto">Auto habilitar após %1$s minutos</string>
-    <string name="setting_delay">Delay de %1$s minutos após desligar a tela</string>
+    <string name="setting_auto">Auto habilitar após %1$d minutos</string>
+    <string name="setting_delay">Delay de %1$d minutos após desligar a tela</string>
     <string name="setting_update">Procurar por atualizações</string>
     <string name="setting_network_options">Opções de rede</string>
     <string name="setting_subnet">Roteamento de subrede</string>
@@ -92,7 +92,7 @@
     <string name="setting_reset_usage">Redefinir o uso da rede</string>
     <string name="setting_show_resolved">Mostrar nomes de domínio resolvidos</string>
     <string name="setting_block_domains">Bloquear nomes de domínio</string>
-    <string name="setting_rcode">Código de resposta DNS:%s</string>
+    <string name="setting_rcode">Código de resposta DNS: %d</string>
     <string name="setting_forwarding">Encaminhamento de porta</string>
     <string name="setting_vpn4">VPN IPv4: %s</string>
     <string name="setting_vpn6">VPN IPv6: %s</string>

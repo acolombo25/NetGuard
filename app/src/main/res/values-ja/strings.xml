@@ -60,8 +60,8 @@
     <string name="setting_dark">ダークテーマを使用</string>
     <string name="setting_install">アプリインストール時に通知</string>
     <string name="setting_screen_on">‘“画面が点灯中” ルール’ を使用</string>
-    <string name="setting_auto">%1$s 分後に自動的に有効にする</string>
-    <string name="setting_delay">%1$s 分、画面消灯を遅延</string>
+    <string name="setting_auto">%1$d 分後に自動的に有効にする</string>
+    <string name="setting_delay">%1$d 分、画面消灯を遅延</string>
     <string name="setting_update">アップデートの確認</string>
     <string name="setting_network_options">ネットワークオプション</string>
     <string name="setting_subnet">サブネットのルーティング</string>
@@ -92,7 +92,7 @@
     <string name="setting_reset_usage">ネットワークの使用状況をリセット</string>
     <string name="setting_show_resolved">解決済みのドメイン名を表示</string>
     <string name="setting_block_domains">ドメイン名をブロック</string>
-    <string name="setting_rcode">DNS 応答コード: %s</string>
+    <string name="setting_rcode">DNS 応答コード: %d</string>
     <string name="setting_forwarding">ポート転送</string>
     <string name="setting_vpn4">VPN IPv4: %s</string>
     <string name="setting_vpn6">VPN IPv6: %s</string>
