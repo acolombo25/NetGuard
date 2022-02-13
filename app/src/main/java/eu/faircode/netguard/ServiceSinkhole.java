@@ -1109,7 +1109,7 @@ public class ServiceSinkhole extends VpnService implements SharedPreferences.OnS
 
             TypedValue tv = new TypedValue();
             getTheme().resolveAttribute(R.attr.colorPrimary, tv, true);
-            NotificationCompat.Builder builder = new NotificationCompat.Builder(ServiceSinkhole.this, "notify");
+            NotificationCompat.Builder builder = new NotificationCompat.Builder(ServiceSinkhole.this, NotificationChannels.Notify.getValue());
             builder.setWhen(when)
                     .setSmallIcon(R.drawable.ic_equalizer_white_24dp)
                     .setContent(remoteViews)
@@ -2319,7 +2319,7 @@ public class ServiceSinkhole extends VpnService implements SharedPreferences.OnS
 
             TypedValue tv = new TypedValue();
             getTheme().resolveAttribute(R.attr.colorPrimary, tv, true);
-            NotificationCompat.Builder builder = new NotificationCompat.Builder(this, "notify");
+            NotificationCompat.Builder builder = new NotificationCompat.Builder(this, NotificationChannels.Notify.getValue());
             builder.setSmallIcon(R.drawable.ic_security_white_24dp)
                     .setContentIntent(pi)
                     .setColor(tv.data)
@@ -2803,7 +2803,7 @@ public class ServiceSinkhole extends VpnService implements SharedPreferences.OnS
 
         TypedValue tv = new TypedValue();
         getTheme().resolveAttribute(R.attr.colorPrimary, tv, true);
-        NotificationCompat.Builder builder = new NotificationCompat.Builder(this, "foreground");
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(this, NotificationChannels.Foreground.getValue());
         builder.setSmallIcon(isLockedDown(last_metered) ? R.drawable.ic_lock_outline_white_24dp : R.drawable.ic_security_white_24dp)
                 .setContentIntent(pi)
                 .setColor(tv.data)
@@ -2867,7 +2867,7 @@ public class ServiceSinkhole extends VpnService implements SharedPreferences.OnS
 
         TypedValue tv = new TypedValue();
         getTheme().resolveAttribute(R.attr.colorPrimary, tv, true);
-        NotificationCompat.Builder builder = new NotificationCompat.Builder(this, "foreground");
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(this, NotificationChannels.Foreground.getValue()));
         builder.setSmallIcon(R.drawable.ic_security_white_24dp)
                 .setContentIntent(pi)
                 .setColor(tv.data)
@@ -2894,7 +2894,7 @@ public class ServiceSinkhole extends VpnService implements SharedPreferences.OnS
 
         TypedValue tv = new TypedValue();
         getTheme().resolveAttribute(R.attr.colorOff, tv, true);
-        NotificationCompat.Builder builder = new NotificationCompat.Builder(this, "notify");
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(this, NotificationChannels.Notify.getValue());
         builder.setSmallIcon(R.drawable.ic_error_white_24dp)
                 .setContentTitle(getString(R.string.app_name))
                 .setContentText(getString(R.string.msg_revoked))
@@ -2919,7 +2919,7 @@ public class ServiceSinkhole extends VpnService implements SharedPreferences.OnS
 
         TypedValue tv = new TypedValue();
         getTheme().resolveAttribute(R.attr.colorOff, tv, true);
-        NotificationCompat.Builder builder = new NotificationCompat.Builder(this, "notify");
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(this, NotificationChannels.Notify.getValue());
         builder.setSmallIcon(R.drawable.ic_error_white_24dp)
                 .setContentTitle(getString(R.string.app_name))
                 .setContentText(getString(R.string.msg_always_on_lockdown))
@@ -2950,7 +2950,7 @@ public class ServiceSinkhole extends VpnService implements SharedPreferences.OnS
 
         TypedValue tv = new TypedValue();
         getTheme().resolveAttribute(R.attr.colorOff, tv, true);
-        NotificationCompat.Builder builder = new NotificationCompat.Builder(this, "notify");
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(this, NotificationChannels.Notify.getValue());
         builder.setSmallIcon(R.drawable.ic_error_white_24dp)
                 .setContentTitle(getString(R.string.app_name))
                 .setContentText(getString(R.string.msg_autostart))
@@ -2975,7 +2975,7 @@ public class ServiceSinkhole extends VpnService implements SharedPreferences.OnS
 
         TypedValue tv = new TypedValue();
         getTheme().resolveAttribute(R.attr.colorOff, tv, true);
-        NotificationCompat.Builder builder = new NotificationCompat.Builder(this, "notify");
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(this, NotificationChannels.Notify.getValue());
         builder.setSmallIcon(R.drawable.ic_error_white_24dp)
                 .setContentTitle(getString(R.string.app_name))
                 .setContentText(getString(R.string.msg_error, message))
@@ -3008,7 +3008,7 @@ public class ServiceSinkhole extends VpnService implements SharedPreferences.OnS
         getTheme().resolveAttribute(R.attr.colorOff, tv, true);
         int colorOff = tv.data;
 
-        NotificationCompat.Builder builder = new NotificationCompat.Builder(this, "access");
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(this, NotificationChannels.Access.getValue());
         builder.setSmallIcon(R.drawable.ic_cloud_upload_white_24dp)
                 .setGroup("AccessAttempt")
                 .setContentIntent(pi)
@@ -3086,7 +3086,7 @@ public class ServiceSinkhole extends VpnService implements SharedPreferences.OnS
 
         TypedValue tv = new TypedValue();
         getTheme().resolveAttribute(R.attr.colorPrimary, tv, true);
-        NotificationCompat.Builder builder = new NotificationCompat.Builder(this, "notify");
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(this, NotificationChannels.Notify.getValue());
         builder.setSmallIcon(R.drawable.ic_security_white_24dp)
                 .setContentTitle(name)
                 .setContentText(getString(R.string.msg_update))
