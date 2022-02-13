@@ -96,20 +96,20 @@
     <string name="setting_forwarding">Cổng chuyển tiếp</string>
 
     <string name="setting_validate">Xác thực tại: %s</string>
-    <string name="setting_ttl">Tối thiểu DNS TTL: %s s</string>
+    <string name="setting_ttl">Tối thiểu DNS TTL: %d s</string>
     <string name="setting_socks5_enabled">Dùng Socks5 proxy</string>
     <string name="setting_socks5_addr">Địa chỉ (Socks5): %s</string>
     <string name="setting_socks5_port">Cổng (Socks5):%s</string>
     <string name="setting_socks5_username">Username: %s</string>
     <string name="setting_socks5_password">Password: %s</string>
-    <string name="setting_pcap_record_size">Kích thước ghi PCAP: %s B</string>
-    <string name="setting_pcap_file_size">Kích thước tập tin PCAP lớn nhất: %s MB</string>
-    <string name="setting_watchdog">Thời gian giám sát: mỗi %s phút</string>
+    <string name="setting_pcap_record_size">Kích thước ghi PCAP: %d B</string>
+    <string name="setting_pcap_file_size">Kích thước tập tin PCAP lớn nhất: %d MB</string>
+    <string name="setting_watchdog">Thời gian giám sát: mỗi %d phút</string>
     <string name="setting_stats_category">Hiển thị thông báo tốc độ</string>
     <string name="setting_stats">Hiển thị thông báo tốc độ</string>
     <string name="setting_stats_top">Hiển thị các ứng dụng hàng đầu</string>
-    <string name="setting_stats_frequency">Khoảng thời gian mẫu: %s ms</string>
-    <string name="setting_stats_samples">Số mẫu: %s s</string>
+    <string name="setting_stats_frequency">Khoảng thời gian mẫu: %d ms</string>
+    <string name="setting_stats_samples">Số mẫu: %d s</string>
     <string name="setting_backup">Sao lưu</string>
     <string name="setting_export">Xuất cài đặt</string>
     <string name="setting_import">Nhập cài đặt</string>
@@ -217,7 +217,7 @@
     <string name="title_conditions">Điều kiện</string>
     <string name="title_screen_wifi">Cho phép Wi-Fi khi màn hình bật</string>
     <string name="title_screen_other">Cho phép mạng di động khi màn hình bật</string>
-    <string name="title_roaming_symbol">R</string>
+
     <string name="title_roaming">Chặn khi chuyển vùng</string>
     <string name="title_lockdown">Cho phép ở chế độ khóa</string>
     <string name="title_related">Lọc liên quan</string>

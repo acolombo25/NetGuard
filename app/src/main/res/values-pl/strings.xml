@@ -96,20 +96,20 @@
     <string name="setting_forwarding">Przekierowanie portów</string>
 
     <string name="setting_validate">Potwierdź w: %s</string>
-    <string name="setting_ttl">Minimalny DNS TTL: %s s</string>
+    <string name="setting_ttl">Minimalny DNS TTL: %d s</string>
     <string name="setting_socks5_enabled">Użyj serwera proxy SOCKS5</string>
     <string name="setting_socks5_addr">Adres SOCKS5: %s</string>
     <string name="setting_socks5_port">Port SOCKS5: %s</string>
     <string name="setting_socks5_username">Użytkownik SOCKS5: %s</string>
     <string name="setting_socks5_password">Hasło SOCKS5: %s</string>
-    <string name="setting_pcap_record_size">Wielkość rekordu PCAP: %s B</string>
-    <string name="setting_pcap_file_size">Maksymalna wielkość pliku PCAP: %s MB</string>
-    <string name="setting_watchdog">Watchdog: co %s minut</string>
+    <string name="setting_pcap_record_size">Wielkość rekordu PCAP: %d B</string>
+    <string name="setting_pcap_file_size">Maksymalna wielkość pliku PCAP: %d MB</string>
+    <string name="setting_watchdog">Watchdog: co %d minut</string>
     <string name="setting_stats_category">Wykres prędkości</string>
     <string name="setting_stats">Pokazuj wskaźnik prędkości</string>
     <string name="setting_stats_top">Pokaż aplikacje z najwyższym transferem</string>
-    <string name="setting_stats_frequency">Częstotliwość próbkowania: %s ms</string>
-    <string name="setting_stats_samples">Ilość próbek: %s s</string>
+    <string name="setting_stats_frequency">Częstotliwość próbkowania: %d ms</string>
+    <string name="setting_stats_samples">Ilość próbek: %d s</string>
     <string name="setting_backup">Kopia zapasowa</string>
     <string name="setting_export">Eksportuj ustawienia</string>
     <string name="setting_import">Importuj ustawienia</string>
@@ -219,7 +219,7 @@
     <string name="title_conditions">Warunki</string>
     <string name="title_screen_wifi">Zezwól na Wi-Fi przy włączonym ekranie</string>
     <string name="title_screen_other">Zezwól komórkowe przy włączonym ekranie</string>
-    <string name="title_roaming_symbol">R</string>
+
     <string name="title_roaming">Blokuj gdy roaming</string>
     <string name="title_lockdown">Zezwalaj w trybie blokady</string>
     <string name="title_related">Powiązane z filtrowaniem</string>

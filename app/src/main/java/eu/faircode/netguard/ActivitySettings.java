@@ -249,7 +249,7 @@ public class ActivitySettings extends AppCompatActivity implements SharedPrefere
         pref_dns1.setTitle(getString(R.string.setting_dns, prefs.getString(Preferences.DNS1.getKey(), Preferences.DNS1.getDefaultValue())));
         pref_dns2.setTitle(getString(R.string.setting_dns, prefs.getString(Preferences.DNS2.getKey(), Preferences.DNS2.getDefaultValue())));
         pref_validate.setTitle(getString(R.string.setting_validate, prefs.getString(Preferences.VALIDATE.getKey(), Preferences.VALIDATE.getDefaultValue())));
-        pref_ttl.setTitle(getString(R.string.setting_ttl, prefs.getString(Preferences.TTL.getKey(), Preferences.TTL.getDefaultValue())));
+        pref_ttl.setTitle(getString(R.string.setting_ttl, prefs.getInt(Preferences.TTL.getKey(), Preferences.TTL.getDefaultValue())));
 
         // SOCKS5 parameters
         screen.findPreference(Preferences.SOCKS_5_ADDR.getKey()).setTitle(getString(R.string.setting_socks5_addr, prefs.getString(Preferences.SOCKS_5_ADDR.getKey(), Preferences.SOCKS_5_ADDR.getDefaultValue())));
@@ -258,14 +258,14 @@ public class ActivitySettings extends AppCompatActivity implements SharedPrefere
         screen.findPreference(Preferences.SOCKS_5_PASSWORD.getKey()).setTitle(getString(R.string.setting_socks5_password, TextUtils.isEmpty(prefs.getString(Preferences.SOCKS_5_PASSWORD.getKey(), Preferences.SOCKS_5_PASSWORD.getDefaultValue())) ? "-" : "*****"));
 
         // PCAP parameters
-        screen.findPreference("pcap_record_size").setTitle(getString(R.string.setting_pcap_record_size, prefs.getString("pcap_record_size", "64")));
-        screen.findPreference("pcap_file_size").setTitle(getString(R.string.setting_pcap_file_size, prefs.getString("pcap_file_size", "2")));
+        screen.findPreference(Preferences.PCAP_RECORD_SIZE.getKey()).setTitle(getString(R.string.setting_pcap_record_size, prefs.getLong(Preferences.PCAP_RECORD_SIZE.getKey(), Preferences.PCAP_RECORD_SIZE.getDefaultValue())));
+        screen.findPreference(Preferences.PCAP_FILE_SIZE.getKey()).setTitle(getString(R.string.setting_pcap_file_size, prefs.getLong(Preferences.PCAP_FILE_SIZE.getKey(), Preferences.PCAP_FILE_SIZE.getDefaultValue())));
 
         // Watchdog
-        screen.findPreference("watchdog").setTitle(getString(R.string.setting_watchdog, prefs.getString("watchdog", "0")));
+        screen.findPreference(Preferences.WATCHDOG.getKey()).setTitle(getString(R.string.setting_watchdog, prefs.getLong(Preferences.WATCHDOG.getKey(), Preferences.WATCHDOG.getDefaultValue())));
 
         // Show resolved
-        Preference pref_show_resolved = screen.findPreference("show_resolved");
+        Preference pref_show_resolved = screen.findPreference(Preferences.SHOW_RESOLVED.getKey());
         if (Util.isPlayStoreInstall(this))
             cat_advanced.removePreference(pref_show_resolved);
         else
@@ -280,13 +280,13 @@ public class ActivitySettings extends AppCompatActivity implements SharedPrefere
         // Handle stats
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N)
             cat_stats.removePreference(screen.findPreference(Preferences.SHOW_TOP.getKey()));
-        EditTextPreference pref_stats_frequency = (EditTextPreference) screen.findPreference("stats_frequency");
-        EditTextPreference pref_stats_samples = (EditTextPreference) screen.findPreference("stats_samples");
-        pref_stats_frequency.setTitle(getString(R.string.setting_stats_frequency, prefs.getString("stats_frequency", "1000")));
-        pref_stats_samples.setTitle(getString(R.string.setting_stats_samples, prefs.getString("stats_samples", "90")));
+        EditTextPreference pref_stats_frequency = (EditTextPreference) screen.findPreference(Preferences.STATS_FREQUENCY.getKey());
+        EditTextPreference pref_stats_samples = (EditTextPreference) screen.findPreference(Preferences.STATS_SAMPLES.getKey());
+        pref_stats_frequency.setTitle(getString(R.string.setting_stats_frequency, prefs.getLong(Preferences.STATS_FREQUENCY.getKey(), Preferences.STATS_FREQUENCY.getDefaultValue())));
+        pref_stats_samples.setTitle(getString(R.string.setting_stats_samples, prefs.getLong(Preferences.STATS_SAMPLES.getKey(), Preferences.STATS_SAMPLES.getDefaultValue())));
 
         // Handle export
-        Preference pref_export = screen.findPreference("export");
+        Preference pref_export = screen.findPreference(Preferences.EXPORT.getKey());
         pref_export.setEnabled(getIntentCreateExport().resolveActivity(getPackageManager()) != null);
         pref_export.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
             @Override
@@ -297,7 +297,7 @@ public class ActivitySettings extends AppCompatActivity implements SharedPrefere
         });
 
         // Handle import
-        Preference pref_import = screen.findPreference("import");
+        Preference pref_import = screen.findPreference(Preferences.IMPORT.getKey());
         pref_import.setEnabled(getIntentOpenExport().resolveActivity(getPackageManager()) != null);
         pref_import.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
             @Override
@@ -310,10 +310,10 @@ public class ActivitySettings extends AppCompatActivity implements SharedPrefere
         // Hosts file settings
         Preference pref_block_domains = screen.findPreference(Preferences.USE_HOSTS.getKey());
         EditTextPreference pref_rcode = (EditTextPreference) screen.findPreference(Preferences.R_CODE.getKey());
-        Preference pref_hosts_import = screen.findPreference("hosts_import");
-        Preference pref_hosts_import_append = screen.findPreference("hosts_import_append");
+        Preference pref_hosts_import = screen.findPreference(Preferences.HOSTS_IMPORT.getKey());
+        Preference pref_hosts_import_append = screen.findPreference(Preferences.HOSTS_IMPORT_APPEND.getKey());
         EditTextPreference pref_hosts_url = (EditTextPreference) screen.findPreference(Preferences.HOSTS_URL.getKey());
-        final Preference pref_hosts_download = screen.findPreference("hosts_download");
+        final Preference pref_hosts_download = screen.findPreference(Preferences.HOSTS_DOWNLOAD.getKey());
 
         pref_rcode.setTitle(getString(R.string.setting_rcode, prefs.getInt(Preferences.R_CODE.getKey(), Preferences.R_CODE.getDefaultValue())));
 
@@ -414,7 +414,7 @@ public class ActivitySettings extends AppCompatActivity implements SharedPrefere
 
         // Development
         if (!Util.isDebuggable(this))
-            screen.removePreference(screen.findPreference("screen_development"));
+            screen.removePreference(screen.findPreference(Preferences.SCREEN_DEVELOPMENT.getKey()));
 
         // Handle technical info
         Preference.OnPreferenceClickListener listener = new Preference.OnPreferenceClickListener() {
@@ -426,8 +426,8 @@ public class ActivitySettings extends AppCompatActivity implements SharedPrefere
         };
 
         // Technical info
-        Preference pref_technical_info = screen.findPreference("technical_info");
-        Preference pref_technical_network = screen.findPreference("technical_network");
+        Preference pref_technical_info = screen.findPreference(Preferences.TECHNICAL_INFO.getKey());
+        Preference pref_technical_network = screen.findPreference(Preferences.TECHNICAL_NETWORK.getKey());
         pref_technical_info.setEnabled(INTENT_VPN_SETTINGS.resolveActivity(this.getPackageManager()) != null);
         pref_technical_info.setIntent(INTENT_VPN_SETTINGS);
         pref_technical_info.setOnPreferenceClickListener(listener);
@@ -699,7 +699,7 @@ public class ActivitySettings extends AppCompatActivity implements SharedPrefere
             ServiceSinkhole.reload(new Reason.Changed(name), this, false);
 
         } else if (Preferences.TTL.getKey().equals(name))
-            getPreferenceScreen().findPreference(name).setTitle(getString(R.string.setting_ttl, prefs.getString(name, Preferences.TTL.getDefaultValue())));
+            getPreferenceScreen().findPreference(name).setTitle(getString(R.string.setting_ttl, prefs.getInt(name, Preferences.TTL.getDefaultValue())));
 
         else if (Preferences.R_CODE.getKey().equals(name)) {
             getPreferenceScreen().findPreference(name).setTitle(getString(R.string.setting_rcode, prefs.getInt(name, Preferences.R_CODE.getDefaultValue())));
@@ -734,11 +734,11 @@ public class ActivitySettings extends AppCompatActivity implements SharedPrefere
             getPreferenceScreen().findPreference(name).setTitle(getString(R.string.setting_socks5_password, TextUtils.isEmpty(Preferences.SOCKS_5_PASSWORD.getDefaultValue()) ? "-" : "*****"));
             ServiceSinkhole.reload(new Reason.Changed(name), this, false);
 
-        } else if ("pcap_record_size".equals(name) || "pcap_file_size".equals(name)) {
-            if ("pcap_record_size".equals(name))
-                getPreferenceScreen().findPreference(name).setTitle(getString(R.string.setting_pcap_record_size, prefs.getString(name, "64")));
-            else
-                getPreferenceScreen().findPreference(name).setTitle(getString(R.string.setting_pcap_file_size, prefs.getString(name, "2")));
+        } else if (Preferences.PCAP_RECORD_SIZE.getKey().equals(name) || Preferences.PCAP_FILE_SIZE.getKey().equals(name)) {
+            if (Preferences.PCAP_RECORD_SIZE.getKey().equals(name))
+                getPreferenceScreen().findPreference(name).setTitle(getString(R.string.setting_pcap_record_size, prefs.getLong(name, Preferences.PCAP_RECORD_SIZE.getDefaultValue())));
+            else if (Preferences.PCAP_FILE_SIZE.getKey().equals(name))
+                getPreferenceScreen().findPreference(name).setTitle(getString(R.string.setting_pcap_file_size, prefs.getLong(name, Preferences.PCAP_FILE_SIZE.getDefaultValue())));
 
             ServiceSinkhole.setPcap(false, this);
 
@@ -749,18 +749,18 @@ public class ActivitySettings extends AppCompatActivity implements SharedPrefere
             if (prefs.getBoolean(Preferences.PCAP.getKey(), Preferences.PCAP.getDefaultValue()))
                 ServiceSinkhole.setPcap(true, this);
 
-        } else if ("watchdog".equals(name)) {
-            getPreferenceScreen().findPreference(name).setTitle(getString(R.string.setting_watchdog, prefs.getString(name, "0")));
+        } else if (Preferences.WATCHDOG.getKey().equals(name)) {
+            getPreferenceScreen().findPreference(name).setTitle(getString(R.string.setting_watchdog, prefs.getLong(name, Preferences.WATCHDOG.getDefaultValue())));
             ServiceSinkhole.reload(new Reason.Changed(name), this, false);
 
         } else if (Preferences.SHOW_STATS.getKey().equals(name))
             ServiceSinkhole.reloadStats(new Reason.Changed(name), this);
 
-        else if ("stats_frequency".equals(name))
-            getPreferenceScreen().findPreference(name).setTitle(getString(R.string.setting_stats_frequency, prefs.getString(name, "1000")));
+        else if (Preferences.STATS_FREQUENCY.getKey().equals(name))
+            getPreferenceScreen().findPreference(name).setTitle(getString(R.string.setting_stats_frequency, prefs.getLong(name, Preferences.STATS_FREQUENCY.getDefaultValue())));
 
-        else if ("stats_samples".equals(name))
-            getPreferenceScreen().findPreference(name).setTitle(getString(R.string.setting_stats_samples, prefs.getString(name, "90")));
+        else if (Preferences.STATS_SAMPLES.getKey().equals(name))
+            getPreferenceScreen().findPreference(name).setTitle(getString(R.string.setting_stats_samples, prefs.getLong(name, Preferences.STATS_SAMPLES.getDefaultValue())));
 
         else if (Preferences.HOSTS_URL.getKey().equals(name))
             getPreferenceScreen().findPreference(name).setSummary(prefs.getString(name, BuildConfig.HOSTS_FILE_URI));
@@ -858,8 +858,8 @@ public class ActivitySettings extends AppCompatActivity implements SharedPrefere
 
     private void updateTechnicalInfo() {
         PreferenceScreen screen = getPreferenceScreen();
-        Preference pref_technical_info = screen.findPreference("technical_info");
-        Preference pref_technical_network = screen.findPreference("technical_network");
+        Preference pref_technical_info = screen.findPreference(Preferences.TECHNICAL_INFO.getKey());
+        Preference pref_technical_network = screen.findPreference(Preferences.TECHNICAL_NETWORK.getKey());
 
         pref_technical_info.setSummary(Util.getGeneralInfo(this));
         pref_technical_network.setSummary(Util.getNetworkInfo(this));
@@ -1023,7 +1023,7 @@ public class ActivitySettings extends AppCompatActivity implements SharedPrefere
                         prefs.edit().putString(Preferences.HOSTS_LAST_IMPORT.getKey(), last).apply();
 
                         if (running) {
-                            getPreferenceScreen().findPreference("hosts_import").setSummary(getString(R.string.msg_import_last, last));
+                            getPreferenceScreen().findPreference(Preferences.HOSTS_IMPORT.getKey()).setSummary(getString(R.string.msg_import_last, last));
                             Toast.makeText(ActivitySettings.this, R.string.msg_completed, Toast.LENGTH_LONG).show();
                         }
 

@@ -96,20 +96,20 @@
     <string name="setting_forwarding">Prievado nukreipimas</string>
 
     <string name="setting_validate">Galioja iki: %s</string>
-    <string name="setting_ttl">Mažiausia DNS TTL reikšmė: %s s</string>
+    <string name="setting_ttl">Mažiausia DNS TTL reikšmė: %d s</string>
     <string name="setting_socks5_enabled">Naudoti SOCKS5 tarpinį serverį</string>
     <string name="setting_socks5_addr">SOCKS5 adresas: %s</string>
     <string name="setting_socks5_port">SOCKS5 prievadas: %s</string>
     <string name="setting_socks5_username">SOCKS5 naudotojo vardas: %s</string>
     <string name="setting_socks5_password">SOCKS5 slaptažodis: %s</string>
-    <string name="setting_pcap_record_size">PCAP įrašo dydis: %s B</string>
-    <string name="setting_pcap_file_size">PACP didžiausias failo dydis: %s MB</string>
-    <string name="setting_watchdog">Budėtojas: kas %s minučių</string>
+    <string name="setting_pcap_record_size">PCAP įrašo dydis: %d B</string>
+    <string name="setting_pcap_file_size">PACP didžiausias failo dydis: %d MB</string>
+    <string name="setting_watchdog">Budėtojas: kas %d minučių</string>
     <string name="setting_stats_category">Tinklo greičio pranešimas</string>
     <string name="setting_stats">Rodyti tinklo greičio pranešimą</string>
     <string name="setting_stats_top">Rodyti dažniausias programas</string>
-    <string name="setting_stats_frequency">Bandinio intervalas: %s ms</string>
-    <string name="setting_stats_samples">Bandinių skaičius: %s s</string>
+    <string name="setting_stats_frequency">Bandinio intervalas: %d ms</string>
+    <string name="setting_stats_samples">Bandinių skaičius: %d s</string>
     <string name="setting_backup">Atsarginė kopija</string>
     <string name="setting_export">Nustatymų kopija</string>
     <string name="setting_import">Įkelti nustatymus</string>
@@ -223,7 +223,7 @@ Jūsų interneto duomenų srautas nėra siunčiamas į jokį nuotolinį VPN serv
     <string name="title_conditions">Sąlygos</string>
     <string name="title_screen_wifi">Leisti Wi-Fi pažadinant ekraną</string>
     <string name="title_screen_other">Leisti mobiliuosius duomenis pažadinant ekraną</string>
-    <string name="title_roaming_symbol">R</string>
+
     <string name="title_roaming">Blokuoti tarptinklinį ryšį</string>
     <string name="title_lockdown">Leisti draudimo režime</string>
     <string name="title_related">Susiję su filtru</string>

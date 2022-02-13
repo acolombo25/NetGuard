@@ -96,20 +96,20 @@
     <string name="setting_forwarding">Encaminhamento de porta</string>
 
     <string name="setting_validate">Validar em: %s</string>
-    <string name="setting_ttl">DNS TTL Mínimo: %s s</string>
+    <string name="setting_ttl">DNS TTL Mínimo: %d s</string>
     <string name="setting_socks5_enabled">Usar proxy SOCKS5</string>
     <string name="setting_socks5_addr">Endereço do SOCKS5: %s</string>
     <string name="setting_socks5_port">Porta do SOCKS5: %s</string>
     <string name="setting_socks5_username">Nome de usuário do SOCKS5: %s</string>
     <string name="setting_socks5_password">Senha de usuário do SOCKS5: %s</string>
-    <string name="setting_pcap_record_size">Tamanho de registro PCAP: %s B</string>
-    <string name="setting_pcap_file_size">Tamanho máximo de arquivo PCAP: %s MB</string>
-    <string name="setting_watchdog">Monitoramento: a cada %s minutos</string>
+    <string name="setting_pcap_record_size">Tamanho de registro PCAP: %d B</string>
+    <string name="setting_pcap_file_size">Tamanho máximo de arquivo PCAP: %d MB</string>
+    <string name="setting_watchdog">Monitoramento: a cada %d minutos</string>
     <string name="setting_stats_category">Notificação de velocidade</string>
     <string name="setting_stats">Mostrar notificação de velocidade</string>
     <string name="setting_stats_top">Mostrar apps mais usados</string>
-    <string name="setting_stats_frequency">Freqüência da amostra: %s ms</string>
-    <string name="setting_stats_samples">Número de amostras: %s s</string>
+    <string name="setting_stats_frequency">Freqüência da amostra: %d ms</string>
+    <string name="setting_stats_samples">Número de amostras: %d s</string>
     <string name="setting_backup">Backup</string>
     <string name="setting_export">Exportar configurações</string>
     <string name="setting_import">Importar configurações</string>
@@ -222,7 +222,7 @@ O seu tráfego de internet não está sendo enviado para um servidor VPN remoto.
     <string name="title_conditions">Condições</string>
     <string name="title_screen_wifi">Permitir Wi-Fi com a tela ligada</string>
     <string name="title_screen_other">Permitir Dados Móveis com a tela ligada</string>
-    <string name="title_roaming_symbol">R</string>
+
     <string name="title_roaming">Bloquear quando em roaming</string>
     <string name="title_lockdown">Permitir modo de bloqueio</string>
     <string name="title_related">Filtrar relacionados</string>

@@ -94,22 +94,19 @@
     <string name="setting_block_domains">Blokker domenenavn</string>
     <string name="setting_rcode">DNS-responskode: %d</string>
     <string name="setting_forwarding">Portvideresending</string>
-
-    <string name="setting_validate">Validate at: %s</string>
-    <string name="setting_ttl">Minimum DNS TTL: %s s</string>
     <string name="setting_socks5_enabled">Bruk SOCKS5-mellomtjener</string>
     <string name="setting_socks5_addr">SOCKS5-adresse: %s</string>
     <string name="setting_socks5_port">SOCKS5-port: %s</string>
     <string name="setting_socks5_username">SOCKS5-brukernavn: %s</string>
     <string name="setting_socks5_password">SOCKS5-passord: %s</string>
-    <string name="setting_pcap_record_size">PCAP-loggstørrelse: %s B</string>
-    <string name="setting_pcap_file_size">PCAP sin maks filstørrelse: %s MB</string>
-    <string name="setting_watchdog">Vakthund: Hvert %s. minutt</string>
+    <string name="setting_pcap_record_size">PCAP-loggstørrelse: %d B</string>
+    <string name="setting_pcap_file_size">PCAP sin maks filstørrelse: %d MB</string>
+    <string name="setting_watchdog">Vakthund: Hvert %d. minutt</string>
     <string name="setting_stats_category">Fartsvarsling</string>
     <string name="setting_stats">Vis fartsvarslingen</string>
     <string name="setting_stats_top">Vis toppappene</string>
-    <string name="setting_stats_frequency">Utdragsintervall: %s ms</string>
-    <string name="setting_stats_samples">Antall utdrag: %s s</string>
+    <string name="setting_stats_frequency">Utdragsintervall: %d ms</string>
+    <string name="setting_stats_samples">Antall utdrag: %d s</string>
     <string name="setting_backup">Sikkerhetskopier</string>
     <string name="setting_export">Eksporter innstillingene</string>
     <string name="setting_import">Importér innstillinger</string>
@@ -222,7 +219,7 @@ Internett-trafikken din blir ikke sendt til en ekstern VPN-server.</string>
     <string name="title_conditions">Forhold</string>
     <string name="title_screen_wifi">Tillat Wi-Fi når skjermen er skrudd på</string>
     <string name="title_screen_other">Tillat mobilnett når skjermen er skrudd på</string>
-    <string name="title_roaming_symbol">R</string>
+
     <string name="title_roaming">Blokker under roaming</string>
     <string name="title_lockdown">Allow in lockdown mode</string>
     <string name="title_related">Filtrer relaterte</string>

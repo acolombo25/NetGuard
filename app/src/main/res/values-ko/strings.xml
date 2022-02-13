@@ -95,20 +95,20 @@
     <string name="setting_rcode">DNS 응답 코드: %d</string>
     <string name="setting_forwarding">포트 포워딩</string>
     <string name="setting_validate">검증 주소: %s</string>
-    <string name="setting_ttl">최소 DNS TTL: %s초</string>
+    <string name="setting_ttl">최소 DNS TTL: %d초</string>
     <string name="setting_socks5_enabled">SOCKS5 프록시 사용</string>
     <string name="setting_socks5_addr">SOCKS5 주소: %s</string>
     <string name="setting_socks5_port">SOCKS5 포트: %s</string>
     <string name="setting_socks5_username">SOCKS5 사용자명: %s</string>
     <string name="setting_socks5_password">SOCKS5 비밀번호: %s</string>
-    <string name="setting_pcap_record_size">PCAP 기록 크기: %sB</string>
-    <string name="setting_pcap_file_size">PCAP 최대. 파일 크기: %sMB</string>
-    <string name="setting_watchdog">워치독: %s분마다</string>
+    <string name="setting_pcap_record_size">PCAP 기록 크기: %dB</string>
+    <string name="setting_pcap_file_size">PCAP 최대. 파일 크기: %dMB</string>
+    <string name="setting_watchdog">워치독: %d분마다</string>
     <string name="setting_stats_category">속도 알림</string>
     <string name="setting_stats">속도 알림 표시</string>
     <string name="setting_stats_top">상위 앱 표시</string>
-    <string name="setting_stats_frequency">샘플 간격: %sms</string>
-    <string name="setting_stats_samples">샘플 수: %s s</string>
+    <string name="setting_stats_frequency">샘플 간격: %d ms</string>
+    <string name="setting_stats_samples">샘플 수: %d s</string>
     <string name="setting_backup">백업</string>
     <string name="setting_export">설정 내보내기</string>
     <string name="setting_import">설정 가져오기</string>
@@ -222,7 +222,7 @@
     <string name="title_conditions">조건</string>
     <string name="title_screen_wifi">화면이 켜져 있을 때 Wi-Fi 허용</string>
     <string name="title_screen_other">화면이 켜져 있을 때 모바일 데이터 허용</string>
-    <string name="title_roaming_symbol">R</string>
+
     <string name="title_roaming">로밍시 차단</string>
     <string name="title_lockdown">차단 모드에서 허용</string>
     <string name="title_related">관련 항목도 필터링</string>

@@ -93,22 +93,20 @@
     <string name="setting_block_domains">Blokiraj lokalne domene</string>
     <string name="setting_rcode">DNS odzivna koda: %d</string>
     <string name="setting_forwarding">Posredovanje portov</string>
-
-    <string name="setting_validate">Validate at: %s</string>
-    <string name="setting_ttl">Minimalen DNS TTL: %s s</string>
+    <string name="setting_ttl">Minimalen DNS TTL: %d s</string>
     <string name="setting_socks5_enabled">Uporabi SOCK5 proxy</string>
     <string name="setting_socks5_addr">SOCKS5 naslov: %s</string>
     <string name="setting_socks5_port">SOCKS5 vrata: %s</string>
     <string name="setting_socks5_username">SOCKS5 uporabniško ime: %s</string>
     <string name="setting_socks5_password">SOCKS5 geslo: %s</string>
-    <string name="setting_pcap_record_size">PCAP zapis velikosti: %s B</string>
-    <string name="setting_pcap_file_size">PCAP max. file size: %s MB</string>
-    <string name="setting_watchdog">Varuh: every %s minut</string>
+    <string name="setting_pcap_record_size">PCAP zapis velikosti: %d B</string>
+    <string name="setting_pcap_file_size">PCAP max. file size: %d MB</string>
+    <string name="setting_watchdog">Varuh: every %d minut</string>
     <string name="setting_stats_category">Hitrost obvestil</string>
     <string name="setting_stats">Pokaži hitrost obvestil</string>
     <string name="setting_stats_top">Pokaži najvišje aplikacije</string>
-    <string name="setting_stats_frequency">Vzorčni interval: %s ms</string>
-    <string name="setting_stats_samples">Število vzorcev: %s s</string>
+    <string name="setting_stats_frequency">Vzorčni interval: %d ms</string>
+    <string name="setting_stats_samples">Število vzorcev: %d s</string>
     <string name="setting_backup">Varnostna kopija</string>
     <string name="setting_export">Izvoz nastavitev</string>
     <string name="setting_import">Uvoz nastavitev</string>
@@ -220,7 +218,7 @@ Your internet traffic is not being sent to a remote VPN server.</string>
     <string name="title_conditions">Pogoji</string>
     <string name="title_screen_wifi">Dovoli Wi-Fi ko je zaslon vklopljen</string>
     <string name="title_screen_other">Dovoli mobilno ko je zaslon vkloplejn</string>
-    <string name="title_roaming_symbol">R</string>
+
     <string name="title_roaming">Blokiraj med gostovanjem</string>
     <string name="title_lockdown">Dovoli v zaklenjenem načinu</string>
     <string name="title_related">Filtriraj povezane</string>

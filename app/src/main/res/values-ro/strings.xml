@@ -96,20 +96,20 @@
     <string name="setting_forwarding">Redirecționare port</string>
 
     <string name="setting_validate">Validează cu: %s</string>
-    <string name="setting_ttl">DNS TTL minim: %s s</string>
+    <string name="setting_ttl">DNS TTL minim: %d s</string>
     <string name="setting_socks5_enabled">Utilizați proxy SOCKS5</string>
     <string name="setting_socks5_addr">SOCKS5 adresa: %s</string>
     <string name="setting_socks5_port">SOCKS5 port: %s</string>
     <string name="setting_socks5_username">SOCKS5 nume utilizator: %s</string>
     <string name="setting_socks5_password">SOCKS5 parola: %s</string>
-    <string name="setting_pcap_record_size">Mărime înregistrare PCAP: %s B</string>
-    <string name="setting_pcap_file_size">Mărime max. fișier PCAP: %s MB</string>
-    <string name="setting_watchdog">Repornire automată: o dată la %s minute</string>
+    <string name="setting_pcap_record_size">Mărime înregistrare PCAP: %d B</string>
+    <string name="setting_pcap_file_size">Mărime max. fișier PCAP: %d MB</string>
+    <string name="setting_watchdog">Repornire automată: o dată la %d minute</string>
     <string name="setting_stats_category">Notificare viteză conexiune</string>
     <string name="setting_stats">Arată notificare viteză</string>
     <string name="setting_stats_top">Arată aplicațiile consumătoare</string>
-    <string name="setting_stats_frequency">Interval de eșantionare: %s ms</string>
-    <string name="setting_stats_samples">Număr de eșantioane: %s s</string>
+    <string name="setting_stats_frequency">Interval de eșantionare: %d ms</string>
+    <string name="setting_stats_samples">Număr de eșantioane: %d s</string>
     <string name="setting_backup">Copie de siguranță</string>
     <string name="setting_export">Exportă setări</string>
     <string name="setting_import">Importă setări</string>
@@ -222,7 +222,7 @@ Din acest motiv, va rugăm să permiteți conexiunea VPN în caseta de dialog ur
     <string name="title_conditions">Restricții</string>
     <string name="title_screen_wifi">Permite Wi-Fi când ecranul este pornit</string>
     <string name="title_screen_other">Permite date mobile când ecranul este pornit</string>
-    <string name="title_roaming_symbol">R</string>
+
     <string name="title_roaming">Blochează în roaming</string>
     <string name="title_lockdown">Permite când traficul este închis</string>
     <string name="title_related">Filtrează aplicațiile asociate</string>

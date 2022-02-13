@@ -95,20 +95,20 @@
     <string name="setting_rcode">DNS 回應碼：%d</string>
     <string name="setting_forwarding">埠轉接</string>
     <string name="setting_validate">驗證於：%s</string>
-    <string name="setting_ttl">DNS TTL 最小值：%s s</string>
+    <string name="setting_ttl">DNS TTL 最小值：%d s</string>
     <string name="setting_socks5_enabled">使用 SOCKS5 代理</string>
     <string name="setting_socks5_addr">SOCKS5 網址：%s</string>
     <string name="setting_socks5_port">SOCKS5 連接埠：%s</string>
     <string name="setting_socks5_username">SOCKS5 帳號：%s</string>
     <string name="setting_socks5_password">SOCKS5 密碼：%s</string>
-    <string name="setting_pcap_record_size">PCAP 記錄大小：%s B</string>
-    <string name="setting_pcap_file_size">PCAP 最大檔案大小：%s MB</string>
-    <string name="setting_watchdog">監控：每 %s 分鐘</string>
+    <string name="setting_pcap_record_size">PCAP 記錄大小：%d B</string>
+    <string name="setting_pcap_file_size">PCAP 最大檔案大小：%d MB</string>
+    <string name="setting_watchdog">監控：每 %d 分鐘</string>
     <string name="setting_stats_category">網路速度通知</string>
     <string name="setting_stats">顯示網路速度通知</string>
     <string name="setting_stats_top">顯示用量最高的 apps</string>
-    <string name="setting_stats_frequency">取樣間隔：%s ms</string>
-    <string name="setting_stats_samples">取樣數：%s s</string>
+    <string name="setting_stats_frequency">取樣間隔：%d ms</string>
+    <string name="setting_stats_samples">取樣數：%d s</string>
     <string name="setting_backup">備份</string>
     <string name="setting_export">匯出設定</string>
     <string name="setting_import">匯入設定</string>
@@ -221,7 +221,7 @@
     <string name="title_conditions">狀態</string>
     <string name="title_screen_wifi">在螢幕開啟時啟用 Wi-fi</string>
     <string name="title_screen_other">在螢幕開啟時啟用行動數據</string>
-    <string name="title_roaming_symbol">R</string>
+
     <string name="title_roaming">漫遊時阻擋</string>
     <string name="title_lockdown">在全面封鎖模式中允許</string>
     <string name="title_related">過濾器相關</string>

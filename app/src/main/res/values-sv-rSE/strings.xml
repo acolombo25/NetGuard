@@ -98,20 +98,20 @@
     <string name="setting_vpn6">VPN-IPv6: %s</string>
     <string name="setting_dns">VPN-DNS: %s</string>
     <string name="setting_validate">Validera på: %s</string>
-    <string name="setting_ttl">Minsta DNS-TTL: %s s</string>
+    <string name="setting_ttl">Minsta DNS-TTL: %d s</string>
     <string name="setting_socks5_enabled">Använd SOCKS5-proxy</string>
     <string name="setting_socks5_addr">SOCKS5-adress: %s</string>
     <string name="setting_socks5_port">SOCKS5-port: %s</string>
     <string name="setting_socks5_username">SOCKS5-användarnamn: %s</string>
     <string name="setting_socks5_password">SOCKS5-lösenord: %s</string>
-    <string name="setting_pcap_record_size">PCAP-poststorlek: %s B</string>
-    <string name="setting_pcap_file_size">PCAP max. filstorlek: %s MB</string>
-    <string name="setting_watchdog">Watchdog: varje %s minuter</string>
+    <string name="setting_pcap_record_size">PCAP-poststorlek: %d B</string>
+    <string name="setting_pcap_file_size">PCAP max. filstorlek: %d MB</string>
+    <string name="setting_watchdog">Watchdog: varje %d minuter</string>
     <string name="setting_stats_category">Hastighetsavisering</string>
     <string name="setting_stats">Visa hastighetsaviseringar</string>
     <string name="setting_stats_top">Visa topp appar</string>
-    <string name="setting_stats_frequency">Samplingsintervallet: %s ms</string>
-    <string name="setting_stats_samples">Antal prover: %s s</string>
+    <string name="setting_stats_frequency">Samplingsintervallet: %d ms</string>
+    <string name="setting_stats_samples">Antal prover: %d s</string>
     <string name="setting_backup">Säkerhetskopiering</string>
     <string name="setting_export">Exportera inställningar</string>
     <string name="setting_import">Importera inställningar</string>
@@ -223,7 +223,7 @@ Din internettrafik skickas inte till en avlägsen VPN-server.</string>
     <string name="title_conditions">Villkor</string>
     <string name="title_screen_wifi">Tillåt Wi-Fi när skärmen är påslagen</string>
     <string name="title_screen_other">Tillåt mobildata när skärmen är påslagen</string>
-    <string name="title_roaming_symbol">R</string>
+
     <string name="title_roaming">Blockera vid roaming</string>
     <string name="title_lockdown">Tillåt i låst läge</string>
     <string name="title_related">Filter relaterat</string>

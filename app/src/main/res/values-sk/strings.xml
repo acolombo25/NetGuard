@@ -75,15 +75,14 @@
     <string name="setting_show_resolved">Show resolved domain names</string>
     <string name="setting_block_domains">Blokovať názvy domén</string>
     <string name="setting_forwarding">Presmerovanie portu</string>
-
-    <string name="setting_pcap_record_size">Veľkosť záznamu PCAP: %s B</string>
-    <string name="setting_pcap_file_size">Maximálna veľkosť súboru PCAP: %s MB</string>
-    <string name="setting_watchdog">Watchdog: every %s minutes</string>
+    <string name="setting_pcap_record_size">Veľkosť záznamu PCAP: %d B</string>
+    <string name="setting_pcap_file_size">Maximálna veľkosť súboru PCAP: %d MB</string>
+    <string name="setting_watchdog">Watchdog: every %d minutes</string>
     <string name="setting_stats_category">Oznámenie o rýchlosti</string>
     <string name="setting_stats">Zobraziť oznámenie o rýchlosti</string>
     <string name="setting_stats_top">Zobraziť top aplikácie</string>
-    <string name="setting_stats_frequency">Interval vzorkovania: %s ms</string>
-    <string name="setting_stats_samples">Počet vzoriek: %s s</string>
+    <string name="setting_stats_frequency">Interval vzorkovania: %d ms</string>
+    <string name="setting_stats_samples">Počet vzoriek: %d s</string>
     <string name="setting_backup">Zálohovať</string>
     <string name="setting_export">Exportovať nastavenia</string>
     <string name="setting_import">Importovať nastavenia</string>

@@ -96,20 +96,20 @@
     <string name="setting_forwarding">Porta pāradresācija</string>
 
     <string name="setting_validate">Apstiprināt uz: %s</string>
-    <string name="setting_ttl">Minimums DNS TTL: %s s</string>
+    <string name="setting_ttl">Minimums DNS TTL: %d s</string>
     <string name="setting_socks5_enabled">Lietot SOCKS5 proxy</string>
     <string name="setting_socks5_addr">SOCKS5 adrese: %s</string>
     <string name="setting_socks5_port">SOCKS5 ports: %s</string>
     <string name="setting_socks5_username">SOCKS5 lietotājvārds: %s</string>
     <string name="setting_socks5_password">SOCKS5 parole: %s</string>
-    <string name="setting_pcap_record_size">PCAP ieraksta izmērs: %s B</string>
-    <string name="setting_pcap_file_size">PCAP maks. faila izmērs: %s MB</string>
-    <string name="setting_watchdog">Sargsuns: katras %s minūtes</string>
+    <string name="setting_pcap_record_size">PCAP ieraksta izmērs: %d B</string>
+    <string name="setting_pcap_file_size">PCAP maks. faila izmērs: %d MB</string>
+    <string name="setting_watchdog">Sargsuns: katras %d minūtes</string>
     <string name="setting_stats_category">Informācija par ātrumu</string>
     <string name="setting_stats">Rādīt informāciju par ātrumu</string>
     <string name="setting_stats_top">Rādīt top lietotnes</string>
-    <string name="setting_stats_frequency">Mērījumu intervāls: %s ms</string>
-    <string name="setting_stats_samples">Mērījuma ilgums: %s s</string>
+    <string name="setting_stats_frequency">Mērījumu intervāls: %d ms</string>
+    <string name="setting_stats_samples">Mērījuma ilgums: %d s</string>
     <string name="setting_backup">Rezerves kopija</string>
     <string name="setting_export">Eksportēt iestatījumus</string>
     <string name="setting_import">Importēt iestatījumus</string>
@@ -223,7 +223,7 @@ Tava interneta datu plūsma netiks sūtīta uz kādu ārējo VPN serveri.</strin
     <string name="title_conditions">Nosacījumi</string>
     <string name="title_screen_wifi">Atļaut Wi-Fi, kad ekrāns ir ieslēgts</string>
     <string name="title_screen_other">Atļaut mobilos datus, kad ekrāns ir ieslēgts</string>
-    <string name="title_roaming_symbol">R</string>
+
     <string name="title_roaming">Bloķēt viesabonēšanā</string>
     <string name="title_lockdown">Atļaut bloķētas datu plūsmas režīmā</string>
     <string name="title_related">Filtrēt saistītos</string>

@@ -96,20 +96,20 @@
     <string name="setting_forwarding">Bağlantı noktası yönlendirme</string>
 
     <string name="setting_validate">Doğrulama adresi: %s</string>
-    <string name="setting_ttl">En düşük DNS TTL: %s s</string>
+    <string name="setting_ttl">En düşük DNS TTL: %d s</string>
     <string name="setting_socks5_enabled">SOCKS5 kullan</string>
     <string name="setting_socks5_addr">SOCKS5 adresi: %s</string>
     <string name="setting_socks5_port">SOCKS5 bağlantı noktası: %s</string>
     <string name="setting_socks5_username">SOCKS5 kullanıcı adı: %s</string>
     <string name="setting_socks5_password">SOCKS5 parolası: %s</string>
-    <string name="setting_pcap_record_size">PCAP kayıt boyutu: %s B</string>
-    <string name="setting_pcap_file_size">PCAP dosya boyutu sınırı: %s MB</string>
-    <string name="setting_watchdog">Bekçi: her %s dakika</string>
+    <string name="setting_pcap_record_size">PCAP kayıt boyutu: %d B</string>
+    <string name="setting_pcap_file_size">PCAP dosya boyutu sınırı: %d MB</string>
+    <string name="setting_watchdog">Bekçi: her %d dakika</string>
     <string name="setting_stats_category">Hız bildirimi</string>
     <string name="setting_stats">Hız bildirimini göster</string>
     <string name="setting_stats_top">En çok kullanan uygulamaları göster</string>
-    <string name="setting_stats_frequency">Yenileme aralığı: %s ms</string>
-    <string name="setting_stats_samples">Yenileme geçmişi: %s s</string>
+    <string name="setting_stats_frequency">Yenileme aralığı: %d ms</string>
+    <string name="setting_stats_samples">Yenileme geçmişi: %d s</string>
     <string name="setting_backup">Yedekleme</string>
     <string name="setting_export">Ayarları dışa aktar</string>
     <string name="setting_import">Ayarları içe aktar</string>

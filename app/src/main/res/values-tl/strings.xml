@@ -88,13 +88,13 @@
     <string name="setting_block_domains">Harangan ang mga domain name</string>
     <string name="setting_rcode">Code para sa sagot ng DNS: %d</string>
     <string name="setting_forwarding">Pagpasa ng Port</string>
-    <string name="setting_pcap_file_size">Pinakamataas na limitasyon ng PCAP para sukat ng file: %s MB</string>
-    <string name="setting_watchdog">Watchdog: kada %s minuto</string>
+    <string name="setting_pcap_file_size">Pinakamataas na limitasyon ng PCAP para sukat ng file: %d MB</string>
+    <string name="setting_watchdog">Watchdog: kada %d minuto</string>
     <string name="setting_stats_category">Notipikasyon ng bilis</string>
     <string name="setting_stats">Ipakita ang notipikasyon ng bilis</string>
     <string name="setting_stats_top">Ipakita ang mga pangunahing app</string>
-    <string name="setting_stats_frequency">Halimbawa ng agwat: %s ms</string>
-    <string name="setting_stats_samples">Bilang ng mga halimbawa: %s s</string>
+    <string name="setting_stats_frequency">Halimbawa ng agwat: %d ms</string>
+    <string name="setting_stats_samples">Bilang ng mga halimbawa: %d s</string>
     <string name="setting_backup">Backup</string>
     <string name="setting_export">I-export ang mga setting</string>
     <string name="setting_import">I-import ang mga setting</string>
@@ -197,7 +197,7 @@ Ang iyong internet traffic ay hindi pinapadala sa isang liblib na vpn serber.</s
     <string name="title_conditions">Mga kundisyon</string>
     <string name="title_screen_wifi">Pahintulutan ang Wi-Fi kung buhay ang screen</string>
     <string name="title_screen_other">Pahintulutan ang mobile kung buhay ang screen</string>
-    <string name="title_roaming_symbol">R</string>
+
     <string name="title_roaming">Harangan kapag roaming</string>
     <string name="title_lockdown">Pahintulutan sa mode na lockdown</string>
     <string name="title_related">Salain sa may kaugnayan</string>

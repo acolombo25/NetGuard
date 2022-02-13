@@ -56,7 +56,7 @@
     <string name="setting_reset_usage">Nulli võrgu kasutamine</string>
     <string name="setting_show_resolved">Näita lahendatud domeeninimesid</string>
     <string name="setting_block_domains">Blokeeri domeenid</string>
-    <string name="setting_ttl">Minimaalne DNS TTL: %s s</string>
+    <string name="setting_ttl">Minimaalne DNS TTL: %d s</string>
     <string name="setting_socks5_enabled">Kasuta SOCKS5 puhverserverit</string>
     <string name="setting_stats_category">Kiirus teavitus</string>
     <string name="setting_backup">Varunda</string>

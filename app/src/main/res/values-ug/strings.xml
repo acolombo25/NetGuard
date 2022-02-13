@@ -80,20 +80,20 @@
     <string name="setting_block_domains">توسۇلغان ئادىرس نام</string>
     <string name="setting_rcode">DNS كود: %d</string>
     <string name="setting_forwarding">يۆتكەش ئېغىز</string>
-    <string name="setting_ttl">ئەڭ كىچىك DNS TTL: %s s</string>
+    <string name="setting_ttl">ئەڭ كىچىك DNS TTL: %d s</string>
     <string name="setting_socks5_enabled">ئىشلىتىش ۋاكالەتلىك SOCKS5</string>
     <string name="setting_socks5_addr">SOCKS5 ئادرېس: %s</string>
     <string name="setting_socks5_port">SOCKS5 ئېغىزى: %s</string>
     <string name="setting_socks5_username">SOCKS5 ئابونىت نام: %s</string>
     <string name="setting_socks5_password">SOCKS5 پارول: %s</string>
-    <string name="setting_pcap_record_size">PCAP نۇمۇر چوڭلۇقى: %s B</string>
-    <string name="setting_pcap_file_size">PCAP ئەڭ چوڭ. ھۆججەت: %s MB</string>
-    <string name="setting_watchdog">كۈزۈتۈش: ھەر %s مىنۇت</string>
+    <string name="setting_pcap_record_size">PCAP نۇمۇر چوڭلۇقى: %d B</string>
+    <string name="setting_pcap_file_size">PCAP ئەڭ چوڭ. ھۆججەت: %d MB</string>
+    <string name="setting_watchdog">كۈزۈتۈش: ھەر %d مىنۇت</string>
     <string name="setting_stats_category">سۈرئەت ئۇقتۇرۇش</string>
     <string name="setting_stats">سۈرئەت ئۇقتۇرۇش كۆرۈنۈش</string>
     <string name="setting_stats_top">كۆپ ئىشلىتىدىغىنى كۆرۈنۈش</string>
-    <string name="setting_stats_frequency">ۋاقىت ئارلىقى: %s ms</string>
-    <string name="setting_stats_samples">سانى: %s s</string>
+    <string name="setting_stats_frequency">ۋاقىت ئارلىقى: %d ms</string>
+    <string name="setting_stats_samples">انى: %d s</string>
     <string name="setting_backup">زاپاسلاش</string>
     <string name="setting_export">چىقىرىش تەڭشەك</string>
     <string name="setting_import">كىرگۈزۈش تەڭشەك</string>
@@ -188,7 +188,7 @@ VPN مۇلازىمىتى چېقىرۋىتىش يوللانمىغان.</string>
     <string name="title_conditions">شەرت</string>
     <string name="title_screen_wifi">ئېكران يورۇن ۋاقىتتا Wi-Fiيول قويۇش</string>
     <string name="title_screen_other">ئېكران يورۇن ۋاقىتتا ئېقىمغا يول قويۇش</string>
-    <string name="title_roaming_symbol">R</string>
+
     <string name="title_roaming">كەزمە مۇلازىمەت توسۇش</string>
     <string name="title_lockdown">قۇلۇپ ھالىتىدە يول قويۇش</string>
     <string name="title_related">مۇناسۋەتلىك ئەپنى ئۆتكۈزۈش</string>

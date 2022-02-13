@@ -97,20 +97,20 @@
     <string name="setting_forwarding">הפניית פורטים</string>
 
     <string name="setting_validate">אמת ב: %s</string>
-    <string name="setting_ttl">TTL DNS מינימלי: %s s</string>
+    <string name="setting_ttl">TTL DNS מינימלי: %d s</string>
     <string name="setting_socks5_enabled">השתמש ב- SOCKS5 proxy</string>
     <string name="setting_socks5_addr">כתובת SOCKS5: %s</string>
     <string name="setting_socks5_port">פורט SOCKS5: %s</string>
     <string name="setting_socks5_username">שם משתמש SOCKS5: %s</string>
     <string name="setting_socks5_password">סיסמת SOCKS5: %s</string>
-    <string name="setting_pcap_record_size">גודל רשומת PCAP: %s B</string>
-    <string name="setting_pcap_file_size">גודל מקסימלי של קובץ PCAP: %s MB</string>
-    <string name="setting_watchdog">Watchdog טיימר: כל %s דקות</string>
+    <string name="setting_pcap_record_size">גודל רשומת PCAP: %d B</string>
+    <string name="setting_pcap_file_size">גודל מקסימלי של קובץ PCAP: %d MB</string>
+    <string name="setting_watchdog">Watchdog טיימר: כל %d דקות</string>
     <string name="setting_stats_category">התראת מהירות</string>
     <string name="setting_stats">הצג התראת מהירות</string>
     <string name="setting_stats_top">הצג את היישומים העליונים</string>
-    <string name="setting_stats_frequency">מרווח הדגימה: %s מ\"ש</string>
-    <string name="setting_stats_samples">מספר הדגימות: %s ש</string>
+    <string name="setting_stats_frequency">מרווח הדגימה: %d מ\"ש</string>
+    <string name="setting_stats_samples">מספר הדגימות: %d ש</string>
     <string name="setting_backup">גיבוי</string>
     <string name="setting_export">ייצא הגדרות</string>
     <string name="setting_import">יבא הגדרות</string>

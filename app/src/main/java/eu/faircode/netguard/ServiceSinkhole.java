@@ -222,28 +222,22 @@ public class ServiceSinkhole extends VpnService implements SharedPreferences.OnS
     public static void setPcap(boolean enabled, Context context) {
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
 
-        int record_size = 64;
+        long record_size = 64;
         try {
-            String r = prefs.getString("pcap_record_size", null);
-            if (TextUtils.isEmpty(r))
-                r = "64";
-            record_size = Integer.parseInt(r);
+            record_size = prefs.getLong(Preferences.PCAP_RECORD_SIZE.getKey(), Preferences.PCAP_RECORD_SIZE.getDefaultValue());
         } catch (Throwable ex) {
             Log.e(TAG, ex.toString() + "\n" + Log.getStackTraceString(ex));
         }
 
-        int file_size = 2 * 1024 * 1024;
+        long file_size = 2 * 1024 * 1024;
         try {
-            String f = prefs.getString("pcap_file_size", null);
-            if (TextUtils.isEmpty(f))
-                f = "2";
-            file_size = Integer.parseInt(f) * 1024 * 1024;
+            file_size = prefs.getLong(Preferences.PCAP_FILE_SIZE.getKey(), Preferences.PCAP_FILE_SIZE.getDefaultValue()) * 1024 * 1024;
         } catch (Throwable ex) {
             Log.e(TAG, ex.toString() + "\n" + Log.getStackTraceString(ex));
         }
 
         File pcap = (enabled ? new File(context.getDir("data", MODE_PRIVATE), "netguard.pcap") : null);
-        jni_pcap(pcap == null ? null : pcap.getAbsolutePath(), record_size, file_size);
+        jni_pcap(pcap == null ? null : pcap.getAbsolutePath(), (int)record_size, (int)file_size);
     }
 
     synchronized private static PowerManager.WakeLock getLock(Context context) {
@@ -402,10 +396,11 @@ public class ServiceSinkhole extends VpnService implements SharedPreferences.OnS
                 am.cancel(pi);
 
                 if (cmd != Command.stop) {
-                    int watchdog = Integer.parseInt(prefs.getString("watchdog", "0"));
+                    long watchdog = prefs.getLong(Preferences.WATCHDOG.getKey(), Preferences.WATCHDOG.getDefaultValue());
                     if (watchdog > 0) {
                         Log.i(TAG, "Watchdog " + watchdog + " minutes");
-                        am.setInexactRepeating(AlarmManager.RTC, SystemClock.elapsedRealtime() + watchdog * 60 * 1000, watchdog * 60 * 1000, pi);
+                        long minutes = watchdog * 60 * 1000;
+                        am.setInexactRepeating(AlarmManager.RTC, SystemClock.elapsedRealtime() + minutes, minutes, pi);
                     }
                 }
             }
@@ -926,8 +921,8 @@ public class ServiceSinkhole extends VpnService implements SharedPreferences.OnS
         private void updateStats() {
             RemoteViews remoteViews = new RemoteViews(getPackageName(), R.layout.traffic);
             SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(ServiceSinkhole.this);
-            long frequency = Long.parseLong(prefs.getString("stats_frequency", "1000"));
-            long samples = Long.parseLong(prefs.getString("stats_samples", "90"));
+            long frequency = prefs.getLong(Preferences.STATS_FREQUENCY.getKey(), Preferences.STATS_FREQUENCY.getDefaultValue());
+            long samples = prefs.getLong(Preferences.STATS_SAMPLES.getKey(), Preferences.STATS_SAMPLES.getDefaultValue());
             boolean filter = prefs.getBoolean(Preferences.FILTER.getKey(), Preferences.FILTER.getDefaultValue());
             boolean show_top = prefs.getBoolean(Preferences.SHOW_TOP.getKey(), Preferences.SHOW_TOP.getDefaultValue());
             int loglevel = prefs.getInt(Preferences.LOG_LEVEL.getKey(), Preferences.LOG_LEVEL.getDefaultValue());

@@ -61,8 +61,8 @@
     <string name="setting_install">Notificar noves instal·lacions</string>
     <string name="setting_screen_on">Aplica regles \'quan pantalla encesa\'</string>
     <string name="setting_auto">Auto activació després de %1$d minuts</string>
-    <string name="setting_stats_frequency">Interval de mostreig: %s ms</string>
-    <string name="setting_stats_samples">Nombre de mostreig: %s s</string>
+    <string name="setting_stats_frequency">Interval de mostreig: %d ms</string>
+    <string name="setting_stats_samples">Nombre de mostreig: %d s</string>
     <string name="setting_backup">Còpies</string>
     <string name="setting_export">Exporta preferències</string>
     <string name="setting_import">Importa preferències</string>

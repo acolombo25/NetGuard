@@ -96,20 +96,20 @@
     <string name="setting_forwarding">முணையம் மேலனுப்ப</string>
 
     <string name="setting_validate">%s - இல் சரிபார்க்கவும்</string>
-    <string name="setting_ttl">குறைந்தபட்ச DNS TTL:%s s</string>
+    <string name="setting_ttl">குறைந்தபட்ச DNS TTL:%d s</string>
     <string name="setting_socks5_enabled">SOCKS5 பதிலி பயன்படுத்தவும்</string>
     <string name="setting_socks5_addr">SOCKS5 முகவரி: %s</string>
     <string name="setting_socks5_port">SOCKS5 போர்ட்: %s</string>
     <string name="setting_socks5_username">SOCKS5 பயனர் பெயர்: %s</string>
     <string name="setting_socks5_password">SOCKS5 கடவுச்சொல்: %s</string>
-    <string name="setting_pcap_record_size">PCAP சாதனை அளவு: %s B</string>
-    <string name="setting_pcap_file_size">PCAP அதிகபட்ச கோப்பு அளவு: %s MB</string>
-    <string name="setting_watchdog">கண்காணிப்பு: ஒவ்வொரு %s நிமிடங்களும்</string>
+    <string name="setting_pcap_record_size">PCAP சாதனை அளவு: %d B</string>
+    <string name="setting_pcap_file_size">PCAP அதிகபட்ச கோப்பு அளவு: %d MB</string>
+    <string name="setting_watchdog">கண்காணிப்பு: ஒவ்வொரு %d நிமிடங்களும்</string>
     <string name="setting_stats_category">வேக அறிவிப்பு</string>
     <string name="setting_stats">வேக அறிவிப்பை காண்பி</string>
     <string name="setting_stats_top">மேல் பயன்பாடுகள் காண்பி</string>
-    <string name="setting_stats_frequency">மாதிரி இடைவேளை: %s ms</string>
-    <string name="setting_stats_samples">மாதிரிகளின் எண்ணிக்கை: %s s</string>
+    <string name="setting_stats_frequency">மாதிரி இடைவேளை: %d ms</string>
+    <string name="setting_stats_samples">மாதிரிகளின் எண்ணிக்கை: %d s</string>
     <string name="setting_backup">மறுபிரதி</string>
     <string name="setting_export">ஏற்றுமதி அமைப்புகள்</string>
     <string name="setting_import">இறக்குமதி அமைப்புகள்</string>

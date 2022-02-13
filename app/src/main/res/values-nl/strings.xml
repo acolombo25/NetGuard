@@ -98,20 +98,20 @@
     <string name="setting_vpn6">VPN-IPv6: %s</string>
     <string name="setting_dns">VPN-DNS: %s</string>
     <string name="setting_validate">Valideer op: %s</string>
-    <string name="setting_ttl">Minimale DNS TTL: %s s</string>
+    <string name="setting_ttl">Minimale DNS TTL: %d s</string>
     <string name="setting_socks5_enabled">Gebruik SOCKS5-proxy</string>
     <string name="setting_socks5_addr">SOCKS5-adres: %s</string>
     <string name="setting_socks5_port">SOCKS5-poort: %s</string>
     <string name="setting_socks5_username">SOCKS5-gebruikersnaam: %s</string>
     <string name="setting_socks5_password">SOCKS5-wachtwoord: %s</string>
-    <string name="setting_pcap_record_size">PCAP-recordgrootte: %s B</string>
-    <string name="setting_pcap_file_size">PCAP max. bestandsgrootte: %s MB</string>
-    <string name="setting_watchdog">Watchdog: iedere %s minuten</string>
+    <string name="setting_pcap_record_size">PCAP-recordgrootte: %d B</string>
+    <string name="setting_pcap_file_size">PCAP max. bestandsgrootte: %d MB</string>
+    <string name="setting_watchdog">Watchdog: iedere %d minuten</string>
     <string name="setting_stats_category">Snelheidsmelding</string>
     <string name="setting_stats">Toon snelheidsmelding</string>
     <string name="setting_stats_top">Toon populairste apps</string>
-    <string name="setting_stats_frequency">Voorbeeldinterval: %s ms</string>
-    <string name="setting_stats_samples">Aantal voorbeelden: %s s</string>
+    <string name="setting_stats_frequency">Voorbeeldinterval: %d ms</string>
+    <string name="setting_stats_samples">Aantal voorbeelden: %d s</string>
     <string name="setting_backup">Back-up</string>
     <string name="setting_export">Exporteer instellingen</string>
     <string name="setting_import">Importeer instellingen</string>
@@ -224,7 +224,7 @@ Je internetverkeer wordt niet naar een externe VPN-server gestuurd.</string>
     <string name="title_conditions">Condities</string>
     <string name="title_screen_wifi">Sta Wi-Fi toe als het scherm aan is</string>
     <string name="title_screen_other">Sta mobiel toe als het scherm aan is</string>
-    <string name="title_roaming_symbol">R</string>
+
     <string name="title_roaming">Blokkeer bij roamen</string>
     <string name="title_lockdown">Toestaan in vergrendelmodus</string>
     <string name="title_related">Verwante filteren</string>

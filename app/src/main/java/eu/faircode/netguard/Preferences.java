@@ -1,5 +1,6 @@
 package eu.faircode.netguard;
 
+import android.preference.EditTextPreference;
 import android.util.Log;
 
 import java.util.HashSet;
@@ -69,7 +70,7 @@ public interface Preferences {
     Preference<String> VPN4 = new Preference<>("vpn4", "10.1.10.1"); ///
     Preference<String> VPN6 = new Preference<>("vpn6", "fd00:1:fd00:1:fd00:1:fd00:1"); ///
     Preference<String> VALIDATE = new Preference<>("validate", "www.google.com"); ///
-    Preference<String> TTL = new Preference<>("ttl", "259200"); ///
+    Preference<Integer> TTL = new Preference<>("ttl", 259200); ///
     Preference<Integer> R_CODE = new Preference<>("rcode", 3); /// id
     Preference<Integer> LOG_LEVEL = new Preference<>("loglevel", Log.WARN); /// id
 
@@ -129,7 +130,27 @@ public interface Preferences {
     Preference<String> HOSTS_LAST_DOWNLOAD = new Preference<>("hosts_last_download", null);
 
     Preference<Boolean> RELOAD_CONNECTIVITY = new Preference<>("reload_onconnectivity", false);
-    Preference<Boolean> FORWARDING = new Preference<>("forwarding", false); /// id
+
+    Preference<Long> WATCHDOG = new Preference<>("watchdog", 0L); /// id
+    Preference<Long> STATS_FREQUENCY = new Preference<>("stats_frequency", 1000L); /// id
+    Preference<Long> STATS_SAMPLES = new Preference<>("stats_samples", 90L); /// id
+    Preference<Integer> PCAP_RECORD_SIZE = new Preference<>("pcap_record_size", 64); /// id
+    Preference<Integer> PCAP_FILE_SIZE = new Preference<>("pcap_file_size", 2); /// id
+
+    // KEY ONLY (id)
+    Preference<Boolean> FORWARDING = new Preference<>("forwarding", false); /// id, reason
+    Preference<Boolean> SCREEN_DEVELOPMENT = new Preference<>("screen_development", false); /// id
+    Preference<Boolean> TECHNICAL_INFO = new Preference<>("technical_info", false); /// id
+    Preference<Boolean> TECHNICAL_NETWORK = new Preference<>("technical_network", false); /// id
+    Preference<Boolean> SHOW_RESOLVED = new Preference<>("show_resolved", false); /// id
+
+    Preference<Boolean> EXPORT = new Preference<>("export", false); /// id
+    Preference<Boolean> IMPORT = new Preference<>("import", false); /// id
+    Preference<Boolean> HOSTS_IMPORT = new Preference<>("hosts_import", false); /// id
+    Preference<Boolean> HOSTS_IMPORT_APPEND = new Preference<>("hosts_import_append", false); /// id
+    Preference<Boolean> HOSTS_DOWNLOAD = new Preference<>("hosts_download", false); /// id
+
+
 }
 
 public enum Sort {
