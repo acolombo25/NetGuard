@@ -172,10 +172,6 @@
     <string name="msg_terms">Донирајући, сагласни сте са <a href="http://www.netguard.me/#terms">одредбама и условима</a></string>
     <string name="msg_dimming">Ако на следећем дијалогу не можете да изаберете „У реду“, могуће је да нека апликација управља екраном.</string>
     <string name="msg_mbday">± %1$.3f▲ %2$.3f▼ MB/дневно</string>
-    <string name="msg_kb">%1$7.3f▲ %2$7.3f▼ KB</string>
-    <string name="msg_mb">%1$7.3f▲ %2$7.3f▼ MB</string>
-    <string name="msg_gb">%1$7.3f▲ %2$7.3f▼ GB</string>
-    <string name="msg_count">%dx</string>
     <string name="msg_doze">Ради добрих резултата, Нетгард треба искључити из Андроидове оптимизације батерије.
 \n\nУ следећем дијалогу изаберите „Све апликације“, тапните на Нетгард у листи и изаберите „Не оптимизуј“.</string>
     <string name="msg_datasaving">Ради добрих резултата, Нетгард треба искључити из Андроидове опције уштеде података

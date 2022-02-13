@@ -94,9 +94,7 @@
     <string name="setting_block_domains">Chặn tên miền</string>
     <string name="setting_rcode">Mã phản hồi DNS: %d</string>
     <string name="setting_forwarding">Cổng chuyển tiếp</string>
-    <string name="setting_vpn4">VPN IPv4: %s</string>
-    <string name="setting_vpn6">VPN IPv6: %s</string>
-    <string name="setting_dns">VPN DNS: %s</string>
+
     <string name="setting_validate">Xác thực tại: %s</string>
     <string name="setting_ttl">Tối thiểu DNS TTL: %s s</string>
     <string name="setting_socks5_enabled">Dùng Socks5 proxy</string>
@@ -170,10 +168,6 @@
     <string name="msg_terms">Bằng cách tặng, bạn đồng ý với các <a href="http://www.netguard.me/#terms"> điều khoản &amp; điều kiện</a></string>
     <string name="msg_dimming">Nếu bạn không thể nhấn OK trong hộp thoại kế tiếp, rất có thể một ứng dụng khác (màn hình mờ) đang thao tác với màn hình.</string>
     <string name="msg_mbday">± %1$.3f▲ %2$.3f▼ MB/ngày</string>
-    <string name="msg_kb">%1$7.3f▲ %2$7.3f▼ KB</string>
-    <string name="msg_mb">%1$7.3f▲ %2$7.3f▼ MB</string>
-    <string name="msg_gb">%1$7.3f▲ %2$7.3f▼ GB</string>
-    <string name="msg_count">%dx</string>
     <string name="msg_doze">Để có kết quả phù hợp, tối ưu hóa pin Android nên bị vô hiệu hóa cho NetGuard. \n\nTrong hộp thoại kế tiếp, chọn \"Tất cả ứng dụng\" ở phía trên cùng, bấm vào NetGuard trong danh sách và chọn và xác nhận \"Don\'t optimize\".</string>
     <string name="msg_datasaving">Để có kết quả phù hợp, tùy chọn tiết kiệm dữ liệu Android nên được vô hiệu hóa cho NetGuard \n\nTrong trong hộp thoại kế tiếp, cho phép tùy chọn \"Background data\" và \"Unrestricted data usage\"</string>
     <string name="msg_filter">Sử dụng bộ lọc sẽ làm cho Android hiểu lầm NetGuard sử dụng dữ liệu và năng lượng - Android giả định dữ liệu và năng lượng đang được sử dụng bởi NetGuard, chứ không phải là các ứng dụng ban đầu</string>
@@ -280,9 +274,5 @@
         <item>hổ phách/xanh dương</item>
         <item>cam/xám</item>
         <item>xanh lá cây</item>
-    </string-array>
-    <string-array name="protocolNames">
-        <item>UDP</item>
-        <item>TCP</item>
     </string-array>
 </resources>

@@ -94,9 +94,6 @@
     <string name="setting_block_domains">Blokér domænenavne</string>
     <string name="setting_rcode">DNS-svarkode: %d</string>
     <string name="setting_forwarding">Port-viderestilling</string>
-    <string name="setting_vpn4">VPN IPv4: %s</string>
-    <string name="setting_vpn6">VPN IPv6: %s</string>
-    <string name="setting_dns">VPN DNS: %s</string>
     <string name="setting_validate">Validér på: %s</string>
     <string name="setting_ttl">Minimum DNS TTL: %s s</string>
     <string name="setting_socks5_enabled">Benyt SOCKS5-proxy</string>
@@ -172,10 +169,8 @@ Din Internettrafik sendes ikke til en ekstern VPN-server.</string>
     <string name="msg_terms">Ved at donere, accepterer du <a href="http://www.netguard.me/#terms">vilkårene og betingelserne</a></string>
     <string name="msg_dimming">Kan du ikke trykke OK i næste dialog, så håndteres skærmen sandsynligvis af en anden (skærmnedtonings-) app.</string>
     <string name="msg_mbday">± %1$.3f▲ %2$.3f▼ MB/dag</string>
-    <string name="msg_kb">%1$7.3f▲ %2$7.3f▼ KB</string>
-    <string name="msg_mb">%1$7.3f▲ %2$7.3f▼ MB</string>
-    <string name="msg_gb">%1$7.3f▲ %2$7.3f▼ GB</string>
-    <string name="msg_count">%dx</string>
+
+
     <string name="msg_doze">Med henblik på ensartethed i resultaterne, bør Androids batterioptimering ikke inkludere NetGuard.\n\n
 Vælg \"Alle apps\" øverst i den næste dialog, tryk på NetGuard på listen og vælg - og bekræft - \"Optimér ikke\".</string>
     <string name="msg_datasaving">Med henblik på ensartethed i resultaterne, bør Androids datasparefunktion ikke inkludere NetGuard.\n\n
@@ -227,7 +222,6 @@ Aktivér venligst indstillingerne \"Baggrundsdata\" og \"Ubegrænset dataforbrug
     <string name="title_conditions">Betingelser</string>
     <string name="title_screen_wifi">Tillad Wi-Fi, når skærmen er tændt</string>
     <string name="title_screen_other">Tillad mobildata, når skærmen er tændt</string>
-    <string name="title_roaming_symbol">R</string>
     <string name="title_roaming">Blokér under roaming</string>
     <string name="title_lockdown">Tillad i aflåst tilstand</string>
     <string name="title_related">Filtér relaterede</string>
@@ -284,9 +278,5 @@ Aktivér venligst indstillingerne \"Baggrundsdata\" og \"Ubegrænset dataforbrug
         <item>rav/blå</item>
         <item>orange/grå</item>
         <item>grøn</item>
-    </string-array>
-    <string-array name="protocolNames">
-        <item>UDP</item>
-        <item>TCP</item>
     </string-array>
 </resources>

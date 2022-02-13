@@ -172,10 +172,8 @@ Je internetverkeer wordt niet naar een externe VPN-server gestuurd.</string>
     <string name="msg_terms">Door te doneren ga je akkoord met de <a href="http://www.netguard.me/#terms">algemene &amp; voorwaarden</a></string>
     <string name="msg_dimming">Als je niet op \'OK\' kan tikken in het dialoogvenster, is een (schermdimmende) app waarschijnlijk actief.</string>
     <string name="msg_mbday">± %1$.3f▲ %2$.3f▼ MB/dag</string>
-    <string name="msg_kb">%1$7.3f▲ %2$7.3f▼ KB</string>
-    <string name="msg_mb">%1$7.3f▲ %2$7.3f▼ MB</string>
-    <string name="msg_gb">%1$7.3f▲ %2$7.3f▼ GB</string>
-    <string name="msg_count">%dx</string>
+
+
     <string name="msg_doze">Voor consistente resultaten moeten de Android-batterijoptimalisaties worden uitgeschakeld voor NetGuard.
 \n\nSelecteer in het volgende dialoogvenster bovenaan \"Alle apps\", tik op NetGuard in de lijst en selecteer en bevestig \'niet optimaliseren\'.</string>
     <string name="msg_datasaving">Voor consistente resultaten moeten de Android-opties voor het opslaan van gegevens worden uitgeschakeld voor. NetGuard. \n\nSelecteer in het volgende dialoogvenster de opties \'achtergrondgegevens\' en \'onbeperkt gegevensgebruik\' in</string>
@@ -283,9 +281,5 @@ Je internetverkeer wordt niet naar een externe VPN-server gestuurd.</string>
         <item>amber/blauw</item>
         <item>oranje/grijs</item>
         <item>groen</item>
-    </string-array>
-    <string-array name="protocolNames">
-        <item>UDP</item>
-        <item>TCP</item>
     </string-array>
 </resources>

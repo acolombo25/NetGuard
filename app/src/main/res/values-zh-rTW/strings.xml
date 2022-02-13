@@ -94,9 +94,6 @@
     <string name="setting_block_domains">封鎖網域名稱</string>
     <string name="setting_rcode">DNS 回應碼：%d</string>
     <string name="setting_forwarding">埠轉接</string>
-    <string name="setting_vpn4">VPN IPv4: %s</string>
-    <string name="setting_vpn6">VPN IPv6: %s</string>
-    <string name="setting_dns">VPN DNS: %s</string>
     <string name="setting_validate">驗證於：%s</string>
     <string name="setting_ttl">DNS TTL 最小值：%s s</string>
     <string name="setting_socks5_enabled">使用 SOCKS5 代理</string>
@@ -172,15 +169,12 @@
     <string name="msg_terms">捐款代表你同意<a href="http://www.netguard.me/#terms">terms &amp; conditions</a></string>
     <string name="msg_dimming">如果您在下一個對話方塊無法按下 OK，很可能有其他 app (藍光過濾器) 在操控您的螢幕。</string>
     <string name="msg_mbday">± %1$.3f▲ %2$.3f▼ MB/日</string>
-    <string name="msg_kb">%1$7.3f▲ %2$7.3f▼ KB</string>
-    <string name="msg_mb">%1$7.3f▲ %2$7.3f▼ MB</string>
-    <string name="msg_gb">%1$7.3f▲ %2$7.3f▼ GB</string>
-    <string name="msg_count">%dx</string>
+
     <string name="msg_doze">為使結果一致，應將 NetGuard 的 Android 電池最佳化選項停用
 \n\n請在下一個對話方塊中，在上方選擇 \"所有應用程式\"，然後點選清單中的 NetGuard 並選擇 \"不要最佳化\" 並按下 \"完成\"</string>
     <string name="msg_datasaving">為使結果一致，應將 NetGuard 的 Android 數據節省選項停用
 \n\n請在下一個對話方塊中，啟用 \"背景數據\" 以及 \"數據用量不受限\"</string>
-    <string name="msg_filter">使用過濾功能將導致 Android 系統把數據用量與耗電量歸在 NetGuard 底下 -- 即 Android 會以為是 NetGuard 耗用這些數據用量及耗電量，而非那些被過濾的 apps 所致。</string>
+    <string name="msg_filter">使用過濾功能將導致 Android 系統把數據用量與耗電量歸在 NetGuard 底下 — 即 Android 會以為是 NetGuard 耗用這些數據用量及耗電量，而非那些被過濾的 apps 所致。</string>
     <string name="msg_filter4">Android 4 需啟用過濾</string>
     <string name="msg_log_disabled">流量記錄已停用，請用上方的切換開關啟用記錄。流量記錄可能會導致額外的耗電量。</string>
     <string name="msg_clear_rules">這將使所有規則和狀態被重置為預設值</string>
@@ -283,9 +277,5 @@
         <item>琥珀/藍</item>
         <item>橙/灰</item>
         <item>綠</item>
-    </string-array>
-    <string-array name="protocolNames">
-        <item>UDP</item>
-        <item>TCP</item>
     </string-array>
 </resources>

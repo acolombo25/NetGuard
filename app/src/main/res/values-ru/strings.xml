@@ -94,9 +94,7 @@
     <string name="setting_block_domains">Блокировать доменные имена</string>
     <string name="setting_rcode">Код ответа DNS: %d</string>
     <string name="setting_forwarding">Перенаправление портов</string>
-    <string name="setting_vpn4">VPN IPv4: %s</string>
-    <string name="setting_vpn6">VPN IPv6: %s</string>
-    <string name="setting_dns">VPN DNS: %s</string>
+
     <string name="setting_validate">Проверить на: %s</string>
     <string name="setting_ttl">Минимальный DNS TTL: %s сек</string>
     <string name="setting_socks5_enabled">Использовать прокси SOCKS5</string>
@@ -174,7 +172,7 @@
     <string name="msg_kb">%1$7.3f▲ %2$7.3f▼ КБ</string>
     <string name="msg_mb">%1$7.3f▲ %2$7.3f▼ МБ</string>
     <string name="msg_gb">%1$7.3f▲ %2$7.3f▼ ГБ</string>
-    <string name="msg_count">%dx</string>
+
     <string name="msg_doze">Для достижения стабильных результатов экономия заряда аккумулятора Android для NetGuard должна быть отключена. \n\nВ следующем диалоговом окне, в верхней части, выберите «Все приложения», найдите NetGuard в списке и выберете его, затем выберите «Не экономить» и подтвердите.</string>
     <string name="msg_datasaving">Для достижения стабильных результатов, ограничение данных Android должно быть отключено для NetGuard.
 \n\nВ следующем диалоговом окне включите опции \"Фоновые данные\" и \"Неограниченное использование данных\"</string>
@@ -282,9 +280,5 @@
         <item>янтарный/синий</item>
         <item>оранжевый/серый</item>
         <item>зеленый</item>
-    </string-array>
-    <string-array name="protocolNames">
-        <item>UDP</item>
-        <item>TCP</item>
     </string-array>
 </resources>

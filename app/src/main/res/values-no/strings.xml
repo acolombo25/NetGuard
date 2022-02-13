@@ -94,9 +94,7 @@
     <string name="setting_block_domains">Blokker domenenavn</string>
     <string name="setting_rcode">DNS-responskode: %d</string>
     <string name="setting_forwarding">Portvideresending</string>
-    <string name="setting_vpn4">VPN IPv4: %s</string>
-    <string name="setting_vpn6">VPN IPv6: %s</string>
-    <string name="setting_dns">VPN DNS: %s</string>
+
     <string name="setting_validate">Validate at: %s</string>
     <string name="setting_ttl">Minimum DNS TTL: %s s</string>
     <string name="setting_socks5_enabled">Bruk SOCKS5-mellomtjener</string>
@@ -150,7 +148,6 @@
     <string name="summary_socks5_enabled">Bare TCP-trafikk vil bli sendt til proxy-serveren</string>
     <string name="summary_watchdog">Periodically check if NetGuard is still running (enter zero to disable this option). This might result in extra battery usage.</string>
     <string name="summary_stats">Vis nettverkshastighetsgraf i statuslinjevarsling</string>
-    <string-array name="default_wifi_home"></string-array>
     <string name="msg_sure">Er du sikker?</string>
     <string name="msg_started">Overholder regler</string>
     <string name="msg_packages">%1$d tillatt, %2$d blokkert</string>
@@ -173,12 +170,7 @@ Internett-trafikken din blir ikke sendt til en ekstern VPN-server.</string>
     <string name="msg_terms">By donating you agree to the <a href="http://www.netguard.me/#terms">terms &amp; conditions</a></string>
     <string name="msg_dimming">If you cannot press OK in the next dialog, another (screen dimming) app is likely manipulating the screen.</string>
     <string name="msg_mbday">± %1$.3f▲ %2$.3f▼ MB/dag</string>
-    <string name="msg_kbsec">%7.3f KB/s</string>
-    <string name="msg_mbsec">%7.3f MB/s</string>
-    <string name="msg_kb">%1$7.3f▲ %2$7.3f▼ KB</string>
-    <string name="msg_mb">%1$7.3f▲ %2$7.3f▼ MB</string>
-    <string name="msg_gb">%1$7.3f▲ %2$7.3f▼ GB</string>
-    <string name="msg_count">%dx</string>
+
     <string name="msg_doze">For consistent results, the Android battery optimizations should be disabled for NetGuard.
 \n\nIn the next dialog, select \"All apps\" at the top, tap on NetGuard in the list and select and confirm \"Don\'t optimize\".</string>
     <string name="msg_datasaving">For consistent results, the Android data saving options should be disabled for NetGuard
@@ -287,9 +279,5 @@ Internett-trafikken din blir ikke sendt til en ekstern VPN-server.</string>
         <item>amber/blue</item>
         <item>oransje/grå</item>
         <item>grønn</item>
-    </string-array>
-    <string-array name="protocolNames">
-        <item>UDP</item>
-        <item>TCP</item>
     </string-array>
 </resources>

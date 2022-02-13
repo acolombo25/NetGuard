@@ -94,9 +94,6 @@
     <string name="setting_block_domains">Blokir nama domain</string>
     <string name="setting_rcode">Kode respons DNS: %d</string>
     <string name="setting_forwarding">Port forwarding</string>
-    <string name="setting_vpn4">IPv4 VPN: %s</string>
-    <string name="setting_vpn6">IPv6 VPN: %s</string>
-    <string name="setting_dns">DNS VPN: %s</string>
     <string name="setting_validate">Validasi pada:%s</string>
     <string name="setting_ttl">Minimum DNS TTL: %s s</string>
     <string name="setting_socks5_enabled">Gunakan proksi SOCKS5</string>
@@ -172,10 +169,8 @@ Lalu lintas internet anda tidak akan dikirim ke server VPN eksternal.</string>
     <string name="msg_terms">Dengan donasi anda setuju dengan <a href="http://www.netguard.me/#terms">syarat &amp; kondisi</a></string>
     <string name="msg_dimming">Jika anda tidak bisa menekan OKE pada dialog berikutnya, apl (peredup layar) mungkin sedang memanipulasi layar.</string>
     <string name="msg_mbday">± %1$.3f▲ %2$.3f▼ MB/hari</string>
-    <string name="msg_kb">%1$7.3f▲ %2$7.3f▼ KB</string>
-    <string name="msg_mb">%1$7.3f▲ %2$7.3f▼ MB</string>
-    <string name="msg_gb">%1$7.3f▲ %2$7.3f▼ GB</string>
-    <string name="msg_count">%dx</string>
+
+
     <string name="msg_doze">Agar hasil konsisten, pengoptimalan baterai Android harus dinonaktifkan untuk NetGuard.
 \n\nPada dialog berikutnya, pilih \"Semua aplikasi\" dibagian atas, ketuk NetGuard dalam daftar dan pilih \"Jangan optimalkan\".</string>
     <string name="msg_datasaving">Agar hasil konsisten, opsi penghemat data Android harus dinonaktifkan untuk NetGuard
@@ -227,7 +222,6 @@ Lalu lintas internet anda tidak akan dikirim ke server VPN eksternal.</string>
     <string name="title_conditions">Kondisi</string>
     <string name="title_screen_wifi">Izinkan Wi-Fi saat layar aktif</string>
     <string name="title_screen_other">Izinkan seluler saat layar aktif</string>
-    <string name="title_roaming_symbol">R</string>
     <string name="title_roaming">Blokir saat roaming</string>
     <string name="title_lockdown">Izinkan dalam mode penguncian</string>
     <string name="title_related">Filter terkait</string>
@@ -284,9 +278,5 @@ Lalu lintas internet anda tidak akan dikirim ke server VPN eksternal.</string>
         <item>kuning/biru</item>
         <item>oranye/abu-abu</item>
         <item>hijau</item>
-    </string-array>
-    <string-array name="protocolNames">
-        <item>UDP</item>
-        <item>TCP</item>
     </string-array>
 </resources>

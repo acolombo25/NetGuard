@@ -172,10 +172,6 @@
     <string name="msg_terms">捐赠即表明您同意相关<a href="http://www.netguard.me/#terms">条款细则</a></string>
     <string name="msg_dimming">如果您在下一个对话框中不能点击确定，另一个应用可能在控制屏幕（如屏幕亮度调节的软件）。</string>
     <string name="msg_mbday">每天 ± %1$.3f▲ %2$.3f▼ MB</string>
-    <string name="msg_kb">%1$7.3f▲ %2$7.3f▼ KB</string>
-    <string name="msg_mb">%1$7.3f▲ %2$7.3f▼ MB</string>
-    <string name="msg_gb">%1$7.3f▲ %2$7.3f▼ GB</string>
-    <string name="msg_count">%dx</string>
     <string name="msg_doze">NetGuard若要正常运作，Android的电池优化功能应豁免NetGuard。
 \n\n请在下一步选择上方的“所有应用”，从列表中点击NetGuard，并选择“不要优化”。</string>
     <string name="msg_datasaving">NetGuard若要正常运作，Android的流量控制功能应豁免NetGuard。
@@ -284,9 +280,5 @@
         <item>琥珀及蓝色</item>
         <item>橙色及灰色</item>
         <item>绿色</item>
-    </string-array>
-    <string-array name="protocolNames">
-        <item>UDP</item>
-        <item>TCP</item>
     </string-array>
 </resources>

@@ -94,9 +94,6 @@
     <string name="setting_block_domains">Bloquer les noms de domaine</string>
     <string name="setting_rcode">Code retour DNS : %d</string>
     <string name="setting_forwarding">Redirection de port</string>
-    <string name="setting_vpn4">VPN IPv4 : %s</string>
-    <string name="setting_vpn6">VPN IPv6 : %s</string>
-    <string name="setting_dns">VPN DNS : %s</string>
     <string name="setting_validate">Valider à : %s</string>
     <string name="setting_ttl">DNS TTL minimum : %s s</string>
     <string name="setting_socks5_enabled">Utiliser un proxy SOCKS5</string>
@@ -175,7 +172,7 @@ Votre trafic Internet n\'est pas envoyé vers un serveur VPN distant.</string>
     <string name="msg_kb">%1$7.3f▲ %2$7.3f▼ Ko</string>
     <string name="msg_mb">%1$7.3f▲ %2$7.3f▼ Mo</string>
     <string name="msg_gb">%1$7.3f▲ %2$7.3f▼ Go</string>
-    <string name="msg_count">%dx</string>
+
     <string name="msg_doze">Pour des résultats cohérents, les optimisations Android de la batterie doivent être désactivées pour NetGuard.\n\nDans la fenêtre suivante, sélectionnez « Toutes les applications » en haut, appuyez sur NetGuard dans la liste, puis sélectionnez et confirmez « Ne pas optimiser ».</string>
     <string name="msg_datasaving">Pour des résultats cohérents, les options de limitation de données de d\'Android doivent être désactivées pour NetGuard \n\nDans la boîte de dialogue suivante, activez les options « Données en arrière-plan » et « Utilisation de données sans restriction »</string>
     <string name="msg_filter">L\'utilisation du filtrage fera qu\'Android attribuera l\'utilisation de données et de batterie à NetGuard - Android suppose que les données et la batterie sont utilisées par NetGuard, plutôt que par les applications d\'origine</string>
@@ -225,7 +222,6 @@ Votre trafic Internet n\'est pas envoyé vers un serveur VPN distant.</string>
     <string name="title_conditions">Conditions</string>
     <string name="title_screen_wifi">Autoriser le Wi-Fi quand l\'écran est allumé</string>
     <string name="title_screen_other">Autoriser les données mobiles quand l\'écran est allumé</string>
-    <string name="title_roaming_symbol">R</string>
     <string name="title_roaming">Bloquer en itinérance</string>
     <string name="title_lockdown">Autoriser en mode verrouillage</string>
     <string name="title_related">Filtre lié</string>
@@ -282,9 +278,5 @@ Votre trafic Internet n\'est pas envoyé vers un serveur VPN distant.</string>
         <item>ambre/bleu</item>
         <item>orange/gris</item>
         <item>vert</item>
-    </string-array>
-    <string-array name="protocolNames">
-        <item>UDP</item>
-        <item>TCP</item>
     </string-array>
 </resources>

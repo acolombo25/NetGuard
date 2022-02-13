@@ -170,10 +170,6 @@
     <string name="msg_terms">Durch eine Spende stimmen Sie den <a href="http://www.netguard.me/#terms">AGB</a> zu.</string>
     <string name="msg_dimming">Falls Sie nicht auf OK im nächsten Fenster tippen können, manipuliert eine andere Anwendung Ihren Bildschirm.</string>
     <string name="msg_mbday">± %1$.3f▲ %2$.3f▼ MB/Tag</string>
-    <string name="msg_kb">%1$7.3f▲ %2$7.3f▼ KB</string>
-    <string name="msg_mb">%1$7.3f▲ %2$7.3f▼ MB</string>
-    <string name="msg_gb">%1$7.3f▲ %2$7.3f▼ GB</string>
-    <string name="msg_count">%dx</string>
     <string name="msg_doze">Für konsistente Ergebnisse sollten für NetGuard die Android-Batterie-Optimierungen deaktiviert werden.\n\nIm nächsten Dialogfenster wählen Sie ganz oben \"Alle Apps\", tippen auf NetGuard in der Liste und wählen und bestätigen \"Nicht optimieren\".</string>
     <string name="msg_datasaving">Für konsistente Ergebnisse sollten die Android-Datenspeicheroptionen für NetGuard deaktiviert werden.\n\nIm nächsten Fenster aktivieren Sie die Optionen \"Hintergrunddaten\" und \"Uneingeschränkte Datennutzung\".</string>
     <string name="msg_filter">Bei Verwendung von Filtern werden Daten- und Energiewerte erfasst und Android nimmt an, dass Daten und Energie von NetGuard statt von den ursprünglichen Anwendungen verbraucht werden</string>
@@ -223,7 +219,6 @@
     <string name="title_conditions">Bedingungen</string>
     <string name="title_screen_wifi">WLAN erlauben, wenn Bildschirm eingeschaltet ist</string>
     <string name="title_screen_other">Mobilfunk erlauben, wenn Bildschirm eingeschaltet ist</string>
-    <string name="title_roaming_symbol">R</string>
     <string name="title_roaming">Bei Roaming blockieren</string>
     <string name="title_lockdown">Im Zugriffsbeschränkungsmodus erlauben</string>
     <string name="title_related">Filterabhängig</string>
@@ -280,9 +275,5 @@
         <item>Gelb/Blau</item>
         <item>Orange/Grau</item>
         <item>Grün</item>
-    </string-array>
-    <string-array name="protocolNames">
-        <item>UDP</item>
-        <item>TCP</item>
     </string-array>
 </resources>

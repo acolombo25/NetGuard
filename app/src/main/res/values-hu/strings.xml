@@ -94,9 +94,6 @@
     <string name="setting_block_domains">Domain nevek letiltása</string>
     <string name="setting_rcode">DNS válasz kód: %d</string>
     <string name="setting_forwarding">Port forward</string>
-    <string name="setting_vpn4">VPN IPv4: %s</string>
-    <string name="setting_vpn6">VPN IPv6: %s</string>
-    <string name="setting_dns">VPN DNS: %s</string>
     <string name="setting_validate">Érvényesítés itt: %s</string>
     <string name="setting_ttl">Minimális DNS TTL: %s s</string>
     <string name="setting_socks5_enabled">SOCKS5 proxy használata</string>
@@ -172,10 +169,8 @@ Az internetes forgalom nem érkezik meg a távoli VPN kiszolgálóhoz.</string>
     <string name="msg_terms">A támogató elfogadja a <a href="http://www.netguard.me/#terms">felhasználási feltételeket</a></string>
     <string name="msg_dimming">Ha nem nyomja meg az OK gombot a következő párbeszédablakban, a másik (a képernyő fényerő) alkalmazás valószínűleg módosul a képernyőn.</string>
     <string name="msg_mbday">± %1$.3f▲ %2$.3f▼ MB/nap</string>
-    <string name="msg_kb">%1$7.3f▲ %2$7.3f▼ KB</string>
-    <string name="msg_mb">%1$7.3f▲ %2$7.3f▼ MB</string>
-    <string name="msg_gb">%1$7.3f▲ %2$7.3f▼ GB</string>
-    <string name="msg_count">%dx</string>
+
+
     <string name="msg_doze">A következetes eredményekhez az Androidos akkumulátor optimalizálásban a NetGuard-ot kivétellé kell tenni.\n\nA következő párbeszédablakban válassza felül az \"Összes alkalmazás\", érintse meg a NetGuard feliratot és válassza a \"Ne optimalizálja\" részt.</string>
     <string name="msg_datasaving">A következetes eredmény érdekében az Android adat mentés opciót le kell tiltani a NetGuard-ban\n\nA következő párbeszédablakban engedélyezni kell a \"Háttér adat\" és \"Korlátlan adat használat\" opciót.</string>
     <string name="msg_filter">A szűrés használatával az adat és az energia használat attributumait a NetGuard-hoz sorolja. Az Android azt feltételezi, hogy ezeket a NetGuard használta fel és nem az eredeti alkalmazás</string>
@@ -225,7 +220,6 @@ Az internetes forgalom nem érkezik meg a távoli VPN kiszolgálóhoz.</string>
     <string name="title_conditions">Feltételek</string>
     <string name="title_screen_wifi">Wi-Fi engedélyezése amikor a képernyő be van kapcsolva</string>
     <string name="title_screen_other">Mobil engedélyezése amikor a képernyő be van kapcsolva</string>
-    <string name="title_roaming_symbol">R</string>
     <string name="title_roaming">Letiltás roaming közben</string>
     <string name="title_lockdown">Engedélyezés lezárt módban</string>
     <string name="title_related">Kapcsolódás szűrő</string>
@@ -282,9 +276,5 @@ Az internetes forgalom nem érkezik meg a távoli VPN kiszolgálóhoz.</string>
         <item>borostyán/kék</item>
         <item>narancssárga/szürke</item>
         <item>zöld</item>
-    </string-array>
-    <string-array name="protocolNames">
-        <item>UDP</item>
-        <item>TCP</item>
     </string-array>
 </resources>

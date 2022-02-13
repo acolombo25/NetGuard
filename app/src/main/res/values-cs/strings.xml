@@ -94,9 +94,6 @@
     <string name="setting_block_domains">Blokovat názvy domén</string>
     <string name="setting_rcode">Kód odpovědi DNS: %d</string>
     <string name="setting_forwarding">Přesměrování portů</string>
-    <string name="setting_vpn4">VPN IPv4: %s</string>
-    <string name="setting_vpn6">VPN IPv6: %s</string>
-    <string name="setting_dns">VPN DNS: %s</string>
     <string name="setting_validate">Ověřit na: %s</string>
     <string name="setting_ttl">Minimální DNS TTL: %s s</string>
     <string name="setting_socks5_enabled">Použít SOCKS5 proxy</string>
@@ -172,10 +169,8 @@ Váš internetový provoz není odesílán žádnému vzdálenému VPN serveru.<
     <string name="msg_terms">Darováním souhlasíte s <a href="http://www.netguard.me/#terms">podmínkami&amp; služby</a></string>
     <string name="msg_dimming">Pokud v následujícím dialogu nelze potvrdit OK, jiná aplikace (např. barevný filtr) pravděpodobně překrývá obrazovku.</string>
     <string name="msg_mbday">± %1$.3f▲ %2$.3f▼ MB/den</string>
-    <string name="msg_kb">%1$7.3f▲ %2$7.3f▼ KB</string>
-    <string name="msg_mb">%1$7.3f▲ %2$7.3f▼ MB</string>
-    <string name="msg_gb">%1$7.3f▲ %2$7.3f▼ GB</string>
-    <string name="msg_count">%dx</string>
+
+
     <string name="msg_doze">Pro optimální výsledky by pro NetGuard měla být vypnuta optimalizace spotřeby baterie.
 \n\nV následujícím dialogu nahoře se přepněte na \"Všechny aplikace\", v seznamu vyberte NetGuard a označte a potvrďte volbu \"Neoptimalizovat\".</string>
     <string name="msg_datasaving">Pro optimální výsledky by pro NetGuard měly být vypnuty funkce úspory dat systému Android
@@ -227,7 +222,6 @@ Váš internetový provoz není odesílán žádnému vzdálenému VPN serveru.<
     <string name="title_conditions">Podmínky</string>
     <string name="title_screen_wifi">Povolit Wi-Fi při zapnuté obrazovce</string>
     <string name="title_screen_other">Povolit mobilní data při zapnuté obrazovce</string>
-    <string name="title_roaming_symbol">R</string>
     <string name="title_roaming">Blokovat při roamingu</string>
     <string name="title_lockdown">Povolit v režimu blokování všech přenosů</string>
     <string name="title_related">Filtrovat související</string>
@@ -284,9 +278,5 @@ Váš internetový provoz není odesílán žádnému vzdálenému VPN serveru.<
         <item>jantarová/modrá</item>
         <item>oranžová/šedá</item>
         <item>zelená</item>
-    </string-array>
-    <string-array name="protocolNames">
-        <item>UDP</item>
-        <item>TCP</item>
     </string-array>
 </resources>

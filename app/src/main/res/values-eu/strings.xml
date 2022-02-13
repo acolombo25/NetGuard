@@ -94,9 +94,6 @@
     <string name="setting_block_domains">Blokeatu domeinu izenak</string>
     <string name="setting_rcode">DNS erantzun kodea: %d</string>
     <string name="setting_forwarding">Atakak birbidaltzea</string>
-    <string name="setting_vpn4">VPN IPv4: %s</string>
-    <string name="setting_vpn6">VPN IPv6: %s</string>
-    <string name="setting_dns">VPN DNS: %s</string>
     <string name="setting_validate">Balioztatu hemen: %s</string>
     <string name="setting_ttl">Gutxieneko DNS TTL: %s s</string>
     <string name="setting_socks5_enabled">Erabili SOCKS5 proxya</string>
@@ -150,7 +147,6 @@
     <string name="summary_socks5_enabled">TCP trafikoa besterik ez da bidaliko proxy zerbitzarira</string>
     <string name="summary_watchdog">Egiaztatu aldiro NetGuarg oraindik martxan dagoen (idatzi 0 ezaugarri hau desgaitzeko). Honek bateria gehiago erabiltzea ekar lezake.</string>
     <string name="summary_stats">Erakutsi sare-abiaduraren grafikoak egoera-barrako jakinarazpenetan</string>
-    <string-array name="default_wifi_home"></string-array>
     <string name="msg_sure">Ziur zaude?</string>
     <string name="msg_started">Arauak betearazten</string>
     <string name="msg_packages">%1$d baimenduta, %2$d blokeatuta</string>
@@ -173,12 +169,7 @@ Zure internet trafikoa ez da kanpo VPN zerbitzari batera bidaltzen.</string>
     <string name="msg_terms">Dohaintza eginez <a href="http://www.netguard.me/#terms">termino eta baldintzak</a> onartzen dituzu</string>
     <string name="msg_dimming">Ezin baduzu \'Ados\' zapaldu hurrengo elkarrizketa-koadroan, beste aplikazio bat pantaila manipulatzen dago.</string>
     <string name="msg_mbday">± %1$.3f▲ %2$.3f▼ MB/egunean</string>
-    <string name="msg_kbsec">%7.3f KB/s</string>
-    <string name="msg_mbsec">%7.3f MB/s</string>
-    <string name="msg_kb">%1$7.3f▲ %2$7.3f▼ KB</string>
-    <string name="msg_mb">%1$7.3f▲ %2$7.3f▼ MB</string>
-    <string name="msg_gb">%1$7.3f▲ %2$7.3f▼ GB</string>
-    <string name="msg_count">%dx</string>
+
     <string name="msg_doze">Emaitza egokiak izateko, Android sistemako bateria optimizazioak desgaitu behar dira NetGuard aplikazioarentzat.
 \n\nHurrengo elkarrizketa-koadroan, hautatu \"Aplikazio guztiak\" goian, sakatu NetGuard zerrendan eta berretsi \"Ez optimizatu\".</string>
     <string name="msg_datasaving">Emaitza egokiak izateko, Android sistemako datuak aurrezteko optimizazioak desgaitu behar dira NetGuard aplikazioarentzat.
@@ -230,7 +221,6 @@ Zure internet trafikoa ez da kanpo VPN zerbitzari batera bidaltzen.</string>
     <string name="title_conditions">Baldintzak</string>
     <string name="title_screen_wifi">Baimendu Wi-Fia pantaila piztuta dagoenean</string>
     <string name="title_screen_other">Baimendu mugikorra pantaila piztuta dagoenean</string>
-    <string name="title_roaming_symbol">R</string>
     <string name="title_roaming">Blokeatu ibiltaritzan</string>
     <string name="title_lockdown">Baimendu blokeo moduan</string>
     <string name="title_related">Iragazi erlazionatutakoak</string>
@@ -277,9 +267,6 @@ Zure internet trafikoa ez da kanpo VPN zerbitzari batera bidaltzen.</string>
     <string name="title_pro_challenge">Erronka</string>
     <string name="title_pro_reponse">Erantzuna</string>
     <string name="title_pro_feature">Hau ordainpeko ezaugarri bat da</string>
-    <string name="title_pro_subscription">        A monthly subscriptions of 1 or 2 euros (excluding local taxes) will activate all pro features.
-        You can cancel or manage a subscription via the subscriptions tab in the Play store app.
-    </string>
     <string-array name="themeNames">
         <item>berdexka/laranja</item>
         <item>urdina/laranja</item>
@@ -287,9 +274,5 @@ Zure internet trafikoa ez da kanpo VPN zerbitzari batera bidaltzen.</string>
         <item>orixka/urdina</item>
         <item>laranja/grisa</item>
         <item>berdea</item>
-    </string-array>
-    <string-array name="protocolNames">
-        <item>UDP</item>
-        <item>TCP</item>
     </string-array>
 </resources>

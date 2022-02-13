@@ -170,10 +170,8 @@
     <string name="msg_terms">Ao fazer um donativo, concorda com os <a href="http://www.netguard.me/#terms">termos e condições</a></string>
     <string name="msg_dimming">Caso não consiga pressionar OK no diálogo a seguir, então provavelmente alguma aplicação (escurecimento do ecrã) está a manipular o ecrã.</string>
     <string name="msg_mbday">± %1$.3f▲ %2$.3f▼ MB/dia</string>
-    <string name="msg_kb">%1$7.3f▲ %2$7.3f▼ KB</string>
-    <string name="msg_mb">%1$7.3f▲ %2$7.3f▼ MB</string>
-    <string name="msg_gb">%1$7.3f▲ %2$7.3f▼ GB</string>
-    <string name="msg_count">%dx</string>
+
+
     <string name="msg_doze">Para resultados consistentes, as otimizações de bateria do Android devem ser desativadas para o NetGuard. \n\nNa próxima caixa de diálogo, selecione \"Todas as aplicações\" na parte superior, toque em NetGuard na lista, selecione e confirme \"Não otimizar\".</string>
     <string name="msg_datasaving">Para resultados consistentes, as opções de guardar dados do Android devem ser desativadas para o NetGuard \n\nNa próxima caixa de diálogo, ative as opções \"dados em segundo plano\" e \"acesso a dados sem restrições\"</string>
     <string name="msg_filter">Usar a filtragem faz com que o Android atribua o uso de dados e energia ao NetGuard - o Android assume que os dados e a energia estão a ser usados pelo NetGuard, e não pelas aplicações efetivas</string>
@@ -280,9 +278,5 @@
         <item>âmbar/azul</item>
         <item>laranja/cinzento</item>
         <item>verde</item>
-    </string-array>
-    <string-array name="protocolNames">
-        <item>UDP</item>
-        <item>TCP</item>
     </string-array>
 </resources>

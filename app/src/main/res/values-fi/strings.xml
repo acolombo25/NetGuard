@@ -94,9 +94,6 @@
     <string name="setting_block_domains">Estä verkkotunnuksia</string>
     <string name="setting_rcode">DNS-vastauskoodi: %d</string>
     <string name="setting_forwarding">Porttien uudelleenohjaus</string>
-    <string name="setting_vpn4">VPN IPv4: %s</string>
-    <string name="setting_vpn6">VPN IPv6: %s</string>
-    <string name="setting_dns">VPN DNS: %s</string>
     <string name="setting_validate">Yhteyden validoinnin kohde: %s</string>
     <string name="setting_ttl">DNS TTL-vähimmäisarvo: %s s</string>
     <string name="setting_socks5_enabled">Käytä SOCKS5-välityspalvelinta</string>
@@ -170,10 +167,8 @@
     <string name="msg_terms">Lahjoittamalla hyväksyt <a href="http://www.netguard.me/#terms">terms &amp; ehdot</a></string>
     <string name="msg_dimming">Jos et voi valita OK seuraavassa kohdassa, jokin näyttöä hallinnoiva (himmentävä) sovellus luultavasti estää sen.</string>
     <string name="msg_mbday">± %1$.3f▲ %2$.3f▼ MB/päivä</string>
-    <string name="msg_kb">%1$7.3f▲ %2$7.3f▼ KB</string>
-    <string name="msg_mb">%1$7.3f▲ %2$7.3f▼ MB</string>
-    <string name="msg_gb">%1$7.3f▲ %2$7.3f▼ GB</string>
-    <string name="msg_count">%dx</string>
+
+
     <string name="msg_doze">Androidin akun käytön optimointi tulisi sulkea NetGuardin osalta luotettavan toiminnan takaamiseksi.
 \n\nValitse seuraavassa valikossa ylhäältä \"Kaikki ohjelmat\", NetGuard ja valitse sekä hyväksy \"Älä optimoi\".</string>
     <string name="msg_datasaving">Androidin dataa säästävät asetukset tulisi laittaa pois päältä NetGuardin osalta luotettavan toiminnan takaamiseksi.
@@ -225,7 +220,6 @@
     <string name="title_conditions">Ehdot</string>
     <string name="title_screen_wifi">Salli Wi-Fi näytön ollessa päällä</string>
     <string name="title_screen_other">Salli mobiili näytön ollessa päällä</string>
-    <string name="title_roaming_symbol">R</string>
     <string name="title_roaming">Estä verkkovierailun aikana</string>
     <string name="title_lockdown">Salli lukitustilassa</string>
     <string name="title_related">Suodata liittyvät</string>
@@ -282,9 +276,5 @@
         <item>ruskeankeltainen/sininen</item>
         <item>oranssi/harmaa</item>
         <item>vihreä</item>
-    </string-array>
-    <string-array name="protocolNames">
-        <item>UDP</item>
-        <item>TCP</item>
     </string-array>
 </resources>

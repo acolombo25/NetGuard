@@ -94,9 +94,7 @@
     <string name="setting_block_domains">Alan adlarını engelle</string>
     <string name="setting_rcode">DNS yanıt kodu: %d</string>
     <string name="setting_forwarding">Bağlantı noktası yönlendirme</string>
-    <string name="setting_vpn4">VPN IPv4: %s</string>
-    <string name="setting_vpn6">VPN IPv6: %s</string>
-    <string name="setting_dns">VPN DNS: %s</string>
+
     <string name="setting_validate">Doğrulama adresi: %s</string>
     <string name="setting_ttl">En düşük DNS TTL: %s s</string>
     <string name="setting_socks5_enabled">SOCKS5 kullan</string>
@@ -172,10 +170,8 @@ Bu yüzden bir sonraki diyalogda lütfen VPN bağlantısına izin verin.
     <string name="msg_terms">Bağış yaparak <a href="http://www.netguard.me/#terms">şart ve koşulları</a> kabul etmiş sayılırsınız</string>
     <string name="msg_dimming">Sonraki diyalogda TAMAM\'a basamıyorsanız, farklı bir (ekran karartma) uygulama ekranı kontrol ediyor olabilir.</string>
     <string name="msg_mbday">± %1$.3f▲ %2$.3f▼ MB/gün</string>
-    <string name="msg_kb">%1$7.3f▲ %2$7.3f▼ KB</string>
-    <string name="msg_mb">%1$7.3f▲ %2$7.3f▼ MB</string>
-    <string name="msg_gb">%1$7.3f▲ %2$7.3f▼ GB</string>
-    <string name="msg_count">%dx</string>
+
+
     <string name="msg_doze">NetGuard\'ın daha istikrarlı çalışması için Android pil optimizasyonları devre dışı bırakılmalıdır.
 \n\nSonraki diyalogda yukarıdan \"Tüm Uygulamalar\" seçip listeden Netguard\'ı bulun ve \"Optimize Etme\" seçeneğine dokunun.</string>
     <string name="msg_datasaving">NetGuard\'ın daha istikrarlı çalışması için Android veri tasarrufu devre dışı bırakılmalıdır.
@@ -284,9 +280,5 @@ Bu yüzden bir sonraki diyalogda lütfen VPN bağlantısına izin verin.
         <item>kehribar/mavi</item>
         <item>turuncu/gri</item>
         <item>yeşil</item>
-    </string-array>
-    <string-array name="protocolNames">
-        <item>UDP</item>
-        <item>TCP</item>
     </string-array>
 </resources>

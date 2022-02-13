@@ -94,9 +94,6 @@
     <string name="setting_block_domains">Bloquear nombres de dominio</string>
     <string name="setting_rcode">Código de respuesta DNS: %d</string>
     <string name="setting_forwarding">Redirección de puertos</string>
-    <string name="setting_vpn4">VPN IPv4: %s</string>
-    <string name="setting_vpn6">VPN IPv6: %s</string>
-    <string name="setting_dns">VPN DNS: %s</string>
     <string name="setting_validate">Validar en: %s</string>
     <string name="setting_ttl">TTL mínimo para DNS: %s s</string>
     <string name="setting_socks5_enabled">Usar proxy SOCKS5</string>
@@ -170,10 +167,8 @@
     <string name="msg_terms">Al donar, acepta los <a href="http://www.netguard.me/#terms"> términos y condiciones</a></string>
     <string name="msg_dimming">Si no puede pulsar \'Aceptar\' en el próximo diálogo, otra aplicación (de atenuación de pantalla) esté probablemente manipulando la pantalla.</string>
     <string name="msg_mbday">± %1$.3f▲ %2$.3f▼ MB/día</string>
-    <string name="msg_kb">%1$7.3f▲ %2$7.3f▼ KB</string>
-    <string name="msg_mb">%1$7.3f▲ %2$7.3f▼ MB</string>
-    <string name="msg_gb">%1$7.3f▲ %2$7.3f▼ GB</string>
-    <string name="msg_count">%dx</string>
+
+
     <string name="msg_doze">Para obtener resultados consistentes, las optimizaciones de batería de Android deberían desactivarse para NetGuard. \n\nEn el siguiente diálogo, seleccione \'Todas las aplicaciones\' en la parte superior, pulse en NetGuard en la lista y seleccione y confirme \'No optimizar\'.</string>
     <string name="msg_datasaving">Para obtener resultados consistentes, las opciones de ahorro de datos de Android deben estar desactivadas para NetGuard.\n\nEn el siguiente cuadro de diálogo, active las opciones \'Datos en segundo plano\' y \'Uso de datos ilimitado\'.</string>
     <string name="msg_filter">Al utilizar el filtrado, Android atribuirá el uso de datos y batería a Netguard en lugar de las aplicaciones originales</string>
@@ -223,7 +218,6 @@
     <string name="title_conditions">Condiciones</string>
     <string name="title_screen_wifi">Permitir Wi-Fi con la pantalla encendida</string>
     <string name="title_screen_other">Permitir red móvil con la pantalla encendida</string>
-    <string name="title_roaming_symbol">R</string>
     <string name="title_roaming">Bloquear en roaming</string>
     <string name="title_lockdown">Permitir en modo de bloqueo</string>
     <string name="title_related">Filtro relacionado</string>
@@ -280,9 +274,5 @@
         <item>ámbar/azul</item>
         <item>anaranjado/gris</item>
         <item>verde</item>
-    </string-array>
-    <string-array name="protocolNames">
-        <item>UDP</item>
-        <item>TCP</item>
     </string-array>
 </resources>

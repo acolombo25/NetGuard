@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_description">NetGuard zagotavlja preprost in napreden način za blokiranje interneta - koren nu potreben. Aplikacije in naslovi so lahko posamično dovoljeni ali blokirani pri dostopanju do vašega Wi-Fi in/ali mobilne povezave.</string>
-    <string name="app_android">NetGuard requires Android 5.1 or later</string>
     <string name="app_xposed">Xposed povzroča preveč zrušitev, ki lahko vodijo k odstranitvjiji NetGuard iz Google Play Store, zato NetGuard nemore delovati ko je Xposed naložen</string>
     <string name="app_privacy"><a href="https://www.netguard.me/privacy/">Politika zasebnosti</a></string>
     <string name="app_first">Great care has been taken to develop and test NetGuard, however it is impossible to guarantee NetGuard will work correctly on every device.</string>
@@ -94,9 +93,7 @@
     <string name="setting_block_domains">Blokiraj lokalne domene</string>
     <string name="setting_rcode">DNS odzivna koda: %d</string>
     <string name="setting_forwarding">Posredovanje portov</string>
-    <string name="setting_vpn4">VPN IPv4: %s</string>
-    <string name="setting_vpn6">VPN IPv6: %s</string>
-    <string name="setting_dns">VPN DNS: %s</string>
+
     <string name="setting_validate">Validate at: %s</string>
     <string name="setting_ttl">Minimalen DNS TTL: %s s</string>
     <string name="setting_socks5_enabled">Uporabi SOCK5 proxy</string>
@@ -150,7 +147,6 @@
     <string name="summary_socks5_enabled">Only TCP traffic will be sent to the proxy server</string>
     <string name="summary_watchdog">Periodically check if NetGuard is still running (enter zero to disable this option). This might result in extra battery usage.</string>
     <string name="summary_stats">Show network speed graph in status bar notification</string>
-    <string-array name="default_wifi_home"></string-array>
     <string name="msg_sure">Ali ste prepričani?</string>
     <string name="msg_started">Uveljavljanje pravil</string>
     <string name="msg_packages">%1$d dovoljen, %2$d blokiran</string>
@@ -173,12 +169,6 @@ Your internet traffic is not being sent to a remote VPN server.</string>
     <string name="msg_terms">Z doniranjem se strinjate z <a href="http://www.netguard.me/#terms"> &amp; pogoji</a></string>
     <string name="msg_dimming">Če v naslednjem pogovornem oknu ne morete pritisniti OK, po usej vrjetnosti druga aplikacija upravlja zaslon naprave (zatemnitev zaslona).</string>
     <string name="msg_mbday">± %1$.3f▲ %2$.3f▼ MB/day</string>
-    <string name="msg_kbsec">%7.3f KB/s</string>
-    <string name="msg_mbsec">%7.3f MB/s</string>
-    <string name="msg_kb">%1$7.3f▲ %2$7.3f▼ KB</string>
-    <string name="msg_mb">%1$7.3f▲ %2$7.3f▼ MB</string>
-    <string name="msg_gb">%1$7.3f▲ %2$7.3f▼ GB</string>
-    <string name="msg_count">%dx</string>
     <string name="msg_doze">For consistent results, the Android battery optimizations should be disabled for NetGuard.
 \n\nIn the next dialog, select \"All apps\" at the top, tap on NetGuard in the list and select and confirm \"Don\'t optimize\".</string>
     <string name="msg_datasaving">For consistent results, the Android data saving options should be disabled for NetGuard
@@ -276,10 +266,6 @@ Your internet traffic is not being sent to a remote VPN server.</string>
     <string name="title_pro_details">Pritisnite na naslov za več informacij</string>
     <string name="title_pro_challenge">Izziv</string>
     <string name="title_pro_reponse">Odziv</string>
-    <string name="title_pro_feature">This is a pro feature</string>
-    <string name="title_pro_subscription">        A monthly subscriptions of 1 or 2 euros (excluding local taxes) will activate all pro features.
-        You can cancel or manage a subscription via the subscriptions tab in the Play store app.
-    </string>
     <string-array name="themeNames">
         <item>modro zelena/oranžna</item>
         <item>modra/oranžna</item>
@@ -287,9 +273,5 @@ Your internet traffic is not being sent to a remote VPN server.</string>
         <item>jantarna/modra</item>
         <item>oranžna/siva</item>
         <item>zelena</item>
-    </string-array>
-    <string-array name="protocolNames">
-        <item>UDP</item>
-        <item>TCP</item>
     </string-array>
 </resources>

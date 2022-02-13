@@ -172,10 +172,6 @@ Din internettrafik skickas inte till en avlägsen VPN-server.</string>
     <string name="msg_terms">Genom att donera samtycker du till <a href="http://www.netguard.me/#terms">villkor</a></string>
     <string name="msg_dimming">Om du inte kan klicka på OK i nästa dialogruta kommer en annan (skärmdimnings)app sannolikt att manipulera skärmen.</string>
     <string name="msg_mbday">± %1$.3f▲ %2$.3f▼ MB/dag</string>
-    <string name="msg_kb">%1$7.3f▲ %2$7.3f▼ KB</string>
-    <string name="msg_mb">%1$7.3f▲ %2$7.3f▼ MB</string>
-    <string name="msg_gb">%1$7.3f▲ %2$7.3f▼ GB</string>
-    <string name="msg_count">%dx</string>
     <string name="msg_doze">För konsekventa resultat bör Android-batterioptimeringarna inaktiveras för NetGuard.
 \n\nI nästa dialogruta väljer du \"Alla appar\" högst upp, tryck på NetGuard i listan och välj och bekräfta \"Optimera inte\".</string>
     <string name="msg_datasaving">För konsekventa resultat ska Android-databesparingsalternativen inaktiveras för NetGuard
@@ -284,9 +280,5 @@ Din internettrafik skickas inte till en avlägsen VPN-server.</string>
         <item>amber/blå</item>
         <item>orange/grå</item>
         <item>grön</item>
-    </string-array>
-    <string-array name="protocolNames">
-        <item>UDP</item>
-        <item>TCP</item>
     </string-array>
 </resources>

@@ -94,9 +94,7 @@
     <string name="setting_block_domains">டொமைன் பெயர்களை தடு</string>
     <string name="setting_rcode">டிஎன்எஸ் மறுமொழி குறியீடு:%d</string>
     <string name="setting_forwarding">முணையம் மேலனுப்ப</string>
-    <string name="setting_vpn4">VPN IPv4: %s</string>
-    <string name="setting_vpn6">VPN IPv6: %s</string>
-    <string name="setting_dns">VPN DNS: %s</string>
+
     <string name="setting_validate">%s - இல் சரிபார்க்கவும்</string>
     <string name="setting_ttl">குறைந்தபட்ச DNS TTL:%s s</string>
     <string name="setting_socks5_enabled">SOCKS5 பதிலி பயன்படுத்தவும்</string>
@@ -170,10 +168,6 @@
     <string name="msg_terms">கொடுப்பதன் மூலம் நீங்கள் ஒப்புக்கொள்கிறீர்கள், <a href="http://www.netguard.me/#terms"> விதிமுறைகள் &amp; நிபந்தனைகள்</a></string>
     <string name="msg_dimming">நீங்கள், அடுத்த உரையாடலில் உள்ள சரி என்பதை அழுத்தினால் முடியாது, வேறு (திரை dimming) பயன்பாடு என்பது தெரிகிறது manipulating திரை.</string>
     <string name="msg_mbday">± %1$.3f▲ %2$.3f▼ MB/நாள்</string>
-    <string name="msg_kb">%1$7.3f▲ %2$7.3f▼ KB</string>
-    <string name="msg_mb">%1$7.3f▲ %2$7.3f▼ MB</string>
-    <string name="msg_gb">%1$7.3f▲ %2$7.3f▼ GB</string>
-    <string name="msg_count">%dx</string>
     <string name="msg_doze">ஒத்திருக்கும் முடிவுகளுக்கு, அண்ட்ராய்டு மின்கல optimizations வேண்டும் இருக்க முடக்கப்பட்டுள்ளது NetGuard. \n\nIn அடுத்த உரையாடல், மேலே \"அனைத்து பயன்பாடுகள்\" தேர்ந்தெடுக்கவும், துறையில் உள்ள NetGuard பட்டியல் மற்றும் தேர்வு செய்து உறுதி \"வேண்டாம் உகப்பாக்கு\".</string>
     <string name="msg_datasaving">ஒத்திருக்கும் முடிவுகளுக்கு, அண்ட்ராய்டு தரவு விருப்பங்கள் சேமிக்க வேண்டும் முடக்க NetGuard \n\nIn அடுத்த உரையாடல், விருப்பங்கள் \"பின்னணி தகவல்\" மற்றும் \"கட்டுப்பாடற்ற தரவு பயன்பாட்டு\" செயல்படுத்த திட்டம்</string>
     <string name="msg_filter">வடிகட்டல் பயன்படுத்தி அவை ஆண் போன்ற பண்பு தரவு மற்றும் மின் பயன்பாடு NetGuard செய்ய வேண்டும் - ஆண் போன்ற பதிலுடன் தரவு மற்றும் மின் இருக்கும் மற்றோரு NetGuard அல்லாமல் மூல பயன்பாடுகள்</string>
@@ -279,9 +273,5 @@
         <item>பொன்/நீலம்</item>
         <item>ஆரஞ்சு/சாம்பல்</item>
         <item>பச்சை</item>
-    </string-array>
-    <string-array name="protocolNames">
-        <item>UDP</item>
-        <item>TCP</item>
     </string-array>
 </resources>

@@ -94,9 +94,6 @@
     <string name="setting_block_domains">도메인 이름 차단</string>
     <string name="setting_rcode">DNS 응답 코드: %d</string>
     <string name="setting_forwarding">포트 포워딩</string>
-    <string name="setting_vpn4">VPN IPv4: %s</string>
-    <string name="setting_vpn6">VPN IPv6: %s</string>
-    <string name="setting_dns">VPN DNS: %s</string>
     <string name="setting_validate">검증 주소: %s</string>
     <string name="setting_ttl">최소 DNS TTL: %s초</string>
     <string name="setting_socks5_enabled">SOCKS5 프록시 사용</string>
@@ -172,9 +169,7 @@
     <string name="msg_terms">후원하면 <a href="http://www.netguard.me/#terms">이용 약관</a>에 동의하게 됩니다</string>
     <string name="msg_dimming">다음 창에서 확인 버튼을 누를 수 없는 경우, 다른(화면 감광 등의) 앱이 화면을 제어하고 있을 가능성이 높습니다.</string>
     <string name="msg_mbday">± %1$.3f▲ %2$.3f▼ MB/일</string>
-    <string name="msg_kb">%1$7.3f▲ %2$7.3f▼ KB</string>
-    <string name="msg_mb">%1$7.3f▲ %2$7.3f▼ MB</string>
-    <string name="msg_gb">%1$7.3f▲ %2$7.3f▼ GB</string>
+
     <string name="msg_count">%d회</string>
     <string name="msg_doze">NetGuard가 안정적으로 동작하려면 안드로이드 배터리 최적화 설정이 꺼져 있어야 합니다.
 \n\n다음 창에서, 상단의 \"모든 앱\"을 누른 다음, 목록에서 NetGuard를 찾아 누른 다음 제외하십시오.</string>
@@ -284,9 +279,5 @@
         <item>황토/파랑</item>
         <item>주황/회색</item>
         <item>초록</item>
-    </string-array>
-    <string-array name="protocolNames">
-        <item>UDP</item>
-        <item>TCP</item>
     </string-array>
 </resources>

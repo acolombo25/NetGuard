@@ -94,9 +94,7 @@
     <string name="setting_block_domains">Blokuoti domenų vardus</string>
     <string name="setting_rcode">DNS atsakymo kodas: %d</string>
     <string name="setting_forwarding">Prievado nukreipimas</string>
-    <string name="setting_vpn4">VPN IPv4: %s</string>
-    <string name="setting_vpn6">VPN IPv6: %s</string>
-    <string name="setting_dns">VPN DNS: %s</string>
+
     <string name="setting_validate">Galioja iki: %s</string>
     <string name="setting_ttl">Mažiausia DNS TTL reikšmė: %s s</string>
     <string name="setting_socks5_enabled">Naudoti SOCKS5 tarpinį serverį</string>
@@ -172,10 +170,8 @@ Jūsų interneto duomenų srautas nėra siunčiamas į jokį nuotolinį VPN serv
     <string name="msg_terms">Paaukodami sutinkate su <a href="http://www.netguard.me/#terms">nuostatomis &amp; sąlygomis</a></string>
     <string name="msg_dimming">Jei kitame lange negalite spausti „Gerai“, greičiausiai ekraną valdo kita (ekrano pritemdymo) programa.</string>
     <string name="msg_mbday">± %1$.3f▲ %2$.3f▼ MB/dieną</string>
-    <string name="msg_kb">%1$7.3f▲ %2$7.3f▼ KB</string>
-    <string name="msg_mb">%1$7.3f▲ %2$7.3f▼ MB</string>
-    <string name="msg_gb">%1$7.3f▲ %2$7.3f▼ GB</string>
-    <string name="msg_count">%dx</string>
+
+
     <string name="msg_doze">Nuolatiniam NetGuard veikimui programos optimizavimas baterijos optimizavimo nustatymuose turi būti išjungtas.
 \n\nKito lango viršuje pasirinkite „Visos programos“, sąraše pasirinkite NetGuard bei spustelėkite ir patvirtinkite „Neoptimizuoti“.</string>
     <string name="msg_datasaving">Nuolatiniam NetGuard veikimui Android mobilliųjų duomenų tausojimas turi būti išjungtas.

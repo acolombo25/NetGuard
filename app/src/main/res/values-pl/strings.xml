@@ -94,9 +94,7 @@
     <string name="setting_block_domains">Blokuj nazwy domen</string>
     <string name="setting_rcode">Kod odpowiedzi DNS: %d</string>
     <string name="setting_forwarding">Przekierowanie portów</string>
-    <string name="setting_vpn4">VPN IPv4: %s</string>
-    <string name="setting_vpn6">VPN IPv6: %s</string>
-    <string name="setting_dns">VPN DNS: %s</string>
+
     <string name="setting_validate">Potwierdź w: %s</string>
     <string name="setting_ttl">Minimalny DNS TTL: %s s</string>
     <string name="setting_socks5_enabled">Użyj serwera proxy SOCKS5</string>
@@ -170,10 +168,8 @@
     <string name="msg_terms">Przekazując darowiznę wyrażam zgodę na <a href="http://www.netguard.me/#terms">terms &amp; conditions</a></string>
     <string name="msg_dimming">Jeśli nie możesz nacisnąć OK w następnym oknie, prawdopodobnie inna aplikacja zarządza ekranem (przygaszanie ekranu).</string>
     <string name="msg_mbday">± %1$.3f▲ %2$.3f▼ MB/dzień</string>
-    <string name="msg_kb">%1$7.3f▲ %2$7.3f▼ KB</string>
-    <string name="msg_mb">%1$7.3f▲ %2$7.3f▼ MB</string>
-    <string name="msg_gb">%1$7.3f▲ %2$7.3f▼ GB</string>
-    <string name="msg_count">%dx</string>
+
+
     <string name="msg_doze">Dla spójnych rezultatów, należy wyłączyć optymalizację baterii w systemie Android dla NetGuard. \n\n W następnym oknie dialogowym, wybierz \"Wszystkie aplikacje\" na górze, naciśnij NetGuard na liście i wybierz \"Nie optymalizuj\" potwierdzając przyciskiem \"Gotowe\".</string>
     <string name="msg_datasaving">W celu osiągnięcia lepszych rezultatów, ograniczenie zużycia danych w systemie powinno być wyłączone dla aplikacji NetGuard \n\n |W następnym oknie dialogowym, włącz opcje \"Dane w tle\" i \"Transmisja danych bez ograniczeń\"</string>
     <string name="msg_filter">Użycie filtrowanie spowoduje, że Android przekaże sterowanie użyciem danych do NetGuard - Android będzie używał NetGuard zamiast dedykowanej aplikacji do kontroli danych</string>
@@ -280,9 +276,5 @@
         <item>amber/blue</item>
         <item>orange/grey</item>
         <item>zielony</item>
-    </string-array>
-    <string-array name="protocolNames">
-        <item>UDP</item>
-        <item>TCP</item>
     </string-array>
 </resources>

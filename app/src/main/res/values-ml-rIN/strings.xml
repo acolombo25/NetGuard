@@ -94,9 +94,7 @@
     <string name="setting_block_domains">ഡൊമെയ്ൻ നാമങ്ങൾ തടയുക</string>
     <string name="setting_rcode">DNS പ്രതികരണ കോഡ്: %d</string>
     <string name="setting_forwarding">Port forwarding</string>
-    <string name="setting_vpn4">VPN IPv4: %s</string>
-    <string name="setting_vpn6">VPN IPv6: %s</string>
-    <string name="setting_dns">VPN DNS: %s</string>
+
     <string name="setting_validate">Validate at: %s</string>
     <string name="setting_ttl">Minimum DNS TTL: %s s</string>
     <string name="setting_socks5_enabled">SOCKS5 proxy ഉപയോഗിക്കുക</string>
@@ -150,7 +148,6 @@
     <string name="summary_socks5_enabled">TCP ട്രാഫിക് മാത്രമേ പ്രോക്സി സെർവറിലേക്ക് അയയ്ക്കൂ</string>
     <string name="summary_watchdog">Periodically check if NetGuard is still running (enter zero to disable this option). This might result in extra battery usage.</string>
     <string name="summary_stats">സ്റ്റാറ്റസ് ബാർ അറിയിപ്പിൽ നെറ്റ്‌വർക്ക് സ്പീഡ് ഗ്രാഫ് കാണിക്കുക</string>
-    <string-array name="default_wifi_home"></string-array>
     <string name="msg_sure">നിങ്ങള്ക്ക് ഉറപ്പാണോ?</string>
     <string name="msg_started">നിയമങ്ങൾ നടപ്പിലാക്കുന്നു</string>
     <string name="msg_packages">%1$d അനുവദിച്ചു, %2$d തടഞ്ഞു</string>
@@ -173,12 +170,7 @@ Your internet traffic is not being sent to a remote VPN server.</string>
     <string name="msg_terms">By donating you agree to the <a href="http://www.netguard.me/#terms">terms &amp; conditions</a></string>
     <string name="msg_dimming">If you cannot press OK in the next dialog, another (screen dimming) app is likely manipulating the screen.</string>
     <string name="msg_mbday">± %1$.3f▲ %2$.3f▼ MB/ദിവസം</string>
-    <string name="msg_kbsec">%7.3f KB/s</string>
-    <string name="msg_mbsec">%7.3f MB/s</string>
-    <string name="msg_kb">%1$7.3f▲ %2$7.3f▼ KB</string>
-    <string name="msg_mb">%1$7.3f▲ %2$7.3f▼ MB</string>
-    <string name="msg_gb">%1$7.3f▲ %2$7.3f▼ GB</string>
-    <string name="msg_count">%dx</string>
+
     <string name="msg_doze">For consistent results, the Android battery optimizations should be disabled for NetGuard.
 \n\nIn the next dialog, select \"All apps\" at the top, tap on NetGuard in the list and select and confirm \"Don\'t optimize\".</string>
     <string name="msg_datasaving">For consistent results, the Android data saving options should be disabled for NetGuard
@@ -287,9 +279,5 @@ Your internet traffic is not being sent to a remote VPN server.</string>
         <item>ആമ്പർ/നീല</item>
         <item>ഓറഞ്ച്/ഗ്രേ</item>
         <item>പച്ച</item>
-    </string-array>
-    <string-array name="protocolNames">
-        <item>UDP</item>
-        <item>TCP</item>
     </string-array>
 </resources>
