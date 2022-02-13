@@ -1,5 +1,7 @@
 package eu.faircode.netguard;
 
+import android.util.Log;
+
 import java.util.HashSet;
 import java.util.Set;
 
