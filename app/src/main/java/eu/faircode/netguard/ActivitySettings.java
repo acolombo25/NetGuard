@@ -104,6 +104,8 @@ public class ActivitySettings extends AppCompatActivity implements SharedPrefere
     private static final int REQUEST_HOSTS_APPEND = 4;
     private static final int REQUEST_CALL = 5;
 
+    private static final String ERROR_BAD_ADDRESS = "Bad address";
+
     private AlertDialog dialogFilter = null;
 
     private static final Intent INTENT_VPN_SETTINGS = new Intent("android.net.vpn.SETTINGS");
@@ -712,7 +714,7 @@ public class ActivitySettings extends AppCompatActivity implements SharedPrefere
             String socks5_addr = prefs.getString(name, null);
             try {
                 if (!TextUtils.isEmpty(socks5_addr) && !Util.isNumericAddress(socks5_addr))
-                    throw new IllegalArgumentException("Bad address");
+                    throw new IllegalArgumentException(ERROR_BAD_ADDRESS);
             } catch (Throwable ex) {
                 prefs.edit().remove(name).apply();
                 ((EditTextPreference) getPreferenceScreen().findPreference(name)).setText(null);
@@ -809,13 +811,13 @@ public class ActivitySettings extends AppCompatActivity implements SharedPrefere
         if (address != null)
             address = address.trim();
         if (TextUtils.isEmpty(address))
-            throw new IllegalArgumentException("Bad address");
+            throw new IllegalArgumentException(ERROR_BAD_ADDRESS);
         if (!Util.isNumericAddress(address))
-            throw new IllegalArgumentException("Bad address");
+            throw new IllegalArgumentException(ERROR_BAD_ADDRESS);
         if (!allow_local) {
             InetAddress iaddr = InetAddress.getByName(address);
             if (iaddr.isLoopbackAddress() || iaddr.isAnyLocalAddress())
-                throw new IllegalArgumentException("Bad address");
+                throw new IllegalArgumentException(ERROR_BAD_ADDRESS);
         }
     }
 
@@ -823,11 +825,11 @@ public class ActivitySettings extends AppCompatActivity implements SharedPrefere
         if (address != null)
             address = address.trim();
         if (TextUtils.isEmpty(address))
-            throw new IllegalArgumentException("Bad address");
+            throw new IllegalArgumentException(ERROR_BAD_ADDRESS);
         if (Util.isNumericAddress(address))
-            throw new IllegalArgumentException("Bad address");
+            throw new IllegalArgumentException(ERROR_BAD_ADDRESS);
         if (!PatternsCompat.DOMAIN_NAME.matcher(address).matches())
-            throw new IllegalArgumentException("Bad address");
+            throw new IllegalArgumentException(ERROR_BAD_ADDRESS);
     }
 
     private BroadcastReceiver interactiveStateReceiver = new BroadcastReceiver() {
