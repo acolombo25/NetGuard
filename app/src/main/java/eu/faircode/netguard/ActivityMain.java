@@ -72,6 +72,11 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import java.util.List;
 
+import eu.faircode.netguard.preference.Preferences;
+import eu.faircode.netguard.preference.Sort;
+import eu.faircode.netguard.reason.Reason;
+import eu.faircode.netguard.reason.SimpleReason;
+
 public class ActivityMain extends AppCompatActivity implements SharedPreferences.OnSharedPreferenceChangeListener {
     private static final String TAG = "NetGuard.Main";
 
@@ -137,17 +142,17 @@ public class ActivityMain extends AppCompatActivity implements SharedPreferences
         running = true;
 
         final SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
-        boolean enabled = prefs.getBoolean("enabled", false);
-        boolean initialized = prefs.getBoolean("initialized", false);
+        boolean enabled = prefs.getBoolean(Preferences.ENABLED.getKey(), Preferences.ENABLED.getDefaultValue());
+        boolean initialized = prefs.getBoolean(Preferences.INITIALIZED.getKey(), Preferences.INITIALIZED.getDefaultValue());
 
         // Upgrade
         ReceiverAutostart.upgrade(initialized, this);
 
         if (!getIntent().hasExtra(EXTRA_APPROVE)) {
             if (enabled)
-                ServiceSinkhole.start("UI", this);
+                ServiceSinkhole.start(SimpleReason.UI, this);
             else
-                ServiceSinkhole.stop("UI", this, false);
+                ServiceSinkhole.stop(SimpleReason.UI, this, false);
         }
 
         // Action bar
@@ -190,7 +195,7 @@ public class ActivityMain extends AppCompatActivity implements SharedPreferences
         swEnabled.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 Log.i(TAG, "Switch=" + isChecked);
-                prefs.edit().putBoolean("enabled", isChecked).apply();
+                prefs.edit().putBoolean(Preferences.ENABLED.getKey(), isChecked).apply();
 
                 if (isChecked) {
                     try {
@@ -199,7 +204,7 @@ public class ActivityMain extends AppCompatActivity implements SharedPreferences
                         if (!TextUtils.isEmpty(alwaysOn))
                             if (getPackageName().equals(alwaysOn)) {
                                 if (Build.VERSION.SDK_INT < Build.VERSION_CODES.Q &&
-                                        prefs.getBoolean("filter", false)) {
+                                        prefs.getBoolean(Preferences.FILTER.getKey(), Preferences.FILTER.getDefaultValue())) {
                                     int lockdown = Settings.Secure.getInt(getContentResolver(), "always_on_vpn_lockdown", 0);
                                     Log.i(TAG, "Lockdown=" + lockdown);
                                     if (lockdown != 0) {
@@ -217,7 +222,7 @@ public class ActivityMain extends AppCompatActivity implements SharedPreferences
                         Log.e(TAG, ex.toString() + "\n" + Log.getStackTraceString(ex));
                     }
 
-                    boolean filter = prefs.getBoolean("filter", false);
+                    boolean filter = prefs.getBoolean(Preferences.FILTER.getKey(), Preferences.FILTER.getDefaultValue());
                     if (filter && Util.isPrivateDns(ActivityMain.this))
                         Toast.makeText(ActivityMain.this, R.string.msg_private_dns, Toast.LENGTH_LONG).show();
 
@@ -244,7 +249,7 @@ public class ActivityMain extends AppCompatActivity implements SharedPreferences
                                                 } catch (Throwable ex) {
                                                     Log.e(TAG, ex.toString() + "\n" + Log.getStackTraceString(ex));
                                                     onActivityResult(REQUEST_VPN, RESULT_CANCELED, null);
-                                                    prefs.edit().putBoolean("enabled", false).apply();
+                                                    prefs.edit().putBoolean(Preferences.ENABLED.getKey(), Preferences.ENABLED.getDefaultValue()).apply();
                                                 }
                                             }
                                         }
@@ -261,11 +266,11 @@ public class ActivityMain extends AppCompatActivity implements SharedPreferences
                     } catch (Throwable ex) {
                         // Prepare failed
                         Log.e(TAG, ex.toString() + "\n" + Log.getStackTraceString(ex));
-                        prefs.edit().putBoolean("enabled", false).apply();
+                        prefs.edit().putBoolean(Preferences.ENABLED.getKey(), Preferences.ENABLED.getDefaultValue()).apply();
                     }
 
                 } else
-                    ServiceSinkhole.stop("switch off", ActivityMain.this, false);
+                    ServiceSinkhole.stop(SimpleReason.SwitchOff, ActivityMain.this, false);
             }
         });
         if (enabled)
@@ -313,7 +318,7 @@ public class ActivityMain extends AppCompatActivity implements SharedPreferences
             @Override
             public void onRefresh() {
                 Rule.clearCache(ActivityMain.this);
-                ServiceSinkhole.reload("pull", ActivityMain.this, false);
+                ServiceSinkhole.reload(SimpleReason.Pull, ActivityMain.this, false);
                 updateApplicationList(null);
             }
         });
@@ -321,12 +326,12 @@ public class ActivityMain extends AppCompatActivity implements SharedPreferences
         // Hint usage
         final LinearLayout llUsage = findViewById(R.id.llUsage);
         Button btnUsage = findViewById(R.id.btnUsage);
-        boolean hintUsage = prefs.getBoolean("hint_usage", true);
+        boolean hintUsage = prefs.getBoolean(Preferences.HINT_USAGE.getKey(), Preferences.HINT_USAGE.getDefaultValue());
         llUsage.setVisibility(hintUsage ? View.VISIBLE : View.GONE);
         btnUsage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                prefs.edit().putBoolean("hint_usage", false).apply();
+                prefs.edit().putBoolean(Preferences.HINT_USAGE.getKey(), !Preferences.HINT_USAGE.getDefaultValue()).apply();
                 llUsage.setVisibility(View.GONE);
                 showHints();
             }
@@ -336,12 +341,12 @@ public class ActivityMain extends AppCompatActivity implements SharedPreferences
         TextView tvFairEmail = findViewById(R.id.tvFairEmail);
         tvFairEmail.setMovementMethod(LinkMovementMethod.getInstance());
         Button btnFairEmail = findViewById(R.id.btnFairEmail);
-        boolean hintFairEmail = prefs.getBoolean("hint_fairemail", true);
+        boolean hintFairEmail = prefs.getBoolean(Preferences.HINT_FAIR_EMAIL.getKey(), Preferences.HINT_USAGE.getDefaultValue());
         llFairEmail.setVisibility(hintFairEmail ? View.VISIBLE : View.GONE);
         btnFairEmail.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                prefs.edit().putBoolean("hint_fairemail", false).apply();
+                prefs.edit().putBoolean(Preferences.HINT_FAIR_EMAIL.getKey(), !Preferences.HINT_USAGE.getDefaultValue()).apply();
                 llFairEmail.setVisibility(View.GONE);
             }
         });
@@ -387,7 +392,7 @@ public class ActivityMain extends AppCompatActivity implements SharedPreferences
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
                             if (running) {
-                                prefs.edit().putBoolean("initialized", true).apply();
+                                prefs.edit().putBoolean(Preferences.INITIALIZED.getKey(), !Preferences.INITIALIZED.getDefaultValue()).apply();
                             }
                         }
                     })
@@ -420,15 +425,13 @@ public class ActivityMain extends AppCompatActivity implements SharedPreferences
                         iab.updatePurchases();
 
                         if (!IAB.isPurchased(ActivityPro.SKU_LOG, ActivityMain.this))
-                            prefs.edit().putBoolean("log", false).apply();
-                        if (!IAB.isPurchased(ActivityPro.SKU_THEME, ActivityMain.this)) {
-                            if (!"teal".equals(prefs.getString("theme", "teal")))
-                                prefs.edit().putString("theme", "teal").apply();
-                        }
+                            prefs.edit().putBoolean(Preferences.LOG.getKey(), Preferences.LOG.getDefaultValue()).apply();
+                        if (!IAB.isPurchased(ActivityPro.SKU_THEME, ActivityMain.this))
+                            prefs.edit().putString(Preferences.THEME.getKey(), Preferences.THEME.getDefaultValue().getValue()).apply();
                         if (!IAB.isPurchased(ActivityPro.SKU_NOTIFY, ActivityMain.this))
-                            prefs.edit().putBoolean("install", false).apply();
+                            prefs.edit().putBoolean(Preferences.INSTALL.getKey(), Preferences.INSTALL.getDefaultValue()).apply();
                         if (!IAB.isPurchased(ActivityPro.SKU_SPEED, ActivityMain.this))
-                            prefs.edit().putBoolean("show_stats", false).apply();
+                            prefs.edit().putBoolean(Preferences.SHOW_STATS.getKey(), Preferences.SHOW_STATS.getDefaultValue()).apply();
                     } catch (Throwable ex) {
                         Log.e(TAG, ex.toString() + "\n" + Log.getStackTraceString(ex));
                     } finally {
@@ -577,9 +580,9 @@ public class ActivityMain extends AppCompatActivity implements SharedPreferences
         if (requestCode == REQUEST_VPN) {
             // Handle VPN approval
             SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
-            prefs.edit().putBoolean("enabled", resultCode == RESULT_OK).apply();
+            prefs.edit().putBoolean(Preferences.ENABLED.getKey(), resultCode == RESULT_OK).apply();
             if (resultCode == RESULT_OK) {
-                ServiceSinkhole.start("prepared", this);
+                ServiceSinkhole.start(SimpleReason.Prepared, this);
 
                 Toast on = Toast.makeText(ActivityMain.this, R.string.msg_on, Toast.LENGTH_LONG);
                 on.setGravity(Gravity.CENTER, 0, 0);
@@ -612,13 +615,13 @@ public class ActivityMain extends AppCompatActivity implements SharedPreferences
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         if (requestCode == REQUEST_ROAMING)
             if (grantResults[0] == PackageManager.PERMISSION_GRANTED)
-                ServiceSinkhole.reload("permission granted", this, false);
+                ServiceSinkhole.reload(SimpleReason.PermissionGranted, this, false);
     }
 
     @Override
     public void onSharedPreferenceChanged(SharedPreferences prefs, String name) {
         Log.i(TAG, "Preference " + name + "=" + prefs.getAll().get(name));
-        if ("enabled".equals(name)) {
+        if (Preferences.ENABLED.getKey().equals(name)) {
             // Get enabled
             boolean enabled = prefs.getBoolean(name, false);
 
@@ -631,37 +634,37 @@ public class ActivityMain extends AppCompatActivity implements SharedPreferences
             if (swEnabled.isChecked() != enabled)
                 swEnabled.setChecked(enabled);
 
-        } else if ("whitelist_wifi".equals(name) ||
-                "screen_on".equals(name) ||
-                "screen_wifi".equals(name) ||
-                "whitelist_other".equals(name) ||
-                "screen_other".equals(name) ||
-                "whitelist_roaming".equals(name) ||
-                "show_user".equals(name) ||
-                "show_system".equals(name) ||
-                "show_nointernet".equals(name) ||
-                "show_disabled".equals(name) ||
-                "sort".equals(name) ||
-                "imported".equals(name)) {
+        } else if (Preferences.WHITELIST_WIFI.getKey().equals(name) ||
+                Preferences.SCREEN_ON.getKey().equals(name) ||
+                Preferences.SCREEN_WIFI.getKey().equals(name) ||
+                Preferences.WHITELIST_OTHER.getKey().equals(name) ||
+                Preferences.SCREEN_OTHER.getKey().equals(name) ||
+                Preferences.WHITELIST_ROAMING.getKey().equals(name) ||
+                Preferences.SHOW_USER.getKey().equals(name) ||
+                Preferences.SHOW_SYSTEM.getKey().equals(name) ||
+                Preferences.SHOW_NO_INTERNET.getKey().equals(name) ||
+                Preferences.SHOW_DISABLED.getKey().equals(name) ||
+                Preferences.SORT.getKey().equals(name) ||
+                Preferences.IMPORTED.getKey().equals(name)) {
             updateApplicationList(null);
 
             final LinearLayout llWhitelist = findViewById(R.id.llWhitelist);
-            boolean screen_on = prefs.getBoolean("screen_on", true);
-            boolean whitelist_wifi = prefs.getBoolean("whitelist_wifi", false);
-            boolean whitelist_other = prefs.getBoolean("whitelist_other", false);
-            boolean hintWhitelist = prefs.getBoolean("hint_whitelist", true);
+            boolean screen_on = prefs.getBoolean(Preferences.SCREEN_ON.getKey(), Preferences.SCREEN_ON.getDefaultValue());
+            boolean whitelist_wifi = prefs.getBoolean(Preferences.WHITELIST_WIFI.getKey(), !Preferences.WHITELIST_WIFI.getDefaultValue());
+            boolean whitelist_other = prefs.getBoolean(Preferences.WHITELIST_OTHER.getKey(), !Preferences.WHITELIST_OTHER.getDefaultValue());
+            boolean hintWhitelist = prefs.getBoolean(Preferences.HINT_WHITELIST.getKey(), Preferences.HINT_WHITELIST.getDefaultValue());
             llWhitelist.setVisibility(!(whitelist_wifi || whitelist_other) && screen_on && hintWhitelist ? View.VISIBLE : View.GONE);
 
-        } else if ("manage_system".equals(name)) {
+        } else if (Preferences.MANAGE_SYSTEM.getKey().equals(name)) {
             invalidateOptionsMenu();
             updateApplicationList(null);
 
             LinearLayout llSystem = findViewById(R.id.llSystem);
-            boolean system = prefs.getBoolean("manage_system", false);
-            boolean hint = prefs.getBoolean("hint_system", true);
+            boolean system = prefs.getBoolean(Preferences.MANAGE_SYSTEM.getKey(), Preferences.MANAGE_SYSTEM.getDefaultValue());
+            boolean hint = prefs.getBoolean(Preferences.HINT_SYSTEM.getKey(), Preferences.HINT_SYSTEM.getDefaultValue());
             llSystem.setVisibility(!system && hint ? View.VISIBLE : View.GONE);
 
-        } else if ("theme".equals(name) || "dark_theme".equals(name))
+        } else if (Preferences.THEME.getKey().equals(name) || Preferences.DARK.getKey().equals(name))
             recreate();
     }
 
@@ -802,7 +805,7 @@ public class ActivityMain extends AppCompatActivity implements SharedPreferences
     private void markPro(MenuItem menu, String sku) {
         if (sku == null || !IAB.isPurchased(sku, this)) {
             SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
-            boolean dark = prefs.getBoolean("dark_theme", false);
+            boolean dark = prefs.getBoolean(Preferences.DARK.getKey(), Preferences.DARK.getDefaultValue());
             SpannableStringBuilder ssb = new SpannableStringBuilder("  " + menu.getTitle());
             ssb.setSpan(new ImageSpan(this, dark ? R.drawable.ic_shopping_cart_white_24dp : R.drawable.ic_shopping_cart_black_24dp), 0, 1, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
             menu.setTitle(ssb);
@@ -813,25 +816,25 @@ public class ActivityMain extends AppCompatActivity implements SharedPreferences
     public boolean onPrepareOptionsMenu(Menu menu) {
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
 
-        if (prefs.getBoolean("manage_system", false)) {
-            menu.findItem(R.id.menu_app_user).setChecked(prefs.getBoolean("show_user", true));
-            menu.findItem(R.id.menu_app_system).setChecked(prefs.getBoolean("show_system", false));
+        if (prefs.getBoolean(Preferences.MANAGE_SYSTEM.getKey(), Preferences.MANAGE_SYSTEM.getDefaultValue())) {
+            menu.findItem(R.id.menu_app_user).setChecked(prefs.getBoolean(Preferences.SHOW_USER.getKey(), Preferences.SHOW_USER.getDefaultValue()));
+            menu.findItem(R.id.menu_app_system).setChecked(prefs.getBoolean(Preferences.SHOW_SYSTEM.getKey(), Preferences.SHOW_SYSTEM.getDefaultValue()));
         } else {
             Menu submenu = menu.findItem(R.id.menu_filter).getSubMenu();
             submenu.removeItem(R.id.menu_app_user);
             submenu.removeItem(R.id.menu_app_system);
         }
 
-        menu.findItem(R.id.menu_app_nointernet).setChecked(prefs.getBoolean("show_nointernet", true));
-        menu.findItem(R.id.menu_app_disabled).setChecked(prefs.getBoolean("show_disabled", true));
+        menu.findItem(R.id.menu_app_nointernet).setChecked(prefs.getBoolean(Preferences.SHOW_NO_INTERNET.getKey(), Preferences.SHOW_NO_INTERNET.getDefaultValue()));
+        menu.findItem(R.id.menu_app_disabled).setChecked(prefs.getBoolean(Preferences.SHOW_DISABLED.getKey(), Preferences.SHOW_DISABLED.getDefaultValue()));
 
-        String sort = prefs.getString("sort", "name");
-        if ("uid".equals(sort))
+        String sort = prefs.getString(Preferences.SORT.getKey(), Preferences.SORT.getDefaultValue().getValue());
+        if (Sort.Uid.getValue().equals(sort))
             menu.findItem(R.id.menu_sort_uid).setChecked(true);
-        else
+        else if (Sort.Name.getValue().equals(sort))
             menu.findItem(R.id.menu_sort_name).setChecked(true);
 
-        menu.findItem(R.id.menu_lockdown).setChecked(prefs.getBoolean("lockdown", false));
+        menu.findItem(R.id.menu_lockdown).setChecked(prefs.getBoolean(Preferences.LOCKDOWN.getKey(), Preferences.LOCKDOWN.getDefaultValue()));
 
         return super.onPrepareOptionsMenu(menu);
     }
@@ -845,32 +848,32 @@ public class ActivityMain extends AppCompatActivity implements SharedPreferences
         switch (item.getItemId()) {
             case R.id.menu_app_user:
                 item.setChecked(!item.isChecked());
-                prefs.edit().putBoolean("show_user", item.isChecked()).apply();
+                prefs.edit().putBoolean(Preferences.SHOW_USER.getKey(), item.isChecked()).apply();
                 return true;
 
             case R.id.menu_app_system:
                 item.setChecked(!item.isChecked());
-                prefs.edit().putBoolean("show_system", item.isChecked()).apply();
+                prefs.edit().putBoolean(Preferences.SHOW_SYSTEM.getKey(), item.isChecked()).apply();
                 return true;
 
             case R.id.menu_app_nointernet:
                 item.setChecked(!item.isChecked());
-                prefs.edit().putBoolean("show_nointernet", item.isChecked()).apply();
+                prefs.edit().putBoolean(Preferences.SHOW_NO_INTERNET.getKey(), item.isChecked()).apply();
                 return true;
 
             case R.id.menu_app_disabled:
                 item.setChecked(!item.isChecked());
-                prefs.edit().putBoolean("show_disabled", item.isChecked()).apply();
+                prefs.edit().putBoolean(Preferences.SHOW_DISABLED.getKey(), item.isChecked()).apply();
                 return true;
 
             case R.id.menu_sort_name:
                 item.setChecked(true);
-                prefs.edit().putString("sort", "name").apply();
+                prefs.edit().putString(Preferences.SORT.getKey(), Sort.Name.getValue()).apply();
                 return true;
 
             case R.id.menu_sort_uid:
                 item.setChecked(true);
-                prefs.edit().putString("sort", "uid").apply();
+                prefs.edit().putString(Preferences.SORT.getKey(), Sort.Uid.getValue()).apply();
                 return true;
 
             case R.id.menu_lockdown:
@@ -922,19 +925,19 @@ public class ActivityMain extends AppCompatActivity implements SharedPreferences
 
     private void showHints() {
         final SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
-        boolean hintUsage = prefs.getBoolean("hint_usage", true);
+        boolean hintUsage = prefs.getBoolean(Preferences.HINT_USAGE.getKey(), Preferences.HINT_USAGE.getDefaultValue());
 
         // Hint white listing
         final LinearLayout llWhitelist = findViewById(R.id.llWhitelist);
         Button btnWhitelist = findViewById(R.id.btnWhitelist);
-        boolean whitelist_wifi = prefs.getBoolean("whitelist_wifi", false);
-        boolean whitelist_other = prefs.getBoolean("whitelist_other", false);
-        boolean hintWhitelist = prefs.getBoolean("hint_whitelist", true);
+        boolean whitelist_wifi = prefs.getBoolean(Preferences.WHITELIST_WIFI.getKey(), Preferences.WHITELIST_WIFI.getDefaultValue());
+        boolean whitelist_other = prefs.getBoolean(Preferences.WHITELIST_OTHER.getKey(), Preferences.WHITELIST_OTHER.getDefaultValue());
+        boolean hintWhitelist = prefs.getBoolean(Preferences.HINT_WHITELIST.getKey(), Preferences.HINT_WHITELIST.getDefaultValue());
         llWhitelist.setVisibility(!(whitelist_wifi || whitelist_other) && hintWhitelist && !hintUsage ? View.VISIBLE : View.GONE);
         btnWhitelist.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                prefs.edit().putBoolean("hint_whitelist", false).apply();
+                prefs.edit().putBoolean(Preferences.HINT_WHITELIST.getKey(), !Preferences.HINT_WHITELIST.getDefaultValue()).apply();
                 llWhitelist.setVisibility(View.GONE);
             }
         });
@@ -942,12 +945,12 @@ public class ActivityMain extends AppCompatActivity implements SharedPreferences
         // Hint push messages
         final LinearLayout llPush = findViewById(R.id.llPush);
         Button btnPush = findViewById(R.id.btnPush);
-        boolean hintPush = prefs.getBoolean("hint_push", true);
+        boolean hintPush = prefs.getBoolean(Preferences.HINT_PUSH.getKey(), Preferences.HINT_PUSH.getDefaultValue());
         llPush.setVisibility(hintPush && !hintUsage ? View.VISIBLE : View.GONE);
         btnPush.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                prefs.edit().putBoolean("hint_push", false).apply();
+                prefs.edit().putBoolean(Preferences.HINT_PUSH.getKey(), !Preferences.HINT_PUSH.getDefaultValue()).apply();
                 llPush.setVisibility(View.GONE);
             }
         });
@@ -955,13 +958,13 @@ public class ActivityMain extends AppCompatActivity implements SharedPreferences
         // Hint system applications
         final LinearLayout llSystem = findViewById(R.id.llSystem);
         Button btnSystem = findViewById(R.id.btnSystem);
-        boolean system = prefs.getBoolean("manage_system", false);
-        boolean hintSystem = prefs.getBoolean("hint_system", true);
+        boolean system = prefs.getBoolean(Preferences.MANAGE_SYSTEM.getKey(), Preferences.MANAGE_SYSTEM.getDefaultValue());
+        boolean hintSystem = prefs.getBoolean(Preferences.HINT_SYSTEM.getKey(), Preferences.HINT_SYSTEM.getDefaultValue());
         llSystem.setVisibility(!system && hintSystem ? View.VISIBLE : View.GONE);
         btnSystem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                prefs.edit().putBoolean("hint_system", false).apply();
+                prefs.edit().putBoolean(Preferences.HINT_SYSTEM.getKey(), !Preferences.HINT_SYSTEM.getDefaultValue()).apply();
                 llSystem.setVisibility(View.GONE);
             }
         });
@@ -1039,7 +1042,7 @@ public class ActivityMain extends AppCompatActivity implements SharedPreferences
             final Intent doze = new Intent(Settings.ACTION_IGNORE_BATTERY_OPTIMIZATION_SETTINGS);
             if (Util.batteryOptimizing(this) && getPackageManager().resolveActivity(doze, 0) != null) {
                 final SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
-                if (!prefs.getBoolean("nodoze", false)) {
+                if (!prefs.getBoolean(Preferences.NO_DOZE.getKey(), Preferences.NO_DOZE.getDefaultValue())) {
                     LayoutInflater inflater = LayoutInflater.from(this);
                     View view = inflater.inflate(R.layout.doze, null, false);
                     final CheckBox cbDontAsk = view.findViewById(R.id.cbDontAsk);
@@ -1049,14 +1052,14 @@ public class ActivityMain extends AppCompatActivity implements SharedPreferences
                             .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialog, int which) {
-                                    prefs.edit().putBoolean("nodoze", cbDontAsk.isChecked()).apply();
+                                    prefs.edit().putBoolean(Preferences.NO_DOZE.getKey(), cbDontAsk.isChecked()).apply();
                                     startActivity(doze);
                                 }
                             })
                             .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialog, int which) {
-                                    prefs.edit().putBoolean("nodoze", cbDontAsk.isChecked()).apply();
+                                    prefs.edit().putBoolean(Preferences.NO_DOZE.getKey(), cbDontAsk.isChecked()).apply();
                                 }
                             })
                             .setOnDismissListener(new DialogInterface.OnDismissListener() {
@@ -1083,7 +1086,7 @@ public class ActivityMain extends AppCompatActivity implements SharedPreferences
             if (Util.dataSaving(this) && getPackageManager().resolveActivity(settings, 0) != null)
                 try {
                     final SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
-                    if (!prefs.getBoolean("nodata", false)) {
+                    if (!prefs.getBoolean(Preferences.NO_DATA.getKey(), Preferences.NO_DATA.getDefaultValue())) {
                         LayoutInflater inflater = LayoutInflater.from(this);
                         View view = inflater.inflate(R.layout.datasaving, null, false);
                         final CheckBox cbDontAsk = view.findViewById(R.id.cbDontAsk);
@@ -1093,14 +1096,14 @@ public class ActivityMain extends AppCompatActivity implements SharedPreferences
                                 .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                                     @Override
                                     public void onClick(DialogInterface dialog, int which) {
-                                        prefs.edit().putBoolean("nodata", cbDontAsk.isChecked()).apply();
+                                        prefs.edit().putBoolean(Preferences.NO_DATA.getKey(), cbDontAsk.isChecked()).apply();
                                         startActivity(settings);
                                     }
                                 })
                                 .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
                                     @Override
                                     public void onClick(DialogInterface dialog, int which) {
-                                        prefs.edit().putBoolean("nodata", cbDontAsk.isChecked()).apply();
+                                        prefs.edit().putBoolean(Preferences.NO_DATA.getKey(), cbDontAsk.isChecked()).apply();
                                     }
                                 })
                                 .setOnDismissListener(new DialogInterface.OnDismissListener() {
@@ -1174,8 +1177,8 @@ public class ActivityMain extends AppCompatActivity implements SharedPreferences
     private void menu_lockdown(MenuItem item) {
         item.setChecked(!item.isChecked());
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
-        prefs.edit().putBoolean("lockdown", item.isChecked()).apply();
-        ServiceSinkhole.reload("lockdown", this, false);
+        prefs.edit().putBoolean(Preferences.LOCKDOWN.getKey(), item.isChecked()).apply();
+        ServiceSinkhole.reload(SimpleReason.Lockdown, this, false);
         WidgetLockdown.updateWidgets(this);
     }
 
@@ -1203,11 +1206,12 @@ public class ActivityMain extends AppCompatActivity implements SharedPreferences
         view.setOnClickListener(new View.OnClickListener() {
             private short tap = 0;
             private Toast toast = Toast.makeText(ActivityMain.this, "", Toast.LENGTH_SHORT);
+            private static final int TAPS_NEEDED = 7;
 
             @Override
             public void onClick(View view) {
                 tap++;
-                if (tap == 7) {
+                if (tap == TAPS_NEEDED) {
                     tap = 0;
                     toast.cancel();
 
@@ -1215,8 +1219,8 @@ public class ActivityMain extends AppCompatActivity implements SharedPreferences
                     if (intent.resolveActivity(getPackageManager()) != null)
                         startActivityForResult(intent, REQUEST_LOGCAT);
 
-                } else if (tap > 3) {
-                    toast.setText(Integer.toString(7 - tap));
+                } else if (tap > TAPS_NEEDED/2) {
+                    toast.setText(Integer.toString(TAPS_NEEDED - tap));
                     toast.show();
                 }
             }

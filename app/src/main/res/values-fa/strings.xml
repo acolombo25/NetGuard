@@ -60,8 +60,8 @@
     <string name="setting_dark">استفاده از پوسته تیره</string>
     <string name="setting_install">آگاه‌سازی هنگام نصب جدید</string>
     <string name="setting_screen_on">اعمال قوانین هنگام روشن بودن صفحه</string>
-    <string name="setting_auto">فعال‌سازی خودکار بعد از %1$s دقیقه</string>
-    <string name="setting_delay">تأخیر در خاموش کردن صفحه %1$s دقیقه</string>
+    <string name="setting_auto">فعال‌سازی خودکار بعد از %1$d دقیقه</string>
+    <string name="setting_delay">تأخیر در خاموش کردن صفحه %1$d دقیقه</string>
     <string name="setting_update">بررسی برای بروز‌رسانی‌ها</string>
     <string name="setting_network_options">گزینه‌های شبکه</string>
     <string name="setting_subnet">مسیریابی زیرشبکه</string>
@@ -92,26 +92,23 @@
     <string name="setting_reset_usage">بازنشانی مصرف شبکه</string>
     <string name="setting_show_resolved">نمایش نام‌های دامنه پیدا شده</string>
     <string name="setting_block_domains">نام‌های دامنه را مسدود کن</string>
-    <string name="setting_rcode">کد واکنش DNS: %s</string>
+    <string name="setting_rcode">کد واکنش DNS: %d</string>
     <string name="setting_forwarding">هدایت درگاه</string>
-    <string name="setting_vpn4">VPN IPv4: %s</string>
-    <string name="setting_vpn6">VPN IPv6: %s</string>
-    <string name="setting_dns">VPN DNS: %s</string>
     <string name="setting_validate">تایید اعتبار در: %s</string>
-    <string name="setting_ttl">Minimum DNS TTL: %s s</string>
+    <string name="setting_ttl">Minimum DNS TTL: %d s</string>
     <string name="setting_socks5_enabled">استفاده از پروکسی SOCKS5</string>
     <string name="setting_socks5_addr">نشانی SOCKS5: %s</string>
     <string name="setting_socks5_port">درگاه SOCKS5: %s</string>
     <string name="setting_socks5_username">نام‌کاربری SOCKS5: %s</string>
     <string name="setting_socks5_password">گذرواژه SOCKS5: %s</string>
-    <string name="setting_pcap_record_size">PCAP record size: %s B</string>
-    <string name="setting_pcap_file_size">PCAP max. file size: %s MB</string>
-    <string name="setting_watchdog">Watchdog: هر %s دقیقه</string>
+    <string name="setting_pcap_record_size">PCAP record size: %d B</string>
+    <string name="setting_pcap_file_size">PCAP max. file size: %d MB</string>
+    <string name="setting_watchdog">Watchdog: هر %d دقیقه</string>
     <string name="setting_stats_category">اعلان سرعت</string>
     <string name="setting_stats">نمایش اعلان سرعت</string>
     <string name="setting_stats_top">نمایش برنامه‌های برتر</string>
-    <string name="setting_stats_frequency">وقفه‌ نمونه: %s ms</string>
-    <string name="setting_stats_samples">شمار نمونه‌ها: %s s</string>
+    <string name="setting_stats_frequency">وقفه‌ نمونه: %d ms</string>
+    <string name="setting_stats_samples">شمار نمونه‌ها: %d s</string>
     <string name="setting_backup">پشتیبان‌گیری</string>
     <string name="setting_export">خارج‌کردن تنظیمات</string>
     <string name="setting_import">واردکردن تنظیمات</string>
@@ -150,7 +147,6 @@
     <string name="summary_socks5_enabled">تنها ترافیک TCP به سرور پروکسی فرستاده خواهد شد</string>
     <string name="summary_watchdog">Periodically check if NetGuard is still running (enter zero to disable this option). This might result in extra battery usage.</string>
     <string name="summary_stats">نمودار سرعت شبکه را در اعلان نوار وضعیت نشان بده</string>
-    <string-array name="default_wifi_home"></string-array>
     <string name="msg_sure">آیا مطمئن هستید؟</string>
     <string name="msg_started">در حال اجرای قوانین</string>
     <string name="msg_packages">%1$d مجازشد، %2$d مسدود شد</string>
@@ -173,12 +169,9 @@
     <string name="msg_terms">با اهداء شما با <a href="http://www.netguard.me/#terms"> شرایط و مقررات &amp; موافقت می‌کنید</a></string>
     <string name="msg_dimming">اگر در گفتگوی بعدی نمی‌توانید OK را فشار دهید ، احتمالاً برنامه دیگری (کم رنگ کننده صفحه) صفحه را دستکاری می‌کند.</string>
     <string name="msg_mbday">± %1$.3f▲ %2$.3f▼مگابایت/روز</string>
-    <string name="msg_kbsec">%7.3f KB/s</string>
-    <string name="msg_mbsec">%7.3f MB/s</string>
     <string name="msg_kb">%1$7.3f▲ %2$7.3f▼کیلوبایت</string>
     <string name="msg_mb">%1$7.3f▲ %2$7.3f▼مگابایت</string>
     <string name="msg_gb">%1$7.3f▲ %2$7.3f▼ گیگابایت</string>
-    <string name="msg_count">%dx</string>
     <string name="msg_doze">برای عملکرد درست ، بهینه سازی باتری اندروید باید برای NetGuard غیرفعال شود.
 \n\n در گفتگوی بعدی ، \"همه برنامه ها\" را در بالا انتخاب کنید ، روی NetGuard در لیست ضربه بزنید و \"بهینه سازی نکنید\" را انتخاب و تأیید کنید.</string>
     <string name="msg_datasaving">برای نتایج مداوم ، گزینه های ذخیره داده اندرویدی باید برای NetGuard غیرفعال شود
@@ -287,9 +280,5 @@
         <item>کهربایی/آبی</item>
         <item>نارنجی/خاکستری</item>
         <item>سبز</item>
-    </string-array>
-    <string-array name="protocolNames">
-        <item>UDP</item>
-        <item>TCP</item>
     </string-array>
 </resources>

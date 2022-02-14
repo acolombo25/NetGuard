@@ -60,8 +60,8 @@
     <string name="setting_dark">使用深色主题</string>
     <string name="setting_install">安装新应用时通知我</string>
     <string name="setting_screen_on">使用亮屏时的规则</string>
-    <string name="setting_auto">%1$s分钟后自动启用</string>
-    <string name="setting_delay">推迟%1$s分钟关屏</string>
+    <string name="setting_auto">%1$d分钟后自动启用</string>
+    <string name="setting_delay">推迟%1$d分钟关屏</string>
     <string name="setting_update">检查更新</string>
     <string name="setting_network_options">网络选项</string>
     <string name="setting_subnet">子网路由</string>
@@ -92,26 +92,26 @@
     <string name="setting_reset_usage">清空网络使用记录</string>
     <string name="setting_show_resolved">显示已解析的主机名称</string>
     <string name="setting_block_domains">屏蔽域名</string>
-    <string name="setting_rcode">DNS回应码：%s</string>
+    <string name="setting_rcode">DNS回应码：%d</string>
     <string name="setting_forwarding">端口转发</string>
     <string name="setting_vpn4">VPN IPv4：%s</string>
     <string name="setting_vpn6">VPN IPv6：%s</string>
     <string name="setting_dns">VPN DNS：%s</string>
     <string name="setting_validate">验证地址：%s</string>
-    <string name="setting_ttl">最短DNS TTL：%s秒</string>
+    <string name="setting_ttl">最短DNS TTL：%d秒</string>
     <string name="setting_socks5_enabled">使用SOCKS5代理</string>
     <string name="setting_socks5_addr">SOCKS5地址：%s</string>
     <string name="setting_socks5_port">SOCKS5端口：%s</string>
     <string name="setting_socks5_username">SOCKS5用户名：%s</string>
     <string name="setting_socks5_password">SOCKS5密码：%s</string>
-    <string name="setting_pcap_record_size">PCAP记录大小：%s B</string>
-    <string name="setting_pcap_file_size">PCAP最大文件大小：%s MB</string>
-    <string name="setting_watchdog">监控：每%s分钟</string>
+    <string name="setting_pcap_record_size">PCAP记录大小：%d B</string>
+    <string name="setting_pcap_file_size">PCAP最大文件大小：%d MB</string>
+    <string name="setting_watchdog">监控：每%d分钟</string>
     <string name="setting_stats_category">网速通知</string>
     <string name="setting_stats">显示网速通知</string>
     <string name="setting_stats_top">显示最高流量的应用</string>
-    <string name="setting_stats_frequency">采样频率：%s ms</string>
-    <string name="setting_stats_samples">样本数：%s s</string>
+    <string name="setting_stats_frequency">采样频率：%d ms</string>
+    <string name="setting_stats_samples">样本数：%d s</string>
     <string name="setting_backup">备份</string>
     <string name="setting_export">导出设置</string>
     <string name="setting_import">导入设置</string>
@@ -172,10 +172,6 @@
     <string name="msg_terms">捐赠即表明您同意相关<a href="http://www.netguard.me/#terms">条款细则</a></string>
     <string name="msg_dimming">如果您在下一个对话框中不能点击确定，另一个应用可能在控制屏幕（如屏幕亮度调节的软件）。</string>
     <string name="msg_mbday">每天 ± %1$.3f▲ %2$.3f▼ MB</string>
-    <string name="msg_kb">%1$7.3f▲ %2$7.3f▼ KB</string>
-    <string name="msg_mb">%1$7.3f▲ %2$7.3f▼ MB</string>
-    <string name="msg_gb">%1$7.3f▲ %2$7.3f▼ GB</string>
-    <string name="msg_count">%dx</string>
     <string name="msg_doze">NetGuard若要正常运作，Android的电池优化功能应豁免NetGuard。
 \n\n请在下一步选择上方的“所有应用”，从列表中点击NetGuard，并选择“不要优化”。</string>
     <string name="msg_datasaving">NetGuard若要正常运作，Android的流量控制功能应豁免NetGuard。
@@ -284,9 +280,5 @@
         <item>琥珀及蓝色</item>
         <item>橙色及灰色</item>
         <item>绿色</item>
-    </string-array>
-    <string-array name="protocolNames">
-        <item>UDP</item>
-        <item>TCP</item>
     </string-array>
 </resources>

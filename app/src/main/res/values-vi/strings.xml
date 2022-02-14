@@ -60,8 +60,8 @@
     <string name="setting_dark">Sử dụng chủ đề tối</string>
     <string name="setting_install">Thông báo khi có ứng dụng mới</string>
     <string name="setting_screen_on">Áp dụng quy tắc (khi bật màn hình)</string>
-    <string name="setting_auto">Tự động kích hoạt sau %1$s phút</string>
-    <string name="setting_delay">Trì hoãn màn hình tắt %1$s phút</string>
+    <string name="setting_auto">Tự động kích hoạt sau %1$d phút</string>
+    <string name="setting_delay">Trì hoãn màn hình tắt %1$d phút</string>
     <string name="setting_update">Kiểm tra cập Nhật</string>
     <string name="setting_network_options">Tùy chọn mạng</string>
     <string name="setting_subnet">Định tuyến mạng con</string>
@@ -92,26 +92,24 @@
     <string name="setting_reset_usage">Đặt lại sử dụng mạng</string>
     <string name="setting_show_resolved">Hiển thị tên miền giải quyết</string>
     <string name="setting_block_domains">Chặn tên miền</string>
-    <string name="setting_rcode">Mã phản hồi DNS: %s</string>
+    <string name="setting_rcode">Mã phản hồi DNS: %d</string>
     <string name="setting_forwarding">Cổng chuyển tiếp</string>
-    <string name="setting_vpn4">VPN IPv4: %s</string>
-    <string name="setting_vpn6">VPN IPv6: %s</string>
-    <string name="setting_dns">VPN DNS: %s</string>
+
     <string name="setting_validate">Xác thực tại: %s</string>
-    <string name="setting_ttl">Tối thiểu DNS TTL: %s s</string>
+    <string name="setting_ttl">Tối thiểu DNS TTL: %d s</string>
     <string name="setting_socks5_enabled">Dùng Socks5 proxy</string>
     <string name="setting_socks5_addr">Địa chỉ (Socks5): %s</string>
     <string name="setting_socks5_port">Cổng (Socks5):%s</string>
     <string name="setting_socks5_username">Username: %s</string>
     <string name="setting_socks5_password">Password: %s</string>
-    <string name="setting_pcap_record_size">Kích thước ghi PCAP: %s B</string>
-    <string name="setting_pcap_file_size">Kích thước tập tin PCAP lớn nhất: %s MB</string>
-    <string name="setting_watchdog">Thời gian giám sát: mỗi %s phút</string>
+    <string name="setting_pcap_record_size">Kích thước ghi PCAP: %d B</string>
+    <string name="setting_pcap_file_size">Kích thước tập tin PCAP lớn nhất: %d MB</string>
+    <string name="setting_watchdog">Thời gian giám sát: mỗi %d phút</string>
     <string name="setting_stats_category">Hiển thị thông báo tốc độ</string>
     <string name="setting_stats">Hiển thị thông báo tốc độ</string>
     <string name="setting_stats_top">Hiển thị các ứng dụng hàng đầu</string>
-    <string name="setting_stats_frequency">Khoảng thời gian mẫu: %s ms</string>
-    <string name="setting_stats_samples">Số mẫu: %s s</string>
+    <string name="setting_stats_frequency">Khoảng thời gian mẫu: %d ms</string>
+    <string name="setting_stats_samples">Số mẫu: %d s</string>
     <string name="setting_backup">Sao lưu</string>
     <string name="setting_export">Xuất cài đặt</string>
     <string name="setting_import">Nhập cài đặt</string>
@@ -170,10 +168,6 @@
     <string name="msg_terms">Bằng cách tặng, bạn đồng ý với các <a href="http://www.netguard.me/#terms"> điều khoản &amp; điều kiện</a></string>
     <string name="msg_dimming">Nếu bạn không thể nhấn OK trong hộp thoại kế tiếp, rất có thể một ứng dụng khác (màn hình mờ) đang thao tác với màn hình.</string>
     <string name="msg_mbday">± %1$.3f▲ %2$.3f▼ MB/ngày</string>
-    <string name="msg_kb">%1$7.3f▲ %2$7.3f▼ KB</string>
-    <string name="msg_mb">%1$7.3f▲ %2$7.3f▼ MB</string>
-    <string name="msg_gb">%1$7.3f▲ %2$7.3f▼ GB</string>
-    <string name="msg_count">%dx</string>
     <string name="msg_doze">Để có kết quả phù hợp, tối ưu hóa pin Android nên bị vô hiệu hóa cho NetGuard. \n\nTrong hộp thoại kế tiếp, chọn \"Tất cả ứng dụng\" ở phía trên cùng, bấm vào NetGuard trong danh sách và chọn và xác nhận \"Don\'t optimize\".</string>
     <string name="msg_datasaving">Để có kết quả phù hợp, tùy chọn tiết kiệm dữ liệu Android nên được vô hiệu hóa cho NetGuard \n\nTrong trong hộp thoại kế tiếp, cho phép tùy chọn \"Background data\" và \"Unrestricted data usage\"</string>
     <string name="msg_filter">Sử dụng bộ lọc sẽ làm cho Android hiểu lầm NetGuard sử dụng dữ liệu và năng lượng - Android giả định dữ liệu và năng lượng đang được sử dụng bởi NetGuard, chứ không phải là các ứng dụng ban đầu</string>
@@ -223,7 +217,7 @@
     <string name="title_conditions">Điều kiện</string>
     <string name="title_screen_wifi">Cho phép Wi-Fi khi màn hình bật</string>
     <string name="title_screen_other">Cho phép mạng di động khi màn hình bật</string>
-    <string name="title_roaming_symbol">R</string>
+
     <string name="title_roaming">Chặn khi chuyển vùng</string>
     <string name="title_lockdown">Cho phép ở chế độ khóa</string>
     <string name="title_related">Lọc liên quan</string>
@@ -280,9 +274,5 @@
         <item>hổ phách/xanh dương</item>
         <item>cam/xám</item>
         <item>xanh lá cây</item>
-    </string-array>
-    <string-array name="protocolNames">
-        <item>UDP</item>
-        <item>TCP</item>
     </string-array>
 </resources>

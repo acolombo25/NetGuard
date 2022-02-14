@@ -60,8 +60,8 @@
     <string name="setting_dark">ダークテーマを使用</string>
     <string name="setting_install">アプリインストール時に通知</string>
     <string name="setting_screen_on">‘“画面が点灯中” ルール’ を使用</string>
-    <string name="setting_auto">%1$s 分後に自動的に有効にする</string>
-    <string name="setting_delay">%1$s 分、画面消灯を遅延</string>
+    <string name="setting_auto">%1$d 分後に自動的に有効にする</string>
+    <string name="setting_delay">%1$d 分、画面消灯を遅延</string>
     <string name="setting_update">アップデートの確認</string>
     <string name="setting_network_options">ネットワークオプション</string>
     <string name="setting_subnet">サブネットのルーティング</string>
@@ -92,26 +92,23 @@
     <string name="setting_reset_usage">ネットワークの使用状況をリセット</string>
     <string name="setting_show_resolved">解決済みのドメイン名を表示</string>
     <string name="setting_block_domains">ドメイン名をブロック</string>
-    <string name="setting_rcode">DNS 応答コード: %s</string>
+    <string name="setting_rcode">DNS 応答コード: %d</string>
     <string name="setting_forwarding">ポート転送</string>
-    <string name="setting_vpn4">VPN IPv4: %s</string>
-    <string name="setting_vpn6">VPN IPv6: %s</string>
-    <string name="setting_dns">VPN DNS: %s</string>
     <string name="setting_validate">検証: %s</string>
-    <string name="setting_ttl">最小 DNS TTL: %s 秒</string>
+    <string name="setting_ttl">最小 DNS TTL: %d 秒</string>
     <string name="setting_socks5_enabled">SOCKS5 プロキシを使用</string>
     <string name="setting_socks5_addr">SOCKS5 アドレス: %s</string>
     <string name="setting_socks5_port">SOCKS5 ポート: %s</string>
     <string name="setting_socks5_username">SOCKS5 ユーザー名: %s</string>
     <string name="setting_socks5_password">SOCKS5 パスワード: %s</string>
-    <string name="setting_pcap_record_size">PCAP レコードサイズ: %s B</string>
-    <string name="setting_pcap_file_size">PCAP 最大ファイルサイズ: %s MB</string>
-    <string name="setting_watchdog">監視タイマー: %s 分毎</string>
+    <string name="setting_pcap_record_size">PCAP レコードサイズ: %d B</string>
+    <string name="setting_pcap_file_size">PCAP 最大ファイルサイズ: %d MB</string>
+    <string name="setting_watchdog">監視タイマー: %d 分毎</string>
     <string name="setting_stats_category">速度通知</string>
     <string name="setting_stats">通信速度を通知で表示</string>
     <string name="setting_stats_top">上位アプリを表示</string>
-    <string name="setting_stats_frequency">サンプリング間隔: %s ミリ秒</string>
-    <string name="setting_stats_samples">サンプル数: %s s</string>
+    <string name="setting_stats_frequency">サンプリング間隔: %d ミリ秒</string>
+    <string name="setting_stats_samples">サンプル数: %d s</string>
     <string name="setting_backup">バックアップ</string>
     <string name="setting_export">設定をエクスポート</string>
     <string name="setting_import">設定をインポート</string>
@@ -170,10 +167,8 @@
     <string name="msg_terms">寄付によって <a href="http://www.netguard.me/#terms">利用規約</a> に同意します</string>
     <string name="msg_dimming">次のダイアログボックスで OK を押すことができない場合、別の (画面調光) アプリが画面を操作している可能性があります。</string>
     <string name="msg_mbday">± %1$.3f▲ %2$.3f▼ MB/日</string>
-    <string name="msg_kb">%1$7.3f▲ %2$7.3f▼ KB</string>
-    <string name="msg_mb">%1$7.3f▲ %2$7.3f▼ MB</string>
-    <string name="msg_gb">%1$7.3f▲ %2$7.3f▼ GB</string>
-    <string name="msg_count">%dx</string>
+
+
     <string name="msg_doze">一貫性のある結果のため、NetGuard は Android のバッテリー最適化を無効にする必要があります。\n\nIn 次のダイアログで、上部の「すべてのアプリ」を選択し、リストで NetGuard をタップし、「最適化しない」を選択および確認してください。</string>
     <string name="msg_datasaving">一貫性のある結果を得るために、NetGuard は Android のデータの保存オプションを無効にする必要があります\n\n次のダイアログで、オプション「バック グラウンド データ」と「無制限のデータ使用」を有効にしてください。</string>
     <string name="msg_filter">フィルターを使用すると、Android はデータと電力を、元のアプリではなく、NetGuard が使用しているものとみなします。</string>
@@ -223,7 +218,6 @@
     <string name="title_conditions">条件</string>
     <string name="title_screen_wifi">画面が点灯中は Wi-Fi 通信を許可</string>
     <string name="title_screen_other">画面が点灯中はモバイル通信を許可</string>
-    <string name="title_roaming_symbol">R</string>
     <string name="title_roaming">ローミング時にブロック</string>
     <string name="title_lockdown">封鎖中でも通信を許可</string>
     <string name="title_related">フィルター関連</string>
@@ -279,9 +273,5 @@ Playストアアプリの定期購入タブから、定期購入をキャンセ�
         <item>アンバー/ブルー</item>
         <item>オレンジ/グレー</item>
         <item>グリーン</item>
-    </string-array>
-    <string-array name="protocolNames">
-        <item>UDP</item>
-        <item>TCP</item>
     </string-array>
 </resources>

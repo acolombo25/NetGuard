@@ -58,6 +58,11 @@ import java.net.UnknownHostException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import eu.faircode.netguard.database.Column;
+import eu.faircode.netguard.preference.Preferences;
+import eu.faircode.netguard.reason.Changed;
+import eu.faircode.netguard.reason.SimpleReason;
+
 public class ActivityLog extends AppCompatActivity implements SharedPreferences.OnSharedPreferenceChangeListener {
     private static final String TAG = "NetGuard.Log";
 
@@ -110,9 +115,9 @@ public class ActivityLog extends AppCompatActivity implements SharedPreferences.
 
         // Get settings
         final SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
-        resolve = prefs.getBoolean("resolve", false);
-        organization = prefs.getBoolean("organization", false);
-        boolean log = prefs.getBoolean("log", false);
+        resolve = prefs.getBoolean(Preferences.RESOLVE.getKey(), Preferences.RESOLVE.getDefaultValue());
+        organization = prefs.getBoolean(Preferences.ORGANIZATION.getKey(), Preferences.ORGANIZATION.getDefaultValue());
+        boolean log = prefs.getBoolean(Preferences.LOG.getKey(), Preferences.LOG.getDefaultValue());
 
         // Show disabled message
         TextView tvDisabled = findViewById(R.id.tvDisabled);
@@ -122,7 +127,7 @@ public class ActivityLog extends AppCompatActivity implements SharedPreferences.
         swEnabled.setChecked(log);
         swEnabled.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                prefs.edit().putBoolean("log", isChecked).apply();
+                prefs.edit().putBoolean(Preferences.LOG.getKey(), isChecked).apply();
             }
         });
 
@@ -131,11 +136,11 @@ public class ActivityLog extends AppCompatActivity implements SharedPreferences.
 
         lvLog = findViewById(R.id.lvLog);
 
-        boolean udp = prefs.getBoolean("proto_udp", true);
-        boolean tcp = prefs.getBoolean("proto_tcp", true);
-        boolean other = prefs.getBoolean("proto_other", true);
-        boolean allowed = prefs.getBoolean("traffic_allowed", true);
-        boolean blocked = prefs.getBoolean("traffic_blocked", true);
+        boolean udp = prefs.getBoolean(Preferences.PROTO_UDP.getKey(), Preferences.PROTO_UDP.getDefaultValue());
+        boolean tcp = prefs.getBoolean(Preferences.PROTO_TCP.getKey(), Preferences.PROTO_TCP.getDefaultValue());
+        boolean other = prefs.getBoolean(Preferences.PROTO_OTHER.getKey(), Preferences.PROTO_OTHER.getDefaultValue());
+        boolean allowed = prefs.getBoolean(Preferences.TRAFFIC_ALLOWED.getKey(), Preferences.TRAFFIC_ALLOWED.getDefaultValue());
+        boolean blocked = prefs.getBoolean(Preferences.TRAFFIC_BLOCKED.getKey(), Preferences.TRAFFIC_BLOCKED.getDefaultValue());
 
         adapter = new AdapterLog(this, DatabaseHelper.getInstance(this).getLog(udp, tcp, other, allowed, blocked), resolve, organization);
         adapter.setFilterQueryProvider(new FilterQueryProvider() {
@@ -147,8 +152,8 @@ public class ActivityLog extends AppCompatActivity implements SharedPreferences.
         lvLog.setAdapter(adapter);
 
         try {
-            vpn4 = InetAddress.getByName(prefs.getString("vpn4", "10.1.10.1"));
-            vpn6 = InetAddress.getByName(prefs.getString("vpn6", "fd00:1:fd00:1:fd00:1:fd00:1"));
+            vpn4 = InetAddress.getByName(prefs.getString(Preferences.VPN4.getKey(), Preferences.VPN4.getDefaultValue()));
+            vpn6 = InetAddress.getByName(prefs.getString(Preferences.VPN6.getKey(), Preferences.VPN6.getDefaultValue()));
         } catch (UnknownHostException ex) {
             Log.e(TAG, ex.toString() + "\n" + Log.getStackTraceString(ex));
         }
@@ -158,16 +163,16 @@ public class ActivityLog extends AppCompatActivity implements SharedPreferences.
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 PackageManager pm = getPackageManager();
                 Cursor cursor = (Cursor) adapter.getItem(position);
-                long time = cursor.getLong(cursor.getColumnIndex("time"));
-                int version = cursor.getInt(cursor.getColumnIndex("version"));
-                int protocol = cursor.getInt(cursor.getColumnIndex("protocol"));
-                final String saddr = cursor.getString(cursor.getColumnIndex("saddr"));
-                final int sport = (cursor.isNull(cursor.getColumnIndex("sport")) ? -1 : cursor.getInt(cursor.getColumnIndex("sport")));
-                final String daddr = cursor.getString(cursor.getColumnIndex("daddr"));
-                final int dport = (cursor.isNull(cursor.getColumnIndex("dport")) ? -1 : cursor.getInt(cursor.getColumnIndex("dport")));
-                final String dname = cursor.getString(cursor.getColumnIndex("dname"));
-                final int uid = (cursor.isNull(cursor.getColumnIndex("uid")) ? -1 : cursor.getInt(cursor.getColumnIndex("uid")));
-                int allowed = (cursor.isNull(cursor.getColumnIndex("allowed")) ? -1 : cursor.getInt(cursor.getColumnIndex("allowed")));
+                long time = cursor.getLong(cursor.getColumnIndex(Column.TIME.getValue()));
+                int version = cursor.getInt(cursor.getColumnIndex(Column.VERSION.getValue()));
+                int protocol = cursor.getInt(cursor.getColumnIndex(Column.PROTOCOL.getValue()));
+                final String saddr = cursor.getString(cursor.getColumnIndex(Column.SADDR.getValue()));
+                final int sport = (cursor.isNull(cursor.getColumnIndex(Column.SPORT.getValue())) ? -1 : cursor.getInt(cursor.getColumnIndex(Column.SPORT.getValue())));
+                final String daddr = cursor.getString(cursor.getColumnIndex(Column.DADDR.getValue()));
+                final int dport = (cursor.isNull(cursor.getColumnIndex(Column.DPORT.getValue())) ? -1 : cursor.getInt(cursor.getColumnIndex(Column.DPORT.getValue())));
+                final String dname = cursor.getString(cursor.getColumnIndex(Column.DNAME.getValue()));
+                final int uid = (cursor.isNull(cursor.getColumnIndex(Column.UID.getValue())) ? -1 : cursor.getInt(cursor.getColumnIndex(Column.UID.getValue())));
+                int allowed = (cursor.isNull(cursor.getColumnIndex(Column.ALLOWED.getValue())) ? -1 : cursor.getInt(cursor.getColumnIndex(Column.ALLOWED.getValue())));
 
                 // Get external address
                 InetAddress addr = null;
@@ -214,7 +219,7 @@ public class ActivityLog extends AppCompatActivity implements SharedPreferences.
                 else
                     popup.getMenu().findItem(R.id.menu_port).setTitle(getString(R.string.title_log_port, port));
 
-                if (prefs.getBoolean("filter", false)) {
+                if (prefs.getBoolean(Preferences.FILTER.getKey(), Preferences.FILTER.getDefaultValue())) {
                     if (uid <= 0) {
                         popup.getMenu().removeItem(R.id.menu_allow);
                         popup.getMenu().removeItem(R.id.menu_block);
@@ -259,7 +264,7 @@ public class ActivityLog extends AppCompatActivity implements SharedPreferences.
                             case R.id.menu_allow:
                                 if (IAB.isPurchased(ActivityPro.SKU_FILTER, ActivityLog.this)) {
                                     DatabaseHelper.getInstance(ActivityLog.this).updateAccess(packet, dname, 0);
-                                    ServiceSinkhole.reload("allow host", ActivityLog.this, false);
+                                    ServiceSinkhole.reload(SimpleReason.AllowHost, ActivityLog.this, false);
                                     Intent main = new Intent(ActivityLog.this, ActivityMain.class);
                                     main.putExtra(ActivityMain.EXTRA_SEARCH, Integer.toString(uid));
                                     startActivity(main);
@@ -270,7 +275,7 @@ public class ActivityLog extends AppCompatActivity implements SharedPreferences.
                             case R.id.menu_block:
                                 if (IAB.isPurchased(ActivityPro.SKU_FILTER, ActivityLog.this)) {
                                     DatabaseHelper.getInstance(ActivityLog.this).updateAccess(packet, dname, 1);
-                                    ServiceSinkhole.reload("block host", ActivityLog.this, false);
+                                    ServiceSinkhole.reload(SimpleReason.BlockHost, ActivityLog.this, false);
                                     Intent main = new Intent(ActivityLog.this, ActivityMain.class);
                                     main.putExtra(ActivityMain.EXTRA_SEARCH, Integer.toString(uid));
                                     startActivity(main);
@@ -325,7 +330,7 @@ public class ActivityLog extends AppCompatActivity implements SharedPreferences.
     @Override
     public void onSharedPreferenceChanged(SharedPreferences prefs, String name) {
         Log.i(TAG, "Preference " + name + "=" + prefs.getAll().get(name));
-        if ("log".equals(name)) {
+        if (Preferences.LOG.getKey().equals(name)) {
             // Get enabled
             boolean log = prefs.getBoolean(name, false);
 
@@ -338,7 +343,7 @@ public class ActivityLog extends AppCompatActivity implements SharedPreferences.
             if (swEnabled.isChecked() != log)
                 swEnabled.setChecked(log);
 
-            ServiceSinkhole.reload("changed " + name, ActivityLog.this, false);
+            ServiceSinkhole.reload(new Changed(name), ActivityLog.this, false);
         }
     }
 
@@ -385,17 +390,17 @@ public class ActivityLog extends AppCompatActivity implements SharedPreferences.
 
         boolean export = (getPackageManager().resolveActivity(getIntentPCAPDocument(), 0) != null);
 
-        menu.findItem(R.id.menu_protocol_udp).setChecked(prefs.getBoolean("proto_udp", true));
-        menu.findItem(R.id.menu_protocol_tcp).setChecked(prefs.getBoolean("proto_tcp", true));
-        menu.findItem(R.id.menu_protocol_other).setChecked(prefs.getBoolean("proto_other", true));
-        menu.findItem(R.id.menu_traffic_allowed).setEnabled(prefs.getBoolean("filter", false));
-        menu.findItem(R.id.menu_traffic_allowed).setChecked(prefs.getBoolean("traffic_allowed", true));
-        menu.findItem(R.id.menu_traffic_blocked).setChecked(prefs.getBoolean("traffic_blocked", true));
+        menu.findItem(R.id.menu_protocol_udp).setChecked(prefs.getBoolean(Preferences.PROTO_UDP.getKey(), Preferences.PROTO_UDP.getDefaultValue()));
+        menu.findItem(R.id.menu_protocol_tcp).setChecked(prefs.getBoolean(Preferences.PROTO_TCP.getKey(), Preferences.PROTO_TCP.getDefaultValue()));
+        menu.findItem(R.id.menu_protocol_other).setChecked(prefs.getBoolean(Preferences.PROTO_OTHER.getKey(), Preferences.PROTO_OTHER.getDefaultValue()));
+        menu.findItem(R.id.menu_traffic_allowed).setEnabled(prefs.getBoolean(Preferences.FILTER.getKey(), Preferences.FILTER.getDefaultValue()));
+        menu.findItem(R.id.menu_traffic_allowed).setChecked(prefs.getBoolean(Preferences.TRAFFIC_ALLOWED.getKey(), Preferences.TRAFFIC_ALLOWED.getDefaultValue()));
+        menu.findItem(R.id.menu_traffic_blocked).setChecked(prefs.getBoolean(Preferences.TRAFFIC_BLOCKED.getKey(), Preferences.TRAFFIC_BLOCKED.getDefaultValue()));
 
         menu.findItem(R.id.menu_refresh).setEnabled(!menu.findItem(R.id.menu_log_live).isChecked());
-        menu.findItem(R.id.menu_log_resolve).setChecked(prefs.getBoolean("resolve", false));
-        menu.findItem(R.id.menu_log_organization).setChecked(prefs.getBoolean("organization", false));
-        menu.findItem(R.id.menu_pcap_enabled).setChecked(prefs.getBoolean("pcap", false));
+        menu.findItem(R.id.menu_log_resolve).setChecked(prefs.getBoolean(Preferences.RESOLVE.getKey(), Preferences.RESOLVE.getDefaultValue()));
+        menu.findItem(R.id.menu_log_organization).setChecked(prefs.getBoolean(Preferences.ORGANIZATION.getKey(), Preferences.ORGANIZATION.getDefaultValue()));
+        menu.findItem(R.id.menu_pcap_enabled).setChecked(prefs.getBoolean(Preferences.PCAP.getKey(), Preferences.PCAP.getDefaultValue()));
         menu.findItem(R.id.menu_pcap_export).setEnabled(pcap_file.exists() && export);
 
         return super.onPrepareOptionsMenu(menu);
@@ -414,31 +419,31 @@ public class ActivityLog extends AppCompatActivity implements SharedPreferences.
 
             case R.id.menu_protocol_udp:
                 item.setChecked(!item.isChecked());
-                prefs.edit().putBoolean("proto_udp", item.isChecked()).apply();
+                prefs.edit().putBoolean(Preferences.PROTO_UDP.getKey(), item.isChecked()).apply();
                 updateAdapter();
                 return true;
 
             case R.id.menu_protocol_tcp:
                 item.setChecked(!item.isChecked());
-                prefs.edit().putBoolean("proto_tcp", item.isChecked()).apply();
+                prefs.edit().putBoolean(Preferences.PROTO_TCP.getKey(), item.isChecked()).apply();
                 updateAdapter();
                 return true;
 
             case R.id.menu_protocol_other:
                 item.setChecked(!item.isChecked());
-                prefs.edit().putBoolean("proto_other", item.isChecked()).apply();
+                prefs.edit().putBoolean(Preferences.PROTO_OTHER.getKey(), item.isChecked()).apply();
                 updateAdapter();
                 return true;
 
             case R.id.menu_traffic_allowed:
                 item.setChecked(!item.isChecked());
-                prefs.edit().putBoolean("traffic_allowed", item.isChecked()).apply();
+                prefs.edit().putBoolean(Preferences.TRAFFIC_ALLOWED.getKey(), item.isChecked()).apply();
                 updateAdapter();
                 return true;
 
             case R.id.menu_traffic_blocked:
                 item.setChecked(!item.isChecked());
-                prefs.edit().putBoolean("traffic_blocked", item.isChecked()).apply();
+                prefs.edit().putBoolean(Preferences.TRAFFIC_BLOCKED.getKey(), item.isChecked()).apply();
                 updateAdapter();
                 return true;
 
@@ -458,21 +463,21 @@ public class ActivityLog extends AppCompatActivity implements SharedPreferences.
 
             case R.id.menu_log_resolve:
                 item.setChecked(!item.isChecked());
-                prefs.edit().putBoolean("resolve", item.isChecked()).apply();
+                prefs.edit().putBoolean(Preferences.RESOLVE.getKey(), item.isChecked()).apply();
                 adapter.setResolve(item.isChecked());
                 adapter.notifyDataSetChanged();
                 return true;
 
             case R.id.menu_log_organization:
                 item.setChecked(!item.isChecked());
-                prefs.edit().putBoolean("organization", item.isChecked()).apply();
+                prefs.edit().putBoolean(Preferences.ORGANIZATION.getKey(), item.isChecked()).apply();
                 adapter.setOrganization(item.isChecked());
                 adapter.notifyDataSetChanged();
                 return true;
 
             case R.id.menu_pcap_enabled:
                 item.setChecked(!item.isChecked());
-                prefs.edit().putBoolean("pcap", item.isChecked()).apply();
+                prefs.edit().putBoolean(Preferences.PCAP.getKey(), item.isChecked()).apply();
                 ServiceSinkhole.setPcap(item.isChecked(), ActivityLog.this);
                 return true;
 
@@ -485,7 +490,7 @@ public class ActivityLog extends AppCompatActivity implements SharedPreferences.
                     @Override
                     protected Object doInBackground(Object... objects) {
                         DatabaseHelper.getInstance(ActivityLog.this).clearLog(-1);
-                        if (prefs.getBoolean("pcap", false)) {
+                        if (prefs.getBoolean(Preferences.PCAP.getKey(), Preferences.PCAP.getDefaultValue())) {
                             ServiceSinkhole.setPcap(false, ActivityLog.this);
                             if (pcap_file.exists() && !pcap_file.delete())
                                 Log.w(TAG, "Delete PCAP failed");
@@ -520,11 +525,11 @@ public class ActivityLog extends AppCompatActivity implements SharedPreferences.
     private void updateAdapter() {
         if (adapter != null) {
             SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
-            boolean udp = prefs.getBoolean("proto_udp", true);
-            boolean tcp = prefs.getBoolean("proto_tcp", true);
-            boolean other = prefs.getBoolean("proto_other", true);
-            boolean allowed = prefs.getBoolean("traffic_allowed", true);
-            boolean blocked = prefs.getBoolean("traffic_blocked", true);
+            boolean udp = prefs.getBoolean(Preferences.PROTO_UDP.getKey(), Preferences.PROTO_UDP.getDefaultValue());
+            boolean tcp = prefs.getBoolean(Preferences.PROTO_TCP.getKey(), Preferences.PROTO_TCP.getDefaultValue());
+            boolean other = prefs.getBoolean(Preferences.PROTO_OTHER.getKey(), Preferences.PROTO_OTHER.getDefaultValue());
+            boolean allowed = prefs.getBoolean(Preferences.TRAFFIC_ALLOWED.getKey(), Preferences.TRAFFIC_ALLOWED.getDefaultValue());
+            boolean blocked = prefs.getBoolean(Preferences.TRAFFIC_BLOCKED.getKey(), Preferences.TRAFFIC_BLOCKED.getDefaultValue());
             adapter.changeCursor(DatabaseHelper.getInstance(this).getLog(udp, tcp, other, allowed, blocked));
             if (menuSearch != null && menuSearch.isActionViewExpanded()) {
                 SearchView searchView = (SearchView) menuSearch.getActionView();
@@ -626,7 +631,7 @@ public class ActivityLog extends AppCompatActivity implements SharedPreferences.
 
                     // Resume capture
                     SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(ActivityLog.this);
-                    if (prefs.getBoolean("pcap", false))
+                    if (prefs.getBoolean(Preferences.PCAP.getKey(), Preferences.PCAP.getDefaultValue()))
                         ServiceSinkhole.setPcap(true, ActivityLog.this);
                 }
             }

@@ -60,8 +60,8 @@
     <string name="setting_dark">डार्क थीम का इस्तेमाल करें</string>
     <string name="setting_install">नई स्थापना पर सूचित करें</string>
     <string name="setting_screen_on">लागू करें \'जब स्क्रीन चालू हो\' नियम</string>
-    <string name="setting_auto">%1$s मिनट के बाद स्वतः सक्षम</string>
-    <string name="setting_delay">देरी स्क्रीन बंद %1$s मिनट</string>
+    <string name="setting_auto">%1$d मिनट के बाद स्वतः सक्षम</string>
+    <string name="setting_delay">देरी स्क्रीन बंद %1$d मिनट</string>
     <string name="setting_update">नवीनतम के लिए जाँच करें</string>
     <string name="setting_network_options">नेटवर्क विकल्प</string>
     <string name="setting_subnet">सबनेट रूटिंग</string>
@@ -92,26 +92,23 @@
     <string name="setting_reset_usage">नेटवर्क उपयोग रीसेट करें</string>
     <string name="setting_show_resolved">Show resolved domain names</string>
     <string name="setting_block_domains">ब्लॉक डोमेन नाम</string>
-    <string name="setting_rcode">DNS प्रतिक्रिया कोड: %s</string>
+    <string name="setting_rcode">DNS प्रतिक्रिया कोड: %d</string>
     <string name="setting_forwarding">पोर्ट अग्रेषण</string>
-    <string name="setting_vpn4">VPN IPv4: %s</string>
-    <string name="setting_vpn6">VPN IPv6: %s</string>
-    <string name="setting_dns">VPN DNS: %s</string>
     <string name="setting_validate">%s पर मान्य</string>
-    <string name="setting_ttl">न्यूनतम DNS TTL: %s s</string>
+    <string name="setting_ttl">न्यूनतम DNS TTL: %d s</string>
     <string name="setting_socks5_enabled">SOCKS5 प्रॉक्सी का उपयोग करें</string>
     <string name="setting_socks5_addr">SOCKS5 पता: %s</string>
     <string name="setting_socks5_port">SOCKS5 पोर्ट: %s</string>
     <string name="setting_socks5_username">SOCKS5 उपयोगकर्ता नाम: %s</string>
     <string name="setting_socks5_password">SOCKS5 पासवर्ड: %s</string>
-    <string name="setting_pcap_record_size">PCAP रिकॉर्ड आकार: %s B</string>
-    <string name="setting_pcap_file_size">PCAP मैक्स। फ़ाइल का आकार: %s MB</string>
-    <string name="setting_watchdog">प्रहरी: प्रत्येक %s मिनट</string>
+    <string name="setting_pcap_record_size">PCAP रिकॉर्ड आकार: %d B</string>
+    <string name="setting_pcap_file_size">PCAP मैक्स। फ़ाइल का आकार: %d MB</string>
+    <string name="setting_watchdog">प्रहरी: प्रत्येक %d मिनट</string>
     <string name="setting_stats_category">गति अधिसूचना</string>
     <string name="setting_stats">गति अधिसूचना दिखाएं</string>
     <string name="setting_stats_top">शीर्ष अनुप्रयोगों दिखाएँ</string>
-    <string name="setting_stats_frequency">नमूना अंतराल: %s ms</string>
-    <string name="setting_stats_samples">नमूनों की संख्या: %s s</string>
+    <string name="setting_stats_frequency">नमूना अंतराल: %d ms</string>
+    <string name="setting_stats_samples">नमूनों की संख्या: %d s</string>
     <string name="setting_backup">Backup</string>
     <string name="setting_export">सेटिंग्स निर्यात</string>
     <string name="setting_import">सेटिंग्स आयात करें</string>
@@ -173,7 +170,7 @@
     <string name="msg_kb">%1$7.3f▲ %2$7.3f▼ KB</string>
     <string name="msg_mb">%1$7.3f▲ %2$7.3f▼ MB</string>
     <string name="msg_gb">%1$7.3f▲ %2$7.3f▼ KB</string>
-    <string name="msg_count">%dx</string>
+
     <string name="msg_doze">एकरूप परिणाम के लिए, के लिए NetGuard Android बैटरी ऑप्टिमाइजेशन अक्षम किया जाना चाहिए। \n\nIn अगले संवाद, \"सभी apps\" शीर्ष पर का चयन करें, का चयन करें और सूची में NetGuard पर टैप करें और \"ऑप्टिमाइज़ नहीं\" की पुष्टि करें।</string>
     <string name="msg_datasaving">NetGuard \n\nIn अगले संवाद, सक्षम करें के लिए विकल्प \"पृष्ठभूमि डेटा\" और \"अप्रतिबंधित डेटा उपयोग\" संगत परिणामों के लिए, Android डेटा बचत विकल्प निष्क्रिय किया जाना चाहिए</string>
     <string name="msg_filter">फ़िल्टरिंग का उपयोग कर Android विशेषता डेटा और पावर NetGuard करने के लिए उपयोग करने के लिए कारण होगा - डेटा और पावर NetGuard, बजाय द्वारा मूल अनुप्रयोग उपयोग किया जा रहा हैं Android मानता है</string>
@@ -223,7 +220,6 @@
     <string name="title_conditions">शर्तें</string>
     <string name="title_screen_wifi">जब स्क्रीन चालू हो तब वाईफ़ाई की अनुमति दें</string>
     <string name="title_screen_other">जब स्क्रीन चालू हो तब मोबाइल की अनुमति दें</string>
-    <string name="title_roaming_symbol">R</string>
     <string name="title_roaming">रोमिंग पर ब्लॉक</string>
     <string name="title_lockdown">लॉकडाउन मोड में अनुमति दें</string>
     <string name="title_related">संबंधित फ़िल्टर करें</string>
@@ -280,9 +276,5 @@
         <item>एम्बर/ब्लू</item>
         <item>ऑरेंज/ग्रे</item>
         <item>हरा</item>
-    </string-array>
-    <string-array name="protocolNames">
-        <item>UDP</item>
-        <item>TCP</item>
     </string-array>
 </resources>

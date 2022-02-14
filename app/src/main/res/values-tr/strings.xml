@@ -60,8 +60,8 @@
     <string name="setting_dark">Karanlık tema kullan</string>
     <string name="setting_install">Yeni uygulamaları bildir</string>
     <string name="setting_screen_on">Ekranın açıklığına bağlı kurallar uygulansın</string>
-    <string name="setting_auto">%1$s dakika sonra otomatik etkinleştir</string>
-    <string name="setting_delay">Ekranın kapalı olarak algılanmasını %1$s dakika ertele</string>
+    <string name="setting_auto">%1$d dakika sonra otomatik etkinleştir</string>
+    <string name="setting_delay">Ekranın kapalı olarak algılanmasını %1$d dakika ertele</string>
     <string name="setting_update">Güncellemeleri kontrol et</string>
     <string name="setting_network_options">Ağ seçenekleri</string>
     <string name="setting_subnet">Alt ağ yönlendirmesi</string>
@@ -92,26 +92,24 @@
     <string name="setting_reset_usage">Veri kullanımını sıfırla</string>
     <string name="setting_show_resolved">Çözümlenmiş alan adlarını göster</string>
     <string name="setting_block_domains">Alan adlarını engelle</string>
-    <string name="setting_rcode">DNS yanıt kodu: %s</string>
+    <string name="setting_rcode">DNS yanıt kodu: %d</string>
     <string name="setting_forwarding">Bağlantı noktası yönlendirme</string>
-    <string name="setting_vpn4">VPN IPv4: %s</string>
-    <string name="setting_vpn6">VPN IPv6: %s</string>
-    <string name="setting_dns">VPN DNS: %s</string>
+
     <string name="setting_validate">Doğrulama adresi: %s</string>
-    <string name="setting_ttl">En düşük DNS TTL: %s s</string>
+    <string name="setting_ttl">En düşük DNS TTL: %d s</string>
     <string name="setting_socks5_enabled">SOCKS5 kullan</string>
     <string name="setting_socks5_addr">SOCKS5 adresi: %s</string>
     <string name="setting_socks5_port">SOCKS5 bağlantı noktası: %s</string>
     <string name="setting_socks5_username">SOCKS5 kullanıcı adı: %s</string>
     <string name="setting_socks5_password">SOCKS5 parolası: %s</string>
-    <string name="setting_pcap_record_size">PCAP kayıt boyutu: %s B</string>
-    <string name="setting_pcap_file_size">PCAP dosya boyutu sınırı: %s MB</string>
-    <string name="setting_watchdog">Bekçi: her %s dakika</string>
+    <string name="setting_pcap_record_size">PCAP kayıt boyutu: %d B</string>
+    <string name="setting_pcap_file_size">PCAP dosya boyutu sınırı: %d MB</string>
+    <string name="setting_watchdog">Bekçi: her %d dakika</string>
     <string name="setting_stats_category">Hız bildirimi</string>
     <string name="setting_stats">Hız bildirimini göster</string>
     <string name="setting_stats_top">En çok kullanan uygulamaları göster</string>
-    <string name="setting_stats_frequency">Yenileme aralığı: %s ms</string>
-    <string name="setting_stats_samples">Yenileme geçmişi: %s s</string>
+    <string name="setting_stats_frequency">Yenileme aralığı: %d ms</string>
+    <string name="setting_stats_samples">Yenileme geçmişi: %d s</string>
     <string name="setting_backup">Yedekleme</string>
     <string name="setting_export">Ayarları dışa aktar</string>
     <string name="setting_import">Ayarları içe aktar</string>
@@ -172,10 +170,8 @@ Bu yüzden bir sonraki diyalogda lütfen VPN bağlantısına izin verin.
     <string name="msg_terms">Bağış yaparak <a href="http://www.netguard.me/#terms">şart ve koşulları</a> kabul etmiş sayılırsınız</string>
     <string name="msg_dimming">Sonraki diyalogda TAMAM\'a basamıyorsanız, farklı bir (ekran karartma) uygulama ekranı kontrol ediyor olabilir.</string>
     <string name="msg_mbday">± %1$.3f▲ %2$.3f▼ MB/gün</string>
-    <string name="msg_kb">%1$7.3f▲ %2$7.3f▼ KB</string>
-    <string name="msg_mb">%1$7.3f▲ %2$7.3f▼ MB</string>
-    <string name="msg_gb">%1$7.3f▲ %2$7.3f▼ GB</string>
-    <string name="msg_count">%dx</string>
+
+
     <string name="msg_doze">NetGuard\'ın daha istikrarlı çalışması için Android pil optimizasyonları devre dışı bırakılmalıdır.
 \n\nSonraki diyalogda yukarıdan \"Tüm Uygulamalar\" seçip listeden Netguard\'ı bulun ve \"Optimize Etme\" seçeneğine dokunun.</string>
     <string name="msg_datasaving">NetGuard\'ın daha istikrarlı çalışması için Android veri tasarrufu devre dışı bırakılmalıdır.
@@ -284,9 +280,5 @@ Bu yüzden bir sonraki diyalogda lütfen VPN bağlantısına izin verin.
         <item>kehribar/mavi</item>
         <item>turuncu/gri</item>
         <item>yeşil</item>
-    </string-array>
-    <string-array name="protocolNames">
-        <item>UDP</item>
-        <item>TCP</item>
     </string-array>
 </resources>

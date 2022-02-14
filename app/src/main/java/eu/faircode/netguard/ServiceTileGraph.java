@@ -31,6 +31,10 @@ import android.widget.Toast;
 
 import androidx.preference.PreferenceManager;
 
+import eu.faircode.netguard.preference.Preferences;
+import eu.faircode.netguard.reason.Reason;
+import eu.faircode.netguard.reason.SimpleReason;
+
 @TargetApi(Build.VERSION_CODES.N)
 public class ServiceTileGraph extends TileService implements SharedPreferences.OnSharedPreferenceChangeListener {
     private static final String TAG = "NetGuard.TileGraph";
@@ -44,13 +48,13 @@ public class ServiceTileGraph extends TileService implements SharedPreferences.O
 
     @Override
     public void onSharedPreferenceChanged(SharedPreferences prefs, String key) {
-        if ("show_stats".equals(key))
+        if (Preferences.SHOW_STATS.getKey().equals(key))
             update();
     }
 
     private void update() {
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
-        boolean stats = prefs.getBoolean("show_stats", false);
+        boolean stats = prefs.getBoolean(Preferences.SHOW_STATS.getKey(), Preferences.SHOW_STATS.getDefaultValue());
         Tile tile = getQsTile();
         if (tile != null) {
             tile.setState(stats ? Tile.STATE_ACTIVE : Tile.STATE_INACTIVE);
@@ -70,11 +74,11 @@ public class ServiceTileGraph extends TileService implements SharedPreferences.O
 
         // Check state
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
-        boolean stats = !prefs.getBoolean("show_stats", false);
+        boolean stats = !prefs.getBoolean(Preferences.SHOW_STATS.getKey(), Preferences.SHOW_STATS.getDefaultValue());
         if (stats && !IAB.isPurchased(ActivityPro.SKU_SPEED, this))
             Toast.makeText(this, R.string.title_pro_feature, Toast.LENGTH_SHORT).show();
         else
-            prefs.edit().putBoolean("show_stats", stats).apply();
-        ServiceSinkhole.reloadStats("tile", this);
+            prefs.edit().putBoolean(Preferences.SHOW_STATS.getKey(), stats).apply();
+        ServiceSinkhole.reloadStats(SimpleReason.Tile, this);
     }
 }

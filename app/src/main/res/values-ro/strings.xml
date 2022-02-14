@@ -60,8 +60,8 @@
     <string name="setting_dark">Folosește tema întunecată</string>
     <string name="setting_install">Notificare la o instalare nouă</string>
     <string name="setting_screen_on">Aplică regulile pentru \'ecran pornit\'</string>
-    <string name="setting_auto">Activează automat după %1$s minute</string>
-    <string name="setting_delay">Întârzie regulile pentru \"ecran oprit\" %1$s minute</string>
+    <string name="setting_auto">Activează automat după %1$d minute</string>
+    <string name="setting_delay">Întârzie regulile pentru \"ecran oprit\" %1$d minute</string>
     <string name="setting_update">Verificați dacă există actualizări</string>
     <string name="setting_network_options">Opțiuni rețea</string>
     <string name="setting_subnet">Rutare subrețea</string>
@@ -92,26 +92,24 @@
     <string name="setting_reset_usage">Resetează folosirea conexiunii</string>
     <string name="setting_show_resolved">Arată numele de domenii rezolvate</string>
     <string name="setting_block_domains">Blochează domenii</string>
-    <string name="setting_rcode">Cod de răspuns DNS: %s</string>
+    <string name="setting_rcode">Cod de răspuns DNS: %d</string>
     <string name="setting_forwarding">Redirecționare port</string>
-    <string name="setting_vpn4">VPN IPv4: %s</string>
-    <string name="setting_vpn6">VPN IPv6: %s</string>
-    <string name="setting_dns">VPN DNS: %s</string>
+
     <string name="setting_validate">Validează cu: %s</string>
-    <string name="setting_ttl">DNS TTL minim: %s s</string>
+    <string name="setting_ttl">DNS TTL minim: %d s</string>
     <string name="setting_socks5_enabled">Utilizați proxy SOCKS5</string>
     <string name="setting_socks5_addr">SOCKS5 adresa: %s</string>
     <string name="setting_socks5_port">SOCKS5 port: %s</string>
     <string name="setting_socks5_username">SOCKS5 nume utilizator: %s</string>
     <string name="setting_socks5_password">SOCKS5 parola: %s</string>
-    <string name="setting_pcap_record_size">Mărime înregistrare PCAP: %s B</string>
-    <string name="setting_pcap_file_size">Mărime max. fișier PCAP: %s MB</string>
-    <string name="setting_watchdog">Repornire automată: o dată la %s minute</string>
+    <string name="setting_pcap_record_size">Mărime înregistrare PCAP: %d B</string>
+    <string name="setting_pcap_file_size">Mărime max. fișier PCAP: %d MB</string>
+    <string name="setting_watchdog">Repornire automată: o dată la %d minute</string>
     <string name="setting_stats_category">Notificare viteză conexiune</string>
     <string name="setting_stats">Arată notificare viteză</string>
     <string name="setting_stats_top">Arată aplicațiile consumătoare</string>
-    <string name="setting_stats_frequency">Interval de eșantionare: %s ms</string>
-    <string name="setting_stats_samples">Număr de eșantioane: %s s</string>
+    <string name="setting_stats_frequency">Interval de eșantionare: %d ms</string>
+    <string name="setting_stats_samples">Număr de eșantioane: %d s</string>
     <string name="setting_backup">Copie de siguranță</string>
     <string name="setting_export">Exportă setări</string>
     <string name="setting_import">Importă setări</string>
@@ -171,10 +169,8 @@ Din acest motiv, va rugăm să permiteți conexiunea VPN în caseta de dialog ur
     <string name="msg_terms">Donand esti de acord cu <a href="http://www.netguard.me/#terms">termenii si conditiile</a></string>
     <string name="msg_dimming">Dacă în următoarea fereastră de dialog nu puteți apasă OK înseamnă că o aplicație ce manipulează ecranul (luminozitatea sau nuanță) blochează interacțiunea.</string>
     <string name="msg_mbday">± %1$.3f▲ %2$.3f▼ MB/zi</string>
-    <string name="msg_kb">%1$7.3f▲ %2$7.3f▼ KB</string>
-    <string name="msg_mb">%1$7.3f▲ %2$7.3f▼ MB</string>
-    <string name="msg_gb">%1$7.3f▲ %2$7.3f▼ GB</string>
-    <string name="msg_count">%dx</string>
+
+
     <string name="msg_doze">Pentru o funcționare consistentă, optimizările Android de baterie trebuie dezactivate pentru NetGuard.
 \n\nÎn următoarea fereastră de dialog selectați de sus \"Toate aplicațiile\" apoi selectați NetGuard în listă și confirmați \"Nu se optimizează\".</string>
     <string name="msg_datasaving">Pentru rezultate consecvente, opțiunile Android de economisire a datelor ar trebui dezactivate pentru NetGuard
@@ -226,7 +222,7 @@ Din acest motiv, va rugăm să permiteți conexiunea VPN în caseta de dialog ur
     <string name="title_conditions">Restricții</string>
     <string name="title_screen_wifi">Permite Wi-Fi când ecranul este pornit</string>
     <string name="title_screen_other">Permite date mobile când ecranul este pornit</string>
-    <string name="title_roaming_symbol">R</string>
+
     <string name="title_roaming">Blochează în roaming</string>
     <string name="title_lockdown">Permite când traficul este închis</string>
     <string name="title_related">Filtrează aplicațiile asociate</string>
@@ -283,9 +279,5 @@ Din acest motiv, va rugăm să permiteți conexiunea VPN în caseta de dialog ur
         <item>culoarea chihlimbarului/albastru</item>
         <item>portocaliu/gri</item>
         <item>verde</item>
-    </string-array>
-    <string-array name="protocolNames">
-        <item>UDP</item>
-        <item>TCP</item>
     </string-array>
 </resources>

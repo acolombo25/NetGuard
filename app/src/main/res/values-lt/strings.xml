@@ -60,8 +60,8 @@
     <string name="setting_dark">Naudoti tamsią temą</string>
     <string name="setting_install">Pranešti naujo įdiegimo metu</string>
     <string name="setting_screen_on">Taikyti „aktyvaus ekrano“ taisykles</string>
-    <string name="setting_auto">Automatiškai įjungti po %1$s min.</string>
-    <string name="setting_delay">Uždelsti ekrano užrakinimą %1$s minučių</string>
+    <string name="setting_auto">Automatiškai įjungti po %1$d min.</string>
+    <string name="setting_delay">Uždelsti ekrano užrakinimą %1$d minučių</string>
     <string name="setting_update">Naujinių tikrinimas</string>
     <string name="setting_network_options">Tinklo nustatymai</string>
     <string name="setting_subnet">Potinklio nukreipimas</string>
@@ -92,26 +92,24 @@
     <string name="setting_reset_usage">Atstatyti tinklo naudojimą</string>
     <string name="setting_show_resolved">Rodyti išspręstus domenų vardus</string>
     <string name="setting_block_domains">Blokuoti domenų vardus</string>
-    <string name="setting_rcode">DNS atsakymo kodas: %s</string>
+    <string name="setting_rcode">DNS atsakymo kodas: %d</string>
     <string name="setting_forwarding">Prievado nukreipimas</string>
-    <string name="setting_vpn4">VPN IPv4: %s</string>
-    <string name="setting_vpn6">VPN IPv6: %s</string>
-    <string name="setting_dns">VPN DNS: %s</string>
+
     <string name="setting_validate">Galioja iki: %s</string>
-    <string name="setting_ttl">Mažiausia DNS TTL reikšmė: %s s</string>
+    <string name="setting_ttl">Mažiausia DNS TTL reikšmė: %d s</string>
     <string name="setting_socks5_enabled">Naudoti SOCKS5 tarpinį serverį</string>
     <string name="setting_socks5_addr">SOCKS5 adresas: %s</string>
     <string name="setting_socks5_port">SOCKS5 prievadas: %s</string>
     <string name="setting_socks5_username">SOCKS5 naudotojo vardas: %s</string>
     <string name="setting_socks5_password">SOCKS5 slaptažodis: %s</string>
-    <string name="setting_pcap_record_size">PCAP įrašo dydis: %s B</string>
-    <string name="setting_pcap_file_size">PACP didžiausias failo dydis: %s MB</string>
-    <string name="setting_watchdog">Budėtojas: kas %s minučių</string>
+    <string name="setting_pcap_record_size">PCAP įrašo dydis: %d B</string>
+    <string name="setting_pcap_file_size">PACP didžiausias failo dydis: %d MB</string>
+    <string name="setting_watchdog">Budėtojas: kas %d minučių</string>
     <string name="setting_stats_category">Tinklo greičio pranešimas</string>
     <string name="setting_stats">Rodyti tinklo greičio pranešimą</string>
     <string name="setting_stats_top">Rodyti dažniausias programas</string>
-    <string name="setting_stats_frequency">Bandinio intervalas: %s ms</string>
-    <string name="setting_stats_samples">Bandinių skaičius: %s s</string>
+    <string name="setting_stats_frequency">Bandinio intervalas: %d ms</string>
+    <string name="setting_stats_samples">Bandinių skaičius: %d s</string>
     <string name="setting_backup">Atsarginė kopija</string>
     <string name="setting_export">Nustatymų kopija</string>
     <string name="setting_import">Įkelti nustatymus</string>
@@ -172,10 +170,8 @@ Jūsų interneto duomenų srautas nėra siunčiamas į jokį nuotolinį VPN serv
     <string name="msg_terms">Paaukodami sutinkate su <a href="http://www.netguard.me/#terms">nuostatomis &amp; sąlygomis</a></string>
     <string name="msg_dimming">Jei kitame lange negalite spausti „Gerai“, greičiausiai ekraną valdo kita (ekrano pritemdymo) programa.</string>
     <string name="msg_mbday">± %1$.3f▲ %2$.3f▼ MB/dieną</string>
-    <string name="msg_kb">%1$7.3f▲ %2$7.3f▼ KB</string>
-    <string name="msg_mb">%1$7.3f▲ %2$7.3f▼ MB</string>
-    <string name="msg_gb">%1$7.3f▲ %2$7.3f▼ GB</string>
-    <string name="msg_count">%dx</string>
+
+
     <string name="msg_doze">Nuolatiniam NetGuard veikimui programos optimizavimas baterijos optimizavimo nustatymuose turi būti išjungtas.
 \n\nKito lango viršuje pasirinkite „Visos programos“, sąraše pasirinkite NetGuard bei spustelėkite ir patvirtinkite „Neoptimizuoti“.</string>
     <string name="msg_datasaving">Nuolatiniam NetGuard veikimui Android mobilliųjų duomenų tausojimas turi būti išjungtas.
@@ -227,7 +223,7 @@ Jūsų interneto duomenų srautas nėra siunčiamas į jokį nuotolinį VPN serv
     <string name="title_conditions">Sąlygos</string>
     <string name="title_screen_wifi">Leisti Wi-Fi pažadinant ekraną</string>
     <string name="title_screen_other">Leisti mobiliuosius duomenis pažadinant ekraną</string>
-    <string name="title_roaming_symbol">R</string>
+
     <string name="title_roaming">Blokuoti tarptinklinį ryšį</string>
     <string name="title_lockdown">Leisti draudimo režime</string>
     <string name="title_related">Susiję su filtru</string>

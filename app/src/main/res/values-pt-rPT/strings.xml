@@ -60,8 +60,8 @@
     <string name="setting_dark">Usar tema escuro</string>
     <string name="setting_install">Notificar nova instalação</string>
     <string name="setting_screen_on">Aplicar regras \'com ecrã ligado\'</string>
-    <string name="setting_auto">Auto habilitar após %1$s minutos</string>
-    <string name="setting_delay">Atraso de %1$s minutos após desligar o ecrã</string>
+    <string name="setting_auto">Auto habilitar após %1$d minutos</string>
+    <string name="setting_delay">Atraso de %1$d minutos após desligar o ecrã</string>
     <string name="setting_update">Procurar atualizações</string>
     <string name="setting_network_options">Opções de rede</string>
     <string name="setting_subnet">Encaminhamento subnet</string>
@@ -92,26 +92,26 @@
     <string name="setting_reset_usage">Redefinir o uso de rede</string>
     <string name="setting_show_resolved">Mostrar nomes de domínio resolvidos</string>
     <string name="setting_block_domains">Bloquear nomes de domínio</string>
-    <string name="setting_rcode">Código de resposta DNS: %s</string>
+    <string name="setting_rcode">Código de resposta DNS: %d</string>
     <string name="setting_forwarding">Reencaminhamento de porta</string>
     <string name="setting_vpn4">IPv4 VPN: %s</string>
     <string name="setting_vpn6">VPN IPv6: %s</string>
     <string name="setting_dns">DNS da VPN: %s</string>
     <string name="setting_validate">Validar com: %s</string>
-    <string name="setting_ttl">TTL mínimo de DNS: %s s</string>
+    <string name="setting_ttl">TTL mínimo de DNS: %d s</string>
     <string name="setting_socks5_enabled">Usar proxy SOCKS5</string>
     <string name="setting_socks5_addr">Endereço SOCKS5: %s</string>
     <string name="setting_socks5_port">Porto SOCKS5: %s</string>
     <string name="setting_socks5_username">Nome de utilizador SOCKS5: %s</string>
     <string name="setting_socks5_password">Palavra-passe do SOCKS5: %s</string>
-    <string name="setting_pcap_record_size">Tamanho de registo PCAP: %s B</string>
-    <string name="setting_pcap_file_size">Tamanho máx. do ficheiro PCAP: %s MB</string>
-    <string name="setting_watchdog">Watchdog: cada %s minutos</string>
+    <string name="setting_pcap_record_size">Tamanho de registo PCAP: %d B</string>
+    <string name="setting_pcap_file_size">Tamanho máx. do ficheiro PCAP: %d MB</string>
+    <string name="setting_watchdog">Watchdog: cada %d minutos</string>
     <string name="setting_stats_category">Notificação de velocidade</string>
     <string name="setting_stats">Mostrar notificação de velocidade</string>
     <string name="setting_stats_top">Mostrar aplicações principais</string>
-    <string name="setting_stats_frequency">Frequência da amostra: %s ms</string>
-    <string name="setting_stats_samples">Número de amostras: %s s</string>
+    <string name="setting_stats_frequency">Frequência da amostra: %d ms</string>
+    <string name="setting_stats_samples">Número de amostras: %d s</string>
     <string name="setting_backup">Cópia de segurança</string>
     <string name="setting_export">Exportar definições</string>
     <string name="setting_import">Importar definições</string>
@@ -170,10 +170,8 @@
     <string name="msg_terms">Ao fazer um donativo, concorda com os <a href="http://www.netguard.me/#terms">termos e condições</a></string>
     <string name="msg_dimming">Caso não consiga pressionar OK no diálogo a seguir, então provavelmente alguma aplicação (escurecimento do ecrã) está a manipular o ecrã.</string>
     <string name="msg_mbday">± %1$.3f▲ %2$.3f▼ MB/dia</string>
-    <string name="msg_kb">%1$7.3f▲ %2$7.3f▼ KB</string>
-    <string name="msg_mb">%1$7.3f▲ %2$7.3f▼ MB</string>
-    <string name="msg_gb">%1$7.3f▲ %2$7.3f▼ GB</string>
-    <string name="msg_count">%dx</string>
+
+
     <string name="msg_doze">Para resultados consistentes, as otimizações de bateria do Android devem ser desativadas para o NetGuard. \n\nNa próxima caixa de diálogo, selecione \"Todas as aplicações\" na parte superior, toque em NetGuard na lista, selecione e confirme \"Não otimizar\".</string>
     <string name="msg_datasaving">Para resultados consistentes, as opções de guardar dados do Android devem ser desativadas para o NetGuard \n\nNa próxima caixa de diálogo, ative as opções \"dados em segundo plano\" e \"acesso a dados sem restrições\"</string>
     <string name="msg_filter">Usar a filtragem faz com que o Android atribua o uso de dados e energia ao NetGuard - o Android assume que os dados e a energia estão a ser usados pelo NetGuard, e não pelas aplicações efetivas</string>
@@ -223,7 +221,7 @@
     <string name="title_conditions">Condições</string>
     <string name="title_screen_wifi">Permitir Wi-Fi quando o ecrã estiver ligado</string>
     <string name="title_screen_other">Permitir dados móveis quando o ecrã estiver ligado</string>
-    <string name="title_roaming_symbol">R</string>
+
     <string name="title_roaming">Bloquear quando em roaming</string>
     <string name="title_lockdown">Permitir em modo de bloqueio</string>
     <string name="title_related">Filtrar relacionados</string>
@@ -280,9 +278,5 @@
         <item>âmbar/azul</item>
         <item>laranja/cinzento</item>
         <item>verde</item>
-    </string-array>
-    <string-array name="protocolNames">
-        <item>UDP</item>
-        <item>TCP</item>
     </string-array>
 </resources>

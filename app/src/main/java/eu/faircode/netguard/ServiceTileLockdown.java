@@ -30,6 +30,10 @@ import android.util.Log;
 
 import androidx.preference.PreferenceManager;
 
+import eu.faircode.netguard.preference.Preferences;
+import eu.faircode.netguard.reason.Reason;
+import eu.faircode.netguard.reason.SimpleReason;
+
 @TargetApi(Build.VERSION_CODES.N)
 public class ServiceTileLockdown extends TileService implements SharedPreferences.OnSharedPreferenceChangeListener {
     private static final String TAG = "NetGuard.TileLockdown";
@@ -43,13 +47,13 @@ public class ServiceTileLockdown extends TileService implements SharedPreference
 
     @Override
     public void onSharedPreferenceChanged(SharedPreferences prefs, String key) {
-        if ("lockdown".equals(key))
+        if (Preferences.LOCKDOWN.getKey().equals(key))
             update();
     }
 
     private void update() {
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
-        boolean lockdown = prefs.getBoolean("lockdown", false);
+        boolean lockdown = prefs.getBoolean(Preferences.LOCKDOWN.getKey(), Preferences.LOCKDOWN.getDefaultValue());
         Tile tile = getQsTile();
         if (tile != null) {
             tile.setState(lockdown ? Tile.STATE_ACTIVE : Tile.STATE_INACTIVE);
@@ -68,8 +72,8 @@ public class ServiceTileLockdown extends TileService implements SharedPreference
         Log.i(TAG, "Click");
 
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
-        prefs.edit().putBoolean("lockdown", !prefs.getBoolean("lockdown", false)).apply();
-        ServiceSinkhole.reload("tile", this, false);
+        prefs.edit().putBoolean(Preferences.LOCKDOWN.getKey(), !prefs.getBoolean(Preferences.LOCKDOWN.getKey(), Preferences.LOCKDOWN.getDefaultValue())).apply();
+        ServiceSinkhole.reload(SimpleReason.Tile, this, false);
         WidgetLockdown.updateWidgets(this);
     }
 }

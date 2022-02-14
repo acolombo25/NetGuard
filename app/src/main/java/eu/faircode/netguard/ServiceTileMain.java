@@ -36,6 +36,10 @@ import androidx.preference.PreferenceManager;
 
 import java.util.Date;
 
+import eu.faircode.netguard.preference.Preferences;
+import eu.faircode.netguard.reason.Reason;
+import eu.faircode.netguard.reason.SimpleReason;
+
 @TargetApi(Build.VERSION_CODES.N)
 public class ServiceTileMain extends TileService implements SharedPreferences.OnSharedPreferenceChangeListener {
     private static final String TAG = "NetGuard.TileMain";
@@ -49,13 +53,13 @@ public class ServiceTileMain extends TileService implements SharedPreferences.On
 
     @Override
     public void onSharedPreferenceChanged(SharedPreferences prefs, String key) {
-        if ("enabled".equals(key))
+        if (Preferences.ENABLED.getKey().equals(key))
             update();
     }
 
     private void update() {
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
-        boolean enabled = prefs.getBoolean("enabled", false);
+        boolean enabled = prefs.getBoolean(Preferences.ENABLED.getKey(), Preferences.ENABLED.getDefaultValue());
         Tile tile = getQsTile();
         if (tile != null) {
             tile.setState(enabled ? Tile.STATE_ACTIVE : Tile.STATE_INACTIVE);
@@ -82,15 +86,15 @@ public class ServiceTileMain extends TileService implements SharedPreferences.On
 
         // Check state
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
-        boolean enabled = !prefs.getBoolean("enabled", false);
-        prefs.edit().putBoolean("enabled", enabled).apply();
+        boolean enabled = !prefs.getBoolean(Preferences.ENABLED.getKey(), Preferences.ENABLED.getDefaultValue());
+        prefs.edit().putBoolean(Preferences.ENABLED.getKey(), enabled).apply();
         if (enabled)
-            ServiceSinkhole.start("tile", this);
+            ServiceSinkhole.start(SimpleReason.Tile, this);
         else {
-            ServiceSinkhole.stop("tile", this, false);
+            ServiceSinkhole.stop(SimpleReason.Tile, this, false);
 
             // Auto enable
-            int auto = Integer.parseInt(prefs.getString("auto_enable", "0"));
+            int auto = prefs.getInt(Preferences.AUTO_ENABLE.getKey(), Preferences.AUTO_ENABLE.getDefaultValue());
             if (auto > 0) {
                 Log.i(TAG, "Scheduling enabled after minutes=" + auto);
                 if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M)

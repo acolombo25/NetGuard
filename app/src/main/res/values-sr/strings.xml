@@ -60,8 +60,8 @@
     <string name="setting_dark">Користи тамну тему</string>
     <string name="setting_install">Обавести при новим инсталацијама</string>
     <string name="setting_screen_on">Примени правило \'укљученог екрана\'</string>
-    <string name="setting_auto">Сам укључи након %1$s мин.</string>
-    <string name="setting_delay">Одложи угашен екран %1$s мин.</string>
+    <string name="setting_auto">Сам укључи након %1$d мин.</string>
+    <string name="setting_delay">Одложи угашен екран %1$d мин.</string>
     <string name="setting_update">Провери ажурирања</string>
     <string name="setting_network_options">Мрежне опције</string>
     <string name="setting_subnet">Подмрежно рутирање</string>
@@ -92,26 +92,26 @@
     <string name="setting_reset_usage">Ресетуј коришћење мреже</string>
     <string name="setting_show_resolved">Прикажи разрешене називе домена</string>
     <string name="setting_block_domains">Блокирај домене</string>
-    <string name="setting_rcode">ДНС код одговора: %s</string>
+    <string name="setting_rcode">ДНС код одговора: %d</string>
     <string name="setting_forwarding">Прослеђивање порта</string>
     <string name="setting_vpn4">ВПН ИПв4: %s</string>
     <string name="setting_vpn6">ВПН ИПв6: %s</string>
     <string name="setting_dns">ВПН ДНС: %s</string>
     <string name="setting_validate">Провери на: %s</string>
-    <string name="setting_ttl">Време истека ДНС упита: %s сек.</string>
+    <string name="setting_ttl">Време истека ДНС упита: %d сек.</string>
     <string name="setting_socks5_enabled">Користи СОКС5 прокси</string>
     <string name="setting_socks5_addr">СОКС5 адреса: %s</string>
     <string name="setting_socks5_port">СОКС5 порт: %s</string>
     <string name="setting_socks5_username">СОКС5 корисничко име: %s</string>
     <string name="setting_socks5_password">СОКС5 лозинка: %s</string>
-    <string name="setting_pcap_record_size">„PCAP“ величина записа: %s B</string>
-    <string name="setting_pcap_file_size">„PCAP“ макс. вел. фајла: %s MB</string>
-    <string name="setting_watchdog">Вочдог: сваких %s мин.</string>
+    <string name="setting_pcap_record_size">„PCAP“ величина записа: %d B</string>
+    <string name="setting_pcap_file_size">„PCAP“ макс. вел. фајла: %d MB</string>
+    <string name="setting_watchdog">Вочдог: сваких %d мин.</string>
     <string name="setting_stats_category">Обавештење о брзини</string>
     <string name="setting_stats">Приказ обавештења о брзини</string>
     <string name="setting_stats_top">Прикажи најкоришћеније</string>
-    <string name="setting_stats_frequency">Интервал узорковања: %s ms</string>
-    <string name="setting_stats_samples">Број узорака: %s s</string>
+    <string name="setting_stats_frequency">Интервал узорковања: %d ms</string>
+    <string name="setting_stats_samples">Број узорака: %d s</string>
     <string name="setting_backup">Резервна копија</string>
     <string name="setting_export">Извези поставке</string>
     <string name="setting_import">Увези поставке</string>
@@ -172,10 +172,6 @@
     <string name="msg_terms">Донирајући, сагласни сте са <a href="http://www.netguard.me/#terms">одредбама и условима</a></string>
     <string name="msg_dimming">Ако на следећем дијалогу не можете да изаберете „У реду“, могуће је да нека апликација управља екраном.</string>
     <string name="msg_mbday">± %1$.3f▲ %2$.3f▼ MB/дневно</string>
-    <string name="msg_kb">%1$7.3f▲ %2$7.3f▼ KB</string>
-    <string name="msg_mb">%1$7.3f▲ %2$7.3f▼ MB</string>
-    <string name="msg_gb">%1$7.3f▲ %2$7.3f▼ GB</string>
-    <string name="msg_count">%dx</string>
     <string name="msg_doze">Ради добрих резултата, Нетгард треба искључити из Андроидове оптимизације батерије.
 \n\nУ следећем дијалогу изаберите „Све апликације“, тапните на Нетгард у листи и изаберите „Не оптимизуј“.</string>
     <string name="msg_datasaving">Ради добрих резултата, Нетгард треба искључити из Андроидове опције уштеде података
@@ -227,7 +223,7 @@
     <string name="title_conditions">Услови</string>
     <string name="title_screen_wifi">Дозволи бежичну кад екран ради</string>
     <string name="title_screen_other">Дозволи мобилну кад екран ради</string>
-    <string name="title_roaming_symbol">R</string>
+
     <string name="title_roaming">Блокирај у ромингу</string>
     <string name="title_lockdown">Дозволи и у блокади</string>
     <string name="title_related">Везано за филтер</string>

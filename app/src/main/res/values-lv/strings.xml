@@ -60,8 +60,8 @@
     <string name="setting_dark">Izmantot tumšo tēmu</string>
     <string name="setting_install">Paziņot par jaunu instalāciju</string>
     <string name="setting_screen_on">Pielietot \'kad ekrāns ieslēgts\' noteikumus</string>
-    <string name="setting_auto">Automātiski iespējot pēc %1$s minūtēm</string>
-    <string name="setting_delay">Aizturēt ekrāna izslēgšanu %1$s minūtes</string>
+    <string name="setting_auto">Automātiski iespējot pēc %1$d minūtēm</string>
+    <string name="setting_delay">Aizturēt ekrāna izslēgšanu %1$d minūtes</string>
     <string name="setting_update">Pārbaudīt atjauninājumus</string>
     <string name="setting_network_options">Tīkla iespējas</string>
     <string name="setting_subnet">Apakštīkla maršrutēšana</string>
@@ -92,26 +92,24 @@
     <string name="setting_reset_usage">Atiestatīt tīkla lietojuma statistiku</string>
     <string name="setting_show_resolved">Rādīt atļautos domēna vārdus</string>
     <string name="setting_block_domains">Bloķēt domēna vārdus</string>
-    <string name="setting_rcode">DNS atbildes kods: %s</string>
+    <string name="setting_rcode">DNS atbildes kods: %d</string>
     <string name="setting_forwarding">Porta pāradresācija</string>
-    <string name="setting_vpn4">VPN IPv4: %s</string>
-    <string name="setting_vpn6">VPN IPv6: %s</string>
-    <string name="setting_dns">VPN DNS: %s</string>
+
     <string name="setting_validate">Apstiprināt uz: %s</string>
-    <string name="setting_ttl">Minimums DNS TTL: %s s</string>
+    <string name="setting_ttl">Minimums DNS TTL: %d s</string>
     <string name="setting_socks5_enabled">Lietot SOCKS5 proxy</string>
     <string name="setting_socks5_addr">SOCKS5 adrese: %s</string>
     <string name="setting_socks5_port">SOCKS5 ports: %s</string>
     <string name="setting_socks5_username">SOCKS5 lietotājvārds: %s</string>
     <string name="setting_socks5_password">SOCKS5 parole: %s</string>
-    <string name="setting_pcap_record_size">PCAP ieraksta izmērs: %s B</string>
-    <string name="setting_pcap_file_size">PCAP maks. faila izmērs: %s MB</string>
-    <string name="setting_watchdog">Sargsuns: katras %s minūtes</string>
+    <string name="setting_pcap_record_size">PCAP ieraksta izmērs: %d B</string>
+    <string name="setting_pcap_file_size">PCAP maks. faila izmērs: %d MB</string>
+    <string name="setting_watchdog">Sargsuns: katras %d minūtes</string>
     <string name="setting_stats_category">Informācija par ātrumu</string>
     <string name="setting_stats">Rādīt informāciju par ātrumu</string>
     <string name="setting_stats_top">Rādīt top lietotnes</string>
-    <string name="setting_stats_frequency">Mērījumu intervāls: %s ms</string>
-    <string name="setting_stats_samples">Mērījuma ilgums: %s s</string>
+    <string name="setting_stats_frequency">Mērījumu intervāls: %d ms</string>
+    <string name="setting_stats_samples">Mērījuma ilgums: %d s</string>
     <string name="setting_backup">Rezerves kopija</string>
     <string name="setting_export">Eksportēt iestatījumus</string>
     <string name="setting_import">Importēt iestatījumus</string>
@@ -172,10 +170,8 @@ Tava interneta datu plūsma netiks sūtīta uz kādu ārējo VPN serveri.</strin
     <string name="msg_terms">Ziedojot Tu piekrītu <a href="http://www.netguard.me/#terms">noteikumiem un nosacījumiem</a></string>
     <string name="msg_dimming">Ja nākamajā dialog logā nevari nospiest OK, tad visticamākais kāda cita (ekrāna aptumšošanas) lietotne patreiz lieto ekrānu.</string>
     <string name="msg_mbday">± %1$.3f▲ %2$.3f▼ MB/dienā</string>
-    <string name="msg_kb">%1$7.3f▲ %2$7.3f▼ KB</string>
-    <string name="msg_mb">%1$7.3f▲ %2$7.3f▼ MB</string>
-    <string name="msg_gb">%1$7.3f▲ %2$7.3f▼ GB</string>
-    <string name="msg_count">%dx</string>
+
+
     <string name="msg_doze">Lai nodrošinātu stabilu rezultātu, Android baterijas optimizēšana lietotnei NetGuard ir jābūt atslēgtai.
 \n\nNākamajā dialoglogā augšā izvēlies \"Visas lietotnes\", no saraksta izvēlies NetGuard, izvēlies \"Neoptimizēt\", un to pastiprini.</string>
     <string name="msg_datasaving">Lai iegūtu stabilu rezultātu, Android datu lietojuma samazinātājam uz NetGuard jābūt izslēgtam.
@@ -227,7 +223,7 @@ Tava interneta datu plūsma netiks sūtīta uz kādu ārējo VPN serveri.</strin
     <string name="title_conditions">Nosacījumi</string>
     <string name="title_screen_wifi">Atļaut Wi-Fi, kad ekrāns ir ieslēgts</string>
     <string name="title_screen_other">Atļaut mobilos datus, kad ekrāns ir ieslēgts</string>
-    <string name="title_roaming_symbol">R</string>
+
     <string name="title_roaming">Bloķēt viesabonēšanā</string>
     <string name="title_lockdown">Atļaut bloķētas datu plūsmas režīmā</string>
     <string name="title_related">Filtrēt saistītos</string>
@@ -284,9 +280,5 @@ Tava interneta datu plūsma netiks sūtīta uz kādu ārējo VPN serveri.</strin
         <item>dzintars/zils</item>
         <item>oranžs/pelēks</item>
         <item>zaļš</item>
-    </string-array>
-    <string-array name="protocolNames">
-        <item>UDP</item>
-        <item>TCP</item>
     </string-array>
 </resources>

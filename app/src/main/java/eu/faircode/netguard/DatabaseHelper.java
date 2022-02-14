@@ -36,11 +36,17 @@ import androidx.preference.PreferenceManager;
 import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
+
+import eu.faircode.netguard.database.Column;
+import eu.faircode.netguard.database.Index;
+import eu.faircode.netguard.database.Table;
+import eu.faircode.netguard.preference.Preferences;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String TAG = "NetGuard.Database";
@@ -49,12 +55,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static final int DB_VERSION = 21;
 
     private static boolean once = true;
-    private static List<LogChangedListener> logChangedListeners = new ArrayList<>();
-    private static List<AccessChangedListener> accessChangedListeners = new ArrayList<>();
-    private static List<ForwardChangedListener> forwardChangedListeners = new ArrayList<>();
+    private static final List<LogChangedListener> logChangedListeners = new ArrayList<>();
+    private static final List<AccessChangedListener> accessChangedListeners = new ArrayList<>();
+    private static final List<ForwardChangedListener> forwardChangedListeners = new ArrayList<>();
 
-    private static HandlerThread hthread = null;
-    private static Handler handler = null;
+    private static HandlerThread hthread;
+    private static Handler handler;
 
     private static final Map<Integer, Long> mapUidHosts = new HashMap<>();
 
@@ -62,8 +68,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private final static int MSG_ACCESS = 2;
     private final static int MSG_FORWARD = 3;
 
-    private SharedPreferences prefs;
-    private ReentrantReadWriteLock lock = new ReentrantReadWriteLock(true);
+    private final SharedPreferences prefs;
+    private final ReentrantReadWriteLock lock = new ReentrantReadWriteLock(true);
 
     static {
         hthread = new HandlerThread("DatabaseHelper");
@@ -134,99 +140,99 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     private void createTableLog(SQLiteDatabase db) {
         Log.i(TAG, "Creating log table");
-        db.execSQL("CREATE TABLE log (" +
+        db.execSQL("CREATE TABLE "+Table.LOG.getValue()+" (" +
                 " ID INTEGER PRIMARY KEY AUTOINCREMENT" +
-                ", time INTEGER NOT NULL" +
-                ", version INTEGER" +
-                ", protocol INTEGER" +
-                ", flags TEXT" +
-                ", saddr TEXT" +
-                ", sport INTEGER" +
-                ", daddr TEXT" +
-                ", dport INTEGER" +
-                ", dname TEXT" +
-                ", uid INTEGER" +
-                ", data TEXT" +
-                ", allowed INTEGER" +
-                ", connection INTEGER" +
-                ", interactive INTEGER" +
+                ", "+Column.TIME.getValue()+" INTEGER NOT NULL" +
+                ", "+Column.VERSION.getValue()+" INTEGER" +
+                ", "+Column.PROTOCOL.getValue()+" INTEGER" +
+                ", "+Column.FLAGS.getValue()+" TEXT" +
+                ", "+Column.SADDR.getValue()+" TEXT" +
+                ", "+Column.SPORT.getValue()+" INTEGER" +
+                ", "+Column.DADDR.getValue()+" TEXT" +
+                ", "+Column.DPORT.getValue()+" INTEGER" +
+                ", "+Column.DNAME.getValue()+" TEXT" +
+                ", "+Column.UID.getValue()+" INTEGER" +
+                ", "+Column.DATA.getValue()+" TEXT" +
+                ", "+Column.ALLOWED.getValue()+" INTEGER" +
+                ", "+Column.CONNECTION.getValue()+" INTEGER" +
+                ", "+Column.INTERACTIVE.getValue()+" INTEGER" +
                 ");");
-        db.execSQL("CREATE INDEX idx_log_time ON log(time)");
-        db.execSQL("CREATE INDEX idx_log_dest ON log(daddr)");
-        db.execSQL("CREATE INDEX idx_log_dname ON log(dname)");
-        db.execSQL("CREATE INDEX idx_log_dport ON log(dport)");
-        db.execSQL("CREATE INDEX idx_log_uid ON log(uid)");
+        createIndex(db, Index.IDX_LOG_TIME, Table.LOG, Column.TIME);
+        createIndex(db, Index.IDX_LOG_DEST, Table.LOG, Column.DADDR);
+        createIndex(db, Index.IDX_LOG_DNAME, Table.LOG, Column.DNAME);
+        createIndex(db, Index.IDX_LOG_DPORT, Table.LOG, Column.DPORT);
+        createIndex(db, Index.IDX_LOG_UID, Table.LOG, Column.UID);
     }
 
     private void createTableAccess(SQLiteDatabase db) {
         Log.i(TAG, "Creating access table");
-        db.execSQL("CREATE TABLE access (" +
+        db.execSQL("CREATE TABLE "+Table.ACCESS.getValue()+" (" +
                 " ID INTEGER PRIMARY KEY AUTOINCREMENT" +
-                ", uid INTEGER NOT NULL" +
-                ", version INTEGER NOT NULL" +
-                ", protocol INTEGER NOT NULL" +
-                ", daddr TEXT NOT NULL" +
-                ", dport INTEGER NOT NULL" +
-                ", time INTEGER NOT NULL" +
-                ", allowed INTEGER" +
-                ", block INTEGER NOT NULL" +
-                ", sent INTEGER" +
-                ", received INTEGER" +
-                ", connections INTEGER" +
+                ", "+Column.UID.getValue()+" INTEGER NOT NULL" +
+                ", "+Column.VERSION.getValue()+" INTEGER NOT NULL" +
+                ", "+Column.PROTOCOL.getValue()+" INTEGER NOT NULL" +
+                ", "+Column.DADDR.getValue()+" TEXT NOT NULL" +
+                ", "+Column.DPORT.getValue()+" INTEGER NOT NULL" +
+                ", "+Column.TIME.getValue()+" INTEGER NOT NULL" +
+                ", "+Column.ALLOWED.getValue()+" INTEGER" +
+                ", "+Column.BLOCK.getValue()+" INTEGER NOT NULL" +
+                ", "+Column.SENT.getValue()+" INTEGER" +
+                ", "+Column.RECEIVED.getValue()+" INTEGER" +
+                ", "+Column.CONNECTION.getValue()+" INTEGER" +
                 ");");
-        db.execSQL("CREATE UNIQUE INDEX idx_access ON access(uid, version, protocol, daddr, dport)");
-        db.execSQL("CREATE INDEX idx_access_daddr ON access(daddr)");
-        db.execSQL("CREATE INDEX idx_access_block ON access(block)");
+        createUniqueIndex(db, Index.IDX_ACCESS, Table.ACCESS, Column.UID, Column.VERSION, Column.PROTOCOL, Column.DADDR, Column.DPORT);
+        createIndex(db, Index.IDX_ACCESS_DADDR, Table.ACCESS, Column.DADDR);
+        createIndex(db, Index.IDX_ACCESS_BLOCK, Table.ACCESS, Column.BLOCK);
     }
 
     private void createTableDns(SQLiteDatabase db) {
         Log.i(TAG, "Creating dns table");
-        db.execSQL("CREATE TABLE dns (" +
+        db.execSQL("CREATE TABLE "+Table.DNS.getValue()+" (" +
                 " ID INTEGER PRIMARY KEY AUTOINCREMENT" +
-                ", time INTEGER NOT NULL" +
-                ", qname TEXT NOT NULL" +
-                ", aname TEXT NOT NULL" +
-                ", resource TEXT NOT NULL" +
-                ", ttl INTEGER" +
+                ", "+Column.TIME.getValue()+" INTEGER NOT NULL" +
+                ", "+Column.QNAME.getValue()+" TEXT NOT NULL" +
+                ", "+Column.ANAME.getValue()+" TEXT NOT NULL" +
+                ", "+Column.RESOURCE.getValue()+" TEXT NOT NULL" +
+                ", "+Column.TTL.getValue()+" INTEGER" +
                 ");");
-        db.execSQL("CREATE UNIQUE INDEX idx_dns ON dns(qname, aname, resource)");
-        db.execSQL("CREATE INDEX idx_dns_resource ON dns(resource)");
+        createUniqueIndex(db, Index.IDX_DNS, Table.DNS, Column.QNAME, Column.ANAME, Column.RESOURCE);
+        createIndex(db, Index.IDX_DNS_RESOURCE, Table.DNS, Column.RESOURCE);
     }
 
     private void createTableForward(SQLiteDatabase db) {
         Log.i(TAG, "Creating forward table");
-        db.execSQL("CREATE TABLE forward (" +
+        db.execSQL("CREATE TABLE "+Table.FORWARD.getValue()+" (" +
                 " ID INTEGER PRIMARY KEY AUTOINCREMENT" +
-                ", protocol INTEGER NOT NULL" +
-                ", dport INTEGER NOT NULL" +
-                ", raddr TEXT NOT NULL" +
-                ", rport INTEGER NOT NULL" +
-                ", ruid INTEGER NOT NULL" +
+                ", "+Column.PROTOCOL.getValue()+" INTEGER NOT NULL" +
+                ", "+Column.DPORT.getValue()+" INTEGER NOT NULL" +
+                ", "+Column.RADDR +" TEXT NOT NULL" +
+                ", "+Column.RPORT +" INTEGER NOT NULL" +
+                ", "+Column.RUID +" INTEGER NOT NULL" +
                 ");");
-        db.execSQL("CREATE UNIQUE INDEX idx_forward ON forward(protocol, dport)");
+        createUniqueIndex(db, Index.IDX_FORWARD, Table.FORWARD, Column.PROTOCOL, Column.DPORT);
     }
 
     private void createTableApp(SQLiteDatabase db) {
         Log.i(TAG, "Creating app table");
-        db.execSQL("CREATE TABLE app (" +
+        db.execSQL("CREATE TABLE "+Table.APP.getValue()+" (" +
                 " ID INTEGER PRIMARY KEY AUTOINCREMENT" +
-                ", package TEXT" +
-                ", label TEXT" +
-                ", system INTEGER  NOT NULL" +
-                ", internet INTEGER NOT NULL" +
-                ", enabled INTEGER NOT NULL" +
+                ", "+Column.PACKAGE.getValue()+" TEXT" +
+                ", "+Column.LABEL.getValue()+" TEXT" +
+                ", "+Column.SYSTEM.getValue()+" INTEGER  NOT NULL" +
+                ", "+Column.INTERNET.getValue()+" INTEGER NOT NULL" +
+                ", "+Column.ENABLED.getValue()+" INTEGER NOT NULL" +
                 ");");
-        db.execSQL("CREATE UNIQUE INDEX idx_package ON app(package)");
+        createUniqueIndex(db, Index.IDX_PACKAGE, Table.APP, Column.PACKAGE);
     }
 
-    private boolean columnExists(SQLiteDatabase db, String table, String column) {
+    private boolean isColumnMissing(SQLiteDatabase db, String table, String column) {
         Cursor cursor = null;
         try {
             cursor = db.rawQuery("SELECT * FROM " + table + " LIMIT 0", null);
-            return (cursor.getColumnIndex(column) >= 0);
+            return (cursor.getColumnIndex(column) < 0);
         } catch (Throwable ex) {
             Log.e(TAG, ex.toString() + "\n" + Log.getStackTraceString(ex));
-            return false;
+            return true;
         } finally {
             if (cursor != null)
                 cursor.close();
@@ -240,49 +246,40 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.beginTransaction();
         try {
             if (oldVersion < 2) {
-                if (!columnExists(db, "log", "version"))
-                    db.execSQL("ALTER TABLE log ADD COLUMN version INTEGER");
-                if (!columnExists(db, "log", "protocol"))
-                    db.execSQL("ALTER TABLE log ADD COLUMN protocol INTEGER");
-                if (!columnExists(db, "log", "uid"))
-                    db.execSQL("ALTER TABLE log ADD COLUMN uid INTEGER");
+                addColumn(db, Table.LOG, Column.VERSION, Column.Type.INTEGER);
+                addColumn(db, Table.LOG, Column.PROTOCOL, Column.Type.INTEGER);
+                addColumn(db, Table.LOG, Column.UID, Column.Type.INTEGER);
                 oldVersion = 2;
             }
             if (oldVersion < 3) {
-                if (!columnExists(db, "log", "port"))
-                    db.execSQL("ALTER TABLE log ADD COLUMN port INTEGER");
-                if (!columnExists(db, "log", "flags"))
-                    db.execSQL("ALTER TABLE log ADD COLUMN flags TEXT");
+                addColumn(db, Table.LOG, Column.PORT, Column.Type.INTEGER);
+                addColumn(db, Table.LOG, Column.FLAGS, Column.Type.TEXT);
                 oldVersion = 3;
             }
             if (oldVersion < 4) {
-                if (!columnExists(db, "log", "connection"))
-                    db.execSQL("ALTER TABLE log ADD COLUMN connection INTEGER");
+                addColumn(db, Table.LOG, Column.CONNECTION, Column.Type.INTEGER);
                 oldVersion = 4;
             }
             if (oldVersion < 5) {
-                if (!columnExists(db, "log", "interactive"))
-                    db.execSQL("ALTER TABLE log ADD COLUMN interactive INTEGER");
+                addColumn(db, Table.LOG, Column.INTERACTIVE, Column.Type.INTEGER);
                 oldVersion = 5;
             }
             if (oldVersion < 6) {
-                if (!columnExists(db, "log", "allowed"))
-                    db.execSQL("ALTER TABLE log ADD COLUMN allowed INTEGER");
+                addColumn(db, Table.LOG, Column.ALLOWED, Column.Type.INTEGER);
                 oldVersion = 6;
             }
             if (oldVersion < 7) {
-                db.execSQL("DROP TABLE log");
+                dropTable(db, Table.LOG);
                 createTableLog(db);
                 oldVersion = 8;
             }
             if (oldVersion < 8) {
-                if (!columnExists(db, "log", "data"))
-                    db.execSQL("ALTER TABLE log ADD COLUMN data TEXT");
-                db.execSQL("DROP INDEX idx_log_source");
-                db.execSQL("DROP INDEX idx_log_dest");
-                db.execSQL("CREATE INDEX idx_log_source ON log(saddr)");
-                db.execSQL("CREATE INDEX idx_log_dest ON log(daddr)");
-                db.execSQL("CREATE INDEX IF NOT EXISTS idx_log_uid ON log(uid)");
+                addColumn(db, Table.LOG, Column.DATA, Column.Type.TEXT);
+                dropIndex(db, Index.IDX_LOG_SOURCE);
+                dropIndex(db, Index.IDX_LOG_DEST);
+                createIndex(db, Index.IDX_LOG_SOURCE, Table.LOG, Column.SADDR);
+                createIndex(db, Index.IDX_LOG_DEST, Table.LOG, Column.DADDR);
+                createIndexIfNotExists(db, Index.IDX_LOG_UID, Table.LOG, Column.UID);
                 oldVersion = 8;
             }
             if (oldVersion < 9) {
@@ -290,20 +287,20 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 oldVersion = 9;
             }
             if (oldVersion < 10) {
-                db.execSQL("DROP TABLE log");
-                db.execSQL("DROP TABLE access");
+                dropTable(db, Table.LOG);
+                dropTable(db, Table.ACCESS);
                 createTableLog(db);
                 createTableAccess(db);
                 oldVersion = 10;
             }
             if (oldVersion < 12) {
-                db.execSQL("DROP TABLE access");
+                dropTable(db, Table.ACCESS);
                 createTableAccess(db);
                 oldVersion = 12;
             }
             if (oldVersion < 13) {
-                db.execSQL("CREATE INDEX IF NOT EXISTS idx_log_dport ON log(dport)");
-                db.execSQL("CREATE INDEX IF NOT EXISTS idx_log_dname ON log(dname)");
+                createIndexIfNotExists(db, Index.IDX_LOG_DPORT, Table.LOG, Column.DPORT);
+                createIndexIfNotExists(db, Index.IDX_LOG_DNAME, Table.LOG, Column.DNAME);
                 oldVersion = 13;
             }
             if (oldVersion < 14) {
@@ -311,7 +308,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 oldVersion = 14;
             }
             if (oldVersion < 15) {
-                db.execSQL("DROP TABLE access");
+                dropTable(db, Table.ACCESS);
                 createTableAccess(db);
                 oldVersion = 15;
             }
@@ -320,26 +317,23 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 oldVersion = 16;
             }
             if (oldVersion < 17) {
-                if (!columnExists(db, "access", "sent"))
-                    db.execSQL("ALTER TABLE access ADD COLUMN sent INTEGER");
-                if (!columnExists(db, "access", "received"))
-                    db.execSQL("ALTER TABLE access ADD COLUMN received INTEGER");
+                addColumn(db, Table.ACCESS, Column.SENT, Column.Type.INTEGER);
+                addColumn(db, Table.ACCESS, Column.RECEIVED, Column.Type.INTEGER);
                 oldVersion = 17;
             }
             if (oldVersion < 18) {
-                db.execSQL("CREATE INDEX IF NOT EXISTS idx_access_block ON access(block)");
-                db.execSQL("DROP INDEX idx_dns");
-                db.execSQL("CREATE UNIQUE INDEX IF NOT EXISTS idx_dns ON dns(qname, aname, resource)");
-                db.execSQL("CREATE INDEX IF NOT EXISTS idx_dns_resource ON dns(resource)");
+                createIndexIfNotExists(db, Index.IDX_ACCESS_BLOCK, Table.ACCESS, Column.BLOCK);
+                dropIndex(db, Index.IDX_DNS);
+                createUniqueIndexIfNotExists(db, Index.IDX_DNS, Table.DNS, Column.QNAME, Column.ANAME, Column.RESOURCE);
+                createIndexIfNotExists(db, Index.IDX_DNS_RESOURCE, Table.DNS, Column.RESOURCE);
                 oldVersion = 18;
             }
             if (oldVersion < 19) {
-                if (!columnExists(db, "access", "connections"))
-                    db.execSQL("ALTER TABLE access ADD COLUMN connections INTEGER");
+                addColumn(db, Table.ACCESS, Column.CONNECTIONS, Column.Type.INTEGER);
                 oldVersion = 19;
             }
             if (oldVersion < 20) {
-                db.execSQL("CREATE INDEX IF NOT EXISTS idx_access_daddr ON access(daddr)");
+                createIndexIfNotExists(db, Index.IDX_ACCESS_DADDR, Table.ACCESS, Column.DADDR);
                 oldVersion = 20;
             }
             if (oldVersion < 21) {
@@ -361,8 +355,47 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         }
     }
 
-    // Log
+    // region Operations
+    private void dropTable(SQLiteDatabase db, Table table) {
+        db.execSQL("DROP TABLE "+table);
+    }
 
+    private void addColumn(SQLiteDatabase db, Table table, Column column, Column.Type type) {
+        if (isColumnMissing(db, table.getValue(), column.getValue()))
+            db.execSQL("ALTER TABLE "+table.getValue()+" ADD COLUMN "+column.getValue()+" "+type.getValue());
+    }
+
+    private void dropIndex(SQLiteDatabase db, Index index) {
+        db.execSQL("DROP INDEX "+index.getValue());
+    }
+
+    private void createIndex(SQLiteDatabase db, Index index, Table table, Column column) {
+        db.execSQL(
+            "CREATE INDEX "+index.getValue()+" ON "+table.getValue()+"("+column.getValue()+")"
+        );
+    }
+    private void createIndexIfNotExists(SQLiteDatabase db, Index index, Table table, Column column) {
+        db.execSQL(
+            "CREATE INDEX IF NOT EXISTS "+index.getValue()+ " ON "+table.getValue()+"("+column.getValue()+")"
+        );
+    }
+    private void createUniqueIndex(SQLiteDatabase db, Index index, Table table, Column... column) {
+        db.execSQL(
+            "CREATE UNIQUE INDEX "+index.getValue()+ " ON "+table.getValue()+"("+ getColumnList(column) +")"
+        );
+    }
+    private void createUniqueIndexIfNotExists(SQLiteDatabase db, Index index, Table table, Column... column) {
+        db.execSQL(
+            "CREATE INDEX IF NOT EXISTS "+index.getValue()+ " ON "+table.getValue()+"("+ getColumnList(column) +")"
+        );
+    }
+    private String getColumnList(Column... column) {
+        String indexes = Arrays.toString(column);
+        return indexes.substring(1, indexes.length()-1);
+    }
+    // endregion
+
+    // Log
     public void insertLog(Packet packet, String dname, int connection, boolean interactive) {
         lock.writeLock().lock();
         try {
@@ -370,46 +403,46 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             db.beginTransactionNonExclusive();
             try {
                 ContentValues cv = new ContentValues();
-                cv.put("time", packet.time);
-                cv.put("version", packet.version);
+                cv.put(Column.TIME.getValue(), packet.time);
+                cv.put(Column.VERSION.getValue(), packet.version);
 
                 if (packet.protocol < 0)
-                    cv.putNull("protocol");
+                    cv.putNull(Column.PROTOCOL.getValue());
                 else
-                    cv.put("protocol", packet.protocol);
+                    cv.put(Column.PROTOCOL.getValue(), packet.protocol);
 
-                cv.put("flags", packet.flags);
+                cv.put(Column.FLAGS.getValue(), packet.flags);
 
-                cv.put("saddr", packet.saddr);
+                cv.put(Column.SADDR.getValue(), packet.saddr);
                 if (packet.sport < 0)
-                    cv.putNull("sport");
+                    cv.putNull(Column.SPORT.getValue());
                 else
-                    cv.put("sport", packet.sport);
+                    cv.put(Column.SPORT.getValue(), packet.sport);
 
-                cv.put("daddr", packet.daddr);
+                cv.put(Column.DADDR.getValue(), packet.daddr);
                 if (packet.dport < 0)
-                    cv.putNull("dport");
+                    cv.putNull(Column.DPORT.getValue());
                 else
-                    cv.put("dport", packet.dport);
+                    cv.put(Column.DPORT.getValue(), packet.dport);
 
                 if (dname == null)
-                    cv.putNull("dname");
+                    cv.putNull(Column.DNAME.getValue());
                 else
-                    cv.put("dname", dname);
+                    cv.put(Column.DNAME.getValue(), dname);
 
-                cv.put("data", packet.data);
+                cv.put(Column.DATA.getValue(), packet.data);
 
                 if (packet.uid < 0)
-                    cv.putNull("uid");
+                    cv.putNull(Column.UID.getValue());
                 else
-                    cv.put("uid", packet.uid);
+                    cv.put(Column.UID.getValue(), packet.uid);
 
-                cv.put("allowed", packet.allowed ? 1 : 0);
+                cv.put(Column.ALLOWED.getValue(), packet.allowed ? 1 : 0);
 
-                cv.put("connection", connection);
-                cv.put("interactive", interactive ? 1 : 0);
+                cv.put(Column.CONNECTION.getValue(), connection);
+                cv.put(Column.INTERACTIVE.getValue(), interactive ? 1 : 0);
 
-                if (db.insert("log", null, cv) == -1)
+                if (db.insert(Table.LOG.getValue(), null, cv) == -1)
                     Log.e(TAG, "Insert log failed");
 
                 db.setTransactionSuccessful();
@@ -430,9 +463,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             db.beginTransactionNonExclusive();
             try {
                 if (uid < 0)
-                    db.delete("log", null, new String[]{});
+                    db.delete(Table.LOG.getValue(), null, new String[]{});
                 else
-                    db.delete("log", "uid = ?", new String[]{Integer.toString(uid)});
+                    db.delete(Table.LOG.getValue(), Column.UID.getValue()+" = ?", new String[]{Integer.toString(uid)});
 
                 db.setTransactionSuccessful();
             } finally {
@@ -454,7 +487,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             db.beginTransactionNonExclusive();
             try {
                 // There an index on time
-                int rows = db.delete("log", "time < ?", new String[]{Long.toString(time)});
+                int rows = db.delete(Table.LOG.getValue(), Column.TIME.getValue()+" < ?", new String[]{Long.toString(time)});
                 Log.i(TAG, "Cleanup log" +
                         " before=" + SimpleDateFormat.getDateTimeInstance().format(new Date(time)) +
                         " rows=" + rows);
@@ -474,9 +507,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             SQLiteDatabase db = this.getReadableDatabase();
             // There is an index on time
             // There is no index on protocol/allowed for write performance
-            String query = "SELECT ID AS _id, *";
-            query += " FROM log";
-            query += " WHERE (0 = 1";
+            String query = "SELECT ID AS _id, *"+
+                    " FROM " + Table.LOG.getValue() +
+                    " WHERE (0 = 1";
             if (udp)
                 query += " OR protocol = 17";
             if (tcp)
@@ -489,7 +522,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             if (blocked)
                 query += " OR allowed = 0";
             query += ")";
-            query += " ORDER BY time DESC";
+            query += " ORDER BY "+Column.TIME+" DESC";
             return db.rawQuery(query, new String[]{});
         } finally {
             lock.readLock().unlock();
@@ -501,10 +534,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         try {
             SQLiteDatabase db = this.getReadableDatabase();
             // There is an index on daddr, dname, dport and uid
-            String query = "SELECT ID AS _id, *";
-            query += " FROM log";
-            query += " WHERE daddr LIKE ? OR dname LIKE ? OR dport = ? OR uid = ?";
-            query += " ORDER BY time DESC";
+            String query = "SELECT ID AS _id, *"+
+            " FROM "+Table.LOG.getValue()+
+            " WHERE "+Column.DADDR.getValue()+" LIKE ? OR "+Column.DNAME.getValue()+" LIKE ? OR "+Column.DPORT.getValue()+" = ? OR "+Column.UID.getValue()+" = ?"+
+            " ORDER BY "+Column.TIME.getValue()+" DESC";
             return db.rawQuery(query, new String[]{"%" + find + "%", "%" + find + "%", find, find});
         } finally {
             lock.readLock().unlock();
@@ -522,13 +555,13 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             db.beginTransactionNonExclusive();
             try {
                 ContentValues cv = new ContentValues();
-                cv.put("time", packet.time);
-                cv.put("allowed", packet.allowed ? 1 : 0);
+                cv.put(Column.TIME.getValue(), packet.time);
+                cv.put(Column.ALLOWED.getValue(), packet.allowed ? 1 : 0);
                 if (block >= 0)
-                    cv.put("block", block);
+                    cv.put(Column.BLOCK.getValue(), block);
 
                 // There is a segmented index on uid, version, protocol, daddr and dport
-                rows = db.update("access", cv, "uid = ? AND version = ? AND protocol = ? AND daddr = ? AND dport = ?",
+                rows = db.update(Table.ACCESS.getValue(), cv, Column.UID.getValue()+" = ? AND "+Column.VERSION.getValue()+" = ? AND "+Column.PROTOCOL.getValue()+" = ? AND "+Column.DADDR.getValue()+" = ? AND "+Column.DPORT.getValue()+" = ?",
                         new String[]{
                                 Integer.toString(packet.uid),
                                 Integer.toString(packet.version),
@@ -537,15 +570,15 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                                 Integer.toString(packet.dport)});
 
                 if (rows == 0) {
-                    cv.put("uid", packet.uid);
-                    cv.put("version", packet.version);
-                    cv.put("protocol", packet.protocol);
-                    cv.put("daddr", dname == null ? packet.daddr : dname);
-                    cv.put("dport", packet.dport);
+                    cv.put(Column.UID.getValue(), packet.uid);
+                    cv.put(Column.VERSION.getValue(), packet.version);
+                    cv.put(Column.PROTOCOL.getValue(), packet.protocol);
+                    cv.put(Column.DADDR.getValue(), dname == null ? packet.daddr : dname);
+                    cv.put(Column.DPORT.getValue(), packet.dport);
                     if (block < 0)
-                        cv.put("block", block);
+                        cv.put(Column.BLOCK.getValue(), block);
 
-                    if (db.insert("access", null, cv) == -1)
+                    if (db.insert(Table.ACCESS.getValue(), null, cv) == -1)
                         Log.e(TAG, "Insert access failed");
                 } else if (rows != 1)
                     Log.e(TAG, "Update access failed rows=" + rows);
@@ -569,7 +602,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             db.beginTransactionNonExclusive();
             try {
                 // There is a segmented index on uid, version, protocol, daddr and dport
-                String selection = "uid = ? AND version = ? AND protocol = ? AND daddr = ? AND dport = ?";
+                String selection = Column.UID.getValue() + " = ? AND "
+                        + Column.VERSION.getValue() + " = ?  AND "
+                        + Column.PROTOCOL.getValue() + " = ? AND "
+                        + Column.DADDR.getValue() + " = ?  AND "
+                        + Column.DPORT.getValue() + " = ?";
                 String[] selectionArgs = new String[]{
                         Integer.toString(usage.Uid),
                         Integer.toString(usage.Version),
@@ -578,13 +615,13 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                         Integer.toString(usage.DPort)
                 };
 
-                try (Cursor cursor = db.query("access", new String[]{"sent", "received", "connections"}, selection, selectionArgs, null, null, null)) {
+                try (Cursor cursor = db.query(Table.ACCESS.getValue(), new String[]{Column.SENT.getValue(), Column.RECEIVED.getValue(), Column.CONNECTIONS.getValue()}, selection, selectionArgs, null, null, null)) {
                     long sent = 0;
                     long received = 0;
                     int connections = 0;
-                    int colSent = cursor.getColumnIndex("sent");
-                    int colReceived = cursor.getColumnIndex("received");
-                    int colConnections = cursor.getColumnIndex("connections");
+                    int colSent = cursor.getColumnIndex(Column.SENT.getValue());
+                    int colReceived = cursor.getColumnIndex(Column.RECEIVED.getValue());
+                    int colConnections = cursor.getColumnIndex(Column.CONNECTIONS.getValue());
                     if (cursor.moveToNext()) {
                         sent = cursor.isNull(colSent) ? 0 : cursor.getLong(colSent);
                         received = cursor.isNull(colReceived) ? 0 : cursor.getLong(colReceived);
@@ -592,11 +629,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                     }
 
                     ContentValues cv = new ContentValues();
-                    cv.put("sent", sent + usage.Sent);
-                    cv.put("received", received + usage.Received);
-                    cv.put("connections", connections + 1);
+                    cv.put(Column.SENT.getValue(), sent + usage.Sent);
+                    cv.put(Column.RECEIVED.getValue(), received + usage.Received);
+                    cv.put(Column.CONNECTIONS.getValue(), connections + 1);
 
-                    int rows = db.update("access", cv, selection, selectionArgs);
+                    int rows = db.update(Table.ACCESS.getValue(), cv, selection, selectionArgs);
                     if (rows != 1)
                         Log.e(TAG, "Update usage failed rows=" + rows);
                 }
@@ -619,10 +656,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             db.beginTransactionNonExclusive();
             try {
                 ContentValues cv = new ContentValues();
-                cv.put("block", block);
-                cv.put("allowed", -1);
+                cv.put(Column.BLOCK.getValue(), block);
+                cv.put(Column.ALLOWED.getValue(), -1);
 
-                if (db.update("access", cv, "ID = ?", new String[]{Long.toString(id)}) != 1)
+                if (db.update(Table.ACCESS.getValue(), cv, "ID = ?", new String[]{Long.toString(id)}) != 1)
                     Log.e(TAG, "Set access failed");
 
                 db.setTransactionSuccessful();
@@ -642,7 +679,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             SQLiteDatabase db = this.getWritableDatabase();
             db.beginTransactionNonExclusive();
             try {
-                db.delete("access", null, null);
+                db.delete(Table.ACCESS.getValue(), null, null);
 
                 db.setTransactionSuccessful();
             } finally {
@@ -664,9 +701,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 // There is a segmented index on uid
                 // There is an index on block
                 if (keeprules)
-                    db.delete("access", "uid = ? AND block < 0", new String[]{Integer.toString(uid)});
+                    db.delete(Table.ACCESS.getValue(), Column.UID.getValue() + " = ? AND " + Column.BLOCK.getValue() + " < 0", new String[]{Integer.toString(uid)});
                 else
-                    db.delete("access", "uid = ?", new String[]{Integer.toString(uid)});
+                    db.delete(Table.ACCESS.getValue(), Column.UID.getValue() + " = ?", new String[]{Integer.toString(uid)});
 
                 db.setTransactionSuccessful();
             } finally {
@@ -687,11 +724,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             db.beginTransactionNonExclusive();
             try {
                 ContentValues cv = new ContentValues();
-                cv.putNull("sent");
-                cv.putNull("received");
-                cv.putNull("connections");
-                db.update("access", cv,
-                        (uid < 0 ? null : "uid = ?"),
+                cv.putNull(Column.SENT.getValue());
+                cv.putNull(Column.RECEIVED.getValue());
+                cv.putNull(Column.CONNECTIONS.getValue());
+                db.update(Table.ACCESS.getValue(), cv,
+                        (uid < 0 ? null : Column.UID.getValue() + " = ?"),
                         (uid < 0 ? null : new String[]{Integer.toString(uid)}));
 
                 db.setTransactionSuccessful();
@@ -711,12 +748,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             SQLiteDatabase db = this.getReadableDatabase();
             // There is a segmented index on uid
             // There is no index on time for write performance
-            String query = "SELECT a.ID AS _id, a.*";
-            query += ", (SELECT COUNT(DISTINCT d.qname) FROM dns d WHERE d.resource IN (SELECT d1.resource FROM dns d1 WHERE d1.qname = a.daddr)) count";
-            query += " FROM access a";
-            query += " WHERE a.uid = ?";
-            query += " ORDER BY a.time DESC";
-            query += " LIMIT 250";
+            String query = "SELECT a.ID AS _id, a.*"+
+            ", (SELECT COUNT(DISTINCT d."+Column.QNAME.getValue()+") FROM "+Table.DNS.getValue()+" d WHERE d."+Column.RESOURCE.getValue()+" IN (SELECT d1."+Column.RESOURCE.getValue()+" FROM "+Table.DNS.getValue()+" d1 WHERE d1."+Column.QNAME.getValue()+" = a."+Column.DADDR.getValue()+")) count"+
+            " FROM "+Table.ACCESS.getValue()+" a"+
+            " WHERE a."+Column.UID.getValue()+" = ?"+
+            " ORDER BY a."+Column.TIME.getValue()+" DESC"+
+            " LIMIT 250";
             return db.rawQuery(query, new String[]{Integer.toString(uid)});
         } finally {
             lock.readLock().unlock();
@@ -729,7 +766,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             SQLiteDatabase db = this.getReadableDatabase();
             // There is a segmented index on uid
             // There is an index on block
-            return db.query("access", null, "block >= 0", null, null, null, "uid");
+            return db.query(Table.ACCESS.getValue(), null, Column.BLOCK.getValue() + " >= 0", null, null, null, Column.UID.getValue());
         } finally {
             lock.readLock().unlock();
         }
@@ -741,13 +778,13 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             SQLiteDatabase db = this.getReadableDatabase();
             // There is a segmented index on uid, block and daddr
             // There is no index on allowed and time for write performance
-            String query = "SELECT MAX(time) AS time, daddr, allowed";
-            query += " FROM access";
-            query += " WHERE uid = ?";
-            query += " AND block < 0";
-            query += " AND time >= ?";
-            query += " GROUP BY daddr, allowed";
-            query += " ORDER BY time DESC";
+            String query = "SELECT MAX("+Column.TIME.getValue()+") AS "+Column.TIME.getValue()+", "+Column.DADDR.getValue()+", "+Column.ALLOWED.getValue()+
+            " FROM "+Table.ACCESS.getValue()+
+            " WHERE "+Column.UID.getValue()+" = ?"+
+            " AND "+Column.BLOCK.getValue()+" < 0"+
+            " AND "+Column.TIME.getValue()+" >= ?"+
+            " GROUP BY "+Column.DADDR.getValue()+", "+Column.ALLOWED.getValue()+
+            " ORDER BY "+Column.TIME.getValue()+" DESC";
             if (limit > 0)
                 query += " LIMIT " + limit;
             return db.rawQuery(query, new String[]{Integer.toString(uid), Long.toString(since)});
@@ -768,7 +805,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             SQLiteDatabase db = this.getReadableDatabase();
             // There is a segmented index on uid
             // There is an index on block
-            long hosts = db.compileStatement("SELECT COUNT(*) FROM access WHERE block >= 0 AND uid =" + uid).simpleQueryForLong();
+            long hosts = db.compileStatement(
+                    "SELECT COUNT(*)" +
+                        " FROM "+Table.ACCESS.getValue()+
+                        " WHERE "+Column.BLOCK.getValue()+" >= 0" +
+                        " AND "+Column.UID.getValue()+" =" + uid
+            ).simpleQueryForLong();
             synchronized (mapUidHosts) {
                 mapUidHosts.put(uid, hosts);
             }
@@ -788,23 +830,29 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             try {
                 int ttl = rr.TTL;
 
-                int min = Integer.parseInt(prefs.getString("ttl", "259200"));
+                int min = prefs.getInt(Preferences.TTL.getKey(), Preferences.TTL.getDefaultValue());
                 if (ttl < min)
                     ttl = min;
 
                 ContentValues cv = new ContentValues();
-                cv.put("time", rr.Time);
-                cv.put("ttl", ttl * 1000L);
+                cv.put(Column.TIME.getValue(), rr.Time);
+                cv.put(Column.TTL.getValue(), ttl * 1000L);
 
-                int rows = db.update("dns", cv, "qname = ? AND aname = ? AND resource = ?",
-                        new String[]{rr.QName, rr.AName, rr.Resource});
+                int rows = db.update(
+                        Table.DNS.getValue(),
+                        cv,
+                        Column.QNAME.getValue() + " = ? AND "
+                                +Column.ANAME.getValue()+" = ? AND "
+                                +Column.RESOURCE.getValue()+" = ?",
+                        new String[]{rr.QName, rr.AName, rr.Resource}
+                );
 
                 if (rows == 0) {
-                    cv.put("qname", rr.QName);
-                    cv.put("aname", rr.AName);
-                    cv.put("resource", rr.Resource);
+                    cv.put(Column.QNAME.getValue(), rr.QName);
+                    cv.put(Column.ANAME.getValue(), rr.AName);
+                    cv.put(Column.RESOURCE.getValue(), rr.Resource);
 
-                    if (db.insert("dns", null, cv) == -1)
+                    if (db.insert(Table.DNS.getValue(), null, cv) == -1)
                         Log.e(TAG, "Insert dns failed");
                     else
                         rows = 1;
@@ -830,7 +878,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             try {
                 // There is no index on time for write performance
                 long now = new Date().getTime();
-                db.execSQL("DELETE FROM dns WHERE time + ttl < " + now);
+                db.delete(Table.DNS.getValue(), Column.TIME.getValue() + " + " + Column.TTL + " < " + now, null);
                 Log.i(TAG, "Cleanup DNS");
 
                 db.setTransactionSuccessful();
@@ -848,7 +896,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             SQLiteDatabase db = this.getWritableDatabase();
             db.beginTransactionNonExclusive();
             try {
-                db.delete("dns", null, new String[]{});
+                db.delete(Table.DNS.getValue(), null, new String[]{});
 
                 db.setTransactionSuccessful();
             } finally {
@@ -864,11 +912,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         try {
             SQLiteDatabase db = this.getReadableDatabase();
             // There is a segmented index on resource
-            String query = "SELECT d.qname";
-            query += " FROM dns AS d";
-            query += " WHERE d.resource = '" + ip.replace("'", "''") + "'";
-            query += " ORDER BY d.qname";
-            query += " LIMIT 1";
+            String query = "SELECT d."+Column.QNAME.getValue()+
+            " FROM "+Table.DNS.getValue()+" AS d"+
+            " WHERE d."+Column.RESOURCE.getValue()+" = '" + ip.replace("'", "''") + "'"+
+            " ORDER BY d."+Column.QNAME.getValue()+
+            " LIMIT 1";
             // There is no way to known for sure which domain name an app used, so just pick the first one
             return db.compileStatement(query).simpleQueryForString();
         } catch (SQLiteDoneException ignored) {
@@ -883,12 +931,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         lock.readLock().lock();
         try {
             SQLiteDatabase db = this.getReadableDatabase();
-            String query = "SELECT DISTINCT d2.qname";
-            query += " FROM dns d1";
-            query += " JOIN dns d2";
-            query += "   ON d2.resource = d1.resource AND d2.id <> d1.id";
-            query += " WHERE d1.qname = ?";
-            query += " ORDER BY d2.qname";
+            String query = "SELECT DISTINCT d2."+Column.QNAME.getValue()+
+            " FROM "+Table.DNS.getValue()+" d1"+
+            " JOIN "+Table.DNS.getValue()+" d2"+
+            " ON d2."+Column.RESOURCE.getValue()+" = d1."+Column.RESOURCE.getValue()+" AND d2.id <> d1.id"+
+            " WHERE d1."+Column.QNAME.getValue()+" = ?"+
+            " ORDER BY d2."+Column.QNAME.getValue();
             return db.rawQuery(query, new String[]{qname});
         } finally {
             lock.readLock().unlock();
@@ -901,9 +949,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             SQLiteDatabase db = this.getReadableDatabase();
             // There is an index on resource
             // There is a segmented index on qname
-            String query = "SELECT ID AS _id, *";
-            query += " FROM dns";
-            query += " ORDER BY resource, qname";
+            String query = "SELECT ID AS _id, *"+
+            " FROM "+Table.DNS.getValue()+
+            " ORDER BY "+Column.RESOURCE.getValue()+", "+Column.QNAME.getValue();
             return db.rawQuery(query, new String[]{});
         } finally {
             lock.readLock().unlock();
@@ -918,14 +966,13 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
             // There is a segmented index on dns.qname
             // There is an index on access.daddr and access.block
-            String query = "SELECT a.uid, a.version, a.protocol, a.daddr, d.resource, a.dport, a.block, d.time, d.ttl";
-            query += " FROM access AS a";
-            query += " LEFT JOIN dns AS d";
-            query += "   ON d.qname = a.daddr";
-            query += " WHERE a.block >= 0";
-            query += " AND (d.time IS NULL OR d.time + d.ttl >= " + now + ")";
-            if (dname != null)
-                query += " AND a.daddr = ?";
+            String query = "SELECT a."+Column.UID.getValue()+", a."+Column.VERSION.getValue()+", a."+Column.PROTOCOL.getValue()+", a."+Column.DADDR.getValue()+", d."+Column.RESOURCE.getValue()+", a."+Column.DPORT.getValue()+", a."+Column.BLOCK.getValue()+", d."+Column.TIME.getValue()+", d."+Column.TTL+
+            " FROM "+Table.ACCESS.getValue()+" AS a"+
+            " LEFT JOIN "+Table.DNS.getValue()+" AS d"+
+            " ON d."+Column.QNAME.getValue()+" = a."+Column.DADDR.getValue()+
+            " WHERE a."+Column.BLOCK.getValue()+" >= 0"+
+            " AND (d."+Column.TIME.getValue()+" IS NULL OR d."+Column.TIME.getValue()+" + d."+Column.TTL+" >= " + now + ")";
+            if (dname != null) query += " AND a."+Column.DADDR.getValue()+" = ?";
 
             return db.rawQuery(query, dname == null ? new String[]{} : new String[]{dname});
         } finally {
@@ -942,13 +989,13 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             db.beginTransactionNonExclusive();
             try {
                 ContentValues cv = new ContentValues();
-                cv.put("protocol", protocol);
-                cv.put("dport", dport);
-                cv.put("raddr", raddr);
-                cv.put("rport", rport);
-                cv.put("ruid", ruid);
+                cv.put(Column.PROTOCOL.getValue(), protocol);
+                cv.put(Column.DPORT.getValue(), dport);
+                cv.put(Column.RADDR.getValue(), raddr);
+                cv.put(Column.RPORT.getValue(), rport);
+                cv.put(Column.RUID.getValue(), ruid);
 
-                if (db.insert("forward", null, cv) < 0)
+                if (db.insert(Table.FORWARD.getValue(), null, cv) < 0)
                     Log.e(TAG, "Insert forward failed");
 
                 db.setTransactionSuccessful();
@@ -968,7 +1015,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             SQLiteDatabase db = this.getWritableDatabase();
             db.beginTransactionNonExclusive();
             try {
-                db.delete("forward", null, null);
+                db.delete(Table.FORWARD.getValue(), null, null);
 
                 db.setTransactionSuccessful();
             } finally {
@@ -987,8 +1034,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             SQLiteDatabase db = this.getWritableDatabase();
             db.beginTransactionNonExclusive();
             try {
-                db.delete("forward", "protocol = ? AND dport = ?",
-                        new String[]{Integer.toString(protocol), Integer.toString(dport)});
+                db.delete(Table.FORWARD.getValue(), Column.PROTOCOL.getValue() + " = ? AND " + Column.DPORT.getValue() + " = ?", new String[]{Integer.toString(protocol), Integer.toString(dport)});
 
                 db.setTransactionSuccessful();
             } finally {
@@ -1005,9 +1051,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         lock.readLock().lock();
         try {
             SQLiteDatabase db = this.getReadableDatabase();
-            String query = "SELECT ID AS _id, *";
-            query += " FROM forward";
-            query += " ORDER BY dport";
+            String query = "SELECT ID AS _id, *"+
+            " FROM "+Table.FORWARD.getValue()+
+            " ORDER BY "+Column.DPORT.getValue();
             return db.rawQuery(query, new String[]{});
         } finally {
             lock.readLock().unlock();
@@ -1021,16 +1067,16 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             db.beginTransactionNonExclusive();
             try {
                 ContentValues cv = new ContentValues();
-                cv.put("package", packageName);
+                cv.put(Column.PACKAGE.getValue(), packageName);
                 if (label == null)
-                    cv.putNull("label");
+                    cv.putNull(Column.LABEL.getValue());
                 else
-                    cv.put("label", label);
-                cv.put("system", system ? 1 : 0);
-                cv.put("internet", internet ? 1 : 0);
-                cv.put("enabled", enabled ? 1 : 0);
+                    cv.put(Column.LABEL.getValue(), label);
+                    cv.put(Column.SYSTEM.getValue(), system ? 1 : 0);
+                    cv.put(Column.INTERNET.getValue(), internet ? 1 : 0);
+                    cv.put(Column.ENABLED.getValue(), enabled ? 1 : 0);
 
-                if (db.insert("app", null, cv) < 0)
+                if (db.insert(Table.APP.getValue(), null, cv) < 0)
                     Log.e(TAG, "Insert app failed");
 
                 db.setTransactionSuccessful();
@@ -1048,7 +1094,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             SQLiteDatabase db = this.getReadableDatabase();
 
             // There is an index on package
-            String query = "SELECT * FROM app WHERE package = ?";
+            String query = "SELECT * FROM "+Table.APP.getValue()+
+                    " WHERE "+Column.PACKAGE.getValue()+" = ?";
 
             return db.rawQuery(query, new String[]{packageName});
         } finally {
@@ -1062,7 +1109,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             SQLiteDatabase db = this.getWritableDatabase();
             db.beginTransactionNonExclusive();
             try {
-                db.delete("app", null, null);
+                db.delete(Table.APP.getValue(), null, null);
                 db.setTransactionSuccessful();
             } finally {
                 db.endTransaction();

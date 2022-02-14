@@ -60,8 +60,8 @@
     <string name="setting_dark">Koristi tamnu temu</string>
     <string name="setting_install">Obavijesti o novoj instalaciji</string>
     <string name="setting_screen_on">Primjeni \'kada je zaslon uključen\' pravila</string>
-    <string name="setting_auto">Automatski omogući nakon %1$s minuta</string>
-    <string name="setting_delay">Odgodi isključivanje zaslona za %1$s minuta</string>
+    <string name="setting_auto">Automatski omogući nakon %1$d minuta</string>
+    <string name="setting_delay">Odgodi isključivanje zaslona za %1$d minuta</string>
     <string name="setting_update">Provjeri ažuriranja</string>
     <string name="setting_network_options">Mrežne postavke</string>
     <string name="setting_subnet">Podmrežno usmjeravanje</string>
@@ -92,26 +92,21 @@
     <string name="setting_reset_usage">Resetiraj korištenje mreže</string>
     <string name="setting_show_resolved">Prikaži riješena imena domena</string>
     <string name="setting_block_domains">Blokiraj nazive domena</string>
-    <string name="setting_rcode">Kod odgovora DNS-a: %s</string>
+    <string name="setting_rcode">Kod odgovora DNS-a: %d</string>
     <string name="setting_forwarding">Prosljeđivanje porta</string>
-    <string name="setting_vpn4">VPN IPv4: %s</string>
-    <string name="setting_vpn6">VPN IPv6: %s</string>
-    <string name="setting_dns">VPN DNS: %s</string>
-    <string name="setting_validate">Validate at: %s</string>
-    <string name="setting_ttl">Minimum DNS TTL: %s s</string>
     <string name="setting_socks5_enabled">Koristi SOCKS5 proxy</string>
     <string name="setting_socks5_addr">SOCKS5 adresa: %s</string>
     <string name="setting_socks5_port">SOCKS5 port: %s</string>
     <string name="setting_socks5_username">SOCKS5 korisničko ime: %s</string>
     <string name="setting_socks5_password">SOCKS5 lozinka: %s</string>
-    <string name="setting_pcap_record_size">PCAP veličina zapisa: %s B</string>
-    <string name="setting_pcap_file_size">PCAP max. veličina datoteke: %s MB</string>
-    <string name="setting_watchdog">Watchdog: svakih %s minuta</string>
+    <string name="setting_pcap_record_size">PCAP veličina zapisa: %d B</string>
+    <string name="setting_pcap_file_size">PCAP max. veličina datoteke: %d MB</string>
+    <string name="setting_watchdog">Watchdog: svakih %d minuta</string>
     <string name="setting_stats_category">Obavijest o brzini</string>
     <string name="setting_stats">Prikaži obavijest o brzini</string>
     <string name="setting_stats_top">Prikaži najčešće aplikacije</string>
-    <string name="setting_stats_frequency">Uzorak intervala: %s ms</string>
-    <string name="setting_stats_samples">Broj uzoraka: %s s</string>
+    <string name="setting_stats_frequency">Uzorak intervala: %d ms</string>
+    <string name="setting_stats_samples">Broj uzoraka: %d s</string>
     <string name="setting_backup">Sigurnosno kopiranje</string>
     <string name="setting_export">Izvezi postavke</string>
     <string name="setting_import">Uvezi postavke</string>
@@ -150,7 +145,6 @@
     <string name="summary_socks5_enabled">Samo TCP promet će biti poslan na proxy poslužitelj</string>
     <string name="summary_watchdog">Periodički provjeri da li je NetGuard još pokrenut (unesite nulu da biste onemogućili ovu opciju). To može dovesti do prekomjerne potrošnje baterije.</string>
     <string name="summary_stats">Prikaži grafikon mrežne propusnosti na traci statusa</string>
-    <string-array name="default_wifi_home"></string-array>
     <string name="msg_sure">Jeste li sigurni?</string>
     <string name="msg_started">Primjenjivanje pravila</string>
     <string name="msg_packages">%1$d dopušteno, %2$d blokirano</string>
@@ -171,12 +165,7 @@
     <string name="msg_terms">Donacijom prihvaćate <a href="http://www.netguard.me/#terms">uvjete &amp; odredbe</a></string>
     <string name="msg_dimming">Ako ne možete kliknuti \"U redu\" u sljedećem dijaloškom okviru (zamračivanje zaslona), najvjerojatnije neka druga aplikacija koristi zaslon.</string>
     <string name="msg_mbday">± %1$.3f▲ %2$.3f▼ MB/dan</string>
-    <string name="msg_kbsec">%7.3f KB/s</string>
-    <string name="msg_mbsec">%7.3f MB/s</string>
-    <string name="msg_kb">%1$7.3f▲ %2$7.3f▼ KB</string>
-    <string name="msg_mb">%1$7.3f▲ %2$7.3f▼ MB</string>
-    <string name="msg_gb">%1$7.3f▲ %2$7.3f▼ GB</string>
-    <string name="msg_count">%dx</string>
+
     <string name="msg_doze">Za dosljedne rezultate, optimizacija baterije za Android trebala bi biti isključena za NetGuard.\n\nU sljedećem dijaloškom okviru na vrhu odaberite \"Sve aplikacije\", dodirnite NetGuard na popisu i odaberite i potvrdite \"Ne optimiziraj\".</string>
     <string name="msg_datasaving">Za dosljedne rezultate, Androidove opcije za spremanje podataka trebale bi biti isključene za NetGuard\n\nU sljedećem dijaloškom okviru omogućite opcije \"Pozadinski podaci\" i \"Neograničeno korištenje podataka\"</string>
     <string name="msg_filter">Upotrebom filtriranja, Android će dodijeliti podatke i potrošnju baterije NetGuardu - Android pretpostavlja da NetGuard upotrebljava podatke i baterije, a ne izvorne aplikacije</string>
@@ -226,7 +215,6 @@
     <string name="title_conditions">Uvjeti</string>
     <string name="title_screen_wifi">Dopusti Wi-Fi kada je zaslon uključen</string>
     <string name="title_screen_other">Dopusti mobilne podatke kada je zaslon uključen</string>
-    <string name="title_roaming_symbol">R</string>
     <string name="title_roaming">Blokiraj prilikom roaminga</string>
     <string name="title_lockdown">Dopusti u zaključanom načinu</string>
     <string name="title_related">Filtriraj povezane</string>
@@ -273,9 +261,6 @@
     <string name="title_pro_challenge">Izazov</string>
     <string name="title_pro_reponse">Odgovor</string>
     <string name="title_pro_feature">Ovo je pro funkcija</string>
-    <string name="title_pro_subscription">        A monthly subscriptions of 1 or 2 euros (excluding local taxes) will activate all pro features.
-        You can cancel or manage a subscription via the subscriptions tab in the Play store app.
-    </string>
     <string-array name="themeNames">
         <item>tirkizna/narančasta</item>
         <item>plava/narančasta</item>
@@ -283,9 +268,5 @@
         <item>jantar/plava</item>
         <item>narančasta/siva</item>
         <item>zelena</item>
-    </string-array>
-    <string-array name="protocolNames">
-        <item>UDP</item>
-        <item>TCP</item>
     </string-array>
 </resources>

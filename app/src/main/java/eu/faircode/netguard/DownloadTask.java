@@ -161,7 +161,7 @@ public class DownloadTask extends AsyncTask<Object, Integer, Object> {
 
         TypedValue tv = new TypedValue();
         context.getTheme().resolveAttribute(R.attr.colorOff, tv, true);
-        NotificationCompat.Builder builder = new NotificationCompat.Builder(context, "notify");
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(context, NotificationChannels.Notify.getValue());
         builder.setSmallIcon(R.drawable.ic_file_download_white_24dp)
                 .setContentTitle(context.getString(R.string.app_name))
                 .setContentText(context.getString(R.string.msg_downloading, url.toString()))

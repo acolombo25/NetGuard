@@ -60,8 +60,8 @@
     <string name="setting_dark">Använd mörkt tema</string>
     <string name="setting_install">Meddela vid ny installation</string>
     <string name="setting_screen_on">Tillämpa regler \'när skärmen är påslagen\'</string>
-    <string name="setting_auto">Aktivera automatiskt efter %1$s minuter</string>
-    <string name="setting_delay">Dröj skärmavstängning i %1$s minuter</string>
+    <string name="setting_auto">Aktivera automatiskt efter %1$d minuter</string>
+    <string name="setting_delay">Dröj skärmavstängning i %1$d minuter</string>
     <string name="setting_update">Sök efter uppdateringar</string>
     <string name="setting_network_options">Nätverksinställningar</string>
     <string name="setting_subnet">Subnet routing</string>
@@ -92,26 +92,26 @@
     <string name="setting_reset_usage">Återställ nätverksanvändning</string>
     <string name="setting_show_resolved">Visa lösta domännamn</string>
     <string name="setting_block_domains">Blockera domännamn</string>
-    <string name="setting_rcode">DNS-svarskod: %s</string>
+    <string name="setting_rcode">DNS-svarskod: %d</string>
     <string name="setting_forwarding">Vidarebefordring av port</string>
     <string name="setting_vpn4">VPN-IPv4: %s</string>
     <string name="setting_vpn6">VPN-IPv6: %s</string>
     <string name="setting_dns">VPN-DNS: %s</string>
     <string name="setting_validate">Validera på: %s</string>
-    <string name="setting_ttl">Minsta DNS-TTL: %s s</string>
+    <string name="setting_ttl">Minsta DNS-TTL: %d s</string>
     <string name="setting_socks5_enabled">Använd SOCKS5-proxy</string>
     <string name="setting_socks5_addr">SOCKS5-adress: %s</string>
     <string name="setting_socks5_port">SOCKS5-port: %s</string>
     <string name="setting_socks5_username">SOCKS5-användarnamn: %s</string>
     <string name="setting_socks5_password">SOCKS5-lösenord: %s</string>
-    <string name="setting_pcap_record_size">PCAP-poststorlek: %s B</string>
-    <string name="setting_pcap_file_size">PCAP max. filstorlek: %s MB</string>
-    <string name="setting_watchdog">Watchdog: varje %s minuter</string>
+    <string name="setting_pcap_record_size">PCAP-poststorlek: %d B</string>
+    <string name="setting_pcap_file_size">PCAP max. filstorlek: %d MB</string>
+    <string name="setting_watchdog">Watchdog: varje %d minuter</string>
     <string name="setting_stats_category">Hastighetsavisering</string>
     <string name="setting_stats">Visa hastighetsaviseringar</string>
     <string name="setting_stats_top">Visa topp appar</string>
-    <string name="setting_stats_frequency">Samplingsintervallet: %s ms</string>
-    <string name="setting_stats_samples">Antal prover: %s s</string>
+    <string name="setting_stats_frequency">Samplingsintervallet: %d ms</string>
+    <string name="setting_stats_samples">Antal prover: %d s</string>
     <string name="setting_backup">Säkerhetskopiering</string>
     <string name="setting_export">Exportera inställningar</string>
     <string name="setting_import">Importera inställningar</string>
@@ -172,10 +172,6 @@ Din internettrafik skickas inte till en avlägsen VPN-server.</string>
     <string name="msg_terms">Genom att donera samtycker du till <a href="http://www.netguard.me/#terms">villkor</a></string>
     <string name="msg_dimming">Om du inte kan klicka på OK i nästa dialogruta kommer en annan (skärmdimnings)app sannolikt att manipulera skärmen.</string>
     <string name="msg_mbday">± %1$.3f▲ %2$.3f▼ MB/dag</string>
-    <string name="msg_kb">%1$7.3f▲ %2$7.3f▼ KB</string>
-    <string name="msg_mb">%1$7.3f▲ %2$7.3f▼ MB</string>
-    <string name="msg_gb">%1$7.3f▲ %2$7.3f▼ GB</string>
-    <string name="msg_count">%dx</string>
     <string name="msg_doze">För konsekventa resultat bör Android-batterioptimeringarna inaktiveras för NetGuard.
 \n\nI nästa dialogruta väljer du \"Alla appar\" högst upp, tryck på NetGuard i listan och välj och bekräfta \"Optimera inte\".</string>
     <string name="msg_datasaving">För konsekventa resultat ska Android-databesparingsalternativen inaktiveras för NetGuard
@@ -227,7 +223,7 @@ Din internettrafik skickas inte till en avlägsen VPN-server.</string>
     <string name="title_conditions">Villkor</string>
     <string name="title_screen_wifi">Tillåt Wi-Fi när skärmen är påslagen</string>
     <string name="title_screen_other">Tillåt mobildata när skärmen är påslagen</string>
-    <string name="title_roaming_symbol">R</string>
+
     <string name="title_roaming">Blockera vid roaming</string>
     <string name="title_lockdown">Tillåt i låst läge</string>
     <string name="title_related">Filter relaterat</string>
@@ -284,9 +280,5 @@ Din internettrafik skickas inte till en avlägsen VPN-server.</string>
         <item>amber/blå</item>
         <item>orange/grå</item>
         <item>grön</item>
-    </string-array>
-    <string-array name="protocolNames">
-        <item>UDP</item>
-        <item>TCP</item>
     </string-array>
 </resources>

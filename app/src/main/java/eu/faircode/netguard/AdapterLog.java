@@ -47,6 +47,8 @@ import java.net.UnknownHostException;
 import java.text.SimpleDateFormat;
 import java.util.List;
 
+import eu.faircode.netguard.preference.Preferences;
+
 public class AdapterLog extends CursorAdapter {
     private static String TAG = "NetGuard.Log";
 
@@ -106,8 +108,8 @@ public class AdapterLog extends CursorAdapter {
             dns1 = (lstDns.size() > 0 ? lstDns.get(0) : null);
             dns2 = (lstDns.size() > 1 ? lstDns.get(1) : null);
             SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
-            vpn4 = InetAddress.getByName(prefs.getString("vpn4", "10.1.10.1"));
-            vpn6 = InetAddress.getByName(prefs.getString("vpn6", "fd00:1:fd00:1:fd00:1:fd00:1"));
+            vpn4 = InetAddress.getByName(prefs.getString(Preferences.VPN4.getKey(), Preferences.VPN4.getDefaultValue()));
+            vpn6 = InetAddress.getByName(prefs.getString(Preferences.VPN6.getKey(), Preferences.VPN6.getDefaultValue()));
         } catch (UnknownHostException ex) {
             Log.e(TAG, ex.toString() + "\n" + Log.getStackTraceString(ex));
         }
@@ -232,13 +234,13 @@ public class AdapterLog extends CursorAdapter {
         boolean we = (android.os.Process.myUid() == uid);
 
         // https://android.googlesource.com/platform/system/core/+/master/include/private/android_filesystem_config.h
-        uid = uid % 100000; // strip off user ID
+        uid = uid % Uid.USER_FACTOR; // strip off user ID
         if (uid == -1)
             tvUid.setText("");
-        else if (uid == 0)
+        else if (uid == Uid.Root.getCode())
             tvUid.setText(context.getString(R.string.title_root));
-        else if (uid == 9999)
-            tvUid.setText("-"); // nobody
+        else if (uid == Uid.Nobody.getCode())
+            tvUid.setText("-");
         else
             tvUid.setText(Integer.toString(uid));
 

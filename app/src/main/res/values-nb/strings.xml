@@ -60,8 +60,8 @@
     <string name="setting_dark">Bruk mørkt tema</string>
     <string name="setting_install">Meld ifra om nye installeringer</string>
     <string name="setting_screen_on">Benytt \'når skjermen er på\'-regler</string>
-    <string name="setting_auto">Skru på automatisk etter %1$s minutter</string>
-    <string name="setting_delay">Forsink avskruing av skjermen med %1$s minutter</string>
+    <string name="setting_auto">Skru på automatisk etter %1$d minutter</string>
+    <string name="setting_delay">Forsink avskruing av skjermen med %1$d minutter</string>
     <string name="setting_update">Se etter oppdateringer</string>
     <string name="setting_network_options">Nettverksinnstillinger</string>
     <string name="setting_subnet">Subnet ruting</string>
@@ -92,26 +92,21 @@
     <string name="setting_reset_usage">Tilbakestill nettverksbruk</string>
     <string name="setting_show_resolved">Vis oppklarte domenenavn</string>
     <string name="setting_block_domains">Blokker domenenavn</string>
-    <string name="setting_rcode">DNS-responskode: %s</string>
+    <string name="setting_rcode">DNS-responskode: %d</string>
     <string name="setting_forwarding">Portvideresending</string>
-    <string name="setting_vpn4">VPN IPv4: %s</string>
-    <string name="setting_vpn6">VPN IPv6: %s</string>
-    <string name="setting_dns">VPN DNS: %s</string>
-    <string name="setting_validate">Validate at: %s</string>
-    <string name="setting_ttl">Minimum DNS TTL: %s s</string>
     <string name="setting_socks5_enabled">Bruk SOCKS5-mellomtjener</string>
     <string name="setting_socks5_addr">SOCKS5-adresse: %s</string>
     <string name="setting_socks5_port">SOCKS5-port: %s</string>
     <string name="setting_socks5_username">SOCKS5-brukernavn: %s</string>
     <string name="setting_socks5_password">SOCKS5-passord: %s</string>
-    <string name="setting_pcap_record_size">PCAP-loggstørrelse: %s B</string>
-    <string name="setting_pcap_file_size">PCAP sin maks filstørrelse: %s MB</string>
-    <string name="setting_watchdog">Vakthund: Hvert %s. minutt</string>
+    <string name="setting_pcap_record_size">PCAP-loggstørrelse: %d B</string>
+    <string name="setting_pcap_file_size">PCAP sin maks filstørrelse: %d MB</string>
+    <string name="setting_watchdog">Vakthund: Hvert %d. minutt</string>
     <string name="setting_stats_category">Fartsvarsling</string>
     <string name="setting_stats">Vis fartsvarslingen</string>
     <string name="setting_stats_top">Vis toppappene</string>
-    <string name="setting_stats_frequency">Utdragsintervall: %s ms</string>
-    <string name="setting_stats_samples">Antall utdrag: %s s</string>
+    <string name="setting_stats_frequency">Utdragsintervall: %d ms</string>
+    <string name="setting_stats_samples">Antall utdrag: %d s</string>
     <string name="setting_backup">Sikkerhetskopier</string>
     <string name="setting_export">Eksporter innstillingene</string>
     <string name="setting_import">Importér innstillinger</string>
@@ -150,7 +145,6 @@
     <string name="summary_socks5_enabled">Bare TCP-trafikk vil bli sendt til proxy-serveren</string>
     <string name="summary_watchdog">Periodically check if NetGuard is still running (enter zero to disable this option). This might result in extra battery usage.</string>
     <string name="summary_stats">Vis nettverkshastighetsgraf i statuslinjevarsling</string>
-    <string-array name="default_wifi_home"></string-array>
     <string name="msg_sure">Er du sikker?</string>
     <string name="msg_started">Overholder regler</string>
     <string name="msg_packages">%1$d tillatt, %2$d blokkert</string>
@@ -173,12 +167,7 @@ Internett-trafikken din blir ikke sendt til en ekstern VPN-server.</string>
     <string name="msg_terms">By donating you agree to the <a href="http://www.netguard.me/#terms">terms &amp; conditions</a></string>
     <string name="msg_dimming">If you cannot press OK in the next dialog, another (screen dimming) app is likely manipulating the screen.</string>
     <string name="msg_mbday">± %1$.3f▲ %2$.3f▼ MB/dag</string>
-    <string name="msg_kbsec">%7.3f KB/s</string>
-    <string name="msg_mbsec">%7.3f MB/s</string>
-    <string name="msg_kb">%1$7.3f▲ %2$7.3f▼ KB</string>
-    <string name="msg_mb">%1$7.3f▲ %2$7.3f▼ MB</string>
-    <string name="msg_gb">%1$7.3f▲ %2$7.3f▼ GB</string>
-    <string name="msg_count">%dx</string>
+
     <string name="msg_doze">For consistent results, the Android battery optimizations should be disabled for NetGuard.
 \n\nIn the next dialog, select \"All apps\" at the top, tap on NetGuard in the list and select and confirm \"Don\'t optimize\".</string>
     <string name="msg_datasaving">For consistent results, the Android data saving options should be disabled for NetGuard
@@ -230,7 +219,7 @@ Internett-trafikken din blir ikke sendt til en ekstern VPN-server.</string>
     <string name="title_conditions">Forhold</string>
     <string name="title_screen_wifi">Tillat Wi-Fi når skjermen er skrudd på</string>
     <string name="title_screen_other">Tillat mobilnett når skjermen er skrudd på</string>
-    <string name="title_roaming_symbol">R</string>
+
     <string name="title_roaming">Blokker under roaming</string>
     <string name="title_lockdown">Allow in lockdown mode</string>
     <string name="title_related">Filtrer relaterte</string>
@@ -287,9 +276,5 @@ Internett-trafikken din blir ikke sendt til en ekstern VPN-server.</string>
         <item>amber/blue</item>
         <item>oransje/grå</item>
         <item>grønn</item>
-    </string-array>
-    <string-array name="protocolNames">
-        <item>UDP</item>
-        <item>TCP</item>
     </string-array>
 </resources>

@@ -88,6 +88,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import eu.faircode.netguard.preference.Preferences;
+
 public class Util {
     private static final String TAG = "NetGuard.Util";
 
@@ -404,11 +406,11 @@ public class Util {
 
     public static List<String> getApplicationNames(int uid, Context context) {
         List<String> listResult = new ArrayList<>();
-        if (uid == 0)
+        if (uid == Uid.Root.getCode())
             listResult.add(context.getString(R.string.title_root));
-        else if (uid == 1013)
+        else if (uid == Uid.Media.getCode())
             listResult.add(context.getString(R.string.title_mediaserver));
-        else if (uid == 9999)
+        else if (uid == Uid.Nobody.getCode())
             listResult.add(context.getString(R.string.title_nobody));
         else {
             PackageManager pm = context.getPackageManager();
@@ -507,19 +509,19 @@ public class Util {
 
     public static void setTheme(Context context) {
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
-        boolean dark = prefs.getBoolean("dark_theme", false);
-        String theme = prefs.getString("theme", "teal");
-        if (theme.equals("teal"))
+        boolean dark = prefs.getBoolean(Preferences.DARK.getKey(), false);
+        String theme = prefs.getString(Preferences.THEME.getKey(), Preferences.THEME.getDefaultValue().getValue());
+        if (theme.equals(Theme.Teal.getValue()))
             context.setTheme(dark ? R.style.AppThemeTealDark : R.style.AppThemeTeal);
-        else if (theme.equals("blue"))
+        else if (theme.equals(Theme.Blue.getValue()))
             context.setTheme(dark ? R.style.AppThemeBlueDark : R.style.AppThemeBlue);
-        else if (theme.equals("purple"))
+        else if (theme.equals(Theme.Purple.getValue()))
             context.setTheme(dark ? R.style.AppThemePurpleDark : R.style.AppThemePurple);
-        else if (theme.equals("amber"))
+        else if (theme.equals(Theme.Amber.getValue()))
             context.setTheme(dark ? R.style.AppThemeAmberDark : R.style.AppThemeAmber);
-        else if (theme.equals("orange"))
+        else if (theme.equals(Theme.Orange.getValue()))
             context.setTheme(dark ? R.style.AppThemeOrangeDark : R.style.AppThemeOrange);
-        else if (theme.equals("green"))
+        else if (theme.equals(Theme.Green.getValue()))
             context.setTheme(dark ? R.style.AppThemeGreenDark : R.style.AppThemeGreen);
 
         if (context instanceof Activity && Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP)

@@ -30,6 +30,11 @@ import androidx.preference.PreferenceManager;
 
 import java.util.Map;
 
+import eu.faircode.netguard.preference.Preferences;
+import eu.faircode.netguard.preference.Sort;
+import eu.faircode.netguard.reason.Reason;
+import eu.faircode.netguard.reason.SimpleReason;
+
 public class ReceiverAutostart extends BroadcastReceiver {
     private static final String TAG = "NetGuard.Receiver";
 
@@ -46,13 +51,13 @@ public class ReceiverAutostart extends BroadcastReceiver {
 
                 // Start service
                 SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
-                if (prefs.getBoolean("enabled", false))
-                    ServiceSinkhole.start("receiver", context);
-                else if (prefs.getBoolean("show_stats", false))
-                    ServiceSinkhole.run("receiver", context);
+                if (prefs.getBoolean(Preferences.ENABLED.getKey(), Preferences.ENABLED.getDefaultValue()))
+                    ServiceSinkhole.start(SimpleReason.Receiver, context);
+                else if (prefs.getBoolean(Preferences.SHOW_STATS.getKey(), false))
+                    ServiceSinkhole.run(SimpleReason.Receiver, context);
 
                 if (Util.isInteractive(context))
-                    ServiceSinkhole.reloadStats("receiver", context);
+                    ServiceSinkhole.reloadStats(SimpleReason.Receiver, context);
             } catch (Throwable ex) {
                 Log.e(TAG, ex.toString() + "\n" + Log.getStackTraceString(ex));
             }
@@ -72,13 +77,13 @@ public class ReceiverAutostart extends BroadcastReceiver {
             if (initialized) {
                 if (oldVersion < 38) {
                     Log.i(TAG, "Converting screen wifi/mobile");
-                    editor.putBoolean("screen_wifi", prefs.getBoolean("unused", false));
-                    editor.putBoolean("screen_other", prefs.getBoolean("unused", false));
-                    editor.remove("unused");
+                    editor.putBoolean(Preferences.SCREEN_WIFI.getKey(), prefs.getBoolean(Preferences.UNUSED.getKey(), Preferences.UNUSED.getDefaultValue()));
+                    editor.putBoolean(Preferences.SCREEN_WIFI.getKey(), prefs.getBoolean(Preferences.UNUSED.getKey(), prefs.getBoolean(Preferences.UNUSED.getKey(), Preferences.UNUSED.getDefaultValue())));
+                    editor.remove(Preferences.UNUSED.getKey());
 
-                    SharedPreferences unused = context.getSharedPreferences("unused", Context.MODE_PRIVATE);
-                    SharedPreferences screen_wifi = context.getSharedPreferences("screen_wifi", Context.MODE_PRIVATE);
-                    SharedPreferences screen_other = context.getSharedPreferences("screen_other", Context.MODE_PRIVATE);
+                    SharedPreferences unused = context.getSharedPreferences(Preferences.UNUSED.getKey(), Context.MODE_PRIVATE);
+                    SharedPreferences screen_wifi = context.getSharedPreferences(Preferences.SCREEN_WIFI.getKey(), Context.MODE_PRIVATE);
+                    SharedPreferences screen_other = context.getSharedPreferences(Preferences.SCREEN_OTHER.getKey(), Context.MODE_PRIVATE);
 
                     Map<String, ?> punused = unused.getAll();
                     SharedPreferences.Editor edit_screen_wifi = screen_wifi.edit();
@@ -91,39 +96,39 @@ public class ReceiverAutostart extends BroadcastReceiver {
                     edit_screen_other.apply();
 
                 } else if (oldVersion <= 2017032112)
-                    editor.remove("ip6");
+                    editor.remove(Preferences.IP6.getKey());
 
             } else {
                 Log.i(TAG, "Initializing sdk=" + Build.VERSION.SDK_INT);
-                editor.putBoolean("filter_udp", true);
-                editor.putBoolean("whitelist_wifi", false);
-                editor.putBoolean("whitelist_other", false);
+                editor.putBoolean(Preferences.FILTER_UDP.getKey(), Preferences.FILTER_UDP.getDefaultValue());
+                editor.putBoolean(Preferences.WHITELIST_WIFI.getKey(), !Preferences.WHITELIST_WIFI.getDefaultValue());
+                editor.putBoolean(Preferences.WHITELIST_OTHER.getKey(), !Preferences.WHITELIST_OTHER.getDefaultValue());
                 if (Build.VERSION.SDK_INT == Build.VERSION_CODES.LOLLIPOP)
-                    editor.putBoolean("filter", true); // Optional
+                    editor.putBoolean(Preferences.FILTER.getKey(), !Preferences.FILTER.getDefaultValue()); // Optional
             }
 
             if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP)
-                editor.putBoolean("filter", true); // Mandatory
+                editor.putBoolean(Preferences.FILTER.getKey(), !Preferences.FILTER.getDefaultValue()); // Mandatory
 
             if (!Util.canFilter(context)) {
-                editor.putBoolean("log_app", false);
-                editor.putBoolean("filter", false);
+                editor.putBoolean(Preferences.LOG_APP.getKey(), Preferences.LOG_APP.getDefaultValue());
+                editor.putBoolean(Preferences.FILTER.getKey(), Preferences.FILTER.getDefaultValue());
             }
 
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-                editor.remove("show_top");
-                if ("data".equals(prefs.getString("sort", "name")))
-                    editor.remove("sort");
+                editor.remove(Preferences.SHOW_TOP.getKey());
+                if (Sort.Data.getValue().equals(prefs.getString(Preferences.SORT.getKey(), Preferences.SORT.getDefaultValue().getValue())))
+                    editor.remove(Preferences.SORT.getKey());
             }
 
             if (Util.isPlayStoreInstall(context)) {
-                editor.remove("update_check");
-                editor.remove("use_hosts");
-                editor.remove("hosts_url");
+                editor.remove(Preferences.UPDATE_CHECK.getKey());
+                editor.remove(Preferences.USE_HOSTS.getKey());
+                editor.remove(Preferences.HOSTS_URL.getKey());
             }
 
             if (!Util.isDebuggable(context))
-                editor.remove("loglevel");
+                editor.remove(Preferences.LOG_LEVEL.getKey());
 
             editor.putInt("version", newVersion);
             editor.apply();

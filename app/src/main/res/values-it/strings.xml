@@ -60,8 +60,8 @@
     <string name="setting_dark">Usa il tema scuro</string>
     <string name="setting_install">Notifica l\'installazione di nuove applicazioni</string>
     <string name="setting_screen_on">Applica le regole \'a schermo acceso\'</string>
-    <string name="setting_auto">Attiva automaticamente dopo %1$s minuti</string>
-    <string name="setting_delay">Ritarda lo spegnimento dello schermo di %1$s minuti</string>
+    <string name="setting_auto">Attiva automaticamente dopo %1$d minuti</string>
+    <string name="setting_delay">Ritarda lo spegnimento dello schermo di %1$d minuti</string>
     <string name="setting_update">Controlla gli aggiornamenti</string>
     <string name="setting_network_options">Opzioni di rete</string>
     <string name="setting_subnet">Routing della sottorete</string>
@@ -92,26 +92,23 @@
     <string name="setting_reset_usage">Ripristina l\'uso di rete</string>
     <string name="setting_show_resolved">Mostra i nomi di dominio risolti</string>
     <string name="setting_block_domains">Blocca i nomi di dominio</string>
-    <string name="setting_rcode">Codice di risposta DNS: %s</string>
+    <string name="setting_rcode">Codice di risposta DNS: %d</string>
     <string name="setting_forwarding">Port forwarding</string>
-    <string name="setting_vpn4">VPN IPv4: %s</string>
-    <string name="setting_vpn6">VPN IPv6: %s</string>
-    <string name="setting_dns">VPN DNS: %s</string>
     <string name="setting_validate">Convalida a: %s</string>
-    <string name="setting_ttl">TTL DNS minimo: %s s</string>
+    <string name="setting_ttl">TTL DNS minimo: %d s</string>
     <string name="setting_socks5_enabled">Usa proxy SOCKS5</string>
     <string name="setting_socks5_addr">Indirizzo SOCKS5: %s</string>
     <string name="setting_socks5_port">Porta SOCKS5: %s</string>
     <string name="setting_socks5_username">Nome utente SOCKS5: %s</string>
     <string name="setting_socks5_password">Password SOCKS5: %s</string>
-    <string name="setting_pcap_record_size">Dimensioni record PCAP: %s B</string>
-    <string name="setting_pcap_file_size">Dimensione massima PCAP del file: %s MB</string>
-    <string name="setting_watchdog">Temporizzazione di supervisione: ogni %s minuti</string>
+    <string name="setting_pcap_record_size">Dimensioni record PCAP: %d B</string>
+    <string name="setting_pcap_file_size">Dimensione massima del file PCAP: %d MB</string>
+    <string name="setting_watchdog">Temporizzazione di supervisione: ogni %d minuti</string>
     <string name="setting_stats_category">Notifica di velocità</string>
     <string name="setting_stats">Mostra la notifica di velocità</string>
     <string name="setting_stats_top">Visualizza le app migliori</string>
-    <string name="setting_stats_frequency">Intervallo campione: %s ms</string>
-    <string name="setting_stats_samples">Numero di campioni: s %s</string>
+    <string name="setting_stats_frequency">Intervallo campione: %d ms</string>
+    <string name="setting_stats_samples">Numero di campioni: %d s</string>
     <string name="setting_backup">Backup</string>
     <string name="setting_export">Esporta le impostazioni</string>
     <string name="setting_import">Importa le impostazioni</string>
@@ -172,10 +169,8 @@ Il tuo traffico internet non è inviato a un server VPN remoto.</string>
     <string name="msg_terms">Donando acconsenti ai <a href="http://www.netguard.me/#terms">Termini e le Condizioni</a></string>
     <string name="msg_dimming">Se non riesci a premere OK nella prossima finestra, un\'altra app (di oscuramento dello schermo) sta probabilmente manipolando lo schermo.</string>
     <string name="msg_mbday">± %1$.3f▲ %2$.3f▼ MB/giorno</string>
-    <string name="msg_kb">%1$7.3f▲ %2$7.3f▼ KB</string>
-    <string name="msg_mb">%1$7.3f▲ %2$7.3f▼ MB</string>
-    <string name="msg_gb">%1$7.3f▲ %2$7.3f▼ GB</string>
-    <string name="msg_count">%dx</string>
+
+
     <string name="msg_doze">Per risultati attendibili, le ottimizzazioni della batteria di Android dovrebbero esser disabilitate per NetGuard.
 \n\nNella prossima finestra, seleziona \"Tutte le app\" in alto, tocca su NetGuard nell\'elenco e seleziona e conferma \"Non ottimizzare\".</string>
     <string name="msg_datasaving">Per risultati attendibili, le opzioni di salvataggio dei dati di Android dovrebbero esser disabilitate per NetGuard.
@@ -227,7 +222,6 @@ Il tuo traffico internet non è inviato a un server VPN remoto.</string>
     <string name="title_conditions">Condizioni</string>
     <string name="title_screen_wifi">Consenti la Wi-Fi a schermo acceso</string>
     <string name="title_screen_other">Consenti la rete mobile a schermo acceso</string>
-    <string name="title_roaming_symbol">R</string>
     <string name="title_roaming">Blocca in roaming</string>
     <string name="title_lockdown">Consenti in modalità limitata</string>
     <string name="title_related">Filtra correlati</string>
@@ -284,9 +278,5 @@ Il tuo traffico internet non è inviato a un server VPN remoto.</string>
         <item>ambra/blu</item>
         <item>arancione/grigio</item>
         <item>verde</item>
-    </string-array>
-    <string-array name="protocolNames">
-        <item>UDP</item>
-        <item>TCP</item>
     </string-array>
 </resources>

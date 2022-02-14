@@ -77,6 +77,10 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import eu.faircode.netguard.preference.Preferences;
+import eu.faircode.netguard.reason.Reason;
+import eu.faircode.netguard.reason.SimpleReason;
+
 public class AdapterRule extends RecyclerView.Adapter<AdapterRule.ViewHolder> implements Filterable {
     private static final String TAG = "NetGuard.Adapter";
 
@@ -264,7 +268,7 @@ public class AdapterRule extends RecyclerView.Adapter<AdapterRule.ViewHolder> im
         this.anchor = anchor;
         this.inflater = LayoutInflater.from(context);
 
-        if (prefs.getBoolean("dark_theme", false))
+        if (prefs.getBoolean(Preferences.DARK.getKey(), Preferences.DARK.getDefaultValue()))
             colorChanged = Color.argb(128, Color.red(Color.DKGRAY), Color.green(Color.DKGRAY), Color.blue(Color.DKGRAY));
         else
             colorChanged = Color.argb(128, Color.red(Color.LTGRAY), Color.green(Color.LTGRAY), Color.blue(Color.LTGRAY));
@@ -338,9 +342,9 @@ public class AdapterRule extends RecyclerView.Adapter<AdapterRule.ViewHolder> im
         final Context context = holder.itemView.getContext();
 
         final SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
-        final boolean log_app = prefs.getBoolean("log_app", false);
-        final boolean filter = prefs.getBoolean("filter", false);
-        final boolean notify_access = prefs.getBoolean("notify_access", false);
+        final boolean log_app = prefs.getBoolean(Preferences.LOG_APP.getKey(), Preferences.LOG_APP.getDefaultValue());
+        final boolean filter = prefs.getBoolean(Preferences.FILTER.getKey(), Preferences.FILTER.getDefaultValue());
+        final boolean notify_access = prefs.getBoolean(Preferences.NOTIFY_ACCESS.getKey(), Preferences.NOTIFY_ACCESS.getDefaultValue());
 
         // Get rule
         final Rule rule = listFiltered.get(position);
@@ -387,9 +391,9 @@ public class AdapterRule extends RecyclerView.Adapter<AdapterRule.ViewHolder> im
         holder.tvHosts.setText(Long.toString(rule.hosts));
 
         // Lockdown settings
-        boolean lockdown = prefs.getBoolean("lockdown", false);
-        boolean lockdown_wifi = prefs.getBoolean("lockdown_wifi", true);
-        boolean lockdown_other = prefs.getBoolean("lockdown_other", true);
+        boolean lockdown = prefs.getBoolean(Preferences.LOCKDOWN.getKey(), Preferences.LOCKDOWN.getDefaultValue());
+        boolean lockdown_wifi = prefs.getBoolean(Preferences.LOCKDOWN_WIFI.getKey(), Preferences.LOCKDOWN_WIFI.getDefaultValue());
+        boolean lockdown_other = prefs.getBoolean(Preferences.LOCKDOWN_OTHER.getKey(), Preferences.LOCKDOWN_OTHER.getDefaultValue());
         if ((otherActive && !lockdown_other) || (wifiActive && !lockdown_wifi))
             lockdown = false;
 
@@ -400,7 +404,7 @@ public class AdapterRule extends RecyclerView.Adapter<AdapterRule.ViewHolder> im
             DrawableCompat.setTint(wrap, rule.apply ? colorOff : colorGrayed);
         }
 
-        boolean screen_on = prefs.getBoolean("screen_on", true);
+        boolean screen_on = prefs.getBoolean(Preferences.SCREEN_ON.getKey(), Preferences.SCREEN_ON.getDefaultValue());
 
         // Wi-Fi settings
         holder.cbWifi.setEnabled(rule.apply);
@@ -654,13 +658,13 @@ public class AdapterRule extends RecyclerView.Adapter<AdapterRule.ViewHolder> im
                 cbLogging.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                     @Override
                     public void onCheckedChanged(CompoundButton compoundButton, boolean checked) {
-                        prefs.edit().putBoolean("log_app", checked).apply();
+                        prefs.edit().putBoolean(Preferences.LOG_APP.getKey(), checked).apply();
                         cbNotify.setEnabled(checked);
                         if (!checked) {
                             cbNotify.setChecked(false);
-                            prefs.edit().putBoolean("notify_access", false).apply();
+                            prefs.edit().putBoolean(Preferences.NOTIFY_ACCESS.getKey(), Preferences.NOTIFY_ACCESS.getDefaultValue()).apply();
                         }
-                        ServiceSinkhole.reload("changed notify", context, false);
+                        ServiceSinkhole.reload(SimpleReason.ChangedNotify, context, false);
                         AdapterRule.this.notifyDataSetChanged();
                     }
                 });
@@ -670,8 +674,8 @@ public class AdapterRule extends RecyclerView.Adapter<AdapterRule.ViewHolder> im
                     public void onCheckedChanged(CompoundButton compoundButton, boolean checked) {
                         if (checked)
                             cbLogging.setChecked(true);
-                        prefs.edit().putBoolean("filter", checked).apply();
-                        ServiceSinkhole.reload("changed filter", context, false);
+                        prefs.edit().putBoolean(Preferences.FILTER.getKey(), checked).apply();
+                        ServiceSinkhole.reload(SimpleReason.ChangedFilter, context, false);
                         AdapterRule.this.notifyDataSetChanged();
                     }
                 });
@@ -679,8 +683,8 @@ public class AdapterRule extends RecyclerView.Adapter<AdapterRule.ViewHolder> im
                 cbNotify.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                     @Override
                     public void onCheckedChanged(CompoundButton compoundButton, boolean checked) {
-                        prefs.edit().putBoolean("notify_access", checked).apply();
-                        ServiceSinkhole.reload("changed notify", context, false);
+                        prefs.edit().putBoolean(Preferences.NOTIFY_ACCESS.getKey(), checked).apply();
+                        ServiceSinkhole.reload(SimpleReason.ChangedNotify, context, false);
                         AdapterRule.this.notifyDataSetChanged();
                     }
                 });
@@ -772,7 +776,7 @@ public class AdapterRule extends RecyclerView.Adapter<AdapterRule.ViewHolder> im
                                 case R.id.menu_allow:
                                     if (IAB.isPurchased(ActivityPro.SKU_FILTER, context)) {
                                         DatabaseHelper.getInstance(context).setAccess(id, 0);
-                                        ServiceSinkhole.reload("allow host", context, false);
+                                        ServiceSinkhole.reload(SimpleReason.AllowHost, context, false);
                                     } else
                                         context.startActivity(new Intent(context, ActivityPro.class));
                                     result = true;
@@ -781,7 +785,7 @@ public class AdapterRule extends RecyclerView.Adapter<AdapterRule.ViewHolder> im
                                 case R.id.menu_block:
                                     if (IAB.isPurchased(ActivityPro.SKU_FILTER, context)) {
                                         DatabaseHelper.getInstance(context).setAccess(id, 1);
-                                        ServiceSinkhole.reload("block host", context, false);
+                                        ServiceSinkhole.reload(SimpleReason.BlockHost, context, false);
                                     } else
                                         context.startActivity(new Intent(context, ActivityPro.class));
                                     result = true;
@@ -789,7 +793,7 @@ public class AdapterRule extends RecyclerView.Adapter<AdapterRule.ViewHolder> im
 
                                 case R.id.menu_reset:
                                     DatabaseHelper.getInstance(context).setAccess(id, -1);
-                                    ServiceSinkhole.reload("reset host", context, false);
+                                    ServiceSinkhole.reload(SimpleReason.ResetHost, context, false);
                                     result = true;
                                     break;
 
@@ -851,7 +855,7 @@ public class AdapterRule extends RecyclerView.Adapter<AdapterRule.ViewHolder> im
         });
 
         // Notify on access
-        holder.cbNotify.setEnabled(prefs.getBoolean("notify_access", false) && rule.apply);
+        holder.cbNotify.setEnabled(prefs.getBoolean(Preferences.NOTIFY_ACCESS.getKey(),Preferences.NOTIFY_ACCESS.getDefaultValue()) && rule.apply);
         holder.cbNotify.setOnCheckedChangeListener(null);
         holder.cbNotify.setChecked(rule.notify);
         holder.cbNotify.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -881,7 +885,7 @@ public class AdapterRule extends RecyclerView.Adapter<AdapterRule.ViewHolder> im
     private void markPro(Context context, MenuItem menu, String sku) {
         if (sku == null || !IAB.isPurchased(sku, context)) {
             SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
-            boolean dark = prefs.getBoolean("dark_theme", false);
+            boolean dark = prefs.getBoolean(Preferences.DARK.getKey(), Preferences.DARK.getDefaultValue());
             SpannableStringBuilder ssb = new SpannableStringBuilder("  " + menu.getTitle());
             ssb.setSpan(new ImageSpan(context, dark ? R.drawable.ic_shopping_cart_white_24dp : R.drawable.ic_shopping_cart_black_24dp), 0, 1, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
             menu.setTitle(ssb);
@@ -889,14 +893,14 @@ public class AdapterRule extends RecyclerView.Adapter<AdapterRule.ViewHolder> im
     }
 
     private void updateRule(Context context, Rule rule, boolean root, List<Rule> listAll) {
-        SharedPreferences wifi = context.getSharedPreferences("wifi", Context.MODE_PRIVATE);
-        SharedPreferences other = context.getSharedPreferences("other", Context.MODE_PRIVATE);
-        SharedPreferences apply = context.getSharedPreferences("apply", Context.MODE_PRIVATE);
-        SharedPreferences screen_wifi = context.getSharedPreferences("screen_wifi", Context.MODE_PRIVATE);
-        SharedPreferences screen_other = context.getSharedPreferences("screen_other", Context.MODE_PRIVATE);
-        SharedPreferences roaming = context.getSharedPreferences("roaming", Context.MODE_PRIVATE);
-        SharedPreferences lockdown = context.getSharedPreferences("lockdown", Context.MODE_PRIVATE);
-        SharedPreferences notify = context.getSharedPreferences("notify", Context.MODE_PRIVATE);
+        SharedPreferences wifi = context.getSharedPreferences(Preferences.WIFI.getKey(), Context.MODE_PRIVATE);
+        SharedPreferences other = context.getSharedPreferences(Preferences.OTHER.getKey(), Context.MODE_PRIVATE);
+        SharedPreferences apply = context.getSharedPreferences(Preferences.APPLY.getKey(), Context.MODE_PRIVATE);
+        SharedPreferences screen_wifi = context.getSharedPreferences(Preferences.SCREEN_WIFI.getKey(), Context.MODE_PRIVATE);
+        SharedPreferences screen_other = context.getSharedPreferences(Preferences.SCREEN_OTHER.getKey(), Context.MODE_PRIVATE);
+        SharedPreferences roaming = context.getSharedPreferences(Preferences.ROAMING.getKey(), Context.MODE_PRIVATE);
+        SharedPreferences lockdown = context.getSharedPreferences(Preferences.LOCKDOWN.getKey(), Context.MODE_PRIVATE);
+        SharedPreferences notify = context.getSharedPreferences(Preferences.NOTIFY.getKey(), Context.MODE_PRIVATE);
 
         if (rule.wifi_blocked == rule.wifi_default)
             wifi.edit().remove(rule.packageName).apply();
@@ -967,7 +971,7 @@ public class AdapterRule extends RecyclerView.Adapter<AdapterRule.ViewHolder> im
         if (root) {
             notifyDataSetChanged();
             NotificationManagerCompat.from(context).cancel(rule.uid);
-            ServiceSinkhole.reload("rule changed", context, false);
+            ServiceSinkhole.reload(SimpleReason.RuleChanged, context, false);
         }
     }
 

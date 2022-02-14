@@ -33,6 +33,10 @@ import androidx.preference.PreferenceManager;
 
 import java.util.Date;
 
+import eu.faircode.netguard.preference.Preferences;
+import eu.faircode.netguard.reason.Reason;
+import eu.faircode.netguard.reason.SimpleReason;
+
 public class WidgetAdmin extends ReceiverAutostart {
     private static final String TAG = "NetGuard.Widget";
 
@@ -70,14 +74,14 @@ public class WidgetAdmin extends ReceiverAutostart {
         try {
             if (INTENT_ON.equals(intent.getAction()) || INTENT_OFF.equals(intent.getAction())) {
                 boolean enabled = INTENT_ON.equals(intent.getAction());
-                prefs.edit().putBoolean("enabled", enabled).apply();
+                prefs.edit().putBoolean(Preferences.ENABLED.getKey(), enabled).apply();
                 if (enabled)
-                    ServiceSinkhole.start("widget", context);
+                    ServiceSinkhole.start(SimpleReason.Widget, context);
                 else
-                    ServiceSinkhole.stop("widget", context, false);
+                    ServiceSinkhole.stop(SimpleReason.Widget, context, false);
 
                 // Auto enable
-                int auto = Integer.parseInt(prefs.getString("auto_enable", "0"));
+                int auto = prefs.getInt(Preferences.AUTO_ENABLE.getKey(), Preferences.AUTO_ENABLE.getDefaultValue());
                 if (!enabled && auto > 0) {
                     Log.i(TAG, "Scheduling enabled after minutes=" + auto);
                     if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M)
@@ -88,8 +92,8 @@ public class WidgetAdmin extends ReceiverAutostart {
 
             } else if (INTENT_LOCKDOWN_ON.equals(intent.getAction()) || INTENT_LOCKDOWN_OFF.equals(intent.getAction())) {
                 boolean lockdown = INTENT_LOCKDOWN_ON.equals(intent.getAction());
-                prefs.edit().putBoolean("lockdown", lockdown).apply();
-                ServiceSinkhole.reload("widget", context, false);
+                prefs.edit().putBoolean(Preferences.LOCKDOWN.getKey(), lockdown).apply();
+                ServiceSinkhole.reload(SimpleReason.Widget, context, false);
                 WidgetLockdown.updateWidgets(context);
             }
         } catch (Throwable ex) {

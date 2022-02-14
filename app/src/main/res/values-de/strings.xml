@@ -60,8 +60,8 @@
     <string name="setting_dark">Dunkles Design verwenden</string>
     <string name="setting_install">Benachrichtigung bei neuer Installation</string>
     <string name="setting_screen_on">\'Wenn Bildschirm an\' Regeln anwenden</string>
-    <string name="setting_auto">Automatisch nach %1$s-Minuten aktivieren</string>
-    <string name="setting_delay">Bildschirmabschaltung um %1$s Minuten verzögern</string>
+    <string name="setting_auto">Automatisch nach %1$d-Minuten aktivieren</string>
+    <string name="setting_delay">Bildschirmabschaltung um %1$d Minuten verzögern</string>
     <string name="setting_update">Nach Aktualisierungen suchen</string>
     <string name="setting_network_options">Netzwerkoptionen</string>
     <string name="setting_subnet">Subnet-Routing</string>
@@ -92,26 +92,26 @@
     <string name="setting_reset_usage">Netzwerknutzung zurücksetzen</string>
     <string name="setting_show_resolved">Aufgelöste Domainnamen anzeigen</string>
     <string name="setting_block_domains">Domainnamen blockieren</string>
-    <string name="setting_rcode">DNS-Rückantwortcode: %s</string>
+    <string name="setting_rcode">DNS-Rückantwortcode: %d</string>
     <string name="setting_forwarding">Portweiterleitung</string>
     <string name="setting_vpn4">VPN-IPv4: %s</string>
     <string name="setting_vpn6">VPN-IPv6: %s</string>
     <string name="setting_dns">VPN-DNS: %s</string>
     <string name="setting_validate">Validieren unter: %s</string>
-    <string name="setting_ttl">Minimum DNS-TTL: %s s</string>
+    <string name="setting_ttl">Minimum DNS-TTL: %d s</string>
     <string name="setting_socks5_enabled">SOCKS5-Proxy verwenden</string>
     <string name="setting_socks5_addr">SOCKS5-Adresse: %s</string>
     <string name="setting_socks5_port">SOCKS5-Port: %s</string>
     <string name="setting_socks5_username">SOCKS5-Benutzername: %s</string>
     <string name="setting_socks5_password">SOCKS5-Passwort: %s</string>
-    <string name="setting_pcap_record_size">PCAP-Datensatzgröße: %s B</string>
-    <string name="setting_pcap_file_size">PCAP-Dateigröße (max): %s MB</string>
-    <string name="setting_watchdog">Watchdog: alle %s Minuten</string>
+    <string name="setting_pcap_record_size">PCAP-Datensatzgröße: %d B</string>
+    <string name="setting_pcap_file_size">PCAP-Dateigröße (max): %d MB</string>
+    <string name="setting_watchdog">Watchdog: alle %d Minuten</string>
     <string name="setting_stats_category">Geschwindigkeitsbenachrichtigung</string>
     <string name="setting_stats">Netzwerkgeschwindigkeit anzeigen</string>
     <string name="setting_stats_top">Top-Anwendungen anzeigen</string>
-    <string name="setting_stats_frequency">Abtastfrequenz: %s ms</string>
-    <string name="setting_stats_samples">Abtastanzahl: %s s</string>
+    <string name="setting_stats_frequency">Abtastfrequenz: %d ms</string>
+    <string name="setting_stats_samples">Abtastanzahl: %d s</string>
     <string name="setting_backup">Sicherung</string>
     <string name="setting_export">Einstellungen exportieren</string>
     <string name="setting_import">Einstellungen importieren</string>
@@ -170,10 +170,6 @@
     <string name="msg_terms">Durch eine Spende stimmen Sie den <a href="http://www.netguard.me/#terms">AGB</a> zu.</string>
     <string name="msg_dimming">Falls Sie nicht auf OK im nächsten Fenster tippen können, manipuliert eine andere Anwendung Ihren Bildschirm.</string>
     <string name="msg_mbday">± %1$.3f▲ %2$.3f▼ MB/Tag</string>
-    <string name="msg_kb">%1$7.3f▲ %2$7.3f▼ KB</string>
-    <string name="msg_mb">%1$7.3f▲ %2$7.3f▼ MB</string>
-    <string name="msg_gb">%1$7.3f▲ %2$7.3f▼ GB</string>
-    <string name="msg_count">%dx</string>
     <string name="msg_doze">Für konsistente Ergebnisse sollten für NetGuard die Android-Batterie-Optimierungen deaktiviert werden.\n\nIm nächsten Dialogfenster wählen Sie ganz oben \"Alle Apps\", tippen auf NetGuard in der Liste und wählen und bestätigen \"Nicht optimieren\".</string>
     <string name="msg_datasaving">Für konsistente Ergebnisse sollten die Android-Datenspeicheroptionen für NetGuard deaktiviert werden.\n\nIm nächsten Fenster aktivieren Sie die Optionen \"Hintergrunddaten\" und \"Uneingeschränkte Datennutzung\".</string>
     <string name="msg_filter">Bei Verwendung von Filtern werden Daten- und Energiewerte erfasst und Android nimmt an, dass Daten und Energie von NetGuard statt von den ursprünglichen Anwendungen verbraucht werden</string>
@@ -223,7 +219,6 @@
     <string name="title_conditions">Bedingungen</string>
     <string name="title_screen_wifi">WLAN erlauben, wenn Bildschirm eingeschaltet ist</string>
     <string name="title_screen_other">Mobilfunk erlauben, wenn Bildschirm eingeschaltet ist</string>
-    <string name="title_roaming_symbol">R</string>
     <string name="title_roaming">Bei Roaming blockieren</string>
     <string name="title_lockdown">Im Zugriffsbeschränkungsmodus erlauben</string>
     <string name="title_related">Filterabhängig</string>
@@ -280,9 +275,5 @@
         <item>Gelb/Blau</item>
         <item>Orange/Grau</item>
         <item>Grün</item>
-    </string-array>
-    <string-array name="protocolNames">
-        <item>UDP</item>
-        <item>TCP</item>
     </string-array>
 </resources>

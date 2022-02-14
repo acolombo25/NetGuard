@@ -40,6 +40,10 @@ import java.net.URLConnection;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import eu.faircode.netguard.preference.Preferences;
+import eu.faircode.netguard.reason.Reason;
+import eu.faircode.netguard.reason.SimpleReason;
+
 public class ServiceExternal extends IntentService {
     private static final String TAG = "NetGuard.External";
     private static final String ACTION_DOWNLOAD_HOSTS_FILE = "eu.faircode.netguard.DOWNLOAD_HOSTS_FILE";
@@ -61,7 +65,7 @@ public class ServiceExternal extends IntentService {
             if (ACTION_DOWNLOAD_HOSTS_FILE.equals(intent.getAction())) {
                 final SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
 
-                String hosts_url = prefs.getString("hosts_url", null);
+                String hosts_url = prefs.getString(Preferences.HOSTS_URL.getKey(), Preferences.HOSTS_URL.getDefaultValue());
                 if ("https://www.netguard.me/hosts".equals(hosts_url))
                     hosts_url = BuildConfig.HOSTS_FILE_URI;
 
@@ -102,9 +106,9 @@ public class ServiceExternal extends IntentService {
                     tmp.renameTo(hosts);
 
                     String last = SimpleDateFormat.getDateTimeInstance().format(new Date().getTime());
-                    prefs.edit().putString("hosts_last_download", last).apply();
+                    prefs.edit().putString(Preferences.HOSTS_LAST_DOWNLOAD.getKey(), last).apply();
 
-                    ServiceSinkhole.reload("hosts file download", this, false);
+                    ServiceSinkhole.reload(SimpleReason.HostsFileDownload, this, false);
 
                 } catch (Throwable ex) {
                     Log.e(TAG, ex.toString() + "\n" + Log.getStackTraceString(ex));
@@ -135,7 +139,7 @@ public class ServiceExternal extends IntentService {
     }
 
     private static Notification getForegroundNotification(Context context) {
-        NotificationCompat.Builder builder = new NotificationCompat.Builder(context, "foreground");
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(context, NotificationChannels.Foreground.getValue());
         builder.setSmallIcon(R.drawable.ic_hourglass_empty_white_24dp);
         builder.setPriority(NotificationCompat.PRIORITY_MIN);
         builder.setCategory(NotificationCompat.CATEGORY_STATUS);

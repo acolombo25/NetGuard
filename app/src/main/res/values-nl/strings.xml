@@ -60,8 +60,8 @@
     <string name="setting_dark">Gebruik donker thema</string>
     <string name="setting_install">Notificatie bij nieuwe installatie</string>
     <string name="setting_screen_on">Pas \'wanneer scherm aan\'-regels toe</string>
-    <string name="setting_auto">Automatisch inschakelen na %1$s minuten</string>
-    <string name="setting_delay">Vertraag schermuitzetten met %1$s minuten</string>
+    <string name="setting_auto">Automatisch inschakelen na %1$d minuten</string>
+    <string name="setting_delay">Vertraag schermuitzetten met %1$d minuten</string>
     <string name="setting_update">Controleer op updates</string>
     <string name="setting_network_options">Netwerkopties</string>
     <string name="setting_subnet">Subnet-routering</string>
@@ -92,26 +92,26 @@
     <string name="setting_reset_usage">Reset netwerkgebruik</string>
     <string name="setting_show_resolved">Toon opgeloste domeinnamen</string>
     <string name="setting_block_domains">Blokkeer domeinnamen</string>
-    <string name="setting_rcode">DNS-antwoordcode: %s</string>
+    <string name="setting_rcode">DNS-antwoordcode: %d</string>
     <string name="setting_forwarding">Port-forwarding</string>
     <string name="setting_vpn4">VPN-IPv4: %s</string>
     <string name="setting_vpn6">VPN-IPv6: %s</string>
     <string name="setting_dns">VPN-DNS: %s</string>
     <string name="setting_validate">Valideer op: %s</string>
-    <string name="setting_ttl">Minimale DNS TTL: %s s</string>
+    <string name="setting_ttl">Minimale DNS TTL: %d s</string>
     <string name="setting_socks5_enabled">Gebruik SOCKS5-proxy</string>
     <string name="setting_socks5_addr">SOCKS5-adres: %s</string>
     <string name="setting_socks5_port">SOCKS5-poort: %s</string>
     <string name="setting_socks5_username">SOCKS5-gebruikersnaam: %s</string>
     <string name="setting_socks5_password">SOCKS5-wachtwoord: %s</string>
-    <string name="setting_pcap_record_size">PCAP-recordgrootte: %s B</string>
-    <string name="setting_pcap_file_size">PCAP max. bestandsgrootte: %s MB</string>
-    <string name="setting_watchdog">Watchdog: iedere %s minuten</string>
+    <string name="setting_pcap_record_size">PCAP-recordgrootte: %d B</string>
+    <string name="setting_pcap_file_size">PCAP max. bestandsgrootte: %d MB</string>
+    <string name="setting_watchdog">Watchdog: iedere %d minuten</string>
     <string name="setting_stats_category">Snelheidsmelding</string>
     <string name="setting_stats">Toon snelheidsmelding</string>
     <string name="setting_stats_top">Toon populairste apps</string>
-    <string name="setting_stats_frequency">Voorbeeldinterval: %s ms</string>
-    <string name="setting_stats_samples">Aantal voorbeelden: %s s</string>
+    <string name="setting_stats_frequency">Voorbeeldinterval: %d ms</string>
+    <string name="setting_stats_samples">Aantal voorbeelden: %d s</string>
     <string name="setting_backup">Back-up</string>
     <string name="setting_export">Exporteer instellingen</string>
     <string name="setting_import">Importeer instellingen</string>
@@ -172,10 +172,8 @@ Je internetverkeer wordt niet naar een externe VPN-server gestuurd.</string>
     <string name="msg_terms">Door te doneren ga je akkoord met de <a href="http://www.netguard.me/#terms">algemene &amp; voorwaarden</a></string>
     <string name="msg_dimming">Als je niet op \'OK\' kan tikken in het dialoogvenster, is een (schermdimmende) app waarschijnlijk actief.</string>
     <string name="msg_mbday">± %1$.3f▲ %2$.3f▼ MB/dag</string>
-    <string name="msg_kb">%1$7.3f▲ %2$7.3f▼ KB</string>
-    <string name="msg_mb">%1$7.3f▲ %2$7.3f▼ MB</string>
-    <string name="msg_gb">%1$7.3f▲ %2$7.3f▼ GB</string>
-    <string name="msg_count">%dx</string>
+
+
     <string name="msg_doze">Voor consistente resultaten moeten de Android-batterijoptimalisaties worden uitgeschakeld voor NetGuard.
 \n\nSelecteer in het volgende dialoogvenster bovenaan \"Alle apps\", tik op NetGuard in de lijst en selecteer en bevestig \'niet optimaliseren\'.</string>
     <string name="msg_datasaving">Voor consistente resultaten moeten de Android-opties voor het opslaan van gegevens worden uitgeschakeld voor. NetGuard. \n\nSelecteer in het volgende dialoogvenster de opties \'achtergrondgegevens\' en \'onbeperkt gegevensgebruik\' in</string>
@@ -226,7 +224,7 @@ Je internetverkeer wordt niet naar een externe VPN-server gestuurd.</string>
     <string name="title_conditions">Condities</string>
     <string name="title_screen_wifi">Sta Wi-Fi toe als het scherm aan is</string>
     <string name="title_screen_other">Sta mobiel toe als het scherm aan is</string>
-    <string name="title_roaming_symbol">R</string>
+
     <string name="title_roaming">Blokkeer bij roamen</string>
     <string name="title_lockdown">Toestaan in vergrendelmodus</string>
     <string name="title_related">Verwante filteren</string>
@@ -283,9 +281,5 @@ Je internetverkeer wordt niet naar een externe VPN-server gestuurd.</string>
         <item>amber/blauw</item>
         <item>oranje/grijs</item>
         <item>groen</item>
-    </string-array>
-    <string-array name="protocolNames">
-        <item>UDP</item>
-        <item>TCP</item>
     </string-array>
 </resources>

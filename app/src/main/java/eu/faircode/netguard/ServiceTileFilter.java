@@ -31,6 +31,9 @@ import android.widget.Toast;
 
 import androidx.preference.PreferenceManager;
 
+import eu.faircode.netguard.preference.Preferences;
+import eu.faircode.netguard.reason.SimpleReason;
+
 @TargetApi(Build.VERSION_CODES.N)
 public class ServiceTileFilter extends TileService implements SharedPreferences.OnSharedPreferenceChangeListener {
     private static final String TAG = "NetGuard.TileFilter";
@@ -44,13 +47,13 @@ public class ServiceTileFilter extends TileService implements SharedPreferences.
 
     @Override
     public void onSharedPreferenceChanged(SharedPreferences prefs, String key) {
-        if ("filter".equals(key))
+        if (Preferences.FILTER.getKey().equals(key))
             update();
     }
 
     private void update() {
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
-        boolean filter = prefs.getBoolean("filter", false);
+        boolean filter = prefs.getBoolean(Preferences.FILTER.getKey(), Preferences.FILTER.getDefaultValue());
         Tile tile = getQsTile();
         if (tile != null) {
             tile.setState(filter ? Tile.STATE_ACTIVE : Tile.STATE_INACTIVE);
@@ -71,8 +74,8 @@ public class ServiceTileFilter extends TileService implements SharedPreferences.
         if (Util.canFilter(this)) {
             if (IAB.isPurchased(ActivityPro.SKU_FILTER, this)) {
                 SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
-                prefs.edit().putBoolean("filter", !prefs.getBoolean("filter", false)).apply();
-                ServiceSinkhole.reload("tile", this, false);
+                prefs.edit().putBoolean(Preferences.FILTER.getKey(), !prefs.getBoolean(Preferences.FILTER.getKey(), Preferences.FILTER.getDefaultValue())).apply();
+                ServiceSinkhole.reload(SimpleReason.Tile, this, false);
             } else
                 Toast.makeText(this, R.string.title_pro_feature, Toast.LENGTH_SHORT).show();
         } else

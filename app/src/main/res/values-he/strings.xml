@@ -61,8 +61,8 @@
     <string name="setting_dark">השתמש בערכת נושא כהה</string>
     <string name="setting_install">הצג התראה על התקנה חדשה</string>
     <string name="setting_screen_on">החל כללי \'מסך דולק\'</string>
-    <string name="setting_auto">אפשר אוטומטית לאחר %1$s דקות</string>
-    <string name="setting_delay">השהה כיבוי מסך לאחרי %1$s דקות</string>
+    <string name="setting_auto">אפשר אוטומטית לאחר %1$d דקות</string>
+    <string name="setting_delay">השהה כיבוי מסך לאחרי %1$d דקות</string>
     <string name="setting_update">בדוק האם קיימים עדכונים</string>
     <string name="setting_network_options">אפשרויות רשת</string>
     <string name="setting_subnet">ניתוב רשת משנה</string>
@@ -93,26 +93,23 @@
     <string name="setting_reset_usage">אפס את מונה השימוש ברשת</string>
     <string name="setting_show_resolved">הצג שמות דומיין</string>
     <string name="setting_block_domains">חסום שמות מתחם (דומיין)</string>
-    <string name="setting_rcode">קוד תגובת DNS: %s</string>
+    <string name="setting_rcode">קוד תגובת DNS: %d</string>
     <string name="setting_forwarding">הפניית פורטים</string>
-    <string name="setting_vpn4">VPN IPv4: %s</string>
-    <string name="setting_vpn6">VPN IPv6: %s</string>
-    <string name="setting_dns">VPN DNS: %s</string>
     <string name="setting_validate">אמת ב: %s</string>
-    <string name="setting_ttl">TTL DNS מינימלי: %s s</string>
+    <string name="setting_ttl">TTL DNS מינימלי: %d s</string>
     <string name="setting_socks5_enabled">השתמש ב- SOCKS5 proxy</string>
     <string name="setting_socks5_addr">כתובת SOCKS5: %s</string>
     <string name="setting_socks5_port">פורט SOCKS5: %s</string>
     <string name="setting_socks5_username">שם משתמש SOCKS5: %s</string>
     <string name="setting_socks5_password">סיסמת SOCKS5: %s</string>
-    <string name="setting_pcap_record_size">גודל רשומת PCAP: %s B</string>
-    <string name="setting_pcap_file_size">גודל מקסימלי של קובץ PCAP: %s MB</string>
-    <string name="setting_watchdog">Watchdog טיימר: כל %s דקות</string>
+    <string name="setting_pcap_record_size">גודל רשומת PCAP: %d B</string>
+    <string name="setting_pcap_file_size">גודל מקסימלי של קובץ PCAP: %d MB</string>
+    <string name="setting_watchdog">Watchdog טיימר: כל %d דקות</string>
     <string name="setting_stats_category">התראת מהירות</string>
     <string name="setting_stats">הצג התראת מהירות</string>
     <string name="setting_stats_top">הצג את היישומים העליונים</string>
-    <string name="setting_stats_frequency">מרווח הדגימה: %s מ\"ש</string>
-    <string name="setting_stats_samples">מספר הדגימות: %s ש</string>
+    <string name="setting_stats_frequency">מרווח הדגימה: %d מ\"ש</string>
+    <string name="setting_stats_samples">מספר הדגימות: %d ש</string>
     <string name="setting_backup">גיבוי</string>
     <string name="setting_export">ייצא הגדרות</string>
     <string name="setting_import">יבא הגדרות</string>
@@ -171,10 +168,8 @@
     <string name="msg_terms">בתרומתך אתה מסכים ל <a href="http://www.netguard.me/#terms"> תנאים והגבלות</a></string>
     <string name="msg_dimming">אם אין אפשרות ללחוץ על אישור בתיבת הדו-שיח הבאה, סביר להניח שיישום אחר (כגון עמעום מסך) משנה את המסך.</string>
     <string name="msg_mbday">± %1$.3f▲ %2$.3f▼ MB/יום</string>
-    <string name="msg_kb">%1$7.3f▲ %2$7.3f▼ KB</string>
-    <string name="msg_mb">%1$7.3f▲ %2$7.3f▼ MB</string>
-    <string name="msg_gb">%1$7.3f▲ %2$7.3f▼ GB</string>
-    <string name="msg_count">%dx</string>
+
+
     <string name="msg_doze">על מנת לקבל תוצאות עקביות, אופציית ייעול הסוללה של אנדרואיד צריכה להיות מכובה עבור NetGuard.
 \n\n בתיבת הדו שיח הבאה, בחר ב\"כל האפלקציות\" בחלק העליון, בחר ב-NetGuard מתוך הרשימה וסמן \"אל תייעל\".</string>
     <string name="msg_datasaving">על מנת לקבל תוצאות עקביות, הגבלות שמירת הנתונים באנדרואיד צריכות להיות מכובות עבור NetGuard.\n\n בתיבת הדו-שיח הבאה, אפשר את האפשרויות \"נתוני רקע\" ו- \"שימוש בלתי מוגבל בנתונים \"</string>
@@ -225,7 +220,6 @@
     <string name="title_conditions">תנאים</string>
     <string name="title_screen_wifi">אפשר גישה ל-Wi-Fi כאשר המסך פעיל</string>
     <string name="title_screen_other">אפשר גישה לרשת סלולרית כאשר המסך פעיל</string>
-    <string name="title_roaming_symbol">R</string>
     <string name="title_roaming">חסום בעת נדידה</string>
     <string name="title_lockdown">אפשר במצב נעילה</string>
     <string name="title_related">סנן דומים</string>
@@ -281,9 +275,5 @@
         <item>עַנבָּר/כחול</item>
         <item>כתום/אפור</item>
         <item>ירוק</item>
-    </string-array>
-    <string-array name="protocolNames">
-        <item>UDP</item>
-        <item>TCP</item>
     </string-array>
 </resources>

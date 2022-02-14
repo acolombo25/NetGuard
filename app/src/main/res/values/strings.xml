@@ -72,8 +72,8 @@
     <string name="setting_dark">Use dark theme</string>
     <string name="setting_install">Notify on new install</string>
     <string name="setting_screen_on">Apply \'when screen on\' rules</string>
-    <string name="setting_auto">Auto enable after %1$s minutes</string>
-    <string name="setting_delay">Delay screen off %1$s minutes</string>
+    <string name="setting_auto">Auto enable after %1$d minutes</string>
+    <string name="setting_delay">Delay screen off %1$d minutes</string>
     <string name="setting_update">Check for updates</string>
 
     <string name="setting_network_options">Network options</string>
@@ -106,27 +106,27 @@
     <string name="setting_reset_usage">Reset network usage</string>
     <string name="setting_show_resolved">Show resolved domain names</string>
     <string name="setting_block_domains">Block domain names</string>
-    <string name="setting_rcode">DNS response code: %s</string>
+    <string name="setting_rcode">DNS response code: %d</string>
     <string name="setting_forwarding">Port forwarding</string>
     <string name="setting_vpn4">VPN IPv4: %s</string>
     <string name="setting_vpn6">VPN IPv6: %s</string>
     <string name="setting_dns">VPN DNS: %s</string>
     <string name="setting_validate">Validate at: %s</string>
-    <string name="setting_ttl">Minimum DNS TTL: %s s</string>
+    <string name="setting_ttl">Minimum DNS TTL: %d s</string>
     <string name="setting_socks5_enabled">Use SOCKS5 proxy</string>
     <string name="setting_socks5_addr">SOCKS5 address: %s</string>
     <string name="setting_socks5_port">SOCKS5 port: %s</string>
     <string name="setting_socks5_username">SOCKS5 username: %s</string>
     <string name="setting_socks5_password">SOCKS5 password: %s</string>
-    <string name="setting_pcap_record_size">PCAP record size: %s B</string>
-    <string name="setting_pcap_file_size">PCAP max. file size: %s MB</string>
-    <string name="setting_watchdog">Watchdog: every %s minutes</string>
+    <string name="setting_pcap_record_size">PCAP record size: %d B</string>
+    <string name="setting_pcap_file_size">PCAP max. file size: %d MB</string>
+    <string name="setting_watchdog">Watchdog: every %d minutes</string>
 
     <string name="setting_stats_category">Speed notification</string>
     <string name="setting_stats">Show speed notification</string>
     <string name="setting_stats_top">Show top apps</string>
-    <string name="setting_stats_frequency">Sample interval: %s ms</string>
-    <string name="setting_stats_samples">Number of samples: %s s</string>
+    <string name="setting_stats_frequency">Sample interval: %d ms</string>
+    <string name="setting_stats_samples">Number of samples: %d s</string>
 
     <string name="setting_backup">Backup</string>
     <string name="setting_export">Export settings</string>
@@ -171,8 +171,6 @@
     <string name="summary_watchdog">Periodically check if NetGuard is still running (enter zero to disable this option). This might result in extra battery usage.</string>
 
     <string name="summary_stats">Show network speed graph in status bar notification</string>
-
-    <string-array name="default_wifi_home"></string-array>
 
     <string name="msg_sure">Are you sure?</string>
     <string name="msg_started">Enforcing rules</string>
@@ -284,6 +282,7 @@ Your internet traffic is not being sent to a remote VPN server.</string>
     <string name="title_block_other">Block mobile</string>
     <string name="title_root">root</string>
     <string name="title_mediaserver">mediaserver</string>
+    <string name="title_multicast" translatable="false">Multicast</string>
     <string name="title_gpsdaemon" translatable="false">GPS daemon</string>
     <string name="title_dnsdaemon" translatable="false">DNS daemon</string>
     <string name="title_nobody">nobody</string>

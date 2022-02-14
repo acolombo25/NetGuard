@@ -60,8 +60,8 @@
     <string name="setting_dark">어두운 테마 사용</string>
     <string name="setting_install">새 앱을 설치할 때 알림</string>
     <string name="setting_screen_on">\'화면이 켜져 있을 때\' 규칙 적용</string>
-    <string name="setting_auto">%1$s분 후 자동 활성화</string>
-    <string name="setting_delay">%1$s분 간 화면 꺼짐 지연</string>
+    <string name="setting_auto">%1$d분 후 자동 활성화</string>
+    <string name="setting_delay">%1$d분 간 화면 꺼짐 지연</string>
     <string name="setting_update">업데이트 확인</string>
     <string name="setting_network_options">네트워크 옵션</string>
     <string name="setting_subnet">서브넷 라우팅</string>
@@ -92,26 +92,23 @@
     <string name="setting_reset_usage">네트워크 사용량 초기화</string>
     <string name="setting_show_resolved">확인된 도메인 이름 표시</string>
     <string name="setting_block_domains">도메인 이름 차단</string>
-    <string name="setting_rcode">DNS 응답 코드: %s</string>
+    <string name="setting_rcode">DNS 응답 코드: %d</string>
     <string name="setting_forwarding">포트 포워딩</string>
-    <string name="setting_vpn4">VPN IPv4: %s</string>
-    <string name="setting_vpn6">VPN IPv6: %s</string>
-    <string name="setting_dns">VPN DNS: %s</string>
     <string name="setting_validate">검증 주소: %s</string>
-    <string name="setting_ttl">최소 DNS TTL: %s초</string>
+    <string name="setting_ttl">최소 DNS TTL: %d초</string>
     <string name="setting_socks5_enabled">SOCKS5 프록시 사용</string>
     <string name="setting_socks5_addr">SOCKS5 주소: %s</string>
     <string name="setting_socks5_port">SOCKS5 포트: %s</string>
     <string name="setting_socks5_username">SOCKS5 사용자명: %s</string>
     <string name="setting_socks5_password">SOCKS5 비밀번호: %s</string>
-    <string name="setting_pcap_record_size">PCAP 기록 크기: %sB</string>
-    <string name="setting_pcap_file_size">PCAP 최대. 파일 크기: %sMB</string>
-    <string name="setting_watchdog">워치독: %s분마다</string>
+    <string name="setting_pcap_record_size">PCAP 기록 크기: %dB</string>
+    <string name="setting_pcap_file_size">PCAP 최대. 파일 크기: %dMB</string>
+    <string name="setting_watchdog">워치독: %d분마다</string>
     <string name="setting_stats_category">속도 알림</string>
     <string name="setting_stats">속도 알림 표시</string>
     <string name="setting_stats_top">상위 앱 표시</string>
-    <string name="setting_stats_frequency">샘플 간격: %sms</string>
-    <string name="setting_stats_samples">샘플 수: %s s</string>
+    <string name="setting_stats_frequency">샘플 간격: %d ms</string>
+    <string name="setting_stats_samples">샘플 수: %d s</string>
     <string name="setting_backup">백업</string>
     <string name="setting_export">설정 내보내기</string>
     <string name="setting_import">설정 가져오기</string>
@@ -172,9 +169,7 @@
     <string name="msg_terms">후원하면 <a href="http://www.netguard.me/#terms">이용 약관</a>에 동의하게 됩니다</string>
     <string name="msg_dimming">다음 창에서 확인 버튼을 누를 수 없는 경우, 다른(화면 감광 등의) 앱이 화면을 제어하고 있을 가능성이 높습니다.</string>
     <string name="msg_mbday">± %1$.3f▲ %2$.3f▼ MB/일</string>
-    <string name="msg_kb">%1$7.3f▲ %2$7.3f▼ KB</string>
-    <string name="msg_mb">%1$7.3f▲ %2$7.3f▼ MB</string>
-    <string name="msg_gb">%1$7.3f▲ %2$7.3f▼ GB</string>
+
     <string name="msg_count">%d회</string>
     <string name="msg_doze">NetGuard가 안정적으로 동작하려면 안드로이드 배터리 최적화 설정이 꺼져 있어야 합니다.
 \n\n다음 창에서, 상단의 \"모든 앱\"을 누른 다음, 목록에서 NetGuard를 찾아 누른 다음 제외하십시오.</string>
@@ -227,7 +222,7 @@
     <string name="title_conditions">조건</string>
     <string name="title_screen_wifi">화면이 켜져 있을 때 Wi-Fi 허용</string>
     <string name="title_screen_other">화면이 켜져 있을 때 모바일 데이터 허용</string>
-    <string name="title_roaming_symbol">R</string>
+
     <string name="title_roaming">로밍시 차단</string>
     <string name="title_lockdown">차단 모드에서 허용</string>
     <string name="title_related">관련 항목도 필터링</string>
@@ -284,9 +279,5 @@
         <item>황토/파랑</item>
         <item>주황/회색</item>
         <item>초록</item>
-    </string-array>
-    <string-array name="protocolNames">
-        <item>UDP</item>
-        <item>TCP</item>
     </string-array>
 </resources>

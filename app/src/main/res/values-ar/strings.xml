@@ -60,8 +60,8 @@
     <string name="setting_dark">استخدم المظهر الداكن</string>
     <string name="setting_install">اخطار عند التثبيت الجديد</string>
     <string name="setting_screen_on">تطبيق القواعد \'عندما تكون الشاشة مفتوحة\'</string>
-    <string name="setting_auto">تمكين تلقائي بعد %1$s دقيقة/دقائق</string>
-    <string name="setting_delay">تأخير تعتيم الشاشة %1$s دقيقة/دقائق</string>
+    <string name="setting_auto">تمكين تلقائي بعد %1$d دقيقة/دقائق</string>
+    <string name="setting_delay">تأخير تعتيم الشاشة %1$d دقيقة/دقائق</string>
     <string name="setting_update">فحص توفر التحديثات</string>
     <string name="setting_network_options">خيارات الشبكة</string>
     <string name="setting_subnet">توجيه الشبكة الفرعية</string>
@@ -92,26 +92,26 @@
     <string name="setting_reset_usage">إعادة تعيين استخدام الشبكة</string>
     <string name="setting_show_resolved">عرض أسماء النطاقات التي تم حلها</string>
     <string name="setting_block_domains">حظر أسماء نطاقات</string>
-    <string name="setting_rcode">رمز استجابة نظام أسماء النطاقات: %s</string>
+    <string name="setting_rcode">رمز استجابة نظام أسماء النطاقات: %d</string>
     <string name="setting_forwarding">توجيه المنفذ</string>
     <string name="setting_vpn4">الشبكة الافتراضية الخاصة IPv4: %s</string>
     <string name="setting_vpn6">الشبكة الإفتراضية الخاصة IPv6: %s</string>
     <string name="setting_dns">DNS للشبكة الافتراضية الخاصة: %s</string>
     <string name="setting_validate">تم التحقق منه في: %s</string>
-    <string name="setting_ttl">مدة الحياة الدنيا لـ DNS: %s ثا</string>
+    <string name="setting_ttl">مدة الحياة الدنيا لـ DNS: %d ثا</string>
     <string name="setting_socks5_enabled">استخدام وكيل SOCKS5</string>
     <string name="setting_socks5_addr">عنوان SOCKS5: %s</string>
     <string name="setting_socks5_port">منفذ SOCKS5: %s</string>
     <string name="setting_socks5_username">اسم المستخدم SOCKS5: %s</string>
     <string name="setting_socks5_password">كلمة المرور SOCKS5: %s</string>
-    <string name="setting_pcap_record_size">سجل PCAP حجمه: %s ب</string>
-    <string name="setting_pcap_file_size">حجم ملف PCAP الأعلى: %s م ب</string>
-    <string name="setting_watchdog">توقيت Watchdog: كل %s دقائق</string>
+    <string name="setting_pcap_record_size">سجل PCAP حجمه: %d ب</string>
+    <string name="setting_pcap_file_size">حجم ملف PCAP الأعلى: %d م ب</string>
+    <string name="setting_watchdog">توقيت Watchdog: كل %d دقائق</string>
     <string name="setting_stats_category">اشعار السرعة</string>
     <string name="setting_stats">إظهار إشعار السرعة</string>
     <string name="setting_stats_top">إظهار التطبيقات الأعلى</string>
-    <string name="setting_stats_frequency">الفاصل الزمني للعينة: %s مللي ثانية</string>
-    <string name="setting_stats_samples">عدد العينات: %s ثا</string>
+    <string name="setting_stats_frequency">الفاصل الزمني للعينة: %d مللي ثانية</string>
+    <string name="setting_stats_samples">عدد العينات: %d ثا</string>
     <string name="setting_backup">النسخ الاحتياطي</string>
     <string name="setting_export">تصدير الإعدادات</string>
     <string name="setting_import">استيراد الإعدادات</string>
@@ -280,9 +280,5 @@
         <item>عنبر/ أزرق</item>
         <item>برتقالي/ رمادي</item>
         <item>أخضر</item>
-    </string-array>
-    <string-array name="protocolNames">
-        <item>UDP</item>
-        <item>TCP</item>
     </string-array>
 </resources>
