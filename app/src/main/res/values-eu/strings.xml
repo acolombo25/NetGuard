@@ -265,7 +265,7 @@ Zure internet trafikoa ez da kanpo VPN zerbitzari batera bidaltzen.</string>
     <string name="title_pro_unavailable">Eskuraezina</string>
     <string name="title_pro_details">Sakatu lauza bat informazio gehiagorako</string>
     <string name="title_pro_challenge">Erronka</string>
-    <string name="title_pro_reponse">Erantzuna</string>
+    <string name="title_pro_response">Erantzuna</string>
     <string name="title_pro_feature">Hau ordainpeko ezaugarri bat da</string>
     <string-array name="themeNames">
         <item>berdexka/laranja</item>

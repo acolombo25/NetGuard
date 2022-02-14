@@ -229,7 +229,7 @@
     <string name="title_pro_unavailable">Не е наличен</string>
     <string name="title_pro_details">Натиснете върху заглавие за повече информация</string>
     <string name="title_pro_challenge">Предизвикателство</string>
-    <string name="title_pro_reponse">Отговор</string>
+    <string name="title_pro_response">Отговор</string>
     <string name="title_pro_feature">Това е pro функция</string>
     <string-array name="themeNames">
         <item>синьо-зелено/оранжево</item>

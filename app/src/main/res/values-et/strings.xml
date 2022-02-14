@@ -97,7 +97,7 @@
     <string name="title_pro_bought">Lubatud</string>
     <string name="title_pro_unavailable">Pole saadaval</string>
     <string name="title_pro_challenge">Väljakutse</string>
-    <string name="title_pro_reponse">Vastus</string>
+    <string name="title_pro_response">Vastus</string>
     <string-array name="themeNames">
         <item>rohekas-sinine/oranž</item>
         <item>sinine/oranž</item>

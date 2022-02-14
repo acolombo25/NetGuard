@@ -255,7 +255,7 @@
     <string name="title_pro_unavailable">Μη διαθέσιμος/η</string>
     <string name="title_pro_details">Πατήστε στον τίτλο για περισσότερες πληροφορίες</string>
     <string name="title_pro_challenge">Πρόκληση</string>
-    <string name="title_pro_reponse">Ανταπόκριση</string>
+    <string name="title_pro_response">Ανταπόκριση</string>
     <string-array name="themeNames">
         <item>κυπαρισσί/πορτοκαλί</item>
         <item>μπλε/πορτοκαλί</item>

@@ -267,7 +267,7 @@ Din acest motiv, va rugăm să permiteți conexiunea VPN în caseta de dialog ur
     <string name="title_pro_unavailable">Indisponibil</string>
     <string name="title_pro_details">Atingeți un titlu pentru mai multe informații</string>
     <string name="title_pro_challenge">Întrebare de verificare</string>
-    <string name="title_pro_reponse">Răspuns</string>
+    <string name="title_pro_response">Răspuns</string>
     <string name="title_pro_feature">Aceasta este o caracteristică Pro</string>
     <string name="title_pro_subscription">        Un abonament lunar de 1 sau 2 euro (cu excepția impozitelor locale) va activa toate funcțiile Pro.
         Puteți anula sau administra un abonament prin intermediul tab-ului de abonamente din aplicația Play Store.

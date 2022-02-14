@@ -269,7 +269,7 @@ Je internetverkeer wordt niet naar een externe VPN-server gestuurd.</string>
     <string name="title_pro_unavailable">Niet beschikbaar</string>
     <string name="title_pro_details">Tik op een titel voor meer info</string>
     <string name="title_pro_challenge">Uitdaging</string>
-    <string name="title_pro_reponse">Antwoord</string>
+    <string name="title_pro_response">Antwoord</string>
     <string name="title_pro_feature">Dit is een pro-functie</string>
     <string name="title_pro_subscription">        Een maandelijks abonnement van één of twee euro (exclusief belasting) activeert alle pro-functies.
         Je kunt je abonnement opzeggen of beheren via het tabblad \'Abonnementen\' in de Google Play Store.

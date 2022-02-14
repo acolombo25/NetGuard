@@ -29,7 +29,7 @@
     <string name="title_pro_theme">පෙනුම (තේමාව, වර්ණ)</string>
     <string name="title_pro_buy">මිලදී ගන්න</string>
     <string name="title_pro_bought">සබල කර ඇත</string>
-    <string name="title_pro_reponse">ප්‍රතිචාරය</string>
+    <string name="title_pro_response">ප්‍රතිචාරය</string>
     <string-array name="themeNames">
         <item>teal/orange</item>
         <item>නිල්/තැඹිලි</item>

@@ -259,7 +259,7 @@
     <string name="title_pro_unavailable">Nije dostupno</string>
     <string name="title_pro_details">Dodirnite naslov za više informacija</string>
     <string name="title_pro_challenge">Izazov</string>
-    <string name="title_pro_reponse">Odgovor</string>
+    <string name="title_pro_response">Odgovor</string>
     <string name="title_pro_feature">Ovo je pro funkcija</string>
     <string-array name="themeNames">
         <item>tirkizna/narančasta</item>

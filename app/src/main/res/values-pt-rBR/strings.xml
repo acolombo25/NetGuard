@@ -267,7 +267,7 @@ O seu tráfego de internet não está sendo enviado para um servidor VPN remoto.
     <string name="title_pro_unavailable">Indisponível</string>
     <string name="title_pro_details">Toque em um título para obter mais informações</string>
     <string name="title_pro_challenge">Código de verificação</string>
-    <string name="title_pro_reponse">Resposta</string>
+    <string name="title_pro_response">Resposta</string>
     <string name="title_pro_feature">Essa é uma funcionalidade Pro</string>
     <string name="title_pro_subscription">        Uma assinatura mensal de 1 ou 2 euros (excluindo taxas locais) irá ativar todas as funcionalidades Pro.
         Você pode cancelar ou gerenciar uma assinatura através da guia de assinaturas do aplicativo da Play Store.

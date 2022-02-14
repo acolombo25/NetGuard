@@ -218,7 +218,7 @@
     <string name="title_pro_unavailable">Mövcud deyil</string>
     <string name="title_pro_details">Daha çox məlumat üçün başlığa toxunun</string>
     <string name="title_pro_challenge">Tapşırıq</string>
-    <string name="title_pro_reponse">Cavab</string>
+    <string name="title_pro_response">Cavab</string>
     <string-array name="themeNames">
         <item>tünd yaşıl/narıncı</item>
         <item>mavi/narıncı</item>
