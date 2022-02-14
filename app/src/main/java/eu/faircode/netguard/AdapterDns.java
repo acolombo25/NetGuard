@@ -34,6 +34,8 @@ import androidx.preference.PreferenceManager;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import eu.faircode.netguard.preference.Preferences;
+
 public class AdapterDns extends CursorAdapter {
     private int colorExpired;
 

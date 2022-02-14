@@ -1,28 +1,11 @@
-package eu.faircode.netguard;
+package eu.faircode.netguard.preference;
 
-import android.preference.EditTextPreference;
 import android.util.Log;
 
 import java.util.HashSet;
 import java.util.Set;
 
-public class Preference<T> {
-    private final String key;
-    private final T defaultValue;
-
-    public Preference(String key, T defaultValue) {
-        this.key = key;
-        this.defaultValue = defaultValue;
-    }
-
-    public String getKey() {
-        return key;
-    }
-
-    public T getDefaultValue() {
-        return defaultValue;
-    }
-}
+import eu.faircode.netguard.Theme;
 
 public interface Preferences {
 
@@ -48,7 +31,7 @@ public interface Preferences {
     Preference<Boolean> TRACK_USAGE = new Preference<>("track_usage", false); ///
     Preference<Integer> SCREEN_DELAY = new Preference<>("screen_delay", 0); ///
     Preference<Integer> AUTO_ENABLE = new Preference<>("auto_enable", 0); ///
-    Preference<Set<String>> WIFI_HOMES = new Preference<>("wifi_homes", new HashSet<>()); ///
+    Preference<HashSet<String>> WIFI_HOMES = new Preference<>("wifi_homes", new HashSet<String>()); ///
 
     Preference<Boolean> WHITELIST_WIFI = new Preference<>("whitelist_wifi", true); ///
     Preference<Boolean> SCREEN_ON = new Preference<>("screen_on", true); ///
@@ -149,13 +132,4 @@ public interface Preferences {
     Preference<Boolean> HOSTS_IMPORT = new Preference<>("hosts_import", false); /// id
     Preference<Boolean> HOSTS_IMPORT_APPEND = new Preference<>("hosts_import_append", false); /// id
     Preference<Boolean> HOSTS_DOWNLOAD = new Preference<>("hosts_download", false); /// id
-
-
-}
-
-public enum Sort {
-    Name, Uid, Data;
-    public String getValue() {
-        return this.name().toLowerCase();
-    }
 }

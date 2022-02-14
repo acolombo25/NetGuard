@@ -58,6 +58,11 @@ import java.net.UnknownHostException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import eu.faircode.netguard.database.Column;
+import eu.faircode.netguard.preference.Preferences;
+import eu.faircode.netguard.reason.Changed;
+import eu.faircode.netguard.reason.SimpleReason;
+
 public class ActivityLog extends AppCompatActivity implements SharedPreferences.OnSharedPreferenceChangeListener {
     private static final String TAG = "NetGuard.Log";
 
@@ -158,16 +163,16 @@ public class ActivityLog extends AppCompatActivity implements SharedPreferences.
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 PackageManager pm = getPackageManager();
                 Cursor cursor = (Cursor) adapter.getItem(position);
-                long time = cursor.getLong(cursor.getColumnIndex("time"));
-                int version = cursor.getInt(cursor.getColumnIndex("version"));
-                int protocol = cursor.getInt(cursor.getColumnIndex("protocol"));
-                final String saddr = cursor.getString(cursor.getColumnIndex("saddr"));
-                final int sport = (cursor.isNull(cursor.getColumnIndex("sport")) ? -1 : cursor.getInt(cursor.getColumnIndex("sport")));
-                final String daddr = cursor.getString(cursor.getColumnIndex("daddr"));
-                final int dport = (cursor.isNull(cursor.getColumnIndex("dport")) ? -1 : cursor.getInt(cursor.getColumnIndex("dport")));
-                final String dname = cursor.getString(cursor.getColumnIndex("dname"));
-                final int uid = (cursor.isNull(cursor.getColumnIndex("uid")) ? -1 : cursor.getInt(cursor.getColumnIndex("uid")));
-                int allowed = (cursor.isNull(cursor.getColumnIndex("allowed")) ? -1 : cursor.getInt(cursor.getColumnIndex("allowed")));
+                long time = cursor.getLong(cursor.getColumnIndex(Column.TIME.getValue()));
+                int version = cursor.getInt(cursor.getColumnIndex(Column.VERSION.getValue()));
+                int protocol = cursor.getInt(cursor.getColumnIndex(Column.PROTOCOL.getValue()));
+                final String saddr = cursor.getString(cursor.getColumnIndex(Column.SADDR.getValue()));
+                final int sport = (cursor.isNull(cursor.getColumnIndex(Column.SPORT.getValue())) ? -1 : cursor.getInt(cursor.getColumnIndex(Column.SPORT.getValue())));
+                final String daddr = cursor.getString(cursor.getColumnIndex(Column.DADDR.getValue()));
+                final int dport = (cursor.isNull(cursor.getColumnIndex(Column.DPORT.getValue())) ? -1 : cursor.getInt(cursor.getColumnIndex(Column.DPORT.getValue())));
+                final String dname = cursor.getString(cursor.getColumnIndex(Column.DNAME.getValue()));
+                final int uid = (cursor.isNull(cursor.getColumnIndex(Column.UID.getValue())) ? -1 : cursor.getInt(cursor.getColumnIndex(Column.UID.getValue())));
+                int allowed = (cursor.isNull(cursor.getColumnIndex(Column.ALLOWED.getValue())) ? -1 : cursor.getInt(cursor.getColumnIndex(Column.ALLOWED.getValue())));
 
                 // Get external address
                 InetAddress addr = null;
@@ -259,7 +264,7 @@ public class ActivityLog extends AppCompatActivity implements SharedPreferences.
                             case R.id.menu_allow:
                                 if (IAB.isPurchased(ActivityPro.SKU_FILTER, ActivityLog.this)) {
                                     DatabaseHelper.getInstance(ActivityLog.this).updateAccess(packet, dname, 0);
-                                    ServiceSinkhole.reload(Reason.AllowHost.INSTANCE, ActivityLog.this, false);
+                                    ServiceSinkhole.reload(SimpleReason.AllowHost, ActivityLog.this, false);
                                     Intent main = new Intent(ActivityLog.this, ActivityMain.class);
                                     main.putExtra(ActivityMain.EXTRA_SEARCH, Integer.toString(uid));
                                     startActivity(main);
@@ -270,7 +275,7 @@ public class ActivityLog extends AppCompatActivity implements SharedPreferences.
                             case R.id.menu_block:
                                 if (IAB.isPurchased(ActivityPro.SKU_FILTER, ActivityLog.this)) {
                                     DatabaseHelper.getInstance(ActivityLog.this).updateAccess(packet, dname, 1);
-                                    ServiceSinkhole.reload(Reason.BlockHost.INSTANCE, ActivityLog.this, false);
+                                    ServiceSinkhole.reload(SimpleReason.BlockHost, ActivityLog.this, false);
                                     Intent main = new Intent(ActivityLog.this, ActivityMain.class);
                                     main.putExtra(ActivityMain.EXTRA_SEARCH, Integer.toString(uid));
                                     startActivity(main);
@@ -338,7 +343,7 @@ public class ActivityLog extends AppCompatActivity implements SharedPreferences.
             if (swEnabled.isChecked() != log)
                 swEnabled.setChecked(log);
 
-            ServiceSinkhole.reload(new Reason.Changed(name), ActivityLog.this, false);
+            ServiceSinkhole.reload(new Changed(name), ActivityLog.this, false);
         }
     }
 

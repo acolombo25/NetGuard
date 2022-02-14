@@ -36,6 +36,10 @@ import androidx.preference.PreferenceManager;
 
 import java.util.Date;
 
+import eu.faircode.netguard.preference.Preferences;
+import eu.faircode.netguard.reason.Reason;
+import eu.faircode.netguard.reason.SimpleReason;
+
 @TargetApi(Build.VERSION_CODES.N)
 public class ServiceTileMain extends TileService implements SharedPreferences.OnSharedPreferenceChangeListener {
     private static final String TAG = "NetGuard.TileMain";
@@ -85,9 +89,9 @@ public class ServiceTileMain extends TileService implements SharedPreferences.On
         boolean enabled = !prefs.getBoolean(Preferences.ENABLED.getKey(), Preferences.ENABLED.getDefaultValue());
         prefs.edit().putBoolean(Preferences.ENABLED.getKey(), enabled).apply();
         if (enabled)
-            ServiceSinkhole.start(Reason.Tile.INSTANCE, this);
+            ServiceSinkhole.start(SimpleReason.Tile, this);
         else {
-            ServiceSinkhole.stop(Reason.Tile.INSTANCE, this, false);
+            ServiceSinkhole.stop(SimpleReason.Tile, this, false);
 
             // Auto enable
             int auto = prefs.getInt(Preferences.AUTO_ENABLE.getKey(), Preferences.AUTO_ENABLE.getDefaultValue());

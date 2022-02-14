@@ -43,6 +43,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import java.net.InetAddress;
 import java.util.List;
 
+import eu.faircode.netguard.reason.SimpleReason;
+
 public class ActivityForwarding extends AppCompatActivity {
     private boolean running;
     private ListView lvForwarding;
@@ -97,7 +99,7 @@ public class ActivityForwarding extends AppCompatActivity {
                     public boolean onMenuItemClick(MenuItem menuItem) {
                         if (menuItem.getItemId() == R.id.menu_delete) {
                             DatabaseHelper.getInstance(ActivityForwarding.this).deleteForward(protocol, dport);
-                            ServiceSinkhole.reload(ServiceSinkhole.Reason.Forwarding, ActivityForwarding.this, false);
+                            ServiceSinkhole.reload(SimpleReason.Forwarding, ActivityForwarding.this, false);
                             adapter = new AdapterForwarding(ActivityForwarding.this,
                                     DatabaseHelper.getInstance(ActivityForwarding.this).getForwarding());
                             lvForwarding.setAdapter(adapter);
@@ -215,7 +217,7 @@ public class ActivityForwarding extends AppCompatActivity {
                                         protected void onPostExecute(Throwable ex) {
                                             if (running)
                                                 if (ex == null) {
-                                                    ServiceSinkhole.reload(ServiceSinkhole.Reason.Forwarding, ActivityForwarding.this, false);
+                                                    ServiceSinkhole.reload(SimpleReason.Forwarding, ActivityForwarding.this, false);
                                                     adapter = new AdapterForwarding(ActivityForwarding.this,
                                                             DatabaseHelper.getInstance(ActivityForwarding.this).getForwarding());
                                                     lvForwarding.setAdapter(adapter);

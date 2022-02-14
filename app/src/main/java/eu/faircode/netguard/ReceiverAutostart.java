@@ -30,6 +30,11 @@ import androidx.preference.PreferenceManager;
 
 import java.util.Map;
 
+import eu.faircode.netguard.preference.Preferences;
+import eu.faircode.netguard.preference.Sort;
+import eu.faircode.netguard.reason.Reason;
+import eu.faircode.netguard.reason.SimpleReason;
+
 public class ReceiverAutostart extends BroadcastReceiver {
     private static final String TAG = "NetGuard.Receiver";
 
@@ -47,12 +52,12 @@ public class ReceiverAutostart extends BroadcastReceiver {
                 // Start service
                 SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
                 if (prefs.getBoolean(Preferences.ENABLED.getKey(), Preferences.ENABLED.getDefaultValue()))
-                    ServiceSinkhole.start(Reason.Receiver.INSTANCE, context);
+                    ServiceSinkhole.start(SimpleReason.Receiver, context);
                 else if (prefs.getBoolean(Preferences.SHOW_STATS.getKey(), false))
-                    ServiceSinkhole.run(Reason.Receiver.INSTANCE, context);
+                    ServiceSinkhole.run(SimpleReason.Receiver, context);
 
                 if (Util.isInteractive(context))
-                    ServiceSinkhole.reloadStats(Reason.Receiver.INSTANCE, context);
+                    ServiceSinkhole.reloadStats(SimpleReason.Receiver, context);
             } catch (Throwable ex) {
                 Log.e(TAG, ex.toString() + "\n" + Log.getStackTraceString(ex));
             }

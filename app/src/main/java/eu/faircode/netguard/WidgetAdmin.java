@@ -33,6 +33,10 @@ import androidx.preference.PreferenceManager;
 
 import java.util.Date;
 
+import eu.faircode.netguard.preference.Preferences;
+import eu.faircode.netguard.reason.Reason;
+import eu.faircode.netguard.reason.SimpleReason;
+
 public class WidgetAdmin extends ReceiverAutostart {
     private static final String TAG = "NetGuard.Widget";
 
@@ -72,9 +76,9 @@ public class WidgetAdmin extends ReceiverAutostart {
                 boolean enabled = INTENT_ON.equals(intent.getAction());
                 prefs.edit().putBoolean(Preferences.ENABLED.getKey(), enabled).apply();
                 if (enabled)
-                    ServiceSinkhole.start(Reason.Widget.INSTANCE, context);
+                    ServiceSinkhole.start(SimpleReason.Widget, context);
                 else
-                    ServiceSinkhole.stop(Reason.Widget.INSTANCE, context, false);
+                    ServiceSinkhole.stop(SimpleReason.Widget, context, false);
 
                 // Auto enable
                 int auto = prefs.getInt(Preferences.AUTO_ENABLE.getKey(), Preferences.AUTO_ENABLE.getDefaultValue());
@@ -89,7 +93,7 @@ public class WidgetAdmin extends ReceiverAutostart {
             } else if (INTENT_LOCKDOWN_ON.equals(intent.getAction()) || INTENT_LOCKDOWN_OFF.equals(intent.getAction())) {
                 boolean lockdown = INTENT_LOCKDOWN_ON.equals(intent.getAction());
                 prefs.edit().putBoolean(Preferences.LOCKDOWN.getKey(), lockdown).apply();
-                ServiceSinkhole.reload(Reason.Widget.INSTANCE, context, false);
+                ServiceSinkhole.reload(SimpleReason.Widget, context, false);
                 WidgetLockdown.updateWidgets(context);
             }
         } catch (Throwable ex) {

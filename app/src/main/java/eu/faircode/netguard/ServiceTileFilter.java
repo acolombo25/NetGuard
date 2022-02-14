@@ -31,6 +31,9 @@ import android.widget.Toast;
 
 import androidx.preference.PreferenceManager;
 
+import eu.faircode.netguard.preference.Preferences;
+import eu.faircode.netguard.reason.SimpleReason;
+
 @TargetApi(Build.VERSION_CODES.N)
 public class ServiceTileFilter extends TileService implements SharedPreferences.OnSharedPreferenceChangeListener {
     private static final String TAG = "NetGuard.TileFilter";
@@ -72,7 +75,7 @@ public class ServiceTileFilter extends TileService implements SharedPreferences.
             if (IAB.isPurchased(ActivityPro.SKU_FILTER, this)) {
                 SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
                 prefs.edit().putBoolean(Preferences.FILTER.getKey(), !prefs.getBoolean(Preferences.FILTER.getKey(), Preferences.FILTER.getDefaultValue())).apply();
-                ServiceSinkhole.reload(ServiceSinkhole.Reason.Tile, this, false);
+                ServiceSinkhole.reload(SimpleReason.Tile, this, false);
             } else
                 Toast.makeText(this, R.string.title_pro_feature, Toast.LENGTH_SHORT).show();
         } else

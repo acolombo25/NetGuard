@@ -30,6 +30,10 @@ import android.util.Log;
 
 import androidx.preference.PreferenceManager;
 
+import eu.faircode.netguard.preference.Preferences;
+import eu.faircode.netguard.reason.Reason;
+import eu.faircode.netguard.reason.SimpleReason;
+
 @TargetApi(Build.VERSION_CODES.N)
 public class ServiceTileLockdown extends TileService implements SharedPreferences.OnSharedPreferenceChangeListener {
     private static final String TAG = "NetGuard.TileLockdown";
@@ -69,7 +73,7 @@ public class ServiceTileLockdown extends TileService implements SharedPreference
 
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
         prefs.edit().putBoolean(Preferences.LOCKDOWN.getKey(), !prefs.getBoolean(Preferences.LOCKDOWN.getKey(), Preferences.LOCKDOWN.getDefaultValue())).apply();
-        ServiceSinkhole.reload(Reason.Tile.INSTANCE, this, false);
+        ServiceSinkhole.reload(SimpleReason.Tile, this, false);
         WidgetLockdown.updateWidgets(this);
     }
 }

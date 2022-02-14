@@ -31,6 +31,8 @@ import android.widget.RemoteViews;
 
 import androidx.preference.PreferenceManager;
 
+import eu.faircode.netguard.preference.Preferences;
+
 public class WidgetLockdown extends AppWidgetProvider {
     private static final String TAG = "NetGuard.WidgetLock";
 

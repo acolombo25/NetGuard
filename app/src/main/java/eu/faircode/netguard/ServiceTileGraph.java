@@ -31,6 +31,10 @@ import android.widget.Toast;
 
 import androidx.preference.PreferenceManager;
 
+import eu.faircode.netguard.preference.Preferences;
+import eu.faircode.netguard.reason.Reason;
+import eu.faircode.netguard.reason.SimpleReason;
+
 @TargetApi(Build.VERSION_CODES.N)
 public class ServiceTileGraph extends TileService implements SharedPreferences.OnSharedPreferenceChangeListener {
     private static final String TAG = "NetGuard.TileGraph";
@@ -75,6 +79,6 @@ public class ServiceTileGraph extends TileService implements SharedPreferences.O
             Toast.makeText(this, R.string.title_pro_feature, Toast.LENGTH_SHORT).show();
         else
             prefs.edit().putBoolean(Preferences.SHOW_STATS.getKey(), stats).apply();
-        ServiceSinkhole.reloadStats(Reason.Tile.INSTANCE, this);
+        ServiceSinkhole.reloadStats(SimpleReason.Tile, this);
     }
 }

@@ -72,6 +72,11 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import java.util.List;
 
+import eu.faircode.netguard.preference.Preferences;
+import eu.faircode.netguard.preference.Sort;
+import eu.faircode.netguard.reason.Reason;
+import eu.faircode.netguard.reason.SimpleReason;
+
 public class ActivityMain extends AppCompatActivity implements SharedPreferences.OnSharedPreferenceChangeListener {
     private static final String TAG = "NetGuard.Main";
 
@@ -145,9 +150,9 @@ public class ActivityMain extends AppCompatActivity implements SharedPreferences
 
         if (!getIntent().hasExtra(EXTRA_APPROVE)) {
             if (enabled)
-                ServiceSinkhole.start(Reason.UI.INSTANCE, this);
+                ServiceSinkhole.start(SimpleReason.UI, this);
             else
-                ServiceSinkhole.stop(Reason.UI.INSTANCE, this, false);
+                ServiceSinkhole.stop(SimpleReason.UI, this, false);
         }
 
         // Action bar
@@ -265,7 +270,7 @@ public class ActivityMain extends AppCompatActivity implements SharedPreferences
                     }
 
                 } else
-                    ServiceSinkhole.stop(Reason.SwitchOff.INSTANCE, ActivityMain.this, false);
+                    ServiceSinkhole.stop(SimpleReason.SwitchOff, ActivityMain.this, false);
             }
         });
         if (enabled)
@@ -313,7 +318,7 @@ public class ActivityMain extends AppCompatActivity implements SharedPreferences
             @Override
             public void onRefresh() {
                 Rule.clearCache(ActivityMain.this);
-                ServiceSinkhole.reload(Reason.Pull.INSTANCE, ActivityMain.this, false);
+                ServiceSinkhole.reload(SimpleReason.Pull, ActivityMain.this, false);
                 updateApplicationList(null);
             }
         });
@@ -577,7 +582,7 @@ public class ActivityMain extends AppCompatActivity implements SharedPreferences
             SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
             prefs.edit().putBoolean(Preferences.ENABLED.getKey(), resultCode == RESULT_OK).apply();
             if (resultCode == RESULT_OK) {
-                ServiceSinkhole.start(Reason.Prepared.INSTANCE, this);
+                ServiceSinkhole.start(SimpleReason.Prepared, this);
 
                 Toast on = Toast.makeText(ActivityMain.this, R.string.msg_on, Toast.LENGTH_LONG);
                 on.setGravity(Gravity.CENTER, 0, 0);
@@ -610,7 +615,7 @@ public class ActivityMain extends AppCompatActivity implements SharedPreferences
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         if (requestCode == REQUEST_ROAMING)
             if (grantResults[0] == PackageManager.PERMISSION_GRANTED)
-                ServiceSinkhole.reload(Reason.PermissionGranted.INSTANCE, this, false);
+                ServiceSinkhole.reload(SimpleReason.PermissionGranted, this, false);
     }
 
     @Override
@@ -1173,7 +1178,7 @@ public class ActivityMain extends AppCompatActivity implements SharedPreferences
         item.setChecked(!item.isChecked());
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
         prefs.edit().putBoolean(Preferences.LOCKDOWN.getKey(), item.isChecked()).apply();
-        ServiceSinkhole.reload(Reason.Lockdown.INSTANCE, this, false);
+        ServiceSinkhole.reload(SimpleReason.Lockdown, this, false);
         WidgetLockdown.updateWidgets(this);
     }
 

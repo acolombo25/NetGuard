@@ -43,6 +43,11 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
 
+import eu.faircode.netguard.database.Column;
+import eu.faircode.netguard.database.Index;
+import eu.faircode.netguard.database.Table;
+import eu.faircode.netguard.preference.Preferences;
+
 public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String TAG = "NetGuard.Database";
 
@@ -1203,73 +1208,4 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public interface ForwardChangedListener {
         void onChanged();
     }
-}
-
-public enum Column {
-    UID,
-    VERSION,
-    PROTOCOL,
-    ANAME,
-    DNAME,
-    DADDR,
-    DPORT,
-    QNAME,
-    RADDR,
-    RPORT,
-    RUID,
-    SADDR,
-    SPORT,
-    TIME,
-    BLOCK,
-    ALLOWED,
-    TTL,
-    RESOURCE,
-
-    PACKAGE,
-    LABEL,
-    SYSTEM,
-    INTERNET,
-    ENABLED,
-
-    PORT,
-    FLAGS,
-    CONNECTION,
-    INTERACTIVE,
-    DATA,
-
-    SENT,
-    RECEIVED,
-    CONNECTIONS,
-    ;
-    public String getValue() { return name().toLowerCase(); }
-
-    public enum Type {
-        INTEGER, TEXT;
-        public String getValue() { return name(); }
-    }
-}
-
-public enum Table {
-    LOG,
-    ACCESS,
-    DNS,
-    FORWARD,
-    APP,
-    ;
-    public String getValue() { return name().toLowerCase(); }
-}
-
-public enum Index {
-    IDX_ACCESS, IDX_ACCESS_BLOCK, IDX_ACCESS_DADDR,
-
-    IDX_LOG, IDX_LOG_SOURCE, IDX_LOG_TIME, IDX_LOG_DEST, IDX_LOG_DNAME, IDX_LOG_DPORT, IDX_LOG_UID,
-
-    IDX_DNS, IDX_DNS_RESOURCE,
-
-    IDX_FORWARD,
-
-    IDX_PACKAGE,
-;
-    public String getValue() { return name().toLowerCase(); }
-
 }

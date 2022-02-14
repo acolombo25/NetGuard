@@ -40,6 +40,10 @@ import java.net.URLConnection;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import eu.faircode.netguard.preference.Preferences;
+import eu.faircode.netguard.reason.Reason;
+import eu.faircode.netguard.reason.SimpleReason;
+
 public class ServiceExternal extends IntentService {
     private static final String TAG = "NetGuard.External";
     private static final String ACTION_DOWNLOAD_HOSTS_FILE = "eu.faircode.netguard.DOWNLOAD_HOSTS_FILE";
@@ -104,7 +108,7 @@ public class ServiceExternal extends IntentService {
                     String last = SimpleDateFormat.getDateTimeInstance().format(new Date().getTime());
                     prefs.edit().putString(Preferences.HOSTS_LAST_DOWNLOAD.getKey(), last).apply();
 
-                    ServiceSinkhole.reload(Reason.HostsFileDownload.INSTANCE, this, false);
+                    ServiceSinkhole.reload(SimpleReason.HostsFileDownload, this, false);
 
                 } catch (Throwable ex) {
                     Log.e(TAG, ex.toString() + "\n" + Log.getStackTraceString(ex));

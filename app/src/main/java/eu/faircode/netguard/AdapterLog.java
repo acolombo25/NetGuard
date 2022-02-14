@@ -47,6 +47,8 @@ import java.net.UnknownHostException;
 import java.text.SimpleDateFormat;
 import java.util.List;
 
+import eu.faircode.netguard.preference.Preferences;
+
 public class AdapterLog extends CursorAdapter {
     private static String TAG = "NetGuard.Log";
 

@@ -44,6 +44,9 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 
+import eu.faircode.netguard.reason.Reason;
+import eu.faircode.netguard.reason.SimpleReason;
+
 public class ActivityDns extends AppCompatActivity {
     private static final String TAG = "NetGuard.DNS";
 
@@ -124,7 +127,7 @@ public class ActivityDns extends AppCompatActivity {
 
             @Override
             protected void onPostExecute(Object result) {
-                ServiceSinkhole.reload(Reason.DNSCleanup.INSTANCE, ActivityDns.this, false);
+                ServiceSinkhole.reload(SimpleReason.DNSCleanup, ActivityDns.this, false);
                 updateAdapter();
             }
         }.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
@@ -141,7 +144,7 @@ public class ActivityDns extends AppCompatActivity {
 
             @Override
             protected void onPostExecute(Object result) {
-                ServiceSinkhole.reload(Reason.DNSClear.INSTANCE, ActivityDns.this, false);
+                ServiceSinkhole.reload(SimpleReason.DNSClear, ActivityDns.this, false);
                 updateAdapter();
             }
         }.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);

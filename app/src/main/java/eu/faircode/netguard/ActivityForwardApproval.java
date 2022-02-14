@@ -30,6 +30,9 @@ import android.widget.TextView;
 
 import java.net.InetAddress;
 
+import eu.faircode.netguard.reason.Reason;
+import eu.faircode.netguard.reason.SimpleReason;
+
 public class ActivityForwardApproval extends Activity {
     private static final String TAG = "NetGuard.Forward";
     private static final String ACTION_START_PORT_FORWARD = "eu.faircode.netguard.START_PORT_FORWARD";
@@ -114,7 +117,7 @@ am start -a eu.faircode.netguard.STOP_PORT_FORWARD \
                     DatabaseHelper.getInstance(ActivityForwardApproval.this).deleteForward(protocol, dport);
                 }
 
-                ServiceSinkhole.reload(Reason.Forwarding.INSTANCE, ActivityForwardApproval.this, false);
+                ServiceSinkhole.reload(SimpleReason.Forwarding, ActivityForwardApproval.this, false);
 
                 finish();
             }

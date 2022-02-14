@@ -77,6 +77,10 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import eu.faircode.netguard.preference.Preferences;
+import eu.faircode.netguard.reason.Reason;
+import eu.faircode.netguard.reason.SimpleReason;
+
 public class AdapterRule extends RecyclerView.Adapter<AdapterRule.ViewHolder> implements Filterable {
     private static final String TAG = "NetGuard.Adapter";
 
@@ -660,7 +664,7 @@ public class AdapterRule extends RecyclerView.Adapter<AdapterRule.ViewHolder> im
                             cbNotify.setChecked(false);
                             prefs.edit().putBoolean(Preferences.NOTIFY_ACCESS.getKey(), Preferences.NOTIFY_ACCESS.getDefaultValue()).apply();
                         }
-                        ServiceSinkhole.reload(Reason.ChangedNotify.INSTANCE, context, false);
+                        ServiceSinkhole.reload(SimpleReason.ChangedNotify, context, false);
                         AdapterRule.this.notifyDataSetChanged();
                     }
                 });
@@ -671,7 +675,7 @@ public class AdapterRule extends RecyclerView.Adapter<AdapterRule.ViewHolder> im
                         if (checked)
                             cbLogging.setChecked(true);
                         prefs.edit().putBoolean(Preferences.FILTER.getKey(), checked).apply();
-                        ServiceSinkhole.reload(Reason.ChangedFilter.INSTANCE, context, false);
+                        ServiceSinkhole.reload(SimpleReason.ChangedFilter, context, false);
                         AdapterRule.this.notifyDataSetChanged();
                     }
                 });
@@ -680,7 +684,7 @@ public class AdapterRule extends RecyclerView.Adapter<AdapterRule.ViewHolder> im
                     @Override
                     public void onCheckedChanged(CompoundButton compoundButton, boolean checked) {
                         prefs.edit().putBoolean(Preferences.NOTIFY_ACCESS.getKey(), checked).apply();
-                        ServiceSinkhole.reload(Reason.ChangedNotify.INSTANCE, context, false);
+                        ServiceSinkhole.reload(SimpleReason.ChangedNotify, context, false);
                         AdapterRule.this.notifyDataSetChanged();
                     }
                 });
@@ -772,7 +776,7 @@ public class AdapterRule extends RecyclerView.Adapter<AdapterRule.ViewHolder> im
                                 case R.id.menu_allow:
                                     if (IAB.isPurchased(ActivityPro.SKU_FILTER, context)) {
                                         DatabaseHelper.getInstance(context).setAccess(id, 0);
-                                        ServiceSinkhole.reload(Reason.AllowHost.INSTANCE, context, false);
+                                        ServiceSinkhole.reload(SimpleReason.AllowHost, context, false);
                                     } else
                                         context.startActivity(new Intent(context, ActivityPro.class));
                                     result = true;
@@ -781,7 +785,7 @@ public class AdapterRule extends RecyclerView.Adapter<AdapterRule.ViewHolder> im
                                 case R.id.menu_block:
                                     if (IAB.isPurchased(ActivityPro.SKU_FILTER, context)) {
                                         DatabaseHelper.getInstance(context).setAccess(id, 1);
-                                        ServiceSinkhole.reload(Reason.BlockHost.INSTANCE, context, false);
+                                        ServiceSinkhole.reload(SimpleReason.BlockHost, context, false);
                                     } else
                                         context.startActivity(new Intent(context, ActivityPro.class));
                                     result = true;
@@ -789,7 +793,7 @@ public class AdapterRule extends RecyclerView.Adapter<AdapterRule.ViewHolder> im
 
                                 case R.id.menu_reset:
                                     DatabaseHelper.getInstance(context).setAccess(id, -1);
-                                    ServiceSinkhole.reload(Reason.ResetHost.INSTANCE, context, false);
+                                    ServiceSinkhole.reload(SimpleReason.ResetHost, context, false);
                                     result = true;
                                     break;
 
@@ -967,7 +971,7 @@ public class AdapterRule extends RecyclerView.Adapter<AdapterRule.ViewHolder> im
         if (root) {
             notifyDataSetChanged();
             NotificationManagerCompat.from(context).cancel(rule.uid);
-            ServiceSinkhole.reload(Reason.RuleChanged.INSTANCE, context, false);
+            ServiceSinkhole.reload(SimpleReason.RuleChanged, context, false);
         }
     }
 
