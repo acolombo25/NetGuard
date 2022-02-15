@@ -47,6 +47,7 @@ import java.net.UnknownHostException;
 import java.text.SimpleDateFormat;
 import java.util.List;
 
+import eu.faircode.netguard.database.Column;
 import eu.faircode.netguard.preference.Preferences;
 
 public class AdapterLog extends CursorAdapter {
@@ -80,20 +81,20 @@ public class AdapterLog extends CursorAdapter {
         super(context, cursor, 0);
         this.resolve = resolve;
         this.organization = organization;
-        colTime = cursor.getColumnIndex("time");
-        colVersion = cursor.getColumnIndex("version");
-        colProtocol = cursor.getColumnIndex("protocol");
-        colFlags = cursor.getColumnIndex("flags");
-        colSAddr = cursor.getColumnIndex("saddr");
-        colSPort = cursor.getColumnIndex("sport");
-        colDAddr = cursor.getColumnIndex("daddr");
-        colDPort = cursor.getColumnIndex("dport");
-        colDName = cursor.getColumnIndex("dname");
-        colUid = cursor.getColumnIndex("uid");
-        colData = cursor.getColumnIndex("data");
-        colAllowed = cursor.getColumnIndex("allowed");
-        colConnection = cursor.getColumnIndex("connection");
-        colInteractive = cursor.getColumnIndex("interactive");
+        colTime = cursor.getColumnIndex(Column.TIME.getValue());
+        colVersion = cursor.getColumnIndex(Column.VERSION.getValue());
+        colProtocol = cursor.getColumnIndex(Column.PROTOCOL.getValue());
+        colFlags = cursor.getColumnIndex(Column.FLAGS.getValue());
+        colSAddr = cursor.getColumnIndex(Column.SADDR.getValue());
+        colSPort = cursor.getColumnIndex(Column.SPORT.getValue());
+        colDAddr = cursor.getColumnIndex(Column.DADDR.getValue());
+        colDPort = cursor.getColumnIndex(Column.DPORT.getValue());
+        colDName = cursor.getColumnIndex(Column.DNAME.getValue());
+        colUid = cursor.getColumnIndex(Column.UID.getValue());
+        colData = cursor.getColumnIndex(Column.DATA.getValue());
+        colAllowed = cursor.getColumnIndex(Column.ALLOWED.getValue());
+        colConnection = cursor.getColumnIndex(Column.CONNECTION.getValue());
+        colInteractive = cursor.getColumnIndex(Column.INTERACTIVE.getValue());
 
         TypedValue tv = new TypedValue();
         context.getTheme().resolveAttribute(R.attr.colorOn, tv, true);
@@ -197,7 +198,7 @@ public class AdapterLog extends CursorAdapter {
         tvFlags.setVisibility(TextUtils.isEmpty(flags) ? View.GONE : View.VISIBLE);
 
         // Show source and destination port
-        if (protocol == 6 || protocol == 17) {
+        if (protocol == Util.PROTOCOL_TCP || protocol == Util.PROTOCOL_UDP) {
             tvSPort.setText(sport < 0 ? "" : getKnownPort(sport));
             tvDPort.setText(dport < 0 ? "" : getKnownPort(dport));
         } else {

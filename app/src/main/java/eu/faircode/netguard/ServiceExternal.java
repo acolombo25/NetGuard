@@ -46,7 +46,7 @@ import eu.faircode.netguard.reason.SimpleReason;
 
 public class ServiceExternal extends IntentService {
     private static final String TAG = "NetGuard.External";
-    private static final String ACTION_DOWNLOAD_HOSTS_FILE = "eu.faircode.netguard.DOWNLOAD_HOSTS_FILE";
+    private static final String ACTION_DOWNLOAD_HOSTS_FILE = "eu.faircode.netguard.DOWNLOAD_HOSTS_FILE"; /// id
 
     // am startservice -a eu.faircode.netguard.DOWNLOAD_HOSTS_FILE
 
@@ -66,11 +66,11 @@ public class ServiceExternal extends IntentService {
                 final SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
 
                 String hosts_url = prefs.getString(Preferences.HOSTS_URL.getKey(), Preferences.HOSTS_URL.getDefaultValue());
-                if ("https://www.netguard.me/hosts".equals(hosts_url))
+                if (Util.URL_HOSTS.equals(hosts_url))
                     hosts_url = BuildConfig.HOSTS_FILE_URI;
 
-                File tmp = new File(getFilesDir(), "hosts.tmp");
-                File hosts = new File(getFilesDir(), "hosts.txt");
+                File tmp = new File(getFilesDir(), Util.FILE_HOSTS_TMP);
+                File hosts = new File(getFilesDir(), Util.FILE_HOSTS);
 
                 InputStream in = null;
                 OutputStream out = null;

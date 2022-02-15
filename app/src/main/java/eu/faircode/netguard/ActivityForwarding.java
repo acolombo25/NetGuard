@@ -19,6 +19,7 @@ package eu.faircode.netguard;
     Copyright 2015-2019 by Marcel Bokhorst (M66B)
 */
 
+import android.annotation.SuppressLint;
 import android.content.DialogInterface;
 import android.database.Cursor;
 import android.os.AsyncTask;
@@ -43,6 +44,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import java.net.InetAddress;
 import java.util.List;
 
+import eu.faircode.netguard.database.Column;
 import eu.faircode.netguard.reason.SimpleReason;
 
 public class ActivityForwarding extends AppCompatActivity {
@@ -81,12 +83,13 @@ public class ActivityForwarding extends AppCompatActivity {
 
         lvForwarding.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
+            @SuppressLint("Range")
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Cursor cursor = (Cursor) adapter.getItem(position);
-                final int protocol = cursor.getInt(cursor.getColumnIndex("protocol"));
-                final int dport = cursor.getInt(cursor.getColumnIndex("dport"));
-                final String raddr = cursor.getString(cursor.getColumnIndex("raddr"));
-                final int rport = cursor.getInt(cursor.getColumnIndex("rport"));
+                final int protocol = cursor.getInt(cursor.getColumnIndex(Column.PROTOCOL.getValue()));
+                final int dport = cursor.getInt(cursor.getColumnIndex(Column.DPORT.getValue()));
+                final String raddr = cursor.getString(cursor.getColumnIndex(Column.RADDR.getValue()));
+                final int rport = cursor.getInt(cursor.getColumnIndex(Column.RPORT.getValue()));
 
                 PopupMenu popup = new PopupMenu(ActivityForwarding.this, view);
                 popup.inflate(R.menu.forward);

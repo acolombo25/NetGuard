@@ -30,6 +30,7 @@ import android.widget.TextView;
 
 import java.net.InetAddress;
 
+import eu.faircode.netguard.database.Column;
 import eu.faircode.netguard.reason.Reason;
 import eu.faircode.netguard.reason.SimpleReason;
 
@@ -40,7 +41,7 @@ public class ActivityForwardApproval extends Activity {
 
     static {
         try {
-            System.loadLibrary("netguard");
+            System.loadLibrary(Util.LIBRARY);
         } catch (UnsatisfiedLinkError ignored) {
             System.exit(1);
         }
@@ -51,12 +52,12 @@ public class ActivityForwardApproval extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.forwardapproval);
 
-        final int protocol = getIntent().getIntExtra("protocol", 0);
-        final int dport = getIntent().getIntExtra("dport", 0);
-        String addr = getIntent().getStringExtra("raddr");
-        final int rport = getIntent().getIntExtra("rport", 0);
-        final int ruid = getIntent().getIntExtra("ruid", 0);
-        final String raddr = (addr == null ? "127.0.0.1" : addr);
+        final int protocol = getIntent().getIntExtra(Column.PROTOCOL.getValue(), 0);
+        final int dport = getIntent().getIntExtra(Column.DPORT.getValue(), 0);
+        String addr = getIntent().getStringExtra(Column.RADDR.getValue());
+        final int rport = getIntent().getIntExtra(Column.RPORT.getValue(), 0);
+        final int ruid = getIntent().getIntExtra(Column.RUID.getValue(), 0);
+        final String raddr = (addr == null ? "127.0.0.1" : addr); /// id
 
         try {
             InetAddress iraddr = InetAddress.getByName(raddr);
@@ -68,9 +69,9 @@ public class ActivityForwardApproval extends Activity {
         }
 
         String pname;
-        if (protocol == 6)
+        if (protocol == Util.PROTOCOL_TCP)
             pname = getString(R.string.menu_protocol_tcp);
-        else if (protocol == 17)
+        else if (protocol == Util.PROTOCOL_UDP)
             pname = getString(R.string.menu_protocol_udp);
         else
             pname = Integer.toString(protocol);

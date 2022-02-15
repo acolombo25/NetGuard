@@ -30,6 +30,7 @@ import androidx.preference.PreferenceManager;
 
 import java.util.Map;
 
+import eu.faircode.netguard.database.Column;
 import eu.faircode.netguard.preference.Preferences;
 import eu.faircode.netguard.preference.Sort;
 import eu.faircode.netguard.reason.Reason;
@@ -130,7 +131,7 @@ public class ReceiverAutostart extends BroadcastReceiver {
             if (!Util.isDebuggable(context))
                 editor.remove(Preferences.LOG_LEVEL.getKey());
 
-            editor.putInt("version", newVersion);
+            editor.putInt(Column.VERSION.getValue(), newVersion);
             editor.apply();
         }
     }
