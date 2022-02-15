@@ -817,6 +817,8 @@ public class ActivitySettings extends AppCompatActivity implements SharedPrefere
 
         if (granted)
             ServiceSinkhole.reload(SimpleReason.PermissionGranted, this, false);
+
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
     }
 
     private void checkAddress(String address, boolean allow_local) throws IllegalArgumentException, UnknownHostException {
