@@ -91,32 +91,11 @@ import java.util.Map;
 import java.util.Set;
 
 import eu.faircode.netguard.database.Column;
-import eu.faircode.netguard.format.Format;
 import eu.faircode.netguard.preference.Preferences;
 
 public class Util {
     private static final String TAG = "NetGuard.Util";
-
     public static final String LIBRARY = "netguard";
-
-    public static final String DATE_FORMAT_DAY_TIME = "dd HH:mm";
-    public static final String DATE_FORMAT_YEAR = "yyyyMMdd";
-
-    public static final String FILE_HOSTS = "hosts.txt";
-    public static final String FILE_HOSTS_TMP = "hosts.tmp";
-
-    public static final String URL_HOSTS = "https://www.netguard.me/hosts"; /// id
-
-    public static File getPcapFile(Context context) {
-        return new File(context.getDir("data", Context.MODE_PRIVATE), context.getString(R.string.app_name) + Format.Pcap.getValue());
-    }
-
-    public static String getFileName(Context context, Format format) {
-        return context.getString(R.string.app_name)+"_" +
-                new SimpleDateFormat(DATE_FORMAT_YEAR).format(Calendar.getInstance()) +
-                format.getValue();
-    }
-
     // Roam like at home
     private static final List<String> listEU = Arrays.asList(
             "AT", // Austria

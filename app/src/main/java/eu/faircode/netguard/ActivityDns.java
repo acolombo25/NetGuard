@@ -46,7 +46,7 @@ import java.util.Locale;
 import eu.faircode.netguard.Serializer.Serializer;
 import eu.faircode.netguard.database.Column;
 import eu.faircode.netguard.database.Table;
-import eu.faircode.netguard.format.Format;
+import eu.faircode.netguard.format.Files;
 import eu.faircode.netguard.reason.SimpleReason;
 
 public class ActivityDns extends AppCompatActivity {
@@ -169,8 +169,8 @@ public class ActivityDns extends AppCompatActivity {
     private Intent getIntentExport() {
         Intent intent = new Intent(Intent.ACTION_CREATE_DOCUMENT);
         intent.addCategory(Intent.CATEGORY_OPENABLE);
-        intent.setType(Util.); // text/xml
-        intent.putExtra(Intent.EXTRA_TITLE, Util.getFileName(this, Format.Xml));
+        intent.setType(Files.FILE_TEXT_XML); // text/xml
+        intent.putExtra(Intent.EXTRA_TITLE, Files.getFileName(this, Files.Format.Xml));
         return intent;
     }
 

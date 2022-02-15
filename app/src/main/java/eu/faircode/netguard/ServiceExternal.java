@@ -38,8 +38,10 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLConnection;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 
+import eu.faircode.netguard.format.Files;
 import eu.faircode.netguard.preference.Preferences;
 import eu.faircode.netguard.reason.Reason;
 import eu.faircode.netguard.reason.SimpleReason;
@@ -66,11 +68,11 @@ public class ServiceExternal extends IntentService {
                 final SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
 
                 String hosts_url = prefs.getString(Preferences.HOSTS_URL.getKey(), Preferences.HOSTS_URL.getDefaultValue());
-                if (Util.URL_HOSTS.equals(hosts_url))
+                if (Files.URL_HOSTS.equals(hosts_url))
                     hosts_url = BuildConfig.HOSTS_FILE_URI;
 
-                File tmp = new File(getFilesDir(), Util.FILE_HOSTS_TMP);
-                File hosts = new File(getFilesDir(), Util.FILE_HOSTS);
+                File tmp = new File(getFilesDir(), Files.FILE_HOSTS_TMP);
+                File hosts = new File(getFilesDir(), Files.FILE_HOSTS);
 
                 InputStream in = null;
                 OutputStream out = null;
@@ -105,7 +107,7 @@ public class ServiceExternal extends IntentService {
                         hosts.delete();
                     tmp.renameTo(hosts);
 
-                    String last = SimpleDateFormat.getDateTimeInstance().format(new Date().getTime());
+                    String last = SimpleDateFormat.getDateTimeInstance().format(Calendar.getInstance());
                     prefs.edit().putString(Preferences.HOSTS_LAST_DOWNLOAD.getKey(), last).apply();
 
                     ServiceSinkhole.reload(SimpleReason.HostsFileDownload, this, false);

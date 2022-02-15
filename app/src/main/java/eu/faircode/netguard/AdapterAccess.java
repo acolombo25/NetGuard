@@ -44,6 +44,7 @@ import java.net.UnknownHostException;
 import java.text.SimpleDateFormat;
 
 import eu.faircode.netguard.database.Column;
+import eu.faircode.netguard.format.DateFormats;
 
 public class AdapterAccess extends CursorAdapter {
     private int colVersion;
@@ -119,7 +120,7 @@ public class AdapterAccess extends CursorAdapter {
         TextView tvTraffic = view.findViewById(R.id.tvTraffic);
 
         // Set values
-        tvTime.setText(new SimpleDateFormat(Util.DATE_FORMAT_DAY_TIME).format(time));
+        tvTime.setText(DateFormats.DAY_TIME.format(time));
         if (block < 0)
             ivBlock.setImageDrawable(null);
         else {

@@ -83,6 +83,7 @@ import java.net.URL;
 import java.net.UnknownHostException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -96,7 +97,7 @@ import javax.xml.parsers.SAXParserFactory;
 import eu.faircode.netguard.Serializer.Serializer;
 import eu.faircode.netguard.Serializer.SerializerType;
 import eu.faircode.netguard.database.Column;
-import eu.faircode.netguard.format.Format;
+import eu.faircode.netguard.format.Files;
 import eu.faircode.netguard.preference.Preferences;
 import eu.faircode.netguard.reason.Changed;
 import eu.faircode.netguard.reason.SimpleReason;
@@ -376,12 +377,12 @@ public class ActivitySettings extends AppCompatActivity implements SharedPrefere
             pref_hosts_download.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
                 @Override
                 public boolean onPreferenceClick(Preference preference) {
-                    final File tmp = new File(getFilesDir(), Util.FILE_HOSTS_TMP);
-                    final File hosts = new File(getFilesDir(), Util.FILE_HOSTS);
+                    final File tmp = new File(getFilesDir(), Files.FILE_HOSTS_TMP);
+                    final File hosts = new File(getFilesDir(), Files.FILE_HOSTS);
 
                     EditTextPreference pref_hosts_url = (EditTextPreference) screen.findPreference(Preferences.HOSTS_URL.getKey());
                     String hosts_url = pref_hosts_url.getText();
-                    if (Util.URL_HOSTS.equals(hosts_url))
+                    if (Files.URL_HOSTS.equals(hosts_url))
                         hosts_url = BuildConfig.HOSTS_FILE_URI;
 
                     try {
@@ -392,7 +393,7 @@ public class ActivitySettings extends AppCompatActivity implements SharedPrefere
                                     hosts.delete();
                                 tmp.renameTo(hosts);
 
-                                String last = SimpleDateFormat.getDateTimeInstance().format(new Date().getTime());
+                                String last = SimpleDateFormat.getDateTimeInstance().format(Calendar.getInstance());
                                 prefs.edit().putString(Preferences.HOSTS_LAST_DOWNLOAD.getKey(), last).apply();
 
                                 if (running) {
@@ -756,7 +757,7 @@ public class ActivitySettings extends AppCompatActivity implements SharedPrefere
 
             ServiceSinkhole.setPcap(false, this);
 
-            File pcap_file = Util.getPcapFile(this);
+            File pcap_file = Files.getPcapFile(this);
             if (pcap_file.exists() && !pcap_file.delete())
                 Log.w(TAG, "Delete PCAP failed");
 
@@ -903,8 +904,6 @@ public class ActivitySettings extends AppCompatActivity implements SharedPrefere
         }
     }
 
-    private final static String FILE_TEXT_XML = "*/*"; // text/xml
-
     private Intent getIntentCreateExport() {
         Intent intent;
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.KITKAT) {
@@ -917,8 +916,8 @@ public class ActivitySettings extends AppCompatActivity implements SharedPrefere
         } else {
             intent = new Intent(Intent.ACTION_CREATE_DOCUMENT);
             intent.addCategory(Intent.CATEGORY_OPENABLE);
-            intent.setType(FILE_TEXT_XML); // text/xml
-            intent.putExtra(Intent.EXTRA_TITLE, Util.getFileName(this, Format.Xml));
+            intent.setType(Files.FILE_TEXT_XML); // text/xml
+            intent.putExtra(Intent.EXTRA_TITLE, Files.getFileName(this, Files.Format.Xml));
         }
         return intent;
     }
@@ -930,7 +929,7 @@ public class ActivitySettings extends AppCompatActivity implements SharedPrefere
         else
             intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
         intent.addCategory(Intent.CATEGORY_OPENABLE);
-        intent.setType(FILE_TEXT_XML); // text/xml
+        intent.setType(Files.FILE_TEXT_XML); // text/xml
         return intent;
     }
 
@@ -941,7 +940,7 @@ public class ActivitySettings extends AppCompatActivity implements SharedPrefere
         else
             intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
         intent.addCategory(Intent.CATEGORY_OPENABLE);
-        intent.setType(FILE_TEXT_XML); // text/plain
+        intent.setType(Files.FILE_TEXT_XML); // text/plain
         return intent;
     }
 
@@ -953,7 +952,7 @@ public class ActivitySettings extends AppCompatActivity implements SharedPrefere
                 try {
                     Uri target = data.getData();
                     if (data.hasExtra("org.openintents.extra.DIR_PATH"))
-                        target = Uri.parse(target + "/"+ Util.getFileName(ActivitySettings.this, Format.Xml));
+                        target = Uri.parse(target + "/"+ Files.getFileName(ActivitySettings.this, Files.Format.Xml));
                     Log.i(TAG, "Writing URI=" + target);
                     out = getContentResolver().openOutputStream(target);
                     xmlExport(out);
@@ -987,15 +986,15 @@ public class ActivitySettings extends AppCompatActivity implements SharedPrefere
         new AsyncTask<Object, Object, Throwable>() {
             @Override
             protected Throwable doInBackground(Object... objects) {
-                File hosts = new File(getFilesDir(), Util.FILE_HOSTS);
+                File hosts = new File(getFilesDir(), Files.FILE_HOSTS);
 
                 FileOutputStream out = null;
                 InputStream in = null;
                 try {
                     Log.i(TAG, "Reading URI=" + data.getData());
                     ContentResolver resolver = getContentResolver();
-                    String[] streamTypes = resolver.getStreamTypes(data.getData(), FILE_TEXT_XML);
-                    String streamType = (streamTypes == null || streamTypes.length == 0 ? FILE_TEXT_XML : streamTypes[0]);
+                    String[] streamTypes = resolver.getStreamTypes(data.getData(), Files.FILE_TEXT_XML);
+                    String streamType = (streamTypes == null || streamTypes.length == 0 ? Files.FILE_TEXT_XML : streamTypes[0]);
                     AssetFileDescriptor descriptor = resolver.openTypedAssetFileDescriptor(data.getData(), streamType, null);
                     in = descriptor.createInputStream();
                     out = new FileOutputStream(hosts, append);
@@ -1034,7 +1033,7 @@ public class ActivitySettings extends AppCompatActivity implements SharedPrefere
                 if (running) {
                     if (ex == null) {
                         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(ActivitySettings.this);
-                        String last = SimpleDateFormat.getDateTimeInstance().format(new Date().getTime());
+                        String last = SimpleDateFormat.getDateTimeInstance().format(Calendar.getInstance());
                         prefs.edit().putString(Preferences.HOSTS_LAST_IMPORT.getKey(), last).apply();
 
                         if (running) {
@@ -1058,8 +1057,8 @@ public class ActivitySettings extends AppCompatActivity implements SharedPrefere
                 try {
                     Log.i(TAG, "Reading URI=" + data.getData());
                     ContentResolver resolver = getContentResolver();
-                    String[] streamTypes = resolver.getStreamTypes(data.getData(), FILE_TEXT_XML);
-                    String streamType = (streamTypes == null || streamTypes.length == 0 ? FILE_TEXT_XML : streamTypes[0]);
+                    String[] streamTypes = resolver.getStreamTypes(data.getData(), Files.FILE_TEXT_XML);
+                    String streamType = (streamTypes == null || streamTypes.length == 0 ? Files.FILE_TEXT_XML : streamTypes[0]);
                     AssetFileDescriptor descriptor = resolver.openTypedAssetFileDescriptor(data.getData(), streamType, null);
                     in = descriptor.createInputStream();
                     xmlImport(in);
