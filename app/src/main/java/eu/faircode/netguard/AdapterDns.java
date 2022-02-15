@@ -35,6 +35,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import eu.faircode.netguard.database.Column;
+import eu.faircode.netguard.format.DateFormats;
 import eu.faircode.netguard.preference.Preferences;
 
 public class AdapterDns extends CursorAdapter {
@@ -89,7 +90,7 @@ public class AdapterDns extends CursorAdapter {
         TextView tvTTL = view.findViewById(R.id.tvTTL);
 
         // Set values
-        tvTime.setText(new SimpleDateFormat(Util.DATE_FORMAT_DAY_TIME).format(time));
+        tvTime.setText(DateFormats.DAY_TIME.format(time));
         tvQName.setText(qname);
         tvAName.setText(aname);
         tvResource.setText(resource);

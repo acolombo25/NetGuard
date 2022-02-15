@@ -112,6 +112,8 @@ import java.util.concurrent.locks.ReentrantReadWriteLock;
 import javax.net.ssl.HttpsURLConnection;
 
 import eu.faircode.netguard.database.Column;
+import eu.faircode.netguard.format.DateFormats;
+import eu.faircode.netguard.format.Files;
 import eu.faircode.netguard.preference.Preferences;
 import eu.faircode.netguard.reason.Reason;
 import eu.faircode.netguard.reason.SimpleReason;
@@ -241,7 +243,7 @@ public class ServiceSinkhole extends VpnService implements SharedPreferences.OnS
             Log.e(TAG, ex.toString() + "\n" + Log.getStackTraceString(ex));
         }
 
-        File pcap = (enabled ? Util.getPcapFile(context) : null);
+        File pcap = (enabled ? Files.getPcapFile(context) : null);
         jni_pcap(pcap == null ? null : pcap.getAbsolutePath(), (int)record_size, (int)file_size);
     }
 
@@ -1574,7 +1576,7 @@ public class ServiceSinkhole extends VpnService implements SharedPreferences.OnS
     private void prepareHostsBlocked() {
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(ServiceSinkhole.this);
         boolean use_hosts = prefs.getBoolean(Preferences.FILTER.getKey(), Preferences.FILTER.getDefaultValue()) && prefs.getBoolean(Preferences.USE_HOSTS.getKey(), Preferences.USE_HOSTS.getDefaultValue());
-        File hosts = new File(getFilesDir(), Util.FILE_HOSTS);
+        File hosts = new File(getFilesDir(), Files.FILE_HOSTS);
         if (!use_hosts || !hosts.exists() || !hosts.canRead()) {
             Log.i(TAG, "Hosts file use=" + use_hosts + " exists=" + hosts.exists());
             lock.writeLock().lock();
@@ -3027,7 +3029,7 @@ public class ServiceSinkhole extends VpnService implements SharedPreferences.OnS
             builder.setCategory(NotificationCompat.CATEGORY_STATUS)
                     .setVisibility(NotificationCompat.VISIBILITY_SECRET);
 
-        DateFormat df = new SimpleDateFormat(Util.DATE_FORMAT_DAY_TIME);
+        DateFormat df = DateFormats.DAY_TIME;
 
         NotificationCompat.InboxStyle notification = new NotificationCompat.InboxStyle(builder);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N)

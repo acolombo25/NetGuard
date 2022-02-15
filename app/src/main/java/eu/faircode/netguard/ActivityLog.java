@@ -59,7 +59,7 @@ import java.net.UnknownHostException;
 import java.text.SimpleDateFormat;
 
 import eu.faircode.netguard.database.Column;
-import eu.faircode.netguard.format.Format;
+import eu.faircode.netguard.format.Files;
 import eu.faircode.netguard.preference.Preferences;
 import eu.faircode.netguard.reason.Changed;
 import eu.faircode.netguard.reason.SimpleReason;
@@ -388,7 +388,7 @@ public class ActivityLog extends AppCompatActivity implements SharedPreferences.
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
 
         // https://gist.github.com/granoeste/5574148
-        File pcap_file = Util.getPcapFile(this);
+        File pcap_file = Files.getPcapFile(this);
 
         boolean export = (getPackageManager().resolveActivity(getIntentPCAPDocument(), 0) != null);
 
@@ -411,7 +411,7 @@ public class ActivityLog extends AppCompatActivity implements SharedPreferences.
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         final SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
-        final File pcap_file = Util.getPcapFile(this);
+        final File pcap_file = Files.getPcapFile(this);
 
         switch (item.getItemId()) {
             case android.R.id.home:
@@ -566,7 +566,7 @@ public class ActivityLog extends AppCompatActivity implements SharedPreferences.
             intent = new Intent(Intent.ACTION_CREATE_DOCUMENT);
             intent.addCategory(Intent.CATEGORY_OPENABLE);
             intent.setType("application/octet-stream");
-            intent.putExtra(Intent.EXTRA_TITLE, Util.getFileName(this, Format.Pcap));
+            intent.putExtra(Intent.EXTRA_TITLE, Files.getFileName(this, Files.Format.Pcap));
         }
         return intent;
     }
@@ -601,7 +601,7 @@ public class ActivityLog extends AppCompatActivity implements SharedPreferences.
                     Log.i(TAG, "Export PCAP URI=" + target);
                     out = getContentResolver().openOutputStream(target);
 
-                    File pcap = Util.getPcapFile(ActivityLog.this);
+                    File pcap = Files.getPcapFile(ActivityLog.this);
                     in = new FileInputStream(pcap);
 
                     int len;
