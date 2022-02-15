@@ -19,6 +19,7 @@ package eu.faircode.netguard;
     Copyright 2015-2019 by Marcel Bokhorst (M66B)
 */
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.pm.ApplicationInfo;
@@ -44,6 +45,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
+import eu.faircode.netguard.database.Column;
 import eu.faircode.netguard.preference.Preferences;
 import eu.faircode.netguard.preference.Sort;
 
@@ -138,6 +140,7 @@ public class Rule {
         dh.clearApps();
     }
 
+    @SuppressLint("Range")
     private Rule(DatabaseHelper dh, PackageInfo info, Context context) {
         this.uid = info.applicationInfo.uid;
         this.packageName = info.packageName;
@@ -184,10 +187,10 @@ public class Rule {
             try {
                 cursor = dh.getApp(this.packageName);
                 if (cursor.moveToNext()) {
-                    this.name = cursor.getString(cursor.getColumnIndex("label"));
-                    this.system = cursor.getInt(cursor.getColumnIndex("system")) > 0;
-                    this.internet = cursor.getInt(cursor.getColumnIndex("internet")) > 0;
-                    this.enabled = cursor.getInt(cursor.getColumnIndex("enabled")) > 0;
+                    this.name = cursor.getString(cursor.getColumnIndex(Column.LABEL.getValue()));
+                    this.system = cursor.getInt(cursor.getColumnIndex(Column.SYSTEM.getValue())) > 0;
+                    this.internet = cursor.getInt(cursor.getColumnIndex(Column.INTERNET.getValue())) > 0;
+                    this.enabled = cursor.getInt(cursor.getColumnIndex(Column.ENABLED.getValue())) > 0;
                 } else {
                     this.name = getLabel(info, context);
                     this.system = isSystem(info.packageName, context);
@@ -243,6 +246,7 @@ public class Rule {
                 int eventType = xml.getEventType();
                 while (eventType != XmlPullParser.END_DOCUMENT) {
                     if (eventType == XmlPullParser.START_TAG)
+                        //FIXME More keys
                         if (Preferences.WIFI.getKey().equals(xml.getName())) {
                             String pkg = xml.getAttributeValue(null, "package");
                             boolean pblocked = xml.getAttributeBooleanValue(null, "blocked", false);

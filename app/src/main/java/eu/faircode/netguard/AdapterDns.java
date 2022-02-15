@@ -34,6 +34,7 @@ import androidx.preference.PreferenceManager;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import eu.faircode.netguard.database.Column;
 import eu.faircode.netguard.preference.Preferences;
 
 public class AdapterDns extends CursorAdapter {
@@ -50,16 +51,16 @@ public class AdapterDns extends CursorAdapter {
 
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
 
-        if (prefs.getBoolean(Preferences.DARK.getKey(), Preferences.DARK.getDefaultValue()))
+        if (prefs.getBoolean(Preferences.DARK.getKey(), Preferences.DARK.getDefaultValue())) //FIXME Remove
             colorExpired = Color.argb(128, Color.red(Color.DKGRAY), Color.green(Color.DKGRAY), Color.blue(Color.DKGRAY));
         else
             colorExpired = Color.argb(128, Color.red(Color.LTGRAY), Color.green(Color.LTGRAY), Color.blue(Color.LTGRAY));
 
-        colTime = cursor.getColumnIndex("time");
-        colQName = cursor.getColumnIndex("qname");
-        colAName = cursor.getColumnIndex("aname");
-        colResource = cursor.getColumnIndex("resource");
-        colTTL = cursor.getColumnIndex("ttl");
+        colTime = cursor.getColumnIndex(Column.TIME.getValue());
+        colQName = cursor.getColumnIndex(Column.QNAME.getValue());
+        colAName = cursor.getColumnIndex(Column.ANAME.getValue());
+        colResource = cursor.getColumnIndex(Column.RESOURCE.getValue());
+        colTTL = cursor.getColumnIndex(Column.TTL.getValue());
     }
 
     @Override
@@ -88,10 +89,10 @@ public class AdapterDns extends CursorAdapter {
         TextView tvTTL = view.findViewById(R.id.tvTTL);
 
         // Set values
-        tvTime.setText(new SimpleDateFormat("dd HH:mm").format(time));
+        tvTime.setText(new SimpleDateFormat(Util.DATE_FORMAT_DAY_TIME).format(time));
         tvQName.setText(qname);
         tvAName.setText(aname);
         tvResource.setText(resource);
-        tvTTL.setText("+" + Integer.toString(ttl / 1000));
+        tvTTL.setText("+" + ttl / 1000);
     }
 }

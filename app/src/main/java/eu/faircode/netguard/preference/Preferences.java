@@ -86,6 +86,7 @@ public interface Preferences {
     Preference<Boolean> IMPORTED = new Preference<>("imported", true); ///
 
     Preference<Boolean> FILTER = new Preference<>("filter", false); /// id
+    Preference<Boolean> FORWARD = new Preference<>("forward", false);
 
     Preference<Boolean> NOTIFY = new Preference<>("notify", false); ///
     Preference<Boolean> ROAMING = new Preference<>("roaming", false); //
@@ -132,4 +133,6 @@ public interface Preferences {
     Preference<Boolean> HOSTS_IMPORT = new Preference<>("hosts_import", false); /// id
     Preference<Boolean> HOSTS_IMPORT_APPEND = new Preference<>("hosts_import_append", false); /// id
     Preference<Boolean> HOSTS_DOWNLOAD = new Preference<>("hosts_download", false); /// id
+
+    Preference<Boolean> DEBUG_IAB = new Preference<>("debug_iab", false); /// id
 }

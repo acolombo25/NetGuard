@@ -43,7 +43,7 @@ public class ReceiverPackageRemoved extends BroadcastReceiver {
                 dh.clearAccess(uid, false);
 
                 NotificationManagerCompat.from(context).cancel(uid); // installed notification
-                NotificationManagerCompat.from(context).cancel(uid + 10000); // access notification
+                NotificationManagerCompat.from(context).cancel(uid + Uid.FACTOR); // access notification
             }
         }
     }

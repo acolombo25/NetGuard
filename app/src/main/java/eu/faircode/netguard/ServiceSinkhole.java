@@ -111,6 +111,7 @@ import java.util.concurrent.locks.ReentrantReadWriteLock;
 
 import javax.net.ssl.HttpsURLConnection;
 
+import eu.faircode.netguard.database.Column;
 import eu.faircode.netguard.preference.Preferences;
 import eu.faircode.netguard.reason.Reason;
 import eu.faircode.netguard.reason.SimpleReason;
@@ -240,7 +241,7 @@ public class ServiceSinkhole extends VpnService implements SharedPreferences.OnS
             Log.e(TAG, ex.toString() + "\n" + Log.getStackTraceString(ex));
         }
 
-        File pcap = (enabled ? new File(context.getDir("data", MODE_PRIVATE), "netguard.pcap") : null);
+        File pcap = (enabled ? Util.getPcapFile(context) : null);
         jni_pcap(pcap == null ? null : pcap.getAbsolutePath(), (int)record_size, (int)file_size);
     }
 
@@ -318,7 +319,7 @@ public class ServiceSinkhole extends VpnService implements SharedPreferences.OnS
             Command cmd = (Command) intent.getSerializableExtra(EXTRA_COMMAND);
             String reason = intent.getStringExtra(EXTRA_REASON);
             Log.i(TAG, "Executing intent=" + intent + " command=" + cmd + " reason=" + reason +
-                    " vpn=" + (vpn != null) + " user=" + (Process.myUid() / 100000));
+                    " vpn=" + (vpn != null) + " user=" + (Process.myUid() / Uid.USER_FACTOR));
 
             // Check if foreground
             if (cmd != Command.stop)
@@ -822,8 +823,8 @@ public class ServiceSinkhole extends VpnService implements SharedPreferences.OnS
 
             // Application log
             if (log_app && packet.uid >= 0 &&
-                    !(packet.uid == 0 && (packet.protocol == 6 || packet.protocol == 17) && packet.dport == 53)) {
-                if (!(packet.protocol == 6 /* TCP */ || packet.protocol == 17 /* UDP */))
+                    !(packet.uid == 0 && (packet.protocol == Util.PROTOCOL_TCP || packet.protocol == Util.PROTOCOL_UDP) && packet.dport == Util.PROTOCOL_DPORT)) {
+                if (!(packet.protocol == Util.PROTOCOL_TCP || packet.protocol == Util.PROTOCOL_UDP))
                     packet.dport = 0;
                 if (dh.updateAccess(packet, dname, -1)) {
                     lock.readLock().lock();
@@ -835,7 +836,7 @@ public class ServiceSinkhole extends VpnService implements SharedPreferences.OnS
         }
 
         private void usage(Usage usage) {
-            if (usage.Uid >= 0 && !(usage.Uid == 0 && usage.Protocol == 17 && usage.DPort == 53)) {
+            if (usage.Uid >= 0 && !(usage.Uid == 0 && usage.Protocol == Util.PROTOCOL_UDP && usage.DPort == Util.PROTOCOL_DPORT)) {
                 SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(ServiceSinkhole.this);
                 boolean filter = prefs.getBoolean(Preferences.FILTER.getKey(), Preferences.FILTER.getDefaultValue());
                 boolean log_app = prefs.getBoolean(Preferences.LOG_APP.getKey(), Preferences.LOG_APP.getDefaultValue());
@@ -1014,8 +1015,8 @@ public class ServiceSinkhole extends VpnService implements SharedPreferences.OnS
             rx = trx;
 
             // Create bitmap
-            int height = Util.dips2pixels(96, ServiceSinkhole.this);
-            int width = Util.dips2pixels(96 * 5, ServiceSinkhole.this);
+            int height = Util.dips2pixels(96, ServiceSinkhole.this); //FIXME Extract dimension
+            int width = Util.dips2pixels(96 * 5, ServiceSinkhole.this); //FIXME Extract dimension
             Bitmap bitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
 
             // Create canvas
@@ -1573,7 +1574,7 @@ public class ServiceSinkhole extends VpnService implements SharedPreferences.OnS
     private void prepareHostsBlocked() {
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(ServiceSinkhole.this);
         boolean use_hosts = prefs.getBoolean(Preferences.FILTER.getKey(), Preferences.FILTER.getDefaultValue()) && prefs.getBoolean(Preferences.USE_HOSTS.getKey(), Preferences.USE_HOSTS.getDefaultValue());
-        File hosts = new File(getFilesDir(), "hosts.txt");
+        File hosts = new File(getFilesDir(), Util.FILE_HOSTS);
         if (!use_hosts || !hosts.exists() || !hosts.canRead()) {
             Log.i(TAG, "Hosts file use=" + use_hosts + " exists=" + hosts.exists());
             lock.writeLock().lock();
@@ -1642,15 +1643,15 @@ public class ServiceSinkhole extends VpnService implements SharedPreferences.OnS
         }
 
         try (Cursor cursor = DatabaseHelper.getInstance(ServiceSinkhole.this).getAccessDns(dname)) {
-            int colUid = cursor.getColumnIndex("uid");
-            int colVersion = cursor.getColumnIndex("version");
-            int colProtocol = cursor.getColumnIndex("protocol");
-            int colDAddr = cursor.getColumnIndex("daddr");
-            int colResource = cursor.getColumnIndex("resource");
-            int colDPort = cursor.getColumnIndex("dport");
-            int colBlock = cursor.getColumnIndex("block");
-            int colTime = cursor.getColumnIndex("time");
-            int colTTL = cursor.getColumnIndex("ttl");
+            int colUid = cursor.getColumnIndex(Column.UID.getValue());
+            int colVersion = cursor.getColumnIndex(Column.VERSION.getValue());
+            int colProtocol = cursor.getColumnIndex(Column.PROTOCOL.getValue());
+            int colDAddr = cursor.getColumnIndex(Column.DADDR.getValue());
+            int colResource = cursor.getColumnIndex(Column.RESOURCE.getValue());
+            int colDPort = cursor.getColumnIndex(Column.DPORT.getValue());
+            int colBlock = cursor.getColumnIndex(Column.BLOCK.getValue());
+            int colTime = cursor.getColumnIndex(Column.TIME.getValue());
+            int colTTL = cursor.getColumnIndex(Column.TTL.getValue());
             while (cursor.moveToNext()) {
                 int uid = cursor.getInt(colUid);
                 int version = cursor.getInt(colVersion);
@@ -1717,11 +1718,11 @@ public class ServiceSinkhole extends VpnService implements SharedPreferences.OnS
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
         if (prefs.getBoolean(Preferences.FILTER.getKey(), Preferences.FILTER.getDefaultValue())) {
             try (Cursor cursor = DatabaseHelper.getInstance(ServiceSinkhole.this).getForwarding()) {
-                int colProtocol = cursor.getColumnIndex("protocol");
-                int colDPort = cursor.getColumnIndex("dport");
-                int colRAddr = cursor.getColumnIndex("raddr");
-                int colRPort = cursor.getColumnIndex("rport");
-                int colRUid = cursor.getColumnIndex("ruid");
+                int colProtocol = cursor.getColumnIndex(Column.PROTOCOL.getValue());
+                int colDPort = cursor.getColumnIndex(Column.DPORT.getValue());
+                int colRAddr = cursor.getColumnIndex(Column.RADDR.getValue());
+                int colRPort = cursor.getColumnIndex(Column.RPORT.getValue());
+                int colRUid = cursor.getColumnIndex(Column.RUID.getValue());
                 while (cursor.moveToNext()) {
                     Forward fwd = new Forward();
                     fwd.protocol = cursor.getInt(colProtocol);
@@ -1798,11 +1799,11 @@ public class ServiceSinkhole extends VpnService implements SharedPreferences.OnS
             metered = true;
             Log.i(TAG, "!@home=" + ssidNetwork + " homes=" + TextUtils.join(",", ssidHomes));
         }
-        if (unmetered_2g && "2G".equals(generation))
+        if (unmetered_2g && Generation.Gen_2G.getValue().equals(generation))
             metered = false;
-        if (unmetered_3g && "3G".equals(generation))
+        if (unmetered_3g && Generation.Gen_3G.getValue().equals(generation))
             metered = false;
-        if (unmetered_4g && "4G".equals(generation))
+        if (unmetered_4g && Generation.Gen_4G.getValue().equals(generation))
             metered = false;
         last_metered = metered;
 
@@ -1909,10 +1910,10 @@ public class ServiceSinkhole extends VpnService implements SharedPreferences.OnS
     }
 
     private boolean isSupported(int protocol) {
-        return (protocol == 1 /* ICMPv4 */ ||
-                protocol == 58 /* ICMPv6 */ ||
-                protocol == 6 /* TCP */ ||
-                protocol == 17 /* UDP */);
+        return (protocol == Util.PROTOCOL_ICMPv4 /* ICMPv4 */ ||
+                protocol == Util.PROTOCOL_ICMPv6 /* ICMPv6 */ ||
+                protocol == Util.PROTOCOL_TCP /* TCP */ ||
+                protocol == Util.PROTOCOL_UDP /* UDP */);
     }
 
     // Called from native code
@@ -1924,7 +1925,7 @@ public class ServiceSinkhole extends VpnService implements SharedPreferences.OnS
         packet.allowed = false;
         if (prefs.getBoolean(Preferences.FILTER.getKey(), Preferences.FILTER.getDefaultValue())) {
             // https://android.googlesource.com/platform/system/core/+/master/include/private/android_filesystem_config.h
-            if (packet.protocol == 17 /* UDP */ && !prefs.getBoolean("filter_udp", false)) {
+            if (packet.protocol == Util.PROTOCOL_UDP /* UDP */ && !prefs.getBoolean(Preferences.FILTER_UDP.getKey(), Preferences.FILTER_UDP.getDefaultValue())) {
                 // Allow unfiltered UDP
                 packet.allowed = true;
                 Log.i(TAG, "Allowing UDP " + packet);
@@ -1989,7 +1990,7 @@ public class ServiceSinkhole extends VpnService implements SharedPreferences.OnS
         lock.readLock().unlock();
 
         if (prefs.getBoolean(Preferences.LOG.getKey(), Preferences.LOG.getDefaultValue()) || prefs.getBoolean(Preferences.LOG_APP.getKey(), Preferences.LOG_APP.getDefaultValue()))
-            if (packet.protocol != 6 /* TCP */ || !"".equals(packet.flags))
+            if (packet.protocol != Util.PROTOCOL_TCP || !"".equals(packet.flags))
                 if (packet.uid != Process.myUid())
                     logPacket(packet);
 
@@ -2282,7 +2283,7 @@ public class ServiceSinkhole extends VpnService implements SharedPreferences.OnS
                             dh.clearAccess(uid, false);
 
                             NotificationManagerCompat.from(context).cancel(uid); // installed notification
-                            NotificationManagerCompat.from(context).cancel(uid + 10000); // access notification
+                            NotificationManagerCompat.from(context).cancel(uid + Uid.FACTOR); // access notification
                         }
                     }
 
@@ -2364,7 +2365,7 @@ public class ServiceSinkhole extends VpnService implements SharedPreferences.OnS
             riOther.putExtra(ServiceSinkhole.EXTRA_UID, uid);
             riOther.putExtra(ServiceSinkhole.EXTRA_PACKAGE, packages[0]);
             riOther.putExtra(ServiceSinkhole.EXTRA_BLOCKED, !other);
-            PendingIntent piOther = PendingIntent.getService(this, uid + 10000, riOther, PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_MUTABLE);
+            PendingIntent piOther = PendingIntent.getService(this, uid + Uid.FACTOR, riOther, PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_MUTABLE);
             NotificationCompat.Action oAction = new NotificationCompat.Action.Builder(
                     other ? R.drawable.other_on : R.drawable.other_off,
                     getString(other ? R.string.title_allow_other : R.string.title_block_other),
@@ -2658,7 +2659,7 @@ public class ServiceSinkhole extends VpnService implements SharedPreferences.OnS
             intent.putExtra(EXTRA_COMMAND, enabled ? Command.start : Command.stop);
         String reason = intent.getStringExtra(EXTRA_REASON);
         Log.i(TAG, "Start intent=" + intent + " command=" + cmd + " reason=" + reason +
-                " vpn=" + (vpn != null) + " user=" + (Process.myUid() / 100000));
+                " vpn=" + (vpn != null) + " user=" + (Process.myUid() / Uid.FACTOR));
 
         commandHandler.queue(intent);
 
@@ -3026,7 +3027,7 @@ public class ServiceSinkhole extends VpnService implements SharedPreferences.OnS
             builder.setCategory(NotificationCompat.CATEGORY_STATUS)
                     .setVisibility(NotificationCompat.VISIBILITY_SECRET);
 
-        DateFormat df = new SimpleDateFormat("dd HH:mm");
+        DateFormat df = new SimpleDateFormat(Util.DATE_FORMAT_DAY_TIME);
 
         NotificationCompat.InboxStyle notification = new NotificationCompat.InboxStyle(builder);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N)
@@ -3049,9 +3050,9 @@ public class ServiceSinkhole extends VpnService implements SharedPreferences.OnS
             }
 
         try (Cursor cursor = DatabaseHelper.getInstance(ServiceSinkhole.this).getAccessUnset(uid, 7, since)) {
-            int colDAddr = cursor.getColumnIndex("daddr");
-            int colTime = cursor.getColumnIndex("time");
-            int colAllowed = cursor.getColumnIndex("allowed");
+            int colDAddr = cursor.getColumnIndex(Column.DADDR.getValue());
+            int colTime = cursor.getColumnIndex(Column.TIME.getValue());
+            int colAllowed = cursor.getColumnIndex(Column.ALLOWED.getValue());
             while (cursor.moveToNext()) {
                 StringBuilder sb = new StringBuilder();
                 sb.append(df.format(cursor.getLong(colTime))).append(' ');
@@ -3076,7 +3077,7 @@ public class ServiceSinkhole extends VpnService implements SharedPreferences.OnS
             }
         }
 
-        NotificationManagerCompat.from(this).notify(uid + 10000, notification.build());
+        NotificationManagerCompat.from(this).notify(uid + Uid.FACTOR, notification.build());
     }
 
     private void showUpdateNotification(String name, String url) {
@@ -3219,7 +3220,7 @@ public class ServiceSinkhole extends VpnService implements SharedPreferences.OnS
             this.version = version;
             this.protocol = protocol;
             // Only TCP (6) and UDP (17) have port numbers
-            this.dport = (protocol == 6 || protocol == 17 ? dport : 0);
+            this.dport = (protocol == Util.PROTOCOL_TCP || protocol == Util.PROTOCOL_UDP ? dport : 0);
             this.uid = uid;
         }
 

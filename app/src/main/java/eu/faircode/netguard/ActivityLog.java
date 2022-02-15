@@ -19,6 +19,7 @@ package eu.faircode.netguard;
     Copyright 2015-2019 by Marcel Bokhorst (M66B)
 */
 
+import android.annotation.SuppressLint;
 import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Intent;
@@ -56,9 +57,9 @@ import java.io.OutputStream;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
 
 import eu.faircode.netguard.database.Column;
+import eu.faircode.netguard.format.Format;
 import eu.faircode.netguard.preference.Preferences;
 import eu.faircode.netguard.reason.Changed;
 import eu.faircode.netguard.reason.SimpleReason;
@@ -160,6 +161,7 @@ public class ActivityLog extends AppCompatActivity implements SharedPreferences.
 
         lvLog.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
+            @SuppressLint("Range")
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 PackageManager pm = getPackageManager();
                 Cursor cursor = (Cursor) adapter.getItem(position);
@@ -285,7 +287,7 @@ public class ActivityLog extends AppCompatActivity implements SharedPreferences.
 
                             case R.id.menu_copy:
                                 ClipboardManager clipboard = (ClipboardManager) getSystemService(CLIPBOARD_SERVICE);
-                                ClipData clip = ClipData.newPlainText("netguard", dname == null ? daddr : dname);
+                                ClipData clip = ClipData.newPlainText(getString(R.string.app_name), dname == null ? daddr : dname);
                                 clipboard.setPrimaryClip(clip);
                                 return true;
 
@@ -386,7 +388,7 @@ public class ActivityLog extends AppCompatActivity implements SharedPreferences.
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
 
         // https://gist.github.com/granoeste/5574148
-        File pcap_file = new File(getDir("data", MODE_PRIVATE), "netguard.pcap");
+        File pcap_file = Util.getPcapFile(this);
 
         boolean export = (getPackageManager().resolveActivity(getIntentPCAPDocument(), 0) != null);
 
@@ -409,7 +411,7 @@ public class ActivityLog extends AppCompatActivity implements SharedPreferences.
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         final SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
-        final File pcap_file = new File(getDir("data", MODE_PRIVATE), "netguard.pcap");
+        final File pcap_file = Util.getPcapFile(this);
 
         switch (item.getItemId()) {
             case android.R.id.home:
@@ -564,7 +566,7 @@ public class ActivityLog extends AppCompatActivity implements SharedPreferences.
             intent = new Intent(Intent.ACTION_CREATE_DOCUMENT);
             intent.addCategory(Intent.CATEGORY_OPENABLE);
             intent.setType("application/octet-stream");
-            intent.putExtra(Intent.EXTRA_TITLE, "netguard_" + new SimpleDateFormat("yyyyMMdd").format(new Date().getTime()) + ".pcap");
+            intent.putExtra(Intent.EXTRA_TITLE, Util.getFileName(this, Format.Pcap));
         }
         return intent;
     }
@@ -599,7 +601,7 @@ public class ActivityLog extends AppCompatActivity implements SharedPreferences.
                     Log.i(TAG, "Export PCAP URI=" + target);
                     out = getContentResolver().openOutputStream(target);
 
-                    File pcap = new File(getDir("data", MODE_PRIVATE), "netguard.pcap");
+                    File pcap = Util.getPcapFile(ActivityLog.this);
                     in = new FileInputStream(pcap);
 
                     int len;
