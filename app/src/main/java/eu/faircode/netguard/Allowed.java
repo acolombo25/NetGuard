@@ -20,8 +20,8 @@ package eu.faircode.netguard;
 */
 
 public class Allowed {
-    public String raddr;
-    public int rport;
+    public final String raddr;
+    public final int rport;
 
     public Allowed() {
         this.raddr = null;

@@ -53,7 +53,7 @@ public class ActivityForwarding extends AppCompatActivity {
     private AdapterForwarding adapter;
     private AlertDialog dialog = null;
 
-    private DatabaseHelper.ForwardChangedListener listener = new DatabaseHelper.ForwardChangedListener() {
+    private final DatabaseHelper.ForwardChangedListener listener = new DatabaseHelper.ForwardChangedListener() {
         @Override
         public void onChanged() {
             runOnUiThread(new Runnable() {
@@ -161,7 +161,7 @@ public class ActivityForwarding extends AppCompatActivity {
                 final ProgressBar pbRuid = view.findViewById(R.id.pbRUid);
                 final Spinner spRuid = view.findViewById(R.id.spRUid);
 
-                final AsyncTask task = new AsyncTask<Object, Object, List<Rule>>() {
+                final AsyncTask<Object, Object, List<Rule>> task = new AsyncTask<Object, Object, List<Rule>>() {
                     @Override
                     protected void onPreExecute() {
                         pbRuid.setVisibility(View.VISIBLE);
@@ -194,7 +194,7 @@ public class ActivityForwarding extends AppCompatActivity {
                                 try {
                                     int pos = spProtocol.getSelectedItemPosition();
                                     String[] values = getResources().getStringArray(R.array.protocolValues);
-                                    final int protocol = Integer.valueOf(values[pos]);
+                                    final int protocol = Integer.parseInt(values[pos]);
                                     final int dport = Integer.parseInt(etDPort.getText().toString());
                                     final String raddr = etRAddr.getText().toString();
                                     final int rport = Integer.parseInt(etRPort.getText().toString());

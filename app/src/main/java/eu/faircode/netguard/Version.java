@@ -19,9 +19,11 @@ package eu.faircode.netguard;
     Copyright 2015-2019 by Marcel Bokhorst (M66B)
 */
 
+import androidx.annotation.NonNull;
+
 public class Version implements Comparable<Version> {
 
-    private String version;
+    private final String version;
 
     public Version(String version) {
         this.version = version.replace("-beta", "");
@@ -43,6 +45,7 @@ public class Version implements Comparable<Version> {
         return 0;
     }
 
+    @NonNull
     @Override
     public String toString() {
         return version;

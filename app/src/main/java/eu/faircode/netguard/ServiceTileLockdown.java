@@ -31,7 +31,6 @@ import android.util.Log;
 import androidx.preference.PreferenceManager;
 
 import eu.faircode.netguard.preference.Preferences;
-import eu.faircode.netguard.reason.Reason;
 import eu.faircode.netguard.reason.SimpleReason;
 
 @TargetApi(Build.VERSION_CODES.N)

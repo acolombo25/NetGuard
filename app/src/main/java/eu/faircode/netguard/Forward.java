@@ -19,6 +19,8 @@ package eu.faircode.netguard;
     Copyright 2015-2019 by Marcel Bokhorst (M66B)
 */
 
+import androidx.annotation.NonNull;
+
 public class Forward {
     public int protocol;
     public int dport;
@@ -26,6 +28,7 @@ public class Forward {
     public int rport;
     public int ruid;
 
+    @NonNull
     @Override
     public String toString() {
         return "protocol=" + protocol + " port " + dport + " to " + raddr + "/" + rport + " uid " + ruid;

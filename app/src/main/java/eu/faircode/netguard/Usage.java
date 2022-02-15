@@ -19,6 +19,8 @@ package eu.faircode.netguard;
     Copyright 2015-2019 by Marcel Bokhorst (M66B)
 */
 
+import androidx.annotation.NonNull;
+
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -33,8 +35,9 @@ public class Usage {
     public long Sent;
     public long Received;
 
-    private static DateFormat formatter = SimpleDateFormat.getDateTimeInstance();
+    private static final DateFormat formatter = SimpleDateFormat.getDateTimeInstance();
 
+    @NonNull
     @Override
     public String toString() {
         return formatter.format(new Date(Time).getTime()) +

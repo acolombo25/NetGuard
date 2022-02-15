@@ -421,7 +421,7 @@ public class ActivityPro extends AppCompatActivity {
         TextView tvLogUnavailable = findViewById(R.id.tvLogUnavailable);
         TextView tvFilterUnavailable = findViewById(R.id.tvFilterUnavailable);
 
-        boolean can = Util.canFilter(this);
+        boolean can = Util.canFilter();
 
         btnLog.setVisibility(IAB.isPurchased(SKU_LOG, this) || !can ? View.GONE : View.VISIBLE);
         btnFilter.setVisibility(IAB.isPurchased(SKU_FILTER, this) || !can ? View.GONE : View.VISIBLE);

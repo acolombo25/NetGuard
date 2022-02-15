@@ -31,7 +31,6 @@ import android.widget.TextView;
 import java.net.InetAddress;
 
 import eu.faircode.netguard.database.Column;
-import eu.faircode.netguard.reason.Reason;
 import eu.faircode.netguard.reason.SimpleReason;
 
 public class ActivityForwardApproval extends Activity {

@@ -31,7 +31,6 @@ import android.widget.TextView;
 
 import androidx.preference.PreferenceManager;
 
-import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import eu.faircode.netguard.database.Column;
@@ -39,13 +38,13 @@ import eu.faircode.netguard.format.DateFormats;
 import eu.faircode.netguard.preference.Preferences;
 
 public class AdapterDns extends CursorAdapter {
-    private int colorExpired;
+    private final int colorExpired;
 
-    private int colTime;
-    private int colQName;
-    private int colAName;
-    private int colResource;
-    private int colTTL;
+    private final int colTime;
+    private final int colQName;
+    private final int colAName;
+    private final int colResource;
+    private final int colTTL;
 
     public AdapterDns(Context context, Cursor cursor) {
         super(context, cursor, 0);

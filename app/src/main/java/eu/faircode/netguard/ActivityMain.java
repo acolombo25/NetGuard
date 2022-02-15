@@ -70,11 +70,11 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import java.util.Arrays;
 import java.util.List;
 
 import eu.faircode.netguard.preference.Preferences;
 import eu.faircode.netguard.preference.Sort;
-import eu.faircode.netguard.reason.Reason;
 import eu.faircode.netguard.reason.SimpleReason;
 
 public class ActivityMain extends AppCompatActivity implements SharedPreferences.OnSharedPreferenceChangeListener {
@@ -517,7 +517,7 @@ public class ActivityMain extends AppCompatActivity implements SharedPreferences
     }
 
     @Override
-    public void onConfigurationChanged(Configuration newConfig) {
+    public void onConfigurationChanged(@NonNull Configuration newConfig) {
         Log.i(TAG, "Config");
         super.onConfigurationChanged(newConfig);
 
@@ -670,7 +670,7 @@ public class ActivityMain extends AppCompatActivity implements SharedPreferences
             recreate();
     }
 
-    private DatabaseHelper.AccessChangedListener accessChangedListener = new DatabaseHelper.AccessChangedListener() {
+    private final DatabaseHelper.AccessChangedListener accessChangedListener = new DatabaseHelper.AccessChangedListener() {
         @Override
         public void onChanged() {
             runOnUiThread(new Runnable() {
@@ -683,7 +683,7 @@ public class ActivityMain extends AppCompatActivity implements SharedPreferences
         }
     };
 
-    private BroadcastReceiver onRulesChanged = new BroadcastReceiver() {
+    private final BroadcastReceiver onRulesChanged = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
             Log.i(TAG, "Received " + intent);
@@ -709,7 +709,7 @@ public class ActivityMain extends AppCompatActivity implements SharedPreferences
         }
     };
 
-    private BroadcastReceiver onQueueChanged = new BroadcastReceiver() {
+    private final BroadcastReceiver onQueueChanged = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
             Log.i(TAG, "Received " + intent);
@@ -720,7 +720,7 @@ public class ActivityMain extends AppCompatActivity implements SharedPreferences
         }
     };
 
-    private BroadcastReceiver packageChangedReceiver = new BroadcastReceiver() {
+    private final BroadcastReceiver packageChangedReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
             Log.i(TAG, "Received " + intent);
@@ -799,7 +799,7 @@ public class ActivityMain extends AppCompatActivity implements SharedPreferences
         if (getIntentSupport().resolveActivity(getPackageManager()) == null)
             menu.removeItem(R.id.menu_support);
 
-        menu.findItem(R.id.menu_apps).setEnabled(getIntentApps(this).resolveActivity(pm) != null);
+        menu.findItem(R.id.menu_apps).setEnabled(getIntentApps().resolveActivity(pm) != null);
 
         return true;
     }
@@ -883,7 +883,7 @@ public class ActivityMain extends AppCompatActivity implements SharedPreferences
                 return true;
 
             case R.id.menu_log:
-                if (Util.canFilter(this))
+                if (Util.canFilter())
                     if (IAB.isPurchased(ActivityPro.SKU_LOG, this))
                         startActivity(new Intent(this, ActivityLog.class));
                     else
@@ -1118,7 +1118,7 @@ public class ActivityMain extends AppCompatActivity implements SharedPreferences
                         dialogDoze.show();
                     }
                 } catch (Throwable ex) {
-                    Log.e(TAG, ex + "\n" + ex.getStackTrace());
+                    Log.e(TAG, ex + "\n" + Arrays.toString(ex.getStackTrace()));
                 }
         }
     }
@@ -1207,7 +1207,7 @@ public class ActivityMain extends AppCompatActivity implements SharedPreferences
         // Handle logcat
         view.setOnClickListener(new View.OnClickListener() {
             private short tap = 0;
-            private Toast toast = Toast.makeText(ActivityMain.this, "", Toast.LENGTH_SHORT);
+            private final Toast toast = Toast.makeText(ActivityMain.this, "", Toast.LENGTH_SHORT);
             private static final int TAPS_NEEDED = 7;
 
             @Override
@@ -1252,7 +1252,7 @@ public class ActivityMain extends AppCompatActivity implements SharedPreferences
     }
 
     private void menu_apps() {
-        startActivity(getIntentApps(this));
+        startActivity(getIntentApps());
     }
 
     private static Intent getIntentPro(Context context) {
@@ -1273,7 +1273,7 @@ public class ActivityMain extends AppCompatActivity implements SharedPreferences
         return intent;
     }
 
-    private static Intent getIntentApps(Context context) {
+    private static Intent getIntentApps() {
         return new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/dev?id=8420080860664580239"));
     }
 

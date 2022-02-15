@@ -45,10 +45,10 @@ import java.net.URLConnection;
 public class DownloadTask extends AsyncTask<Object, Integer, Object> {
     private static final String TAG = "NetGuard.Download";
 
-    private Context context;
-    private URL url;
-    private File file;
-    private Listener listener;
+    private final Context context;
+    private final URL url;
+    private final File file;
+    private final Listener listener;
     private PowerManager.WakeLock wakeLock;
 
     public interface Listener {

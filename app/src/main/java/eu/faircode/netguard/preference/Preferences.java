@@ -3,7 +3,6 @@ package eu.faircode.netguard.preference;
 import android.util.Log;
 
 import java.util.HashSet;
-import java.util.Set;
 
 import eu.faircode.netguard.Theme;
 

@@ -62,6 +62,7 @@ import android.widget.PopupMenu;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.core.app.NotificationManagerCompat;
 import androidx.core.content.ContextCompat;
@@ -80,28 +81,27 @@ import java.util.List;
 
 import eu.faircode.netguard.database.Column;
 import eu.faircode.netguard.preference.Preferences;
-import eu.faircode.netguard.reason.Reason;
 import eu.faircode.netguard.reason.SimpleReason;
 
 public class AdapterRule extends RecyclerView.Adapter<AdapterRule.ViewHolder> implements Filterable {
     private static final String TAG = "NetGuard.Adapter";
 
-    private View anchor;
-    private LayoutInflater inflater;
+    private final View anchor;
+    private final LayoutInflater inflater;
     private RecyclerView rv;
-    private int colorText;
-    private int colorChanged;
-    private int colorOn;
-    private int colorOff;
-    private int colorGrayed;
-    private int iconSize;
+    private final int colorText;
+    private final int colorChanged;
+    private final int colorOn;
+    private final int colorOff;
+    private final int colorGrayed;
+    private final int iconSize;
     private boolean wifiActive = true;
     private boolean otherActive = true;
     private boolean live = true;
     private List<Rule> listAll = new ArrayList<>();
     private List<Rule> listFiltered = new ArrayList<>();
 
-    private List<String> messaging = Arrays.asList(
+    private final List<String> messaging = Arrays.asList(
             "com.discord",
             "com.facebook.mlite",
             "com.facebook.orca",
@@ -113,68 +113,68 @@ public class AdapterRule extends RecyclerView.Adapter<AdapterRule.ViewHolder> im
             "com.whatsapp.w4b"
     );
 
-    private List<String> download = Arrays.asList(
+    private final List<String> download = Arrays.asList(
             "com.google.android.youtube"
     );
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        public View view;
+        final View view;
 
-        public LinearLayout llApplication;
-        public ImageView ivIcon;
-        public ImageView ivExpander;
-        public TextView tvName;
+        final LinearLayout llApplication;
+        final ImageView ivIcon;
+        final ImageView ivExpander;
+        final TextView tvName;
 
-        public TextView tvHosts;
+        final TextView tvHosts;
 
-        public RelativeLayout rlLockdown;
-        public ImageView ivLockdown;
+        final RelativeLayout rlLockdown;
+        final ImageView ivLockdown;
 
-        public CheckBox cbWifi;
-        public ImageView ivScreenWifi;
+        final CheckBox cbWifi;
+        final ImageView ivScreenWifi;
 
-        public CheckBox cbOther;
-        public ImageView ivScreenOther;
-        public TextView tvRoaming;
+        final CheckBox cbOther;
+        final ImageView ivScreenOther;
+        final TextView tvRoaming;
 
-        public TextView tvRemarkMessaging;
-        public TextView tvRemarkDownload;
+        final TextView tvRemarkMessaging;
+        final TextView tvRemarkDownload;
 
-        public LinearLayout llConfiguration;
-        public TextView tvUid;
-        public TextView tvPackage;
-        public TextView tvVersion;
-        public TextView tvInternet;
-        public TextView tvDisabled;
+        final LinearLayout llConfiguration;
+        final TextView tvUid;
+        final TextView tvPackage;
+        final TextView tvVersion;
+        final TextView tvInternet;
+        final TextView tvDisabled;
 
-        public Button btnRelated;
-        public ImageButton ibSettings;
-        public ImageButton ibLaunch;
+        final Button btnRelated;
+        final ImageButton ibSettings;
+        final ImageButton ibLaunch;
 
-        public CheckBox cbApply;
+        final CheckBox cbApply;
 
-        public LinearLayout llScreenWifi;
-        public ImageView ivWifiLegend;
-        public CheckBox cbScreenWifi;
+        final LinearLayout llScreenWifi;
+        final ImageView ivWifiLegend;
+        final CheckBox cbScreenWifi;
 
-        public LinearLayout llScreenOther;
-        public ImageView ivOtherLegend;
-        public CheckBox cbScreenOther;
+        final LinearLayout llScreenOther;
+        final ImageView ivOtherLegend;
+        final CheckBox cbScreenOther;
 
-        public CheckBox cbRoaming;
+        final CheckBox cbRoaming;
 
-        public CheckBox cbLockdown;
-        public ImageView ivLockdownLegend;
+        final CheckBox cbLockdown;
+        final ImageView ivLockdownLegend;
 
-        public ImageButton btnClear;
+        final ImageButton btnClear;
 
-        public LinearLayout llFilter;
-        public ImageView ivLive;
-        public TextView tvLogging;
-        public Button btnLogging;
-        public ListView lvAccess;
-        public ImageButton btnClearAccess;
-        public CheckBox cbNotify;
+        final LinearLayout llFilter;
+        final ImageView ivLive;
+        final TextView tvLogging;
+        final Button btnLogging;
+        final ListView lvAccess;
+        final ImageButton btnClearAccess;
+        final CheckBox cbNotify;
 
         public ViewHolder(View itemView) {
             super(itemView);
@@ -328,13 +328,13 @@ public class AdapterRule extends RecyclerView.Adapter<AdapterRule.ViewHolder> im
     }
 
     @Override
-    public void onAttachedToRecyclerView(RecyclerView recyclerView) {
+    public void onAttachedToRecyclerView(@NonNull RecyclerView recyclerView) {
         super.onAttachedToRecyclerView(recyclerView);
         rv = recyclerView;
     }
 
     @Override
-    public void onDetachedFromRecyclerView(RecyclerView recyclerView) {
+    public void onDetachedFromRecyclerView(@NonNull RecyclerView recyclerView) {
         super.onDetachedFromRecyclerView(recyclerView);
         rv = null;
     }
@@ -622,7 +622,7 @@ public class AdapterRule extends RecyclerView.Adapter<AdapterRule.ViewHolder> im
             }
         });
 
-        holder.llFilter.setVisibility(Util.canFilter(context) ? View.VISIBLE : View.GONE);
+        holder.llFilter.setVisibility(Util.canFilter() ? View.VISIBLE : View.GONE);
 
         // Live
         holder.ivLive.setOnClickListener(new View.OnClickListener() {
@@ -727,16 +727,11 @@ public class AdapterRule extends RecyclerView.Adapter<AdapterRule.ViewHolder> im
 
                     SubMenu sub = popup.getMenu().findItem(R.id.menu_host).getSubMenu();
                     boolean multiple = false;
-                    Cursor alt = null;
-                    try {
-                        alt = DatabaseHelper.getInstance(context).getAlternateQNames(daddr);
+                    try (Cursor alt = DatabaseHelper.getInstance(context).getAlternateQNames(daddr)) {
                         while (alt.moveToNext()) {
                             multiple = true;
                             sub.add(Menu.NONE, Menu.NONE, 0, alt.getString(0)).setEnabled(false);
                         }
-                    } finally {
-                        if (alt != null)
-                            alt.close();
                     }
                     popup.getMenu().findItem(R.id.menu_host).setEnabled(multiple);
 
@@ -871,7 +866,7 @@ public class AdapterRule extends RecyclerView.Adapter<AdapterRule.ViewHolder> im
     }
 
     @Override
-    public void onViewRecycled(ViewHolder holder) {
+    public void onViewRecycled(@NonNull ViewHolder holder) {
         super.onViewRecycled(holder);
 
         //Context context = holder.itemView.getContext();
@@ -885,7 +880,7 @@ public class AdapterRule extends RecyclerView.Adapter<AdapterRule.ViewHolder> im
         }
     }
 
-    private void markPro(Context context, MenuItem menu, String sku) {
+    private void markPro(Context context, MenuItem menu, @SuppressWarnings("SameParameterValue") String sku) {
         if (sku == null || !IAB.isPurchased(sku, context)) {
             SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
             boolean dark = prefs.getBoolean(Preferences.DARK.getKey(), Preferences.DARK.getDefaultValue());
@@ -1022,15 +1017,16 @@ public class AdapterRule extends RecyclerView.Adapter<AdapterRule.ViewHolder> im
         };
     }
 
+    @NonNull
     @Override
-    public AdapterRule.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public AdapterRule.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         return new ViewHolder(inflater.inflate(R.layout.rule, parent, false));
     }
 
     @Override
     public long getItemId(int position) {
         Rule rule = listFiltered.get(position);
-        return rule.packageName.hashCode() * Uid.USER_FACTOR + rule.uid;
+        return (long) rule.packageName.hashCode() * Uid.USER_FACTOR + rule.uid;
     }
 
     @Override

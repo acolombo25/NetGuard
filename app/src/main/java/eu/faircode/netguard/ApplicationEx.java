@@ -28,6 +28,8 @@ import android.content.Context;
 import android.os.Build;
 import android.util.Log;
 
+import androidx.annotation.NonNull;
+
 public class ApplicationEx extends Application {
     private static final String TAG = "NetGuard.App";
 
@@ -44,7 +46,7 @@ public class ApplicationEx extends Application {
         mPrevHandler = Thread.getDefaultUncaughtExceptionHandler();
         Thread.setDefaultUncaughtExceptionHandler(new Thread.UncaughtExceptionHandler() {
             @Override
-            public void uncaughtException(Thread thread, Throwable ex) {
+            public void uncaughtException(@NonNull Thread thread, @NonNull Throwable ex) {
                 if (Util.ownFault(ApplicationEx.this, ex)
                         && Util.isPlayStoreInstall(ApplicationEx.this)) {
                     Log.e(TAG, ex.toString() + "\n" + Log.getStackTraceString(ex));

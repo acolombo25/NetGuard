@@ -81,9 +81,7 @@ import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Calendar;
 import java.util.Collections;
-import java.util.Date;
 import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.List;
@@ -432,7 +430,7 @@ public class Util {
         return listResult;
     }
 
-    public static boolean canFilter(Context context) {
+    public static boolean canFilter() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q)
             return true;
 
@@ -869,7 +867,7 @@ public class Util {
     }
 
     public static void sendLogcat(final Uri uri, final Context context) {
-        AsyncTask task = new AsyncTask<Object, Object, Intent>() {
+        AsyncTask<Object, Object, Intent> task = new AsyncTask<Object, Object, Intent>() {
             @Override
             protected Intent doInBackground(Object... objects) {
                 StringBuilder sb = new StringBuilder();
