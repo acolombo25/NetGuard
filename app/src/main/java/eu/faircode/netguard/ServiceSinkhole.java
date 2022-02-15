@@ -233,14 +233,14 @@ public class ServiceSinkhole extends VpnService implements SharedPreferences.OnS
         try {
             record_size = prefs.getLong(Preferences.PCAP_RECORD_SIZE.getKey(), Preferences.PCAP_RECORD_SIZE.getDefaultValue());
         } catch (Throwable ex) {
-            Log.e(TAG, ex.toString() + "\n" + Log.getStackTraceString(ex));
+            Util.logException(TAG, ex);
         }
 
         long file_size = 2 * 1024 * 1024;
         try {
             file_size = prefs.getLong(Preferences.PCAP_FILE_SIZE.getKey(), Preferences.PCAP_FILE_SIZE.getDefaultValue()) * 1024 * 1024;
         } catch (Throwable ex) {
-            Log.e(TAG, ex.toString() + "\n" + Log.getStackTraceString(ex));
+            Util.logException(TAG, ex);
         }
 
         File pcap = (enabled ? Files.getPcapFile(context) : null);
@@ -296,7 +296,7 @@ public class ServiceSinkhole extends VpnService implements SharedPreferences.OnS
                     handleIntent((Intent) msg.obj);
                 }
             } catch (Throwable ex) {
-                Log.e(TAG, ex.toString() + "\n" + Log.getStackTraceString(ex));
+                Util.logException(TAG, ex);
             } finally {
                 synchronized (this) {
                     queue--;
@@ -310,7 +310,7 @@ public class ServiceSinkhole extends VpnService implements SharedPreferences.OnS
                         Log.w(TAG, "Wakelock under-locked");
                     Log.i(TAG, "Messages=" + hasMessages(0) + " wakelock=" + wlInstance.isHeld());
                 } catch (Throwable ex) {
-                    Log.e(TAG, ex.toString() + "\n" + Log.getStackTraceString(ex));
+                    Util.logException(TAG, ex);
                 }
             }
         }
@@ -477,7 +477,7 @@ public class ServiceSinkhole extends VpnService implements SharedPreferences.OnS
                 // Request garbage collection
                 System.gc();
             } catch (Throwable ex) {
-                Log.e(TAG, ex.toString() + "\n" + Log.getStackTraceString(ex));
+                Util.logException(TAG, ex);
 
                 if (cmd == Command.start || cmd == Command.reload) {
                     if (VpnService.prepare(ServiceSinkhole.this) == null) {
@@ -698,7 +698,7 @@ public class ServiceSinkhole extends VpnService implements SharedPreferences.OnS
                     json.append(line);
 
             } catch (Throwable ex) {
-                Log.e(TAG, ex.toString() + "\n" + Log.getStackTraceString(ex));
+                Util.logException(TAG, ex);
             } finally {
                 if (urlConnection != null)
                     urlConnection.disconnect();
@@ -727,7 +727,7 @@ public class ServiceSinkhole extends VpnService implements SharedPreferences.OnS
                     }
                 }
             } catch (JSONException ex) {
-                Log.e(TAG, ex.toString() + "\n" + Log.getStackTraceString(ex));
+                Util.logException(TAG, ex);
             }
         }
 
@@ -804,7 +804,7 @@ public class ServiceSinkhole extends VpnService implements SharedPreferences.OnS
                 }
 
             } catch (Throwable ex) {
-                Log.e(TAG, ex.toString() + "\n" + Log.getStackTraceString(ex));
+                Util.logException(TAG, ex);
             }
         }
 
@@ -891,7 +891,7 @@ public class ServiceSinkhole extends VpnService implements SharedPreferences.OnS
                         Log.e(TAG, "Unknown stats message=" + msg.what);
                 }
             } catch (Throwable ex) {
-                Log.e(TAG, ex.toString() + "\n" + Log.getStackTraceString(ex));
+                Util.logException(TAG, ex);
             }
         }
 
@@ -1165,7 +1165,7 @@ public class ServiceSinkhole extends VpnService implements SharedPreferences.OnS
                         (ip6 || dns instanceof Inet4Address))
                     listDns.add(dns);
             } catch (Throwable ex) {
-                Log.e(TAG, ex.toString() + "\n" + Log.getStackTraceString(ex));
+                Util.logException(TAG, ex);
             }
 
         if (listDns.size() == 2)
@@ -1179,7 +1179,7 @@ public class ServiceSinkhole extends VpnService implements SharedPreferences.OnS
                         (ip6 || ddns instanceof Inet4Address))
                     listDns.add(ddns);
             } catch (Throwable ex) {
-                Log.e(TAG, ex.toString() + "\n" + Log.getStackTraceString(ex));
+                Util.logException(TAG, ex);
             }
 
         // Remove local DNS servers when not routing LAN
@@ -1211,7 +1211,7 @@ public class ServiceSinkhole extends VpnService implements SharedPreferences.OnS
                         }
                 }
             } catch (Throwable ex) {
-                Log.e(TAG, ex.toString() + "\n" + Log.getStackTraceString(ex));
+                Util.logException(TAG, ex);
             }
 
         // Always set DNS servers
@@ -1224,7 +1224,7 @@ public class ServiceSinkhole extends VpnService implements SharedPreferences.OnS
                     listDns.add(InetAddress.getByName("2001:4860:4860::8844"));
                 }
             } catch (Throwable ex) {
-                Log.e(TAG, ex.toString() + "\n" + Log.getStackTraceString(ex));
+                Util.logException(TAG, ex);
             }
 
         Log.i(TAG, "Get DNS=" + TextUtils.join(",", listDns));
@@ -1251,7 +1251,7 @@ public class ServiceSinkhole extends VpnService implements SharedPreferences.OnS
         } catch (SecurityException ex) {
             throw ex;
         } catch (Throwable ex) {
-            Log.e(TAG, ex.toString() + "\n" + Log.getStackTraceString(ex));
+            Util.logException(TAG, ex);
             return null;
         }
     }
@@ -1398,7 +1398,7 @@ public class ServiceSinkhole extends VpnService implements SharedPreferences.OnS
                         try {
                             builder.addRoute(include.address, include.prefix);
                         } catch (Throwable ex) {
-                            Log.e(TAG, ex.toString() + "\n" + Log.getStackTraceString(ex));
+                            Util.logException(TAG, ex);
                         }
                     start = IPUtil.plus1(exclude.getEnd());
                 }
@@ -1407,10 +1407,10 @@ public class ServiceSinkhole extends VpnService implements SharedPreferences.OnS
                     try {
                         builder.addRoute(include.address, include.prefix);
                     } catch (Throwable ex) {
-                        Log.e(TAG, ex.toString() + "\n" + Log.getStackTraceString(ex));
+                        Util.logException(TAG, ex);
                     }
             } catch (UnknownHostException ex) {
-                Log.e(TAG, ex.toString() + "\n" + Log.getStackTraceString(ex));
+                Util.logException(TAG, ex);
             }
         } else
             builder.addRoute("0.0.0.0", 0);
@@ -1429,14 +1429,14 @@ public class ServiceSinkhole extends VpnService implements SharedPreferences.OnS
             try {
                 builder.addDisallowedApplication(getPackageName());
             } catch (PackageManager.NameNotFoundException ex) {
-                Log.e(TAG, ex.toString() + "\n" + Log.getStackTraceString(ex));
+                Util.logException(TAG, ex);
             }
             if (last_connected && !filter)
                 for (Rule rule : listAllowed)
                     try {
                         builder.addDisallowedApplication(rule.packageName);
                     } catch (PackageManager.NameNotFoundException ex) {
-                        Log.e(TAG, ex.toString() + "\n" + Log.getStackTraceString(ex));
+                        Util.logException(TAG, ex);
                     }
             else if (filter)
                 for (Rule rule : listRule)
@@ -1445,7 +1445,7 @@ public class ServiceSinkhole extends VpnService implements SharedPreferences.OnS
                             Log.i(TAG, "Not routing " + rule.packageName);
                             builder.addDisallowedApplication(rule.packageName);
                         } catch (PackageManager.NameNotFoundException ex) {
-                            Log.e(TAG, ex.toString() + "\n" + Log.getStackTraceString(ex));
+                            Util.logException(TAG, ex);
                         }
         }
 
@@ -1618,13 +1618,13 @@ public class ServiceSinkhole extends VpnService implements SharedPreferences.OnS
             mapHostsBlocked.put("test.netguard.me", true);
             Log.i(TAG, count + " hosts read");
         } catch (IOException ex) {
-            Log.e(TAG, ex.toString() + "\n" + Log.getStackTraceString(ex));
+            Util.logException(TAG, ex);
         } finally {
             if (br != null)
                 try {
                     br.close();
                 } catch (IOException exex) {
-                    Log.e(TAG, exex.toString() + "\n" + Log.getStackTraceString(exex));
+                    Util.logException(TAG, exex);
                 }
         }
 
@@ -1704,7 +1704,7 @@ public class ServiceSinkhole extends VpnService implements SharedPreferences.OnS
                         } else
                             Log.w(TAG, "Address not numeric " + name);
                     } catch (UnknownHostException ex) {
-                        Log.e(TAG, ex.toString() + "\n" + Log.getStackTraceString(ex));
+                        Util.logException(TAG, ex);
                     }
                 }
             }
@@ -1849,7 +1849,7 @@ public class ServiceSinkhole extends VpnService implements SharedPreferences.OnS
         try {
             pfd.close();
         } catch (IOException ex) {
-            Log.e(TAG, ex.toString() + "\n" + Log.getStackTraceString(ex));
+            Util.logException(TAG, ex);
         }
     }
 
@@ -1964,7 +1964,7 @@ public class ServiceSinkhole extends VpnService implements SharedPreferences.OnS
                             }
                         }
                     } catch (UnknownHostException ex) {
-                        Log.w(TAG, "Allowed " + ex.toString() + "\n" + Log.getStackTraceString(ex));
+                        Log.w(TAG, "Allowed " + ex + "\n" + Log.getStackTraceString(ex));
                     }
 
                 if (!filtered)
@@ -2048,7 +2048,7 @@ public class ServiceSinkhole extends VpnService implements SharedPreferences.OnS
                         statsHandler.sendEmptyMessage(
                                 Util.isInteractive(ServiceSinkhole.this) ? MSG_STATS_START : MSG_STATS_STOP);
                     } catch (Throwable ex) {
-                        Log.e(TAG, ex.toString() + "\n" + Log.getStackTraceString(ex));
+                        Util.logException(TAG, ex);
 
                         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M)
                             am.set(AlarmManager.RTC_WAKEUP, new Date().getTime() + 15 * 1000L, pi);
@@ -2209,7 +2209,7 @@ public class ServiceSinkhole extends VpnService implements SharedPreferences.OnS
                         try {
                             socket.close();
                         } catch (IOException ex) {
-                            Log.e(TAG, ex.toString() + "\n" + Log.getStackTraceString(ex));
+                            Util.logException(TAG, ex);
                         }
                 }
             }
@@ -2292,7 +2292,7 @@ public class ServiceSinkhole extends VpnService implements SharedPreferences.OnS
                     reload(SimpleReason.PackageDeleted, context, false);
                 }
             } catch (Throwable ex) {
-                Log.e(TAG, ex.toString() + "\n" + Log.getStackTraceString(ex));
+                Util.logException(TAG, ex);
             }
         }
     };
@@ -2389,7 +2389,7 @@ public class ServiceSinkhole extends VpnService implements SharedPreferences.OnS
             }
 
         } catch (PackageManager.NameNotFoundException ex) {
-            Log.e(TAG, ex.toString() + "\n" + Log.getStackTraceString(ex));
+            Util.logException(TAG, ex);
         }
     }
 
@@ -2464,7 +2464,7 @@ public class ServiceSinkhole extends VpnService implements SharedPreferences.OnS
             try {
                 listenNetworkChanges();
             } catch (Throwable ex) {
-                Log.w(TAG, ex.toString() + "\n" + Log.getStackTraceString(ex));
+                Util.warnException(TAG, ex);
                 listenConnectivityChanges();
             }
         else
@@ -2777,7 +2777,7 @@ public class ServiceSinkhole extends VpnService implements SharedPreferences.OnS
                     unprepare();
                 }
             } catch (Throwable ex) {
-                Log.e(TAG, ex.toString() + "\n" + Log.getStackTraceString(ex));
+                Util.logException(TAG, ex);
             }
 
             Log.i(TAG, "Destroy context=" + jni_context);

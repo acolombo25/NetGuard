@@ -186,14 +186,14 @@ public class ActivityDns extends AppCompatActivity {
                     xmlExport(out);
                     return null;
                 } catch (Throwable ex) {
-                    Log.e(TAG, ex.toString() + "\n" + Log.getStackTraceString(ex));
+                    Util.logException(TAG, ex);
                     return ex;
                 } finally {
                     if (out != null)
                         try {
                             out.close();
                         } catch (IOException ex) {
-                            Log.e(TAG, ex.toString() + "\n" + Log.getStackTraceString(ex));
+                            Util.logException(TAG, ex);
                         }
                 }
             }

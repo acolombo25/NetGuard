@@ -59,7 +59,7 @@ public class ReceiverAutostart extends BroadcastReceiver {
                 if (Util.isInteractive(context))
                     ServiceSinkhole.reloadStats(SimpleReason.Receiver, context);
             } catch (Throwable ex) {
-                Log.e(TAG, ex.toString() + "\n" + Log.getStackTraceString(ex));
+                Util.logException(TAG, ex);
             }
     }
 

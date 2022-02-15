@@ -117,13 +117,13 @@ public class DownloadTask extends AsyncTask<Object, Integer, Object> {
                 if (out != null)
                     out.close();
             } catch (IOException ex) {
-                Log.e(TAG, ex.toString() + "\n" + Log.getStackTraceString(ex));
+                Util.logException(TAG, ex);
             }
             try {
                 if (in != null)
                     in.close();
             } catch (IOException ex) {
-                Log.e(TAG, ex.toString() + "\n" + Log.getStackTraceString(ex));
+                Util.logException(TAG, ex);
             }
 
             if (connection instanceof HttpURLConnection)
@@ -149,7 +149,7 @@ public class DownloadTask extends AsyncTask<Object, Integer, Object> {
         wakeLock.release();
         NotificationManagerCompat.from(context).cancel(ServiceSinkhole.NOTIFY_DOWNLOAD);
         if (result instanceof Throwable) {
-            Log.e(TAG, result.toString() + "\n" + Log.getStackTraceString((Throwable) result));
+            Util.logException(TAG, (Throwable) result);
             listener.onException((Throwable) result);
         } else
             listener.onCompleted();

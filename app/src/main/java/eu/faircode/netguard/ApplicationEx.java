@@ -49,10 +49,10 @@ public class ApplicationEx extends Application {
             public void uncaughtException(@NonNull Thread thread, @NonNull Throwable ex) {
                 if (Util.ownFault(ApplicationEx.this, ex)
                         && Util.isPlayStoreInstall(ApplicationEx.this)) {
-                    Log.e(TAG, ex.toString() + "\n" + Log.getStackTraceString(ex));
+                    Util.logException(TAG, ex);
                     mPrevHandler.uncaughtException(thread, ex);
                 } else {
-                    Log.w(TAG, ex.toString() + "\n" + Log.getStackTraceString(ex));
+                    Util.warnException(TAG, ex);
                     System.exit(1);
                 }
             }

@@ -57,10 +57,10 @@ public class WidgetMain extends AppWidgetProvider {
                     appWidgetManager.updateAppWidget(id, views);
                 }
             } catch (Throwable ex) {
-                Log.e(TAG, ex.toString() + "\n" + Log.getStackTraceString(ex));
+                Util.logException(TAG, ex);
             }
         } catch (Throwable ex) {
-            Log.e(TAG, ex.toString() + "\n" + Log.getStackTraceString(ex));
+            Util.logException(TAG, ex);
         }
     }
 

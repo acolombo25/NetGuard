@@ -112,7 +112,7 @@ public class AdapterLog extends CursorAdapter {
             vpn4 = InetAddress.getByName(prefs.getString(Preferences.VPN4.getKey(), Preferences.VPN4.getDefaultValue()));
             vpn6 = InetAddress.getByName(prefs.getString(Preferences.VPN6.getKey(), Preferences.VPN6.getDefaultValue()));
         } catch (UnknownHostException ex) {
-            Log.e(TAG, ex.toString() + "\n" + Log.getStackTraceString(ex));
+            Util.logException(TAG, ex);
         }
     }
 
@@ -293,7 +293,7 @@ public class AdapterLog extends CursorAdapter {
                         try {
                             return Util.getOrganization(args[0]);
                         } catch (Throwable ex) {
-                            Log.w(TAG, ex.toString() + "\n" + Log.getStackTraceString(ex));
+                            Util.warnException(TAG, ex);
                             return null;
                         }
                     }

@@ -153,7 +153,7 @@ public class ActivityLog extends AppCompatActivity implements SharedPreferences.
             vpn4 = InetAddress.getByName(prefs.getString(Preferences.VPN4.getKey(), Preferences.VPN4.getDefaultValue()));
             vpn6 = InetAddress.getByName(prefs.getString(Preferences.VPN6.getKey(), Preferences.VPN6.getDefaultValue()));
         } catch (UnknownHostException ex) {
-            Log.e(TAG, ex.toString() + "\n" + Log.getStackTraceString(ex));
+            Util.logException(TAG, ex);
         }
 
         lvLog.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -178,7 +178,7 @@ public class ActivityLog extends AppCompatActivity implements SharedPreferences.
                 try {
                     addr = InetAddress.getByName(daddr);
                 } catch (UnknownHostException ex) {
-                    Log.e(TAG, ex.toString() + "\n" + Log.getStackTraceString(ex));
+                    Util.logException(TAG, ex);
                 }
 
                 String ip;
@@ -612,20 +612,20 @@ public class ActivityLog extends AppCompatActivity implements SharedPreferences.
 
                     return null;
                 } catch (Throwable ex) {
-                    Log.e(TAG, ex.toString() + "\n" + Log.getStackTraceString(ex));
+                    Util.logException(TAG, ex);
                     return ex;
                 } finally {
                     if (out != null)
                         try {
                             out.close();
                         } catch (IOException ex) {
-                            Log.e(TAG, ex.toString() + "\n" + Log.getStackTraceString(ex));
+                            Util.logException(TAG, ex);
                         }
                     if (in != null)
                         try {
                             in.close();
                         } catch (IOException ex) {
-                            Log.e(TAG, ex.toString() + "\n" + Log.getStackTraceString(ex));
+                            Util.logException(TAG, ex);
                         }
 
                     // Resume capture

@@ -213,7 +213,7 @@ public class ActivityPro extends AppCompatActivity {
                                     if (id > 0 && pi != null)
                                         startIntentSenderForResult(pi.getIntentSender(), id, new Intent(), 0, 0, 0);
                                 } catch (Throwable ex) {
-                                    Log.i(TAG, ex.toString() + "\n" + Log.getStackTraceString(ex));
+                                    Util.warnException(TAG, ex);
                                 }
                             }
                         };
@@ -237,13 +237,13 @@ public class ActivityPro extends AppCompatActivity {
                         btnDev2.setEnabled(true);
 
                     } catch (Throwable ex) {
-                        Log.e(TAG, ex.toString() + "\n" + Log.getStackTraceString(ex));
+                        Util.logException(TAG, ex);
                     }
                 }
             }, this);
             iab.bind();
         } catch (Throwable ex) {
-            Log.e(TAG, ex.toString() + "\n" + Log.getStackTraceString(ex));
+            Util.logException(TAG, ex);
         }
     }
 
@@ -339,7 +339,7 @@ public class ActivityPro extends AppCompatActivity {
                 }
             });
         } catch (Throwable ex) {
-            Log.e(TAG, ex.toString() + "\n" + Log.getStackTraceString(ex));
+            Util.logException(TAG, ex);
         }
 
         ImageButton ibPaste = view.findViewById(R.id.ibPaste);

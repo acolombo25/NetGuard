@@ -270,7 +270,7 @@ public class Rule {
                     eventType = xml.next();
                 }
             } catch (Throwable ex) {
-                Log.e(TAG, ex.toString() + "\n" + Log.getStackTraceString(ex));
+                Util.logException(TAG, ex);
             }
 
             // Build rule list
@@ -395,7 +395,7 @@ public class Rule {
                         listRules.add(rule);
                     }
                 } catch (Throwable ex) {
-                    Log.e(TAG, ex.toString() + "\n" + Log.getStackTraceString(ex));
+                    Util.logException(TAG, ex);
                 }
 
             // Sort rule list

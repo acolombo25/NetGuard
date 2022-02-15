@@ -219,7 +219,7 @@ public class ActivityMain extends AppCompatActivity implements SharedPreferences
                                 return;
                             }
                     } catch (Throwable ex) {
-                        Log.e(TAG, ex.toString() + "\n" + Log.getStackTraceString(ex));
+                        Util.logException(TAG, ex);
                     }
 
                     boolean filter = prefs.getBoolean(Preferences.FILTER.getKey(), Preferences.FILTER.getDefaultValue());
@@ -247,7 +247,7 @@ public class ActivityMain extends AppCompatActivity implements SharedPreferences
                                                     // com.android.vpndialogs.ConfirmDialog required
                                                     startActivityForResult(prepare, REQUEST_VPN);
                                                 } catch (Throwable ex) {
-                                                    Log.e(TAG, ex.toString() + "\n" + Log.getStackTraceString(ex));
+                                                    Util.logException(TAG, ex);
                                                     onActivityResult(REQUEST_VPN, RESULT_CANCELED, null);
                                                     prefs.edit().putBoolean(Preferences.ENABLED.getKey(), Preferences.ENABLED.getDefaultValue()).apply();
                                                 }
@@ -265,7 +265,7 @@ public class ActivityMain extends AppCompatActivity implements SharedPreferences
                         }
                     } catch (Throwable ex) {
                         // Prepare failed
-                        Log.e(TAG, ex.toString() + "\n" + Log.getStackTraceString(ex));
+                        Util.logException(TAG, ex);
                         prefs.edit().putBoolean(Preferences.ENABLED.getKey(), Preferences.ENABLED.getDefaultValue()).apply();
                     }
 
@@ -433,7 +433,7 @@ public class ActivityMain extends AppCompatActivity implements SharedPreferences
                         if (!IAB.isPurchased(ActivityPro.SKU_SPEED, ActivityMain.this))
                             prefs.edit().putBoolean(Preferences.SHOW_STATS.getKey(), Preferences.SHOW_STATS.getDefaultValue()).apply();
                     } catch (Throwable ex) {
-                        Log.e(TAG, ex.toString() + "\n" + Log.getStackTraceString(ex));
+                        Util.logException(TAG, ex);
                     } finally {
                         iab.unbind();
                     }
@@ -441,7 +441,7 @@ public class ActivityMain extends AppCompatActivity implements SharedPreferences
             }, this);
             iab.bind();
         } catch (Throwable ex) {
-            Log.e(TAG, ex.toString() + "\n" + Log.getStackTraceString(ex));
+            Util.logException(TAG, ex);
         }
 
         // Support
