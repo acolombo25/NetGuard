@@ -190,7 +190,7 @@ Il tuo traffico internet non è inviato a un server VPN remoto.</string>
     <string name="msg_inactive">Nessuna connessione a internet attiva</string>
     <string name="msg_queue">NetGuard è occupato</string>
     <string name="msg_update">Aggiornamento disponibile, tocca per scaricare</string>
-    <string name="msg_usage">Puoi consentire (verdastro) o bloccare (rossastro) l\'accesso a internet mobile o Wi-Fi toccando sulle icone affianco a un\'app</string>
+    <string name="msg_usage">Puoi consentire (verdastro) o bloccare (rossastro) l\'accesso a internet mobile o Wi-Fi toccando sulle icone a fianco a un\'app</string>
     <string name="msg_fairemail">Se hai installato NetGuard per proteggere la tua privacy, potresti essere anche interessato a <a href="https://email.faircode.eu/">FairEmail</a> un app email rispettosa della privacy e open source</string>
     <string name="msg_whitelist">L\'accesso a internet è consentito di default (modalità blacklist), questo è modificabile nelle impostazioni</string>
     <string name="msg_push">I messaggi (push) in arrivo sono prevalentemente gestiti dal componente di sistema Play Services, cui è consentito di default l\'accesso a internet</string>

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_description">NetGuard gir enkle og avanserte måter å blokkere tilgang til internett - ingen root er nødvendig. Apper og adresser kan enkelt tillates eller nektes tilgang til Wi-Fi- og/eller mobilforbindelsen din.</string>
+    <string name="app_description">NetGuard gir enkle og avanserte måter å blokkere tilgang til Internett - ingen root er nødvendig. Apper og adresser kan enkelt tillates eller nektes tilgang til Wi-Fi- og/eller mobilforbindelsen din.</string>
     <string name="app_android">NetGuard krever Android 5.1 eller nyere</string>
     <string name="app_xposed">Xposed forårsaker for mange krasjer, noe som kan føre til at NetGuard blir fjernet fra Google Play Store, derfor støttes ikke NetGuard mens Xposed er installert</string>
     <string name="app_privacy"><a href="https://www.netguard.me/privacy/">Privatlivsretningslinjer</a></string>
@@ -15,7 +15,7 @@
     <string name="menu_filter">Filtrer apper</string>
     <string name="menu_app_user">Vis brukerapper</string>
     <string name="menu_app_system">Vis systemapper</string>
-    <string name="menu_app_nointernet">Vis apper uten internett</string>
+    <string name="menu_app_nointernet">Vis apper uten Internett</string>
     <string name="menu_app_disabled">Vis avskrudde apper</string>
     <string name="menu_sort">Sorter apper</string>
     <string name="menu_sort_name">Sorter etter navn</string>
@@ -111,39 +111,18 @@
     <string name="setting_export">Eksporter innstillingene</string>
     <string name="setting_import">Importér innstillinger</string>
     <string name="setting_hosts">Importer «hosts»-fil</string>
-    <string name="setting_hosts_append">Import hosts file (append)</string>
     <string name="setting_hosts_url">«hosts»-filnedlastningsnettadresse</string>
     <string name="setting_hosts_download">Last ned «hosts»-fil</string>
     <string name="setting_technical">Teknisk informasjon</string>
     <string name="setting_technical_general">Generelt</string>
     <string name="setting_technical_networks">Nettverk</string>
     <string name="setting_technical_subscription">Abonnementer</string>
-    <string name="summary_install">Show status bar notification to directly configure newly installed apps (pro feature)</string>
-    <string name="summary_auto">After disabling using the widget, automatically enable NetGuard again after the selected number of minutes (enter zero to disable this option)</string>
-    <string name="summary_delay">After turning the screen off, keep screen on rules active for the selected number of minutes (enter zero to disable this option)</string>
     <string name="summary_update">Se etter nye utgivelser på GitHub to ganger daglig</string>
-    <string name="summary_tethering">Depending on the Android version, tethering may work or may not work. Tethered traffic cannot be filtered.</string>
     <string name="summary_subnet">Aktiver ruting på nettet; kan aktivere Wi-Fi-anrop, men kan også utløse feil i Android og øke batteribruken</string>
     <string name="summary_lan">Tillat apper å koble seg til lokale nettverksadresser, for eksempel 10.0.0.0/8, 172.16.0.0/12 og 192.168.0.0/16</string>
     <string name="summary_ip6">Rute IP versjon 6-trafikk til NetGuard slik at den selektivt kan tillates eller blokkeres</string>
-    <string name="summary_wifi_home">Apply Wi-Fi network rules for selected network only (apply mobile network rules for other Wi-Fi networks)</string>
-    <string name="summary_metered">Apply mobile network rules to metered (paid, tethered) Wi-Fi networks</string>
-    <string name="summary_metered_2g">Apply Wi-Fi network rules for 2G data connections</string>
-    <string name="summary_metered_3g">Apply Wi-Fi network rules for 3G data connections</string>
-    <string name="summary_metered_4g">Apply Wi-Fi network rules for LTE data connections</string>
-    <string name="summary_national_roaming">Do not apply roaming rules when the SIM and mobile network country are the same</string>
-    <string name="summary_eu_roaming">Do not apply roaming rules when the SIM and mobile network country are within the EU (roam like at home)</string>
-    <string name="summary_call">Disable NetGuard on incoming or outgoing telephone call. This can be used to work around IP/Wi-Fi calling problems.</string>
-    <string name="summary_system">Define rules for system apps (for experts)</string>
-    <string name="summary_log_app">Logg forsøker å få tilgang til internett for apper. Dette kan føre til ekstra batteribruk.</string>
-    <string name="summary_access">Show a status bar notification when an app attempts to access a new internet address (when filtering is disabled, only blocked internet access attempts will be notified)</string>
-    <string name="summary_filter">Filter IP packets going out of the VPN tunnel. This might result in extra battery usage.</string>
-    <string name="summary_track_usage">Track the number of bytes sent and received for each app and address. This might result in extra battery usage.</string>
-    <string name="summary_block_domains">Respond with the configured DNS response code for blocked domain names. This switch is disabled when no hosts file is available.</string>
-    <string name="summary_rcode">The default value is 3 (NXDOMAIN), which means \'non-existent domain\'.</string>
-    <string name="summary_validate">Domain name used to validate the internet connection at port 443 (https).</string>
+    <string name="summary_log_app">Logg forsøker å få tilgang til Internett for apper. Dette kan føre til ekstra batteribruk.</string>
     <string name="summary_socks5_enabled">Bare TCP-trafikk vil bli sendt til proxy-serveren</string>
-    <string name="summary_watchdog">Periodically check if NetGuard is still running (enter zero to disable this option). This might result in extra battery usage.</string>
     <string name="summary_stats">Vis nettverkshastighetsgraf i statuslinjevarsling</string>
     <string name="msg_sure">Er du sikker?</string>
     <string name="msg_started">Overholder regler</string>
@@ -164,15 +143,7 @@ Internett-trafikken din blir ikke sendt til en ekstern VPN-server.</string>
     <string name="msg_error">En uventet feil har oppstått: \'%s\'</string>
     <string name="msg_start_failed">Android nektet å starte VPN-tjenesten i dette øyeblikket. Dette er sannsynligvis på grunn av en feil i Android-versjonen din.</string>
     <string name="msg_try">Prøv NetGuard</string>
-    <string name="msg_terms">By donating you agree to the <a href="http://www.netguard.me/#terms">terms &amp; conditions</a></string>
-    <string name="msg_dimming">If you cannot press OK in the next dialog, another (screen dimming) app is likely manipulating the screen.</string>
     <string name="msg_mbday">± %1$.3f▲ %2$.3f▼ MB/dag</string>
-
-    <string name="msg_doze">For consistent results, the Android battery optimizations should be disabled for NetGuard.
-\n\nIn the next dialog, select \"All apps\" at the top, tap on NetGuard in the list and select and confirm \"Don\'t optimize\".</string>
-    <string name="msg_datasaving">For consistent results, the Android data saving options should be disabled for NetGuard
-\n\nIn the next dialog, enable the options \"Background data\" and \"Unrestricted data usage\"</string>
-    <string name="msg_filter">Using filtering will cause Android to attribute data and power usage to NetGuard - Android assumes the data and power are being used by NetGuard, rather than the original apps</string>
     <string name="msg_filter4">Android 4 krever filtrering for å bli aktivert</string>
     <string name="msg_log_disabled">Trafikkloggføring er deaktivert, bruk bryteren ovenfor for å aktivere loggføring. Trafikkloggføring kan føre til ekstra batteriforbruk.</string>
     <string name="msg_clear_rules">Dette vil tilbakestille reglene og forholdene til sine standardverdier</string>
@@ -187,18 +158,6 @@ Internett-trafikken din blir ikke sendt til en ekstern VPN-server.</string>
     <string name="msg_inactive">Ingen aktiv internettforbindelse</string>
     <string name="msg_queue">NetGuard er opptatt</string>
     <string name="msg_update">En oppdatering er tilgjengelig, trykk for å laste ned</string>
-    <string name="msg_usage">You can allow (greenish) or deny (reddish) Wi-Fi or mobile internet access by tapping on the icons next to an app</string>
-    <string name="msg_fairemail">If you installed NetGuard to protect your privacy, you might be interested in <a href="https://email.faircode.eu/">FairEmail</a>, an open source, privacy friendly email app, too</string>
-    <string name="msg_whitelist">Internet access is allowed by default (blacklist mode), this can be changed in the settings</string>
-    <string name="msg_push">Incoming (push) messages are mostly handled by the system component Play services, which is allowed internet access by default</string>
-    <string name="msg_system">Managing all (system) apps can be enabled in the settings</string>
-    <string name="msg_issue">Please describe the problem and indicate the time of the problem:</string>
-    <string name="msg_vpn_cancelled">VPN connection cancelled\nDid you configure another VPN to be an always-on VPN?</string>
-    <string name="msg_on">Powering down your device with NetGuard enabled, will automatically start NetGuard on powering up your device</string>
-    <string name="msg_unavailable">This feature is not available on this Android version</string>
-    <string name="msg_always_on">Another VPN is set as Always-on VPN</string>
-    <string name="msg_always_on_lockdown">Turn off \"Block connections without VPN\" in Android VPN settings to use NetGuard in filtering mode</string>
-    <string name="msg_private_dns">Turn off \"Private DNS\" in Android network settings to use NetGuard in filtering mode</string>
     <string name="title_lockdown_enabled">Trafikken er stengt av</string>
     <string name="title_unmetered_allowed">Ikke-forbruksmålt trafikk er tillatt</string>
     <string name="title_unmetered_blocked">Ikke-forbruksmålt trafikk er blokkert</string>
@@ -213,15 +172,11 @@ Internett-trafikken din blir ikke sendt til en ekstern VPN-server.</string>
     <string name="title_metered">Som standard er en Wi-Fi-tilkobling ansett for å ikke være forbruksmålt, mens en mobilnettilkobling ansees for å være forbruksmålt</string>
     <string name="title_internet">har ikke tilgang til internettet</string>
     <string name="title_disabled">er skrudd av</string>
-    <string name="title_messaging">Incoming messages are received by Google Play services and not by this app and can therefore not be blocked by blocking this app</string>
-    <string name="title_download">Downloads are performed by the download manager and not by this app and can therefore not be blocked by blocking this app</string>
     <string name="title_apply">Benytt regler og forhold</string>
     <string name="title_conditions">Forhold</string>
     <string name="title_screen_wifi">Tillat Wi-Fi når skjermen er skrudd på</string>
     <string name="title_screen_other">Tillat mobilnett når skjermen er skrudd på</string>
-
     <string name="title_roaming">Blokker under roaming</string>
-    <string name="title_lockdown">Allow in lockdown mode</string>
     <string name="title_related">Filtrer relaterte</string>
     <string name="title_access">Tilgangsforsøk</string>
     <string name="title_precedence">Tilgangsregler tar presedens over andre regler</string>
@@ -230,13 +185,10 @@ Internett-trafikken din blir ikke sendt til en ekstern VPN-server.</string>
     <string name="title_logging_disabled">Loggføring eller filtrering er ikke skrudd på</string>
     <string name="title_logging_enabled">Loggføring og filtrering er skrudd på</string>
     <string name="title_logging_configure">Sett opp</string>
-    <string name="title_enable_logging">Enable logging of blocked addresses only</string>
-    <string name="title_enable_filtering">Enable filtering to log allowed addresses too</string>
     <string name="title_enable_notify">Aktiver tilgangsvarsler for nylig loggførte adresser</string>
     <string name="title_enable_help0">Disse innstillingene er globale innstillinger som gjelder for alle apper</string>
     <string name="title_enable_help1">Filtrering er også nødvendig for å tillate eller blokkere individuelle adresser</string>
     <string name="title_enable_help2">Aktivering av logging (mindre) eller filtrering (mer) kan øke batteribruken og kan påvirke nettverkshastigheten</string>
-    <string name="title_rate">Rate</string>
     <string name="title_allow">Tillat</string>
     <string name="title_block">Blokker</string>
     <string name="title_allow_wifi">Tillat Wi-Fi</string>
@@ -247,8 +199,6 @@ Internett-trafikken din blir ikke sendt til en ekstern VPN-server.</string>
     <string name="title_mediaserver">medietjener</string>
     <string name="title_nobody">ingen</string>
     <string name="title_dontask">Ikke spør igjen</string>
-    <string name="title_log_whois">Whois %1$s</string>
-    <string name="title_log_port">Port %1$d</string>
     <string name="title_log_copy">Kopier</string>
     <string name="title_pro">Pro-funksjoner</string>
     <string name="title_pro_description">De følgende Pro-funksjonene er tilgjengelige:</string>
@@ -266,9 +216,6 @@ Internett-trafikken din blir ikke sendt til en ekstern VPN-server.</string>
     <string name="title_pro_challenge">Challenge</string>
     <string name="title_pro_reponse">Svar</string>
     <string name="title_pro_feature">Dette er en Pro-funksjon</string>
-    <string name="title_pro_subscription">        A monthly subscriptions of 1 or 2 euros (excluding local taxes) will activate all pro features.
-        You can cancel or manage a subscription via the subscriptions tab in the Play store app.
-    </string>
     <string-array name="themeNames">
         <item>teal/orange</item>
         <item>blå/oransje</item>
