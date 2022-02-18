@@ -661,7 +661,7 @@ public class ActivityMain extends AppCompatActivity implements SharedPreferences
             boolean hint = prefs.getBoolean("hint_system", true);
             llSystem.setVisibility(!system && hint ? View.VISIBLE : View.GONE);
 
-        } else if ("theme".equals(name) || "dark_theme".equals(name))
+        } else if ("debug_iab".equals(name) || "theme".equals(name) || "dark_theme".equals(name))
             recreate();
     }
 

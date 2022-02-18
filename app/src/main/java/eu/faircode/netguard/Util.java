@@ -446,8 +446,15 @@ public class Util {
         }
     }
 
-    public static boolean isPurchasable(Context context) {
-        return isPlayStoreInstall(context) && !isDebuggable(context);
+    static boolean isPurchasable(Context context) {
+        if (isPlayStoreInstall(context)) {
+            return true;
+        } else if (isDebuggable(context)) {
+            SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
+            return prefs.getBoolean("debug_iab", false);
+        } else{
+            return false;
+        }
     }
 
     public static boolean isDebuggable(Context context) {
