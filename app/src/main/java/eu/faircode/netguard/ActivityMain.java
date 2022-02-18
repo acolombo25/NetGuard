@@ -77,7 +77,7 @@ public class ActivityMain extends AppCompatActivity implements SharedPreferences
 
     private boolean running = false;
     private ImageView ivIcon;
-    private ImageView ivQueue;
+    private View pbQueue;
     private SwitchCompat swEnabled;
     private ImageView ivMetered;
     private SwipeRefreshLayout swipeRefresh;
@@ -153,7 +153,7 @@ public class ActivityMain extends AppCompatActivity implements SharedPreferences
         // Action bar
         final View actionView = getLayoutInflater().inflate(R.layout.actionmain, null, false);
         ivIcon = actionView.findViewById(R.id.ivIcon);
-        ivQueue = actionView.findViewById(R.id.ivQueue);
+        pbQueue = actionView.findViewById(R.id.pbQueue);
         swEnabled = actionView.findViewById(R.id.swEnabled);
         ivMetered = actionView.findViewById(R.id.ivMetered);
 
@@ -168,22 +168,6 @@ public class ActivityMain extends AppCompatActivity implements SharedPreferences
 
         // Title
         getSupportActionBar().setTitle(null);
-
-        // Netguard is busy
-        ivQueue.setOnLongClickListener(new View.OnLongClickListener() {
-            @Override
-            public boolean onLongClick(View view) {
-                int location[] = new int[2];
-                actionView.getLocationOnScreen(location);
-                Toast toast = Toast.makeText(ActivityMain.this, R.string.msg_queue, Toast.LENGTH_LONG);
-                toast.setGravity(
-                        Gravity.TOP | Gravity.LEFT,
-                        location[0] + ivQueue.getLeft(),
-                        Math.round(location[1] + ivQueue.getBottom() - toast.getView().getPaddingTop()));
-                toast.show();
-                return true;
-            }
-        });
 
         // On/off switch
         swEnabled.setChecked(enabled);
@@ -709,7 +693,7 @@ public class ActivityMain extends AppCompatActivity implements SharedPreferences
             Util.logExtras(intent);
             int size = intent.getIntExtra(EXTRA_SIZE, -1);
             ivIcon.setVisibility(size == 0 ? View.VISIBLE : View.GONE);
-            ivQueue.setVisibility(size == 0 ? View.GONE : View.VISIBLE);
+            pbQueue.setVisibility(size == 0 ? View.GONE : View.VISIBLE);
         }
     };
 

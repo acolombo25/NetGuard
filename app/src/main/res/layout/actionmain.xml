@@ -13,14 +13,15 @@
         android:src="@drawable/ic_security"
         app:tint="@android:color/white" />
 
-    <ImageView
-        android:id="@+id/ivQueue"
-        android:layout_width="24dp"
-        android:layout_height="24dp"
+    <ProgressBar
+        android:id="@+id/pbQueue"
+        android:layout_width="@dimen/icon_action"
+        android:layout_height="@dimen/icon_action"
         android:layout_gravity="center_vertical"
         android:layout_marginHorizontal="4dp"
-        app:tint="@android:color/white"
-        android:src="@drawable/ic_hourglass_empty"
+        android:indeterminateTint="@android:color/white"
+        android:indeterminate="true"
+        tools:visibility="visible"
         android:visibility="gone" />
 
     <androidx.appcompat.widget.SwitchCompat
