@@ -446,6 +446,10 @@ public class Util {
         }
     }
 
+    public static boolean isPurchasable(Context context) {
+        return isPlayStoreInstall(context) && !isDebuggable(context);
+    }
+
     public static boolean isDebuggable(Context context) {
         return ((context.getApplicationContext().getApplicationInfo().flags & ApplicationInfo.FLAG_DEBUGGABLE) != 0);
     }

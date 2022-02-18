@@ -177,7 +177,7 @@ public class IAB implements ServiceConnection {
 
     public static boolean isPurchased(String sku, Context context) {
         try {
-            if (Util.isDebuggable(context)) {
+            if (!Util.isPurchasable(context)) {
                 SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
                 return !prefs.getBoolean("debug_iab", false);
             }
@@ -198,9 +198,9 @@ public class IAB implements ServiceConnection {
 
     public static boolean isPurchasedAny(Context context) {
         try {
-            if (Util.isDebuggable(context)) {
+            if (!Util.isPurchasable(context)) {
                 SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
-                return !(prefs.getBoolean("debug_iab", false));
+                return !prefs.getBoolean("debug_iab", false);
             }
 
             SharedPreferences prefs = context.getSharedPreferences("IAB", Context.MODE_PRIVATE);
