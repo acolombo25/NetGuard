@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="default_wifi_home" translatable="false"/>
+
+    <string-array name="themeValues" translatable="false">
+        <item>teal</item>
+        <item>blue</item>
+        <item>purple</item>
+        <item>amber</item>
+        <item>orange</item>
+        <item>green</item>
+    </string-array>
+
+    <string-array name="logLevelNames" translatable="false">
+        <item>Verbose</item>
+        <item>Debug</item>
+        <item>Info</item>
+        <item>Warning</item>
+        <item>Error</item>
+    </string-array>
+
+    <string-array name="logLevelValues" translatable="false">
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+    </string-array>
+
+    <string-array name="protocolValues" translatable="false">
+        <item>17</item>
+        <item>6</item>
+    </string-array>
+</resources>
