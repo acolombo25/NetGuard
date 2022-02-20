@@ -462,6 +462,17 @@ public class Util {
         }
     }
 
+    static boolean isPurchasable(Context context) {
+        if (isPlayStoreInstall(context)) {
+            return true;
+        } else if (isDebuggable(context)) {
+            SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
+            return prefs.getBoolean(Preferences.DEBUG_IAB.getKey(), Preferences.DEBUG_IAB.getDefaultValue());
+        } else{
+            return false;
+        }
+    }
+
     public static boolean isDebuggable(Context context) {
         return ((context.getApplicationContext().getApplicationInfo().flags & ApplicationInfo.FLAG_DEBUGGABLE) != 0);
     }

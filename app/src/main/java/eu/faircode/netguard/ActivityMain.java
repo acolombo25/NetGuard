@@ -326,7 +326,7 @@ public class ActivityMain extends AppCompatActivity implements SharedPreferences
         tvFairEmail.setMovementMethod(LinkMovementMethod.getInstance());
         Button btnFairEmail = findViewById(R.id.btnFairEmail);
         boolean hintFairEmail = prefs.getBoolean(Preferences.HINT_FAIR_EMAIL.getKey(), Preferences.HINT_USAGE.getDefaultValue());
-        llFairEmail.setVisibility(hintFairEmail ? View.VISIBLE : View.GONE);
+        llFairEmail.setVisibility(hintFairEmail && Util.hasValidFingerprint(this) ? View.VISIBLE : View.GONE);
         btnFairEmail.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -650,7 +650,7 @@ public class ActivityMain extends AppCompatActivity implements SharedPreferences
             boolean hint = prefs.getBoolean(Preferences.HINT_SYSTEM.getKey(), Preferences.HINT_SYSTEM.getDefaultValue());
             llSystem.setVisibility(!system && hint ? View.VISIBLE : View.GONE);
 
-        } else if (Preferences.THEME.getKey().equals(name) || Preferences.DARK.getKey().equals(name))
+        } else if (Preferences.DEBUG_IAB.getKey().equals(name) || Preferences.THEME.getKey().equals(name) || Preferences.DARK.getKey().equals(name))
             recreate();
     }
 
@@ -775,13 +775,17 @@ public class ActivityMain extends AppCompatActivity implements SharedPreferences
         if (!IAB.isPurchasedAny(this))
             markPro(menu.findItem(R.id.menu_pro), null);
 
+        if (!Util.isPurchasable(this))
+            menu.removeItem(R.id.menu_pro);
+
         if (!Util.hasValidFingerprint(this) || getIntentInvite(this).resolveActivity(pm) == null)
             menu.removeItem(R.id.menu_invite);
 
-        if (getIntentSupport().resolveActivity(getPackageManager()) == null)
+        if (!Util.hasValidFingerprint(this) || getIntentSupport().resolveActivity(getPackageManager()) == null)
             menu.removeItem(R.id.menu_support);
 
-        menu.findItem(R.id.menu_apps).setEnabled(getIntentApps().resolveActivity(pm) != null);
+        if (!Util.hasValidFingerprint(this) || getIntentApps().resolveActivity(pm) != null && Util.isPlayStoreInstall(this))
+            menu.removeItem(R.id.menu_apps);
 
         return true;
     }
@@ -1132,13 +1136,16 @@ public class ActivityMain extends AppCompatActivity implements SharedPreferences
         TextView tvVersionName = view.findViewById(R.id.tvVersionName);
         TextView tvVersionCode = view.findViewById(R.id.tvVersionCode);
         Button btnRate = view.findViewById(R.id.btnRate);
+        TextView tvCopyright = view.findViewById(R.id.tvCopyright);
         TextView tvEula = view.findViewById(R.id.tvEula);
         TextView tvPrivacy = view.findViewById(R.id.tvPrivacy);
 
         // Show version
         tvVersionName.setText(Util.getSelfVersionName(this));
-        if (!Util.hasValidFingerprint(this))
+        if (!Util.hasValidFingerprint(this)) {
             tvVersionName.setTextColor(Color.GRAY);
+        }
+        tvCopyright.setVisibility(!Util.hasValidFingerprint(this) ? View.GONE : View.VISIBLE);
         tvVersionCode.setText(Integer.toString(Util.getSelfVersionCode(this)));
 
         // Handle license

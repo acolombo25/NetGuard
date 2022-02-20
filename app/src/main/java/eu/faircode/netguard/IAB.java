@@ -191,10 +191,7 @@ public class IAB implements ServiceConnection {
 
     public static boolean isPurchased(String sku, Context context) {
         try {
-            if (Util.isDebuggable(context)) {
-                SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
-                return !prefs.getBoolean(Preferences.DEBUG_IAB.getKey(), Preferences.DEBUG_IAB.getDefaultValue());
-            }
+            if (!Util.isPurchasable(context)) return true;
 
             SharedPreferences prefs = context.getSharedPreferences(PREFERENCES, Context.MODE_PRIVATE);
             if (ActivityPro.SKU_SUPPORT1.equals(sku) || ActivityPro.SKU_SUPPORT2.equals(sku))
@@ -212,10 +209,7 @@ public class IAB implements ServiceConnection {
 
     public static boolean isPurchasedAny(Context context) {
         try {
-            if (Util.isDebuggable(context)) {
-                SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
-                return !(prefs.getBoolean(Preferences.DEBUG_IAB.getKey(), Preferences.DEBUG_IAB.getDefaultValue()));
-            }
+            if (!Util.isPurchasable(context)) return true;
 
             SharedPreferences prefs = context.getSharedPreferences(PREFERENCES, Context.MODE_PRIVATE);
             for (String key : prefs.getAll().keySet())
