@@ -33,7 +33,6 @@ import java.util.Map;
 import eu.faircode.netguard.database.Column;
 import eu.faircode.netguard.preference.Preferences;
 import eu.faircode.netguard.preference.Sort;
-import eu.faircode.netguard.reason.Reason;
 import eu.faircode.netguard.reason.SimpleReason;
 
 public class ReceiverAutostart extends BroadcastReceiver {
@@ -60,7 +59,7 @@ public class ReceiverAutostart extends BroadcastReceiver {
                 if (Util.isInteractive(context))
                     ServiceSinkhole.reloadStats(SimpleReason.Receiver, context);
             } catch (Throwable ex) {
-                Log.e(TAG, ex.toString() + "\n" + Log.getStackTraceString(ex));
+                Util.logException(TAG, ex);
             }
     }
 
@@ -111,7 +110,7 @@ public class ReceiverAutostart extends BroadcastReceiver {
             if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP)
                 editor.putBoolean(Preferences.FILTER.getKey(), !Preferences.FILTER.getDefaultValue()); // Mandatory
 
-            if (!Util.canFilter(context)) {
+            if (!Util.canFilter()) {
                 editor.putBoolean(Preferences.LOG_APP.getKey(), Preferences.LOG_APP.getDefaultValue());
                 editor.putBoolean(Preferences.FILTER.getKey(), Preferences.FILTER.getDefaultValue());
             }

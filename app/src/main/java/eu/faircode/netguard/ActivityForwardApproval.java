@@ -31,7 +31,6 @@ import android.widget.TextView;
 import java.net.InetAddress;
 
 import eu.faircode.netguard.database.Column;
-import eu.faircode.netguard.reason.Reason;
 import eu.faircode.netguard.reason.SimpleReason;
 
 public class ActivityForwardApproval extends Activity {
@@ -64,7 +63,7 @@ public class ActivityForwardApproval extends Activity {
             if (rport < 1024 && (iraddr.isLoopbackAddress() || iraddr.isAnyLocalAddress()))
                 throw new IllegalArgumentException("Port forwarding to privileged port on local address not possible");
         } catch (Throwable ex) {
-            Log.e(TAG, ex.toString() + "\n" + Log.getStackTraceString(ex));
+            Util.logException(TAG, ex);
             finish();
         }
 

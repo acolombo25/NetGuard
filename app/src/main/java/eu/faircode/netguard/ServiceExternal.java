@@ -42,7 +42,6 @@ import java.util.Date;
 
 import eu.faircode.netguard.format.Files;
 import eu.faircode.netguard.preference.Preferences;
-import eu.faircode.netguard.reason.Reason;
 import eu.faircode.netguard.reason.SimpleReason;
 
 public class ServiceExternal extends IntentService {
@@ -112,7 +111,7 @@ public class ServiceExternal extends IntentService {
                     ServiceSinkhole.reload(SimpleReason.HostsFileDownload, this, false);
 
                 } catch (Throwable ex) {
-                    Log.e(TAG, ex.toString() + "\n" + Log.getStackTraceString(ex));
+                    Util.logException(TAG, ex);
 
                     if (tmp.exists())
                         tmp.delete();
@@ -121,13 +120,13 @@ public class ServiceExternal extends IntentService {
                         if (out != null)
                             out.close();
                     } catch (IOException ex) {
-                        Log.e(TAG, ex.toString() + "\n" + Log.getStackTraceString(ex));
+                        Util.logException(TAG, ex);
                     }
                     try {
                         if (in != null)
                             in.close();
                     } catch (IOException ex) {
-                        Log.e(TAG, ex.toString() + "\n" + Log.getStackTraceString(ex));
+                        Util.logException(TAG, ex);
                     }
 
                     if (connection instanceof HttpURLConnection)

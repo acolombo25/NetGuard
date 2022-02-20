@@ -31,6 +31,7 @@ import android.os.Build;
 import android.os.Process;
 import android.util.Log;
 
+import androidx.annotation.NonNull;
 import androidx.preference.PreferenceManager;
 
 import org.xmlpull.v1.XmlPullParser;
@@ -52,14 +53,14 @@ import eu.faircode.netguard.preference.Sort;
 public class Rule {
     private static final String TAG = "NetGuard.Rule";
 
-    public int uid;
-    public String packageName;
-    public int icon;
-    public String name;
-    public String version;
+    public final int uid;
+    public final String packageName;
+    public final int icon;
+    public final String name;
+    public final String version;
     public boolean system;
-    public boolean internet;
-    public boolean enabled;
+    public final boolean internet;
+    public final boolean enabled;
     public boolean pkg = true;
 
     public boolean wifi_default = false;
@@ -87,10 +88,10 @@ public class Rule {
     public boolean expanded = false;
 
     private static List<PackageInfo> cachePackageInfo = null;
-    private static Map<PackageInfo, String> cacheLabel = new HashMap<>();
-    private static Map<String, Boolean> cacheSystem = new HashMap<>();
-    private static Map<String, Boolean> cacheInternet = new HashMap<>();
-    private static Map<PackageInfo, Boolean> cacheEnabled = new HashMap<>();
+    private static final Map<PackageInfo, String> cacheLabel = new HashMap<>();
+    private static final Map<String, Boolean> cacheSystem = new HashMap<>();
+    private static final Map<String, Boolean> cacheInternet = new HashMap<>();
+    private static final Map<PackageInfo, Boolean> cacheEnabled = new HashMap<>();
 
     private static List<PackageInfo> getPackages(Context context) {
         if (cachePackageInfo == null) {
@@ -183,9 +184,7 @@ public class Rule {
             this.enabled = true;
             this.pkg = false;
         } else {
-            Cursor cursor = null;
-            try {
-                cursor = dh.getApp(this.packageName);
+            try (Cursor cursor = dh.getApp(this.packageName)) {
                 if (cursor.moveToNext()) {
                     this.name = cursor.getString(cursor.getColumnIndex(Column.LABEL.getValue()));
                     this.system = cursor.getInt(cursor.getColumnIndex(Column.SYSTEM.getValue())) > 0;
@@ -199,9 +198,6 @@ public class Rule {
 
                     dh.addApp(this.packageName, this.name, this.system, this.internet, this.enabled);
                 }
-            } finally {
-                if (cursor != null)
-                    cursor.close();
             }
         }
     }
@@ -274,7 +270,7 @@ public class Rule {
                     eventType = xml.next();
                 }
             } catch (Throwable ex) {
-                Log.e(TAG, ex.toString() + "\n" + Log.getStackTraceString(ex));
+                Util.logException(TAG, ex);
             }
 
             // Build rule list
@@ -399,7 +395,7 @@ public class Rule {
                         listRules.add(rule);
                     }
                 } catch (Throwable ex) {
-                    Log.e(TAG, ex.toString() + "\n" + Log.getStackTraceString(ex));
+                    Util.logException(TAG, ex);
                 }
 
             // Sort rule list
@@ -455,6 +451,7 @@ public class Rule {
         updateChanged(default_wifi, default_other, default_roaming);
     }
 
+    @NonNull
     @Override
     public String toString() {
         // This is used in the port forwarding dialog application selector

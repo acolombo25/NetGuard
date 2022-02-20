@@ -59,8 +59,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static final List<AccessChangedListener> accessChangedListeners = new ArrayList<>();
     private static final List<ForwardChangedListener> forwardChangedListeners = new ArrayList<>();
 
-    private static HandlerThread hthread;
-    private static Handler handler;
+    private static final HandlerThread hthread;
+    private static final Handler handler;
 
     private static final Map<Integer, Long> mapUidHosts = new HashMap<>();
 
@@ -226,16 +226,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
     private boolean isColumnMissing(SQLiteDatabase db, String table, String column) {
-        Cursor cursor = null;
-        try {
-            cursor = db.rawQuery("SELECT * FROM " + table + " LIMIT 0", null);
+        try (Cursor cursor = db.rawQuery("SELECT * FROM " + table + " LIMIT 0", null)) {
             return (cursor.getColumnIndex(column) < 0);
         } catch (Throwable ex) {
-            Log.e(TAG, ex.toString() + "\n" + Log.getStackTraceString(ex));
+            Util.logException(TAG, ex);
             return true;
-        } finally {
-            if (cursor != null)
-                cursor.close();
         }
     }
 
@@ -349,7 +344,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 throw new IllegalArgumentException(DB_NAME + " upgraded to " + oldVersion + " but required " + DB_VERSION);
 
         } catch (Throwable ex) {
-            Log.e(TAG, ex.toString() + "\n" + Log.getStackTraceString(ex));
+            Util.logException(TAG, ex);
         } finally {
             db.endTransaction();
         }
@@ -1176,7 +1171,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 try {
                     listener.onChanged();
                 } catch (Throwable ex) {
-                    Log.e(TAG, ex.toString() + "\n" + Log.getStackTraceString(ex));
+                    Util.logException(TAG, ex);
                 }
 
         } else if (msg.what == MSG_ACCESS) {
@@ -1184,7 +1179,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 try {
                     listener.onChanged();
                 } catch (Throwable ex) {
-                    Log.e(TAG, ex.toString() + "\n" + Log.getStackTraceString(ex));
+                    Util.logException(TAG, ex);
                 }
 
         } else if (msg.what == MSG_FORWARD) {
@@ -1192,7 +1187,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 try {
                     listener.onChanged();
                 } catch (Throwable ex) {
-                    Log.e(TAG, ex.toString() + "\n" + Log.getStackTraceString(ex));
+                    Util.logException(TAG, ex);
                 }
         }
     }

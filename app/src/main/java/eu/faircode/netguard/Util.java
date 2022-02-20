@@ -82,7 +82,6 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
-import java.util.Date;
 import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.List;
@@ -142,6 +141,14 @@ public class Util {
         } catch (UnsatisfiedLinkError ignored) {
             System.exit(1);
         }
+    }
+    
+    public static void logException(String tag, Throwable ex) {
+        Log.e(tag, ex + "\n" + Log.getStackTraceString(ex));
+    }
+    
+    public static void warnException(String tag, Throwable ex) {
+        Log.w(tag, ex + "\n" + Log.getStackTraceString(ex));
     }
 
     public static String getSelfVersionName(Context context) {
@@ -398,7 +405,7 @@ public class Util {
             setting = pm.getApplicationEnabledSetting(info.packageName);
         } catch (IllegalArgumentException ex) {
             setting = PackageManager.COMPONENT_ENABLED_STATE_DEFAULT;
-            Log.w(TAG, ex.toString() + "\n" + Log.getStackTraceString(ex));
+            Util.warnException(TAG, ex);
         }
         if (setting == PackageManager.COMPONENT_ENABLED_STATE_DEFAULT)
             return info.applicationInfo.enabled;
@@ -431,7 +438,7 @@ public class Util {
         return listResult;
     }
 
-    public static boolean canFilter(Context context) {
+    public static boolean canFilter() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q)
             return true;
 
@@ -460,7 +467,7 @@ public class Util {
         try {
             return "com.android.vending".equals(context.getPackageManager().getInstallerPackageName(context.getPackageName()));
         } catch (Throwable ex) {
-            Log.e(TAG, ex.toString() + "\n" + Log.getStackTraceString(ex));
+            Util.logException(TAG, ex);
             return false;
         }
     }
@@ -498,7 +505,7 @@ public class Util {
                 sb.append(Integer.toString(b & 0xff, 16).toLowerCase());
             return sb.toString();
         } catch (Throwable ex) {
-            Log.e(TAG, ex.toString() + "\n" + Log.getStackTraceString(ex));
+            Util.logException(TAG, ex);
             return null;
         }
     }
@@ -708,7 +715,7 @@ public class Util {
         try {
             for (int i; (i = reader.read(read)) >= 0; sb.append(read, 0, i)) ;
         } catch (Throwable ex) {
-            Log.e(TAG, ex.toString() + "\n" + Log.getStackTraceString(ex));
+            Util.logException(TAG, ex);
         }
         return sb;
     }
@@ -748,7 +755,7 @@ public class Util {
             if (bug.resolveActivity(context.getPackageManager()) != null)
                 context.startActivity(bug);
         } catch (Throwable exex) {
-            Log.e(TAG, exex.toString() + "\n" + Log.getStackTraceString(exex));
+            Util.logException(TAG, exex);
         }
     }
 
@@ -868,7 +875,7 @@ public class Util {
     }
 
     public static void sendLogcat(final Uri uri, final Context context) {
-        AsyncTask task = new AsyncTask<Object, Object, Intent>() {
+        AsyncTask<Object, Object, Intent> task = new AsyncTask<Object, Object, Intent>() {
             @Override
             protected Intent doInBackground(Object... objects) {
                 StringBuilder sb = new StringBuilder();
@@ -969,7 +976,7 @@ public class Util {
                     out.write(getLogcat().toString().getBytes());
                     out.write(getTrafficLog(context).toString().getBytes());
                 } catch (Throwable ex) {
-                    Log.e(TAG, ex.toString() + "\n" + Log.getStackTraceString(ex));
+                    Util.logException(TAG, ex);
                     sb.append(ex.toString()).append("\r\n").append(Log.getStackTraceString(ex)).append("\r\n");
                 } finally {
                     if (out != null)
@@ -995,7 +1002,7 @@ public class Util {
                     try {
                         context.startActivity(sendEmail);
                     } catch (Throwable ex) {
-                        Log.e(TAG, ex.toString() + "\n" + Log.getStackTraceString(ex));
+                        Util.logException(TAG, ex);
                     }
             }
         };
@@ -1065,7 +1072,7 @@ public class Util {
             Log.i(TAG, "Logcat lines=" + count);
 
         } catch (IOException ex) {
-            Log.e(TAG, ex.toString() + "\n" + Log.getStackTraceString(ex));
+            Util.logException(TAG, ex);
         } finally {
             if (br != null)
                 try {
@@ -1076,13 +1083,13 @@ public class Util {
                 try {
                     process2.destroy();
                 } catch (Throwable ex) {
-                    Log.w(TAG, ex.toString() + "\n" + Log.getStackTraceString(ex));
+                    Util.warnException(TAG, ex);
                 }
             if (process1 != null)
                 try {
                     process1.destroy();
                 } catch (Throwable ex) {
-                    Log.w(TAG, ex.toString() + "\n" + Log.getStackTraceString(ex));
+                    Util.warnException(TAG, ex);
                 }
         }
         return builder;

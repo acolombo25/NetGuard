@@ -51,27 +51,27 @@ import eu.faircode.netguard.database.Column;
 import eu.faircode.netguard.preference.Preferences;
 
 public class AdapterLog extends CursorAdapter {
-    private static String TAG = "NetGuard.Log";
+    private static final String TAG = "NetGuard.Log";
 
     private boolean resolve;
     private boolean organization;
-    private int colTime;
-    private int colVersion;
-    private int colProtocol;
-    private int colFlags;
-    private int colSAddr;
-    private int colSPort;
-    private int colDAddr;
-    private int colDPort;
-    private int colDName;
-    private int colUid;
-    private int colData;
-    private int colAllowed;
-    private int colConnection;
-    private int colInteractive;
-    private int colorOn;
-    private int colorOff;
-    private int iconSize;
+    private final int colTime;
+    private final int colVersion;
+    private final int colProtocol;
+    private final int colFlags;
+    private final int colSAddr;
+    private final int colSPort;
+    private final int colDAddr;
+    private final int colDPort;
+    private final int colDName;
+    private final int colUid;
+    private final int colData;
+    private final int colAllowed;
+    private final int colConnection;
+    private final int colInteractive;
+    private final int colorOn;
+    private final int colorOff;
+    private final int iconSize;
     private InetAddress dns1 = null;
     private InetAddress dns2 = null;
     private InetAddress vpn4 = null;
@@ -112,7 +112,7 @@ public class AdapterLog extends CursorAdapter {
             vpn4 = InetAddress.getByName(prefs.getString(Preferences.VPN4.getKey(), Preferences.VPN4.getDefaultValue()));
             vpn6 = InetAddress.getByName(prefs.getString(Preferences.VPN6.getKey(), Preferences.VPN6.getDefaultValue()));
         } catch (UnknownHostException ex) {
-            Log.e(TAG, ex.toString() + "\n" + Log.getStackTraceString(ex));
+            Util.logException(TAG, ex);
         }
     }
 
@@ -293,7 +293,7 @@ public class AdapterLog extends CursorAdapter {
                         try {
                             return Util.getOrganization(args[0]);
                         } catch (Throwable ex) {
-                            Log.w(TAG, ex.toString() + "\n" + Log.getStackTraceString(ex));
+                            Util.warnException(TAG, ex);
                             return null;
                         }
                     }

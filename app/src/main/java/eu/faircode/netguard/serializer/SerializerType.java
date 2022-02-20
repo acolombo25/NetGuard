@@ -1,4 +1,4 @@
-package eu.faircode.netguard.Serializer;
+package eu.faircode.netguard.serializer;
 
 public enum SerializerType {
     Boolean, Integer, String, Set;

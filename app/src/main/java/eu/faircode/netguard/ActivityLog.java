@@ -68,19 +68,16 @@ public class ActivityLog extends AppCompatActivity implements SharedPreferences.
     private static final String TAG = "NetGuard.Log";
 
     private boolean running = false;
-    private ListView lvLog;
     private AdapterLog adapter;
     private MenuItem menuSearch = null;
 
     private boolean live;
-    private boolean resolve;
-    private boolean organization;
     private InetAddress vpn4 = null;
     private InetAddress vpn6 = null;
 
     private static final int REQUEST_PCAP = 1;
 
-    private DatabaseHelper.LogChangedListener listener = new DatabaseHelper.LogChangedListener() {
+    private final DatabaseHelper.LogChangedListener listener = new DatabaseHelper.LogChangedListener() {
         @Override
         public void onChanged() {
             runOnUiThread(new Runnable() {
@@ -116,8 +113,8 @@ public class ActivityLog extends AppCompatActivity implements SharedPreferences.
 
         // Get settings
         final SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
-        resolve = prefs.getBoolean(Preferences.RESOLVE.getKey(), Preferences.RESOLVE.getDefaultValue());
-        organization = prefs.getBoolean(Preferences.ORGANIZATION.getKey(), Preferences.ORGANIZATION.getDefaultValue());
+        boolean resolve = prefs.getBoolean(Preferences.RESOLVE.getKey(), Preferences.RESOLVE.getDefaultValue());
+        boolean organization = prefs.getBoolean(Preferences.ORGANIZATION.getKey(), Preferences.ORGANIZATION.getDefaultValue());
         boolean log = prefs.getBoolean(Preferences.LOG.getKey(), Preferences.LOG.getDefaultValue());
 
         // Show disabled message
@@ -135,7 +132,7 @@ public class ActivityLog extends AppCompatActivity implements SharedPreferences.
         // Listen for preference changes
         prefs.registerOnSharedPreferenceChangeListener(this);
 
-        lvLog = findViewById(R.id.lvLog);
+        ListView lvLog = findViewById(R.id.lvLog);
 
         boolean udp = prefs.getBoolean(Preferences.PROTO_UDP.getKey(), Preferences.PROTO_UDP.getDefaultValue());
         boolean tcp = prefs.getBoolean(Preferences.PROTO_TCP.getKey(), Preferences.PROTO_TCP.getDefaultValue());
@@ -156,7 +153,7 @@ public class ActivityLog extends AppCompatActivity implements SharedPreferences.
             vpn4 = InetAddress.getByName(prefs.getString(Preferences.VPN4.getKey(), Preferences.VPN4.getDefaultValue()));
             vpn6 = InetAddress.getByName(prefs.getString(Preferences.VPN6.getKey(), Preferences.VPN6.getDefaultValue()));
         } catch (UnknownHostException ex) {
-            Log.e(TAG, ex.toString() + "\n" + Log.getStackTraceString(ex));
+            Util.logException(TAG, ex);
         }
 
         lvLog.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -181,7 +178,7 @@ public class ActivityLog extends AppCompatActivity implements SharedPreferences.
                 try {
                     addr = InetAddress.getByName(daddr);
                 } catch (UnknownHostException ex) {
-                    Log.e(TAG, ex.toString() + "\n" + Log.getStackTraceString(ex));
+                    Util.logException(TAG, ex);
                 }
 
                 String ip;
@@ -615,20 +612,20 @@ public class ActivityLog extends AppCompatActivity implements SharedPreferences.
 
                     return null;
                 } catch (Throwable ex) {
-                    Log.e(TAG, ex.toString() + "\n" + Log.getStackTraceString(ex));
+                    Util.logException(TAG, ex);
                     return ex;
                 } finally {
                     if (out != null)
                         try {
                             out.close();
                         } catch (IOException ex) {
-                            Log.e(TAG, ex.toString() + "\n" + Log.getStackTraceString(ex));
+                            Util.logException(TAG, ex);
                         }
                     if (in != null)
                         try {
                             in.close();
                         } catch (IOException ex) {
-                            Log.e(TAG, ex.toString() + "\n" + Log.getStackTraceString(ex));
+                            Util.logException(TAG, ex);
                         }
 
                     // Resume capture

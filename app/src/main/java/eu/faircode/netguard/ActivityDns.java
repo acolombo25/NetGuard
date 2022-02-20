@@ -43,7 +43,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Locale;
 
-import eu.faircode.netguard.Serializer.Serializer;
+import eu.faircode.netguard.serializer.Serializer;
 import eu.faircode.netguard.database.Column;
 import eu.faircode.netguard.database.Table;
 import eu.faircode.netguard.format.Files;
@@ -186,14 +186,14 @@ public class ActivityDns extends AppCompatActivity {
                     xmlExport(out);
                     return null;
                 } catch (Throwable ex) {
-                    Log.e(TAG, ex.toString() + "\n" + Log.getStackTraceString(ex));
+                    Util.logException(TAG, ex);
                     return ex;
                 } finally {
                     if (out != null)
                         try {
                             out.close();
                         } catch (IOException ex) {
-                            Log.e(TAG, ex.toString() + "\n" + Log.getStackTraceString(ex));
+                            Util.logException(TAG, ex);
                         }
                 }
             }

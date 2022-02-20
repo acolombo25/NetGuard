@@ -213,7 +213,7 @@ public class ActivityPro extends AppCompatActivity {
                                     if (id > 0 && pi != null)
                                         startIntentSenderForResult(pi.getIntentSender(), id, new Intent(), 0, 0, 0);
                                 } catch (Throwable ex) {
-                                    Log.i(TAG, ex.toString() + "\n" + Log.getStackTraceString(ex));
+                                    Util.warnException(TAG, ex);
                                 }
                             }
                         };
@@ -237,13 +237,13 @@ public class ActivityPro extends AppCompatActivity {
                         btnDev2.setEnabled(true);
 
                     } catch (Throwable ex) {
-                        Log.e(TAG, ex.toString() + "\n" + Log.getStackTraceString(ex));
+                        Util.logException(TAG, ex);
                     }
                 }
             }, this);
             iab.bind();
         } catch (Throwable ex) {
-            Log.e(TAG, ex.toString() + "\n" + Log.getStackTraceString(ex));
+            Util.logException(TAG, ex);
         }
     }
 
@@ -339,7 +339,7 @@ public class ActivityPro extends AppCompatActivity {
                 }
             });
         } catch (Throwable ex) {
-            Log.e(TAG, ex.toString() + "\n" + Log.getStackTraceString(ex));
+            Util.logException(TAG, ex);
         }
 
         ImageButton ibPaste = view.findViewById(R.id.ibPaste);
@@ -421,7 +421,7 @@ public class ActivityPro extends AppCompatActivity {
         TextView tvLogUnavailable = findViewById(R.id.tvLogUnavailable);
         TextView tvFilterUnavailable = findViewById(R.id.tvFilterUnavailable);
 
-        boolean can = Util.canFilter(this);
+        boolean can = Util.canFilter();
 
         btnLog.setVisibility(IAB.isPurchased(SKU_LOG, this) || !can ? View.GONE : View.VISIBLE);
         btnFilter.setVisibility(IAB.isPurchased(SKU_FILTER, this) || !can ? View.GONE : View.VISIBLE);

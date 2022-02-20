@@ -83,6 +83,7 @@ import java.net.URL;
 import java.net.UnknownHostException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -93,8 +94,8 @@ import java.util.Set;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.parsers.SAXParserFactory;
 
-import eu.faircode.netguard.Serializer.Serializer;
-import eu.faircode.netguard.Serializer.SerializerType;
+import eu.faircode.netguard.serializer.Serializer;
+import eu.faircode.netguard.serializer.SerializerType;
 import eu.faircode.netguard.database.Column;
 import eu.faircode.netguard.format.Files;
 import eu.faircode.netguard.preference.Preferences;
@@ -243,7 +244,7 @@ public class ActivitySettings extends AppCompatActivity implements SharedPrefere
             }
         });
 
-        boolean can = Util.canFilter(this);
+        boolean can = Util.canFilter();
         TwoStatePreference pref_log_app = (TwoStatePreference) screen.findPreference(Preferences.LOG_APP.getKey());
         TwoStatePreference pref_filter = (TwoStatePreference) screen.findPreference(Preferences.FILTER.getKey());
         pref_log_app.setEnabled(can);
@@ -816,6 +817,8 @@ public class ActivitySettings extends AppCompatActivity implements SharedPrefere
 
         if (granted)
             ServiceSinkhole.reload(SimpleReason.PermissionGranted, this, false);
+
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
     }
 
     private void checkAddress(String address, boolean allow_local) throws IllegalArgumentException, UnknownHostException {
@@ -843,7 +846,7 @@ public class ActivitySettings extends AppCompatActivity implements SharedPrefere
             throw new IllegalArgumentException(ERROR_BAD_ADDRESS);
     }
 
-    private BroadcastReceiver interactiveStateReceiver = new BroadcastReceiver() {
+    private final BroadcastReceiver interactiveStateReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
             Util.logExtras(intent);
@@ -851,7 +854,7 @@ public class ActivitySettings extends AppCompatActivity implements SharedPrefere
         }
     };
 
-    private BroadcastReceiver connectivityChangedReceiver = new BroadcastReceiver() {
+    private final BroadcastReceiver connectivityChangedReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
             Util.logExtras(intent);
@@ -957,14 +960,14 @@ public class ActivitySettings extends AppCompatActivity implements SharedPrefere
                     xmlExport(out);
                     return null;
                 } catch (Throwable ex) {
-                    Log.e(TAG, ex.toString() + "\n" + Log.getStackTraceString(ex));
+                    Util.logException(TAG, ex);
                     return ex;
                 } finally {
                     if (out != null)
                         try {
                             out.close();
                         } catch (IOException ex) {
-                            Log.e(TAG, ex.toString() + "\n" + Log.getStackTraceString(ex));
+                            Util.logException(TAG, ex);
                         }
                 }
             }
@@ -1009,20 +1012,20 @@ public class ActivitySettings extends AppCompatActivity implements SharedPrefere
 
                     return null;
                 } catch (Throwable ex) {
-                    Log.e(TAG, ex.toString() + "\n" + Log.getStackTraceString(ex));
+                    Util.logException(TAG, ex);
                     return ex;
                 } finally {
                     if (out != null)
                         try {
                             out.close();
                         } catch (IOException ex) {
-                            Log.e(TAG, ex.toString() + "\n" + Log.getStackTraceString(ex));
+                            Util.logException(TAG, ex);
                         }
                     if (in != null)
                         try {
                             in.close();
                         } catch (IOException ex) {
-                            Log.e(TAG, ex.toString() + "\n" + Log.getStackTraceString(ex));
+                            Util.logException(TAG, ex);
                         }
                 }
             }
@@ -1063,14 +1066,14 @@ public class ActivitySettings extends AppCompatActivity implements SharedPrefere
                     xmlImport(in);
                     return null;
                 } catch (Throwable ex) {
-                    Log.e(TAG, ex.toString() + "\n" + Log.getStackTraceString(ex));
+                    Util.logException(TAG, ex);
                     return ex;
                 } finally {
                     if (in != null)
                         try {
                             in.close();
                         } catch (IOException ex) {
-                            Log.e(TAG, ex.toString() + "\n" + Log.getStackTraceString(ex));
+                            Util.logException(TAG, ex);
                         }
                 }
             }
@@ -1312,17 +1315,17 @@ public class ActivitySettings extends AppCompatActivity implements SharedPrefere
     }
 
     private class XmlImportHandler extends DefaultHandler {
-        private Context context;
+        private final Context context;
         public boolean enabled = false;
-        public Map<String, Object> application = new HashMap<>();
-        public Map<String, Object> wifi = new HashMap<>();
-        public Map<String, Object> mobile = new HashMap<>();
-        public Map<String, Object> screen_wifi = new HashMap<>();
-        public Map<String, Object> screen_other = new HashMap<>();
-        public Map<String, Object> roaming = new HashMap<>();
-        public Map<String, Object> lockdown = new HashMap<>();
-        public Map<String, Object> apply = new HashMap<>();
-        public Map<String, Object> notify = new HashMap<>();
+        public final Map<String, Object> application = new HashMap<>();
+        public final Map<String, Object> wifi = new HashMap<>();
+        public final Map<String, Object> mobile = new HashMap<>();
+        public final Map<String, Object> screen_wifi = new HashMap<>();
+        public final Map<String, Object> screen_other = new HashMap<>();
+        public final Map<String, Object> roaming = new HashMap<>();
+        public final Map<String, Object> lockdown = new HashMap<>();
+        public final Map<String, Object> apply = new HashMap<>();
+        public final Map<String, Object> notify = new HashMap<>();
         private Map<String, Object> current = null;
 
         public XmlImportHandler(Context context) {
@@ -1408,8 +1411,7 @@ public class ActivitySettings extends AppCompatActivity implements SharedPrefere
                         else if ("set".equals(type)) {
                             Set<String> set = new HashSet<>();
                             if (!TextUtils.isEmpty(value))
-                                for (String s : value.split("\n"))
-                                    set.add(s);
+                                set.addAll(Arrays.asList(value.split("\n")));
                             current.put(key, set);
                         } else
                             Log.e(TAG, "Unknown type key=" + key);

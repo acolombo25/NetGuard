@@ -1,4 +1,4 @@
-package eu.faircode.netguard.Serializer;
+package eu.faircode.netguard.serializer;
 
 public interface Serializer {
     String OUTPUT = "UTF-8";

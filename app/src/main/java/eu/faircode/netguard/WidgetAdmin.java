@@ -34,7 +34,6 @@ import androidx.preference.PreferenceManager;
 import java.util.Date;
 
 import eu.faircode.netguard.preference.Preferences;
-import eu.faircode.netguard.reason.Reason;
 import eu.faircode.netguard.reason.SimpleReason;
 
 public class WidgetAdmin extends ReceiverAutostart {
@@ -99,7 +98,7 @@ public class WidgetAdmin extends ReceiverAutostart {
                 WidgetLockdown.updateWidgets(context);
             }
         } catch (Throwable ex) {
-            Log.e(TAG, ex.toString() + "\n" + Log.getStackTraceString(ex));
+            Util.logException(TAG, ex);
         }
     }
 }

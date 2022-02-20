@@ -113,7 +113,7 @@ public class IPUtil {
                 this.address = InetAddress.getByName(ip);
                 this.prefix = prefix;
             } catch (UnknownHostException ex) {
-                Log.e(TAG, ex.toString() + "\n" + Log.getStackTraceString(ex));
+                Util.logException(TAG, ex);
             }
         }
 
@@ -125,6 +125,7 @@ public class IPUtil {
             return long2inet((inet2long(this.address) & prefix2mask(this.prefix)) + (1L << (32 - this.prefix)) - 1);
         }
 
+        @NonNull
         @Override
         public String toString() {
             return address.getHostAddress() + "/" + prefix + "=" + getStart().getHostAddress() + "..." + getEnd().getHostAddress();
