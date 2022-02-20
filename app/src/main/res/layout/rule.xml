@@ -279,7 +279,16 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
+                android:layout_marginEnd="8dp"
                 android:src="@drawable/ic_launch" />
+
+            <ImageButton
+                android:id="@+id/ibAddToHomeScreen"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginEnd="8dp"
+                android:src="@drawable/ic_add_to_home_screen" />
         </LinearLayout>
 
         <CheckBox
