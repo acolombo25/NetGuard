@@ -429,19 +429,13 @@ public class ActivityMain extends AppCompatActivity implements SharedPreferences
         }
 
         // Support
-        LinearLayout llSupport = findViewById(R.id.llSupport);
         TextView tvSupport = findViewById(R.id.tvSupport);
 
         SpannableString content = new SpannableString(getString(R.string.app_support));
         content.setSpan(new UnderlineSpan(), 0, content.length(), 0);
         tvSupport.setText(content);
 
-        llSupport.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(getIntentPro(ActivityMain.this));
-            }
-        });
+        tvSupport.setOnClickListener(view -> startActivity(getIntentPro(ActivityMain.this)));
 
         // Handle intent
         checkExtras(getIntent());
@@ -481,8 +475,8 @@ public class ActivityMain extends AppCompatActivity implements SharedPreferences
             adapter.notifyDataSetChanged();
 
         PackageManager pm = getPackageManager();
-        LinearLayout llSupport = findViewById(R.id.llSupport);
-        llSupport.setVisibility(
+        View tvSupport = findViewById(R.id.tvSupport);
+        tvSupport.setVisibility(
                 IAB.isPurchasedAny(this) || getIntentPro(this).resolveActivity(pm) == null
                         ? View.GONE : View.VISIBLE);
 
