@@ -38,7 +38,6 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLConnection;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Date;
 
 import eu.faircode.netguard.format.Files;
@@ -107,7 +106,7 @@ public class ServiceExternal extends IntentService {
                         hosts.delete();
                     tmp.renameTo(hosts);
 
-                    String last = SimpleDateFormat.getDateTimeInstance().format(Calendar.getInstance());
+                    String last = SimpleDateFormat.getDateTimeInstance().format(new Date());
                     prefs.edit().putString(Preferences.HOSTS_LAST_DOWNLOAD.getKey(), last).apply();
 
                     ServiceSinkhole.reload(SimpleReason.HostsFileDownload, this, false);

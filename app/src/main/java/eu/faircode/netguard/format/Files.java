@@ -3,7 +3,7 @@ package eu.faircode.netguard.format;
 import android.content.Context;
 
 import java.io.File;
-import java.util.Calendar;
+import java.util.Date;
 
 import eu.faircode.netguard.R;
 
@@ -32,7 +32,7 @@ public class Files {
 
     public static String getFileName(Context context, Format format) {
         return context.getString(R.string.app_name) + "_" +
-                DateFormats.STANDARD.format(Calendar.getInstance()) +
+                DateFormats.STANDARD.format(new Date()) +
                 format.getValue();
     }
 }

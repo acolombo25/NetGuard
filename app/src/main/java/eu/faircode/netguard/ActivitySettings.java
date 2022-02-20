@@ -83,7 +83,6 @@ import java.net.URL;
 import java.net.UnknownHostException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -393,7 +392,7 @@ public class ActivitySettings extends AppCompatActivity implements SharedPrefere
                                     hosts.delete();
                                 tmp.renameTo(hosts);
 
-                                String last = SimpleDateFormat.getDateTimeInstance().format(Calendar.getInstance());
+                                String last = SimpleDateFormat.getDateTimeInstance().format(new Date());
                                 prefs.edit().putString(Preferences.HOSTS_LAST_DOWNLOAD.getKey(), last).apply();
 
                                 if (running) {
@@ -1033,7 +1032,7 @@ public class ActivitySettings extends AppCompatActivity implements SharedPrefere
                 if (running) {
                     if (ex == null) {
                         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(ActivitySettings.this);
-                        String last = SimpleDateFormat.getDateTimeInstance().format(Calendar.getInstance());
+                        String last = SimpleDateFormat.getDateTimeInstance().format(new Date());
                         prefs.edit().putString(Preferences.HOSTS_LAST_IMPORT.getKey(), last).apply();
 
                         if (running) {
