@@ -27,7 +27,7 @@ import android.content.SharedPreferences;
 import android.util.Log;
 
 import androidx.core.app.NotificationCompat;
-import androidx.preference.PreferenceManager;
+import android.preference.PreferenceManager;
 
 import java.io.File;
 import java.io.FileOutputStream;

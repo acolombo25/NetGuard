@@ -31,7 +31,7 @@ import android.service.quicksettings.Tile;
 import android.service.quicksettings.TileService;
 import android.util.Log;
 
-import androidx.preference.PreferenceManager;
+import android.preference.PreferenceManager;
 
 import java.util.Date;
 
@@ -91,7 +91,7 @@ public class ServiceTileMain extends TileService implements SharedPreferences.On
             ServiceSinkhole.stop(SimpleReason.Tile, this, false);
 
             // Auto enable
-            int auto = prefs.getInt(Preferences.AUTO_ENABLE.getKey(), Preferences.AUTO_ENABLE.getDefaultValue());
+            int auto = Integer.parseInt(prefs.getString(Preferences.AUTO_ENABLE.getKey(), Integer.toString(Preferences.AUTO_ENABLE.getDefaultValue())));
             if (auto > 0) {
                 Log.i(TAG, "Scheduling enabled after minutes=" + auto);
                 if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M)

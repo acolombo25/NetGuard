@@ -27,7 +27,7 @@ import android.service.quicksettings.Tile;
 import android.service.quicksettings.TileService;
 import android.util.Log;
 
-import androidx.preference.PreferenceManager;
+import android.preference.PreferenceManager;
 
 import eu.faircode.netguard.preference.Preferences;
 import eu.faircode.netguard.reason.SimpleReason;

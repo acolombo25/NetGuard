@@ -45,6 +45,7 @@ import android.preference.Preference;
 import android.preference.PreferenceFragment;
 import android.preference.PreferenceGroup;
 import android.preference.PreferenceScreen;
+import android.preference.PreferenceManager;
 import android.preference.TwoStatePreference;
 import android.text.SpannableStringBuilder;
 import android.text.Spanned;
@@ -63,7 +64,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.NavUtils;
 import androidx.core.util.PatternsCompat;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
-import androidx.preference.PreferenceManager;
 
 import org.xml.sax.Attributes;
 import org.xml.sax.InputSource;
@@ -149,11 +149,11 @@ public class ActivitySettings extends AppCompatActivity implements SharedPrefere
 
         // Handle auto enable
         Preference pref_auto_enable = screen.findPreference(Preferences.AUTO_ENABLE.getKey());
-        pref_auto_enable.setTitle(getString(R.string.setting_auto, prefs.getInt(Preferences.AUTO_ENABLE.getKey(), Preferences.AUTO_ENABLE.getDefaultValue())));
+        pref_auto_enable.setTitle(getString(R.string.setting_auto, Integer.parseInt(prefs.getString(Preferences.AUTO_ENABLE.getKey(), Integer.toString(Preferences.AUTO_ENABLE.getDefaultValue())))));
 
         // Handle screen delay
         Preference pref_screen_delay = screen.findPreference(Preferences.SCREEN_DELAY.getKey());
-        pref_screen_delay.setTitle(getString(R.string.setting_delay, prefs.getInt(Preferences.SCREEN_DELAY.getKey(), Preferences.SCREEN_DELAY.getDefaultValue())));
+        pref_screen_delay.setTitle(getString(R.string.setting_delay, Integer.parseInt(prefs.getString(Preferences.SCREEN_DELAY.getKey(), Integer.toString(Preferences.SCREEN_DELAY.getDefaultValue())))));
 
         // Handle theme
         Preference pref_screen_theme = screen.findPreference(Preferences.THEME.getKey());
@@ -264,7 +264,7 @@ public class ActivitySettings extends AppCompatActivity implements SharedPrefere
         pref_dns1.setTitle(getString(R.string.setting_dns, prefs.getString(Preferences.DNS1.getKey(), Preferences.DNS1.getDefaultValue())));
         pref_dns2.setTitle(getString(R.string.setting_dns, prefs.getString(Preferences.DNS2.getKey(), Preferences.DNS2.getDefaultValue())));
         pref_validate.setTitle(getString(R.string.setting_validate, prefs.getString(Preferences.VALIDATE.getKey(), Preferences.VALIDATE.getDefaultValue())));
-        pref_ttl.setTitle(getString(R.string.setting_ttl, prefs.getInt(Preferences.TTL.getKey(), Preferences.TTL.getDefaultValue())));
+        pref_ttl.setTitle(getString(R.string.setting_ttl, Integer.parseInt(prefs.getString(Preferences.TTL.getKey(), Integer.toString(Preferences.TTL.getDefaultValue())))));
 
         // SOCKS5 parameters
         screen.findPreference(Preferences.SOCKS_5_ADDR.getKey()).setTitle(getString(R.string.setting_socks5_addr, prefs.getString(Preferences.SOCKS_5_ADDR.getKey(), Preferences.SOCKS_5_ADDR.getDefaultValue())));
@@ -273,11 +273,11 @@ public class ActivitySettings extends AppCompatActivity implements SharedPrefere
         screen.findPreference(Preferences.SOCKS_5_PASSWORD.getKey()).setTitle(getString(R.string.setting_socks5_password, TextUtils.isEmpty(prefs.getString(Preferences.SOCKS_5_PASSWORD.getKey(), Preferences.SOCKS_5_PASSWORD.getDefaultValue())) ? "-" : "*****"));
 
         // PCAP parameters
-        screen.findPreference(Preferences.PCAP_RECORD_SIZE.getKey()).setTitle(getString(R.string.setting_pcap_record_size, prefs.getLong(Preferences.PCAP_RECORD_SIZE.getKey(), Preferences.PCAP_RECORD_SIZE.getDefaultValue())));
-        screen.findPreference(Preferences.PCAP_FILE_SIZE.getKey()).setTitle(getString(R.string.setting_pcap_file_size, prefs.getLong(Preferences.PCAP_FILE_SIZE.getKey(), Preferences.PCAP_FILE_SIZE.getDefaultValue())));
+        screen.findPreference(Preferences.PCAP_RECORD_SIZE.getKey()).setTitle(getString(R.string.setting_pcap_record_size, Long.parseLong(prefs.getString(Preferences.PCAP_RECORD_SIZE.getKey(), Long.toString(Preferences.PCAP_RECORD_SIZE.getDefaultValue())))));
+        screen.findPreference(Preferences.PCAP_FILE_SIZE.getKey()).setTitle(getString(R.string.setting_pcap_file_size, Long.parseLong(prefs.getString(Preferences.PCAP_FILE_SIZE.getKey(), Long.toString(Preferences.PCAP_FILE_SIZE.getDefaultValue())))));
 
         // Watchdog
-        screen.findPreference(Preferences.WATCHDOG.getKey()).setTitle(getString(R.string.setting_watchdog, prefs.getLong(Preferences.WATCHDOG.getKey(), Preferences.WATCHDOG.getDefaultValue())));
+        screen.findPreference(Preferences.WATCHDOG.getKey()).setTitle(getString(R.string.setting_watchdog, Long.parseLong(prefs.getString(Preferences.WATCHDOG.getKey(), Long.toString(Preferences.WATCHDOG.getDefaultValue())))));
 
         // Show resolved
         Preference pref_show_resolved = screen.findPreference(Preferences.SHOW_RESOLVED.getKey());
@@ -297,8 +297,8 @@ public class ActivitySettings extends AppCompatActivity implements SharedPrefere
             cat_stats.removePreference(screen.findPreference(Preferences.SHOW_TOP.getKey()));
         EditTextPreference pref_stats_frequency = (EditTextPreference) screen.findPreference(Preferences.STATS_FREQUENCY.getKey());
         EditTextPreference pref_stats_samples = (EditTextPreference) screen.findPreference(Preferences.STATS_SAMPLES.getKey());
-        pref_stats_frequency.setTitle(getString(R.string.setting_stats_frequency, prefs.getLong(Preferences.STATS_FREQUENCY.getKey(), Preferences.STATS_FREQUENCY.getDefaultValue())));
-        pref_stats_samples.setTitle(getString(R.string.setting_stats_samples, prefs.getLong(Preferences.STATS_SAMPLES.getKey(), Preferences.STATS_SAMPLES.getDefaultValue())));
+        pref_stats_frequency.setTitle(getString(R.string.setting_stats_frequency, Long.parseLong(prefs.getString(Preferences.STATS_FREQUENCY.getKey(), Long.toString(Preferences.STATS_FREQUENCY.getDefaultValue())))));
+        pref_stats_samples.setTitle(getString(R.string.setting_stats_samples, Long.parseLong(prefs.getString(Preferences.STATS_SAMPLES.getKey(), Long.toString(Preferences.STATS_SAMPLES.getDefaultValue())))));
 
         // Handle export
         Preference pref_export = screen.findPreference(Preferences.EXPORT.getKey());
@@ -330,7 +330,7 @@ public class ActivitySettings extends AppCompatActivity implements SharedPrefere
         EditTextPreference pref_hosts_url = (EditTextPreference) screen.findPreference(Preferences.HOSTS_URL.getKey());
         final Preference pref_hosts_download = screen.findPreference(Preferences.HOSTS_DOWNLOAD.getKey());
 
-        pref_rcode.setTitle(getString(R.string.setting_rcode, prefs.getInt(Preferences.R_CODE.getKey(), Preferences.R_CODE.getDefaultValue())));
+        pref_rcode.setTitle(getString(R.string.setting_rcode, Integer.parseInt(prefs.getString(Preferences.R_CODE.getKey(), Integer.toString(Preferences.R_CODE.getDefaultValue())))));
 
         if (Util.isPlayStoreInstall(this) || !Util.hasValidFingerprint(this))
             cat_options.removePreference(screen.findPreference(Preferences.UPDATE_CHECK.getKey()));
@@ -556,10 +556,10 @@ public class ActivitySettings extends AppCompatActivity implements SharedPrefere
             ServiceSinkhole.reload(new Changed(name), this, false);
 
         else if (Preferences.AUTO_ENABLE.getKey().equals(name))
-            getPreferenceScreen().findPreference(name).setTitle(getString(R.string.setting_auto, prefs.getInt(name, Preferences.AUTO_ENABLE.getDefaultValue())));
+            getPreferenceScreen().findPreference(name).setTitle(getString(R.string.setting_auto, Integer.parseInt(prefs.getString(name, Integer.toString(Preferences.AUTO_ENABLE.getDefaultValue())))));
 
         else if (Preferences.SCREEN_DELAY.getKey().equals(name))
-            getPreferenceScreen().findPreference(name).setTitle(getString(R.string.setting_delay, prefs.getInt(name, Preferences.SCREEN_DELAY.getDefaultValue())));
+            getPreferenceScreen().findPreference(name).setTitle(getString(R.string.setting_delay, Integer.parseInt(prefs.getString(name, Integer.toString(Preferences.SCREEN_DELAY.getDefaultValue())))));
 
         else if (Preferences.THEME.getKey().equals(name) || Preferences.DARK.getKey().equals(name))
             recreate();
@@ -714,10 +714,10 @@ public class ActivitySettings extends AppCompatActivity implements SharedPrefere
             ServiceSinkhole.reload(new Changed(name), this, false);
 
         } else if (Preferences.TTL.getKey().equals(name))
-            getPreferenceScreen().findPreference(name).setTitle(getString(R.string.setting_ttl, prefs.getInt(name, Preferences.TTL.getDefaultValue())));
+            getPreferenceScreen().findPreference(name).setTitle(getString(R.string.setting_ttl, Integer.parseInt(prefs.getString(name, Integer.toString(Preferences.TTL.getDefaultValue())))));
 
         else if (Preferences.R_CODE.getKey().equals(name)) {
-            getPreferenceScreen().findPreference(name).setTitle(getString(R.string.setting_rcode, prefs.getInt(name, Preferences.R_CODE.getDefaultValue())));
+            getPreferenceScreen().findPreference(name).setTitle(getString(R.string.setting_rcode, Integer.parseInt(prefs.getString(name, Integer.toString(Preferences.R_CODE.getDefaultValue())))));
             ServiceSinkhole.reload(new Changed(name), this, false);
 
         } else if (Preferences.SOCKS_5_ENABLED.getKey().equals(name))
@@ -751,9 +751,9 @@ public class ActivitySettings extends AppCompatActivity implements SharedPrefere
 
         } else if (Preferences.PCAP_RECORD_SIZE.getKey().equals(name) || Preferences.PCAP_FILE_SIZE.getKey().equals(name)) {
             if (Preferences.PCAP_RECORD_SIZE.getKey().equals(name))
-                getPreferenceScreen().findPreference(name).setTitle(getString(R.string.setting_pcap_record_size, prefs.getLong(name, Preferences.PCAP_RECORD_SIZE.getDefaultValue())));
+                getPreferenceScreen().findPreference(name).setTitle(getString(R.string.setting_pcap_record_size, Long.parseLong(prefs.getString(name, Long.toString(Preferences.PCAP_RECORD_SIZE.getDefaultValue())))));
             else if (Preferences.PCAP_FILE_SIZE.getKey().equals(name))
-                getPreferenceScreen().findPreference(name).setTitle(getString(R.string.setting_pcap_file_size, prefs.getLong(name, Preferences.PCAP_FILE_SIZE.getDefaultValue())));
+                getPreferenceScreen().findPreference(name).setTitle(getString(R.string.setting_pcap_file_size, Long.parseLong(prefs.getString(name, Long.toString(Preferences.PCAP_FILE_SIZE.getDefaultValue())))));
 
             ServiceSinkhole.setPcap(false, this);
 
@@ -765,17 +765,17 @@ public class ActivitySettings extends AppCompatActivity implements SharedPrefere
                 ServiceSinkhole.setPcap(true, this);
 
         } else if (Preferences.WATCHDOG.getKey().equals(name)) {
-            getPreferenceScreen().findPreference(name).setTitle(getString(R.string.setting_watchdog, prefs.getLong(name, Preferences.WATCHDOG.getDefaultValue())));
+            getPreferenceScreen().findPreference(name).setTitle(getString(R.string.setting_watchdog, Long.parseLong(prefs.getString(name, Long.toString(Preferences.WATCHDOG.getDefaultValue())))));
             ServiceSinkhole.reload(new Changed(name), this, false);
 
         } else if (Preferences.SHOW_STATS.getKey().equals(name))
             ServiceSinkhole.reloadStats(new Changed(name), this);
 
         else if (Preferences.STATS_FREQUENCY.getKey().equals(name))
-            getPreferenceScreen().findPreference(name).setTitle(getString(R.string.setting_stats_frequency, prefs.getLong(name, Preferences.STATS_FREQUENCY.getDefaultValue())));
+            getPreferenceScreen().findPreference(name).setTitle(getString(R.string.setting_stats_frequency, Long.parseLong(prefs.getString(name, Long.toString(Preferences.STATS_FREQUENCY.getDefaultValue())))));
 
         else if (Preferences.STATS_SAMPLES.getKey().equals(name))
-            getPreferenceScreen().findPreference(name).setTitle(getString(R.string.setting_stats_samples, prefs.getLong(name, Preferences.STATS_SAMPLES.getDefaultValue())));
+            getPreferenceScreen().findPreference(name).setTitle(getString(R.string.setting_stats_samples, Long.parseLong(prefs.getString(name, Long.toString(Preferences.STATS_SAMPLES.getDefaultValue())))));
 
         else if (Preferences.HOSTS_URL.getKey().equals(name))
             getPreferenceScreen().findPreference(name).setSummary(prefs.getString(name, BuildConfig.HOSTS_FILE_URI));

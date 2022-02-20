@@ -28,7 +28,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.widget.RemoteViews;
 
-import androidx.preference.PreferenceManager;
+import android.preference.PreferenceManager;
 
 import eu.faircode.netguard.preference.Preferences;
 

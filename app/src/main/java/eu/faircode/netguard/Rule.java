@@ -32,7 +32,7 @@ import android.os.Process;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
-import androidx.preference.PreferenceManager;
+import android.preference.PreferenceManager;
 
 import org.xmlpull.v1.XmlPullParser;
 
