@@ -95,9 +95,10 @@ import javax.xml.parsers.SAXParserFactory;
 
 import eu.faircode.netguard.Serializer.Serializer;
 import eu.faircode.netguard.Serializer.SerializerType;
+import eu.faircode.netguard.database.Column;
+import eu.faircode.netguard.format.Files;
 import eu.faircode.netguard.preference.Preferences;
 import eu.faircode.netguard.reason.Changed;
-import eu.faircode.netguard.reason.Reason;
 import eu.faircode.netguard.reason.SimpleReason;
 
 public class ActivitySettings extends AppCompatActivity implements SharedPreferences.OnSharedPreferenceChangeListener {
@@ -110,6 +111,10 @@ public class ActivitySettings extends AppCompatActivity implements SharedPrefere
     private static final int REQUEST_HOSTS = 3;
     private static final int REQUEST_HOSTS_APPEND = 4;
     private static final int REQUEST_CALL = 5;
+
+    private static final String TAG_APPLICATION = "application";
+    private static final String TAG_RULE = "rule";
+    private static final String TAG_PKG = "pkg";
 
     private static final String ERROR_BAD_ADDRESS = "Bad address";
 
@@ -371,12 +376,12 @@ public class ActivitySettings extends AppCompatActivity implements SharedPrefere
             pref_hosts_download.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
                 @Override
                 public boolean onPreferenceClick(Preference preference) {
-                    final File tmp = new File(getFilesDir(), "hosts.tmp");
-                    final File hosts = new File(getFilesDir(), "hosts.txt");
+                    final File tmp = new File(getFilesDir(), Files.FILE_HOSTS_TMP);
+                    final File hosts = new File(getFilesDir(), Files.FILE_HOSTS);
 
                     EditTextPreference pref_hosts_url = (EditTextPreference) screen.findPreference(Preferences.HOSTS_URL.getKey());
                     String hosts_url = pref_hosts_url.getText();
-                    if ("https://www.netguard.me/hosts".equals(hosts_url))
+                    if (Files.URL_HOSTS.equals(hosts_url))
                         hosts_url = BuildConfig.HOSTS_FILE_URI;
 
                     try {
@@ -387,7 +392,7 @@ public class ActivitySettings extends AppCompatActivity implements SharedPrefere
                                     hosts.delete();
                                 tmp.renameTo(hosts);
 
-                                String last = SimpleDateFormat.getDateTimeInstance().format(new Date().getTime());
+                                String last = SimpleDateFormat.getDateTimeInstance().format(new Date());
                                 prefs.edit().putString(Preferences.HOSTS_LAST_DOWNLOAD.getKey(), last).apply();
 
                                 if (running) {
@@ -751,7 +756,7 @@ public class ActivitySettings extends AppCompatActivity implements SharedPrefere
 
             ServiceSinkhole.setPcap(false, this);
 
-            File pcap_file = new File(getDir("data", MODE_PRIVATE), "netguard.pcap");
+            File pcap_file = Files.getPcapFile(this);
             if (pcap_file.exists() && !pcap_file.delete())
                 Log.w(TAG, "Delete PCAP failed");
 
@@ -791,8 +796,7 @@ public class ActivitySettings extends AppCompatActivity implements SharedPrefere
 
                 requestPermissions(new String[]{Manifest.permission.READ_PHONE_STATE}, REQUEST_CALL);
 
-                if (name != null)
-                    return false;
+                return name==null;
             }
 
         return true;
@@ -911,8 +915,8 @@ public class ActivitySettings extends AppCompatActivity implements SharedPrefere
         } else {
             intent = new Intent(Intent.ACTION_CREATE_DOCUMENT);
             intent.addCategory(Intent.CATEGORY_OPENABLE);
-            intent.setType("*/*"); // text/xml
-            intent.putExtra(Intent.EXTRA_TITLE, "netguard_" + new SimpleDateFormat("yyyyMMdd").format(new Date().getTime()) + ".xml");
+            intent.setType(Files.FILE_TEXT_XML); // text/xml
+            intent.putExtra(Intent.EXTRA_TITLE, Files.getFileName(this, Files.Format.Xml));
         }
         return intent;
     }
@@ -924,7 +928,7 @@ public class ActivitySettings extends AppCompatActivity implements SharedPrefere
         else
             intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
         intent.addCategory(Intent.CATEGORY_OPENABLE);
-        intent.setType("*/*"); // text/xml
+        intent.setType(Files.FILE_TEXT_XML); // text/xml
         return intent;
     }
 
@@ -935,7 +939,7 @@ public class ActivitySettings extends AppCompatActivity implements SharedPrefere
         else
             intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
         intent.addCategory(Intent.CATEGORY_OPENABLE);
-        intent.setType("*/*"); // text/plain
+        intent.setType(Files.FILE_TEXT_XML); // text/plain
         return intent;
     }
 
@@ -947,7 +951,7 @@ public class ActivitySettings extends AppCompatActivity implements SharedPrefere
                 try {
                     Uri target = data.getData();
                     if (data.hasExtra("org.openintents.extra.DIR_PATH"))
-                        target = Uri.parse(target + "/netguard_" + new SimpleDateFormat("yyyyMMdd").format(new Date().getTime()) + ".xml");
+                        target = Uri.parse(target + "/"+ Files.getFileName(ActivitySettings.this, Files.Format.Xml));
                     Log.i(TAG, "Writing URI=" + target);
                     out = getContentResolver().openOutputStream(target);
                     xmlExport(out);
@@ -981,15 +985,15 @@ public class ActivitySettings extends AppCompatActivity implements SharedPrefere
         new AsyncTask<Object, Object, Throwable>() {
             @Override
             protected Throwable doInBackground(Object... objects) {
-                File hosts = new File(getFilesDir(), "hosts.txt");
+                File hosts = new File(getFilesDir(), Files.FILE_HOSTS);
 
                 FileOutputStream out = null;
                 InputStream in = null;
                 try {
                     Log.i(TAG, "Reading URI=" + data.getData());
                     ContentResolver resolver = getContentResolver();
-                    String[] streamTypes = resolver.getStreamTypes(data.getData(), "*/*");
-                    String streamType = (streamTypes == null || streamTypes.length == 0 ? "*/*" : streamTypes[0]);
+                    String[] streamTypes = resolver.getStreamTypes(data.getData(), Files.FILE_TEXT_XML);
+                    String streamType = (streamTypes == null || streamTypes.length == 0 ? Files.FILE_TEXT_XML : streamTypes[0]);
                     AssetFileDescriptor descriptor = resolver.openTypedAssetFileDescriptor(data.getData(), streamType, null);
                     in = descriptor.createInputStream();
                     out = new FileOutputStream(hosts, append);
@@ -1028,7 +1032,7 @@ public class ActivitySettings extends AppCompatActivity implements SharedPrefere
                 if (running) {
                     if (ex == null) {
                         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(ActivitySettings.this);
-                        String last = SimpleDateFormat.getDateTimeInstance().format(new Date().getTime());
+                        String last = SimpleDateFormat.getDateTimeInstance().format(new Date());
                         prefs.edit().putString(Preferences.HOSTS_LAST_IMPORT.getKey(), last).apply();
 
                         if (running) {
@@ -1052,8 +1056,8 @@ public class ActivitySettings extends AppCompatActivity implements SharedPrefere
                 try {
                     Log.i(TAG, "Reading URI=" + data.getData());
                     ContentResolver resolver = getContentResolver();
-                    String[] streamTypes = resolver.getStreamTypes(data.getData(), "*/*");
-                    String streamType = (streamTypes == null || streamTypes.length == 0 ? "*/*" : streamTypes[0]);
+                    String[] streamTypes = resolver.getStreamTypes(data.getData(), Files.FILE_TEXT_XML);
+                    String streamType = (streamTypes == null || streamTypes.length == 0 ? Files.FILE_TEXT_XML : streamTypes[0]);
                     AssetFileDescriptor descriptor = resolver.openTypedAssetFileDescriptor(data.getData(), streamType, null);
                     in = descriptor.createInputStream();
                     xmlImport(in);
@@ -1088,14 +1092,15 @@ public class ActivitySettings extends AppCompatActivity implements SharedPrefere
 
     private void xmlExport(OutputStream out) throws IOException {
         XmlSerializer serializer = Xml.newSerializer();
-        serializer.setOutput(out, "UTF-8");
+        serializer.setOutput(out, Serializer.OUTPUT);
         serializer.startDocument(null, true);
-        serializer.setFeature("http://xmlpull.org/v1/doc/features.html#indent-output", true);
-        serializer.startTag(null, "netguard");
+        serializer.setFeature(Serializer.FEATURE, true);
+        String appName = getString(R.string.app_name);
+        serializer.startTag(null, appName);
 
-        serializer.startTag(null, "application");
+        serializer.startTag(null, TAG_APPLICATION);
         xmlExport(PreferenceManager.getDefaultSharedPreferences(this), serializer);
-        serializer.endTag(null, "application");
+        serializer.endTag(null, TAG_APPLICATION);
 
         String keyWifi = Preferences.WIFI.getKey();
         serializer.startTag(null, keyWifi);
@@ -1143,11 +1148,12 @@ public class ActivitySettings extends AppCompatActivity implements SharedPrefere
         filterExport(serializer);
         serializer.endTag(null, keyFilter);
 
-        serializer.startTag(null, "forward");
+        String keyForward = Preferences.FORWARD.getKey();
+        serializer.startTag(null, keyForward);
         forwardExport(serializer);
-        serializer.endTag(null, "forward");
+        serializer.endTag(null, keyForward);
 
-        serializer.endTag(null, "netguard");
+        serializer.endTag(null, appName);
         serializer.endDocument();
         serializer.flush();
     }
@@ -1188,44 +1194,46 @@ public class ActivitySettings extends AppCompatActivity implements SharedPrefere
 
     private void filterExport(XmlSerializer serializer) throws IOException {
         try (Cursor cursor = DatabaseHelper.getInstance(this).getAccess()) {
-            int colUid = cursor.getColumnIndex("uid");
-            int colVersion = cursor.getColumnIndex("version");
-            int colProtocol = cursor.getColumnIndex("protocol");
-            int colDAddr = cursor.getColumnIndex("daddr");
-            int colDPort = cursor.getColumnIndex("dport");
-            int colTime = cursor.getColumnIndex("time");
-            int colBlock = cursor.getColumnIndex("block");
+            int colUid = cursor.getColumnIndex(Column.UID.getValue());
+            int colVersion = cursor.getColumnIndex(Column.VERSION.getValue());
+            int colProtocol = cursor.getColumnIndex(Column.PROTOCOL.getValue());
+            int colDAddr = cursor.getColumnIndex(Column.DADDR.getValue());
+            int colDPort = cursor.getColumnIndex(Column.DPORT.getValue());
+            int colTime = cursor.getColumnIndex(Column.TIME.getValue());
+            int colBlock = cursor.getColumnIndex(Column.BLOCK.getValue());
             while (cursor.moveToNext())
                 for (String pkg : getPackages(cursor.getInt(colUid))) {
-                    serializer.startTag(null, "rule");
-                    serializer.attribute(null, "pkg", pkg);
-                    serializer.attribute(null, "version", Integer.toString(cursor.getInt(colVersion)));
-                    serializer.attribute(null, "protocol", Integer.toString(cursor.getInt(colProtocol)));
-                    serializer.attribute(null, "daddr", cursor.getString(colDAddr));
-                    serializer.attribute(null, "dport", Integer.toString(cursor.getInt(colDPort)));
-                    serializer.attribute(null, "time", Long.toString(cursor.getLong(colTime)));
-                    serializer.attribute(null, "block", Integer.toString(cursor.getInt(colBlock)));
-                    serializer.endTag(null, "rule");
+                    String tag = TAG_RULE;
+                    serializer.startTag(null, tag);
+                    serializer.attribute(null, TAG_PKG, pkg);
+                    serializer.attribute(null, Column.VERSION.getValue(), Integer.toString(cursor.getInt(colVersion)));
+                    serializer.attribute(null, Column.PROTOCOL.getValue(), Integer.toString(cursor.getInt(colProtocol)));
+                    serializer.attribute(null, Column.DADDR.getValue(), cursor.getString(colDAddr));
+                    serializer.attribute(null, Column.DPORT.getValue(), Integer.toString(cursor.getInt(colDPort)));
+                    serializer.attribute(null, Column.TIME.getValue(), Long.toString(cursor.getLong(colTime)));
+                    serializer.attribute(null, Column.BLOCK.getValue(), Integer.toString(cursor.getInt(colBlock)));
+                    serializer.endTag(null, tag);
                 }
         }
     }
 
     private void forwardExport(XmlSerializer serializer) throws IOException {
         try (Cursor cursor = DatabaseHelper.getInstance(this).getForwarding()) {
-            int colProtocol = cursor.getColumnIndex("protocol");
-            int colDPort = cursor.getColumnIndex("dport");
-            int colRAddr = cursor.getColumnIndex("raddr");
-            int colRPort = cursor.getColumnIndex("rport");
-            int colRUid = cursor.getColumnIndex("ruid");
+            int colProtocol = cursor.getColumnIndex(Column.PROTOCOL.getValue());
+            int colDPort = cursor.getColumnIndex(Column.DPORT.getValue());
+            int colRAddr = cursor.getColumnIndex(Column.RADDR.getValue());
+            int colRPort = cursor.getColumnIndex(Column.RPORT.getValue());
+            int colRUid = cursor.getColumnIndex(Column.RUID.getValue());
             while (cursor.moveToNext())
                 for (String pkg : getPackages(cursor.getInt(colRUid))) {
-                    serializer.startTag(null, "port");
-                    serializer.attribute(null, "pkg", pkg);
-                    serializer.attribute(null, "protocol", Integer.toString(cursor.getInt(colProtocol)));
-                    serializer.attribute(null, "dport", Integer.toString(cursor.getInt(colDPort)));
-                    serializer.attribute(null, "raddr", cursor.getString(colRAddr));
-                    serializer.attribute(null, "rport", Integer.toString(cursor.getInt(colRPort)));
-                    serializer.endTag(null, "port");
+                    String tag = Column.PORT.getValue();
+                    serializer.startTag(null, tag);
+                    serializer.attribute(null, TAG_PKG, pkg);
+                    serializer.attribute(null, Column.PROTOCOL.getValue(), Integer.toString(cursor.getInt(colProtocol)));
+                    serializer.attribute(null, Column.DPORT.getValue(), Integer.toString(cursor.getInt(colDPort)));
+                    serializer.attribute(null, Column.RADDR.getValue(), cursor.getString(colRAddr));
+                    serializer.attribute(null, Column.RPORT.getValue(), Integer.toString(cursor.getInt(colRPort)));
+                    serializer.endTag(null, tag);
                 }
         }
     }
@@ -1323,10 +1331,10 @@ public class ActivitySettings extends AppCompatActivity implements SharedPrefere
 
         @Override
         public void startElement(String uri, String localName, String qName, Attributes attributes) {
-            if (qName.equals("netguard"))
+            if (qName.equals(getString(R.string.app_name)))
                 ; // Ignore
 
-            else if (qName.equals("application"))
+            else if (qName.equals(TAG_APPLICATION))
                 current = application;
 
             else if (qName.equals(Preferences.WIFI.getKey()))
@@ -1358,15 +1366,15 @@ public class ActivitySettings extends AppCompatActivity implements SharedPrefere
                 Log.i(TAG, "Clearing filters");
                 DatabaseHelper.getInstance(context).clearAccess();
 
-            } else if (qName.equals("forward")) {
+            } else if (qName.equals(Preferences.FORWARD.getKey())) {
                 current = null;
                 Log.i(TAG, "Clearing forwards");
                 DatabaseHelper.getInstance(context).deleteForward();
 
-            } else if (qName.equals("setting")) {
-                String key = attributes.getValue("key");
-                String type = attributes.getValue("type");
-                String value = attributes.getValue("value");
+            } else if (qName.equals(Serializer.Tag.SETTING)) {
+                String key = attributes.getValue(Serializer.Attribute.KEY);
+                String type = attributes.getValue(Serializer.Attribute.TYPE);
+                String value = attributes.getValue(Serializer.Attribute.VALUE);
 
                 if (current == null)
                     Log.e(TAG, "No current key=" + key);
@@ -1408,20 +1416,20 @@ public class ActivitySettings extends AppCompatActivity implements SharedPrefere
                     }
                 }
 
-            } else if (qName.equals("rule")) {
-                String pkg = attributes.getValue("pkg");
+            } else if (qName.equals(TAG_RULE)) {
+                String pkg = attributes.getValue(TAG_PKG);
 
-                String version = attributes.getValue("version");
-                String protocol = attributes.getValue("protocol");
+                String version = attributes.getValue(Column.VERSION.getValue());
+                String protocol = attributes.getValue(Column.PROTOCOL.getValue());
 
                 Packet packet = new Packet();
                 packet.version = (version == null ? 4 : Integer.parseInt(version));
                 packet.protocol = (protocol == null ? 6 /* TCP */ : Integer.parseInt(protocol));
-                packet.daddr = attributes.getValue("daddr");
-                packet.dport = Integer.parseInt(attributes.getValue("dport"));
-                packet.time = Long.parseLong(attributes.getValue("time"));
+                packet.daddr = attributes.getValue(Column.DADDR.getValue());
+                packet.dport = Integer.parseInt(attributes.getValue(Column.DPORT.getValue()));
+                packet.time = Long.parseLong(attributes.getValue(Column.TIME.getValue()));
 
-                int block = Integer.parseInt(attributes.getValue("block"));
+                int block = Integer.parseInt(attributes.getValue(Column.BLOCK.getValue()));
 
                 try {
                     packet.uid = getUid(pkg);
@@ -1430,12 +1438,12 @@ public class ActivitySettings extends AppCompatActivity implements SharedPrefere
                     Log.w(TAG, "Package not found pkg=" + pkg);
                 }
 
-            } else if (qName.equals("port")) {
-                String pkg = attributes.getValue("pkg");
-                int protocol = Integer.parseInt(attributes.getValue("protocol"));
-                int dport = Integer.parseInt(attributes.getValue("dport"));
-                String raddr = attributes.getValue("raddr");
-                int rport = Integer.parseInt(attributes.getValue("rport"));
+            } else if (qName.equals(Column.PORT.getValue())) {
+                String pkg = attributes.getValue(TAG_PKG);
+                int protocol = Integer.parseInt(attributes.getValue(Column.PROTOCOL.getValue()));
+                int dport = Integer.parseInt(attributes.getValue(Column.DPORT.getValue()));
+                String raddr = attributes.getValue(Column.RADDR.getValue());
+                int rport = Integer.parseInt(attributes.getValue(Column.RPORT.getValue()));
 
                 try {
                     int uid = getUid(pkg);

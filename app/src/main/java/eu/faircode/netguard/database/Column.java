@@ -35,6 +35,9 @@ public enum Column {
     SENT,
     RECEIVED,
     CONNECTIONS,
+
+    COUNT,
+    ID,
     ;
 
     public String getValue() {

@@ -41,10 +41,12 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.Locale;
 
-import eu.faircode.netguard.reason.Reason;
+import eu.faircode.netguard.Serializer.Serializer;
+import eu.faircode.netguard.database.Column;
+import eu.faircode.netguard.database.Table;
+import eu.faircode.netguard.format.Files;
 import eu.faircode.netguard.reason.SimpleReason;
 
 public class ActivityDns extends AppCompatActivity {
@@ -167,8 +169,8 @@ public class ActivityDns extends AppCompatActivity {
     private Intent getIntentExport() {
         Intent intent = new Intent(Intent.ACTION_CREATE_DOCUMENT);
         intent.addCategory(Intent.CATEGORY_OPENABLE);
-        intent.setType("*/*"); // text/xml
-        intent.putExtra(Intent.EXTRA_TITLE, "netguard_dns_" + new SimpleDateFormat("yyyyMMdd").format(new Date().getTime()) + ".xml");
+        intent.setType(Files.FILE_TEXT_XML); // text/xml
+        intent.putExtra(Intent.EXTRA_TITLE, Files.getFileName(this, Files.Format.Xml));
         return intent;
     }
 
@@ -210,19 +212,20 @@ public class ActivityDns extends AppCompatActivity {
 
     private void xmlExport(OutputStream out) throws IOException {
         XmlSerializer serializer = Xml.newSerializer();
-        serializer.setOutput(out, "UTF-8");
+        serializer.setOutput(out, Serializer.OUTPUT);
         serializer.startDocument(null, true);
-        serializer.setFeature("http://xmlpull.org/v1/doc/features.html#indent-output", true);
-        serializer.startTag(null, "netguard");
+        serializer.setFeature(Serializer.FEATURE, true);
+        String appName = getString(R.string.app_name);
+        serializer.startTag(null, appName);
 
         DateFormat df = new SimpleDateFormat("E, d MMM yyyy HH:mm:ss Z", Locale.US); // RFC 822
 
         try (Cursor cursor = DatabaseHelper.getInstance(this).getDns()) {
-            int colTime = cursor.getColumnIndex("time");
-            int colQName = cursor.getColumnIndex("qname");
-            int colAName = cursor.getColumnIndex("aname");
-            int colResource = cursor.getColumnIndex("resource");
-            int colTTL = cursor.getColumnIndex("ttl");
+            int colTime = cursor.getColumnIndex(Column.TIME.getValue());
+            int colQName = cursor.getColumnIndex(Column.QNAME.getValue());
+            int colAName = cursor.getColumnIndex(Column.ANAME.getValue());
+            int colResource = cursor.getColumnIndex(Column.RESOURCE.getValue());
+            int colTTL = cursor.getColumnIndex(Column.TTL.getValue());
             while (cursor.moveToNext()) {
                 long time = cursor.getLong(colTime);
                 String qname = cursor.getString(colQName);
@@ -230,17 +233,17 @@ public class ActivityDns extends AppCompatActivity {
                 String resource = cursor.getString(colResource);
                 int ttl = cursor.getInt(colTTL);
 
-                serializer.startTag(null, "dns");
-                serializer.attribute(null, "time", df.format(time));
-                serializer.attribute(null, "qname", qname);
-                serializer.attribute(null, "aname", aname);
-                serializer.attribute(null, "resource", resource);
-                serializer.attribute(null, "ttl", Integer.toString(ttl));
-                serializer.endTag(null, "dns");
+                serializer.startTag(null, Table.DNS.getValue());
+                serializer.attribute(null, Column.TIME.name(), df.format(time));
+                serializer.attribute(null, Column.QNAME.getValue(), qname);
+                serializer.attribute(null, Column.ANAME.getValue(), aname);
+                serializer.attribute(null, Column.RESOURCE.getValue(), resource);
+                serializer.attribute(null, Column.TTL.getValue(), Integer.toString(ttl));
+                serializer.endTag(null, Table.DNS.getValue());
             }
         }
 
-        serializer.endTag(null, "netguard");
+        serializer.endTag(null, appName);
         serializer.endDocument();
         serializer.flush();
     }

@@ -43,6 +43,9 @@ import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.text.SimpleDateFormat;
 
+import eu.faircode.netguard.database.Column;
+import eu.faircode.netguard.format.DateFormats;
+
 public class AdapterAccess extends CursorAdapter {
     private int colVersion;
     private int colProtocol;
@@ -62,17 +65,17 @@ public class AdapterAccess extends CursorAdapter {
 
     public AdapterAccess(Context context, Cursor cursor) {
         super(context, cursor, 0);
-        colVersion = cursor.getColumnIndex("version");
-        colProtocol = cursor.getColumnIndex("protocol");
-        colDaddr = cursor.getColumnIndex("daddr");
-        colDPort = cursor.getColumnIndex("dport");
-        colTime = cursor.getColumnIndex("time");
-        colAllowed = cursor.getColumnIndex("allowed");
-        colBlock = cursor.getColumnIndex("block");
-        colCount = cursor.getColumnIndex("count");
-        colSent = cursor.getColumnIndex("sent");
-        colReceived = cursor.getColumnIndex("received");
-        colConnections = cursor.getColumnIndex("connections");
+        colVersion = cursor.getColumnIndex(Column.VERSION.getValue());
+        colProtocol = cursor.getColumnIndex(Column.PROTOCOL.getValue());
+        colDaddr = cursor.getColumnIndex(Column.DADDR.getValue());
+        colDPort = cursor.getColumnIndex(Column.DPORT.getValue());
+        colTime = cursor.getColumnIndex(Column.TIME.getValue());
+        colAllowed = cursor.getColumnIndex(Column.ALLOWED.getValue());
+        colBlock = cursor.getColumnIndex(Column.BLOCK.getValue());
+        colCount = cursor.getColumnIndex(Column.COUNT.getValue());
+        colSent = cursor.getColumnIndex(Column.SENT.getValue());
+        colReceived = cursor.getColumnIndex(Column.RECEIVED.getValue());
+        colConnections = cursor.getColumnIndex(Column.CONNECTIONS.getValue());
 
         TypedArray ta = context.getTheme().obtainStyledAttributes(new int[]{android.R.attr.textColorSecondary});
         try {
@@ -117,7 +120,7 @@ public class AdapterAccess extends CursorAdapter {
         TextView tvTraffic = view.findViewById(R.id.tvTraffic);
 
         // Set values
-        tvTime.setText(new SimpleDateFormat("dd HH:mm").format(time));
+        tvTime.setText(DateFormats.DAY_TIME.format(time));
         if (block < 0)
             ivBlock.setImageDrawable(null);
         else {

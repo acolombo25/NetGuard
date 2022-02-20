@@ -40,13 +40,14 @@ import java.net.URLConnection;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import eu.faircode.netguard.format.Files;
 import eu.faircode.netguard.preference.Preferences;
 import eu.faircode.netguard.reason.Reason;
 import eu.faircode.netguard.reason.SimpleReason;
 
 public class ServiceExternal extends IntentService {
     private static final String TAG = "NetGuard.External";
-    private static final String ACTION_DOWNLOAD_HOSTS_FILE = "eu.faircode.netguard.DOWNLOAD_HOSTS_FILE";
+    private static final String ACTION_DOWNLOAD_HOSTS_FILE = "eu.faircode.netguard.DOWNLOAD_HOSTS_FILE"; /// id
 
     // am startservice -a eu.faircode.netguard.DOWNLOAD_HOSTS_FILE
 
@@ -66,11 +67,11 @@ public class ServiceExternal extends IntentService {
                 final SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
 
                 String hosts_url = prefs.getString(Preferences.HOSTS_URL.getKey(), Preferences.HOSTS_URL.getDefaultValue());
-                if ("https://www.netguard.me/hosts".equals(hosts_url))
+                if (Files.URL_HOSTS.equals(hosts_url))
                     hosts_url = BuildConfig.HOSTS_FILE_URI;
 
-                File tmp = new File(getFilesDir(), "hosts.tmp");
-                File hosts = new File(getFilesDir(), "hosts.txt");
+                File tmp = new File(getFilesDir(), Files.FILE_HOSTS_TMP);
+                File hosts = new File(getFilesDir(), Files.FILE_HOSTS);
 
                 InputStream in = null;
                 OutputStream out = null;
@@ -105,7 +106,7 @@ public class ServiceExternal extends IntentService {
                         hosts.delete();
                     tmp.renameTo(hosts);
 
-                    String last = SimpleDateFormat.getDateTimeInstance().format(new Date().getTime());
+                    String last = SimpleDateFormat.getDateTimeInstance().format(new Date());
                     prefs.edit().putString(Preferences.HOSTS_LAST_DOWNLOAD.getKey(), last).apply();
 
                     ServiceSinkhole.reload(SimpleReason.HostsFileDownload, this, false);

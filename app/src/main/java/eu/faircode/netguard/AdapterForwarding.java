@@ -28,6 +28,8 @@ import android.view.ViewGroup;
 import android.widget.CursorAdapter;
 import android.widget.TextView;
 
+import eu.faircode.netguard.database.Column;
+
 public class AdapterForwarding extends CursorAdapter {
     private int colProtocol;
     private int colDPort;
@@ -37,11 +39,11 @@ public class AdapterForwarding extends CursorAdapter {
 
     public AdapterForwarding(Context context, Cursor cursor) {
         super(context, cursor, 0);
-        colProtocol = cursor.getColumnIndex("protocol");
-        colDPort = cursor.getColumnIndex("dport");
-        colRAddr = cursor.getColumnIndex("raddr");
-        colRPort = cursor.getColumnIndex("rport");
-        colRUid = cursor.getColumnIndex("ruid");
+        colProtocol = cursor.getColumnIndex(Column.PROTOCOL.getValue());
+        colDPort = cursor.getColumnIndex(Column.DPORT.getValue());
+        colRAddr = cursor.getColumnIndex(Column.RADDR.getValue());
+        colRPort = cursor.getColumnIndex(Column.RPORT.getValue());
+        colRUid = cursor.getColumnIndex(Column.RUID.getValue());
     }
 
     @Override

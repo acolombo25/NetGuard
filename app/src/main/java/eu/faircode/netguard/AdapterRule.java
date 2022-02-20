@@ -19,6 +19,7 @@ package eu.faircode.netguard;
     Copyright 2015-2019 by Marcel Bokhorst (M66B)
 */
 
+import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
 import android.content.ClipData;
 import android.content.ClipboardManager;
@@ -77,6 +78,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import eu.faircode.netguard.database.Column;
 import eu.faircode.netguard.preference.Preferences;
 import eu.faircode.netguard.reason.Reason;
 import eu.faircode.netguard.reason.SimpleReason;
@@ -704,16 +706,17 @@ public class AdapterRule extends RecyclerView.Adapter<AdapterRule.ViewHolder> im
                     DatabaseHelper.getInstance(context).getAccess(rule.uid));
             holder.lvAccess.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
+                @SuppressLint("Range")
                 public void onItemClick(AdapterView<?> parent, View view, final int bposition, long bid) {
                     PackageManager pm = context.getPackageManager();
                     Cursor cursor = (Cursor) badapter.getItem(bposition);
-                    final long id = cursor.getLong(cursor.getColumnIndex("ID"));
-                    final int version = cursor.getInt(cursor.getColumnIndex("version"));
-                    final int protocol = cursor.getInt(cursor.getColumnIndex("protocol"));
-                    final String daddr = cursor.getString(cursor.getColumnIndex("daddr"));
-                    final int dport = cursor.getInt(cursor.getColumnIndex("dport"));
-                    long time = cursor.getLong(cursor.getColumnIndex("time"));
-                    int block = cursor.getInt(cursor.getColumnIndex("block"));
+                    final long id = cursor.getLong(cursor.getColumnIndex(Column.ID.getValue()));
+                    final int version = cursor.getInt(cursor.getColumnIndex(Column.VERSION.getValue()));
+                    final int protocol = cursor.getInt(cursor.getColumnIndex(Column.PROTOCOL.getValue()));
+                    final String daddr = cursor.getString(cursor.getColumnIndex(Column.DADDR.getValue()));
+                    final int dport = cursor.getInt(cursor.getColumnIndex(Column.DPORT.getValue()));
+                    long time = cursor.getLong(cursor.getColumnIndex(Column.TIME.getValue()));
+                    int block = cursor.getInt(cursor.getColumnIndex(Column.BLOCK.getValue()));
 
                     PopupMenu popup = new PopupMenu(context, anchor);
                     popup.inflate(R.menu.access);
@@ -799,7 +802,7 @@ public class AdapterRule extends RecyclerView.Adapter<AdapterRule.ViewHolder> im
 
                                 case R.id.menu_copy:
                                     ClipboardManager clipboard = (ClipboardManager) context.getSystemService(Context.CLIPBOARD_SERVICE);
-                                    ClipData clip = ClipData.newPlainText("netguard", daddr);
+                                    ClipData clip = ClipData.newPlainText(context.getString(R.string.app_name), daddr);
                                     clipboard.setPrimaryClip(clip);
                                     return true;
                             }
@@ -1027,7 +1030,7 @@ public class AdapterRule extends RecyclerView.Adapter<AdapterRule.ViewHolder> im
     @Override
     public long getItemId(int position) {
         Rule rule = listFiltered.get(position);
-        return rule.packageName.hashCode() * 100000L + rule.uid;
+        return rule.packageName.hashCode() * Uid.USER_FACTOR + rule.uid;
     }
 
     @Override

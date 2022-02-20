@@ -10,6 +10,7 @@ public enum Uid {
     ;
 
     public static final int USER_FACTOR = 100000;
+    public static final int FACTOR = 10000;
 
     private final int code;
     private final String packageName;

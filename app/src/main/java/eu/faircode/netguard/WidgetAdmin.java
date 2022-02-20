@@ -46,6 +46,8 @@ public class WidgetAdmin extends ReceiverAutostart {
     public static final String INTENT_LOCKDOWN_ON = "eu.faircode.netguard.LOCKDOWN_ON";
     public static final String INTENT_LOCKDOWN_OFF = "eu.faircode.netguard.LOCKDOWN_OFF";
 
+    private static final int MILLIS_VIBRATION = 50;
+
     @Override
     public void onReceive(Context context, Intent intent) {
         super.onReceive(context, intent);
@@ -67,9 +69,9 @@ public class WidgetAdmin extends ReceiverAutostart {
         Vibrator vs = (Vibrator) context.getSystemService(Context.VIBRATOR_SERVICE);
         if (vs.hasVibrator())
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O)
-                vs.vibrate(VibrationEffect.createOneShot(50, VibrationEffect.DEFAULT_AMPLITUDE));
+                vs.vibrate(VibrationEffect.createOneShot(MILLIS_VIBRATION, VibrationEffect.DEFAULT_AMPLITUDE));
             else
-                vs.vibrate(50);
+                vs.vibrate(MILLIS_VIBRATION);
 
         try {
             if (INTENT_ON.equals(intent.getAction()) || INTENT_OFF.equals(intent.getAction())) {

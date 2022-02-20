@@ -82,17 +82,19 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.Date;
 import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import eu.faircode.netguard.database.Column;
 import eu.faircode.netguard.preference.Preferences;
 
 public class Util {
     private static final String TAG = "NetGuard.Util";
-
+    public static final String LIBRARY = "netguard";
     // Roam like at home
     private static final List<String> listEU = Arrays.asList(
             "AT", // Austria
@@ -136,7 +138,7 @@ public class Util {
 
     static {
         try {
-            System.loadLibrary("netguard");
+            System.loadLibrary(Util.LIBRARY);
         } catch (UnsatisfiedLinkError ignored) {
             System.exit(1);
         }
@@ -268,7 +270,7 @@ public class Util {
             case TelephonyManager.NETWORK_TYPE_GPRS:
             case TelephonyManager.NETWORK_TYPE_IDEN:
             case TelephonyManager.NETWORK_TYPE_GSM:
-                return "2G";
+                return Generation.Gen_2G.getValue();
 
             case TelephonyManager.NETWORK_TYPE_EHRPD:
             case TelephonyManager.NETWORK_TYPE_EVDO_0:
@@ -280,14 +282,14 @@ public class Util {
             case TelephonyManager.NETWORK_TYPE_HSUPA:
             case TelephonyManager.NETWORK_TYPE_UMTS:
             case TelephonyManager.NETWORK_TYPE_TD_SCDMA:
-                return "3G";
+                return Generation.Gen_3G.getValue();
 
             case TelephonyManager.NETWORK_TYPE_LTE:
             case TelephonyManager.NETWORK_TYPE_IWLAN:
-                return "4G";
+                return Generation.Gen_4G.getValue();
 
             default:
-                return "?G";
+                return Generation.Gen_Unknown.getValue();
         }
     }
 
@@ -376,7 +378,7 @@ public class Util {
 
     public static boolean hasInternet(String packageName, Context context) {
         PackageManager pm = context.getPackageManager();
-        return (pm.checkPermission("android.permission.INTERNET", packageName) == PackageManager.PERMISSION_GRANTED);
+        return (pm.checkPermission(Manifest.permission.INTERNET, packageName) == PackageManager.PERMISSION_GRANTED);
     }
 
     public static boolean hasInternet(int uid, Context context) {
@@ -568,33 +570,44 @@ public class Util {
         return BitmapFactory.decodeResource(resources, resourceId, options);
     }
 
+    public static final int PROTOCOL_HOPO = 0;
+    public static final int PROTOCOL_IGMP = 2;
+
+    public static final int PROTOCOL_ICMPv4 = 1;
+    public static final int PROTOCOL_ICMPv6 = 58;
+    public static final int PROTOCOL_TCP = 6;
+    public static final int PROTOCOL_UDP = 17;
+
+    public static final int PROTOCOL_ESP = 50;
+    public static final int PROTOCOL_DPORT = 53;
+
     public static String getProtocolName(int protocol, int version, boolean brief) {
         // https://en.wikipedia.org/wiki/List_of_IP_protocol_numbers
         String p = null;
         String b = null;
         switch (protocol) {
-            case 0:
+            case PROTOCOL_HOPO:
                 p = "HOPO";
                 b = "H";
                 break;
-            case 2:
+            case PROTOCOL_IGMP:
                 p = "IGMP";
                 b = "G";
                 break;
-            case 1:
-            case 58:
+            case PROTOCOL_ICMPv4:
+            case PROTOCOL_ICMPv6:
                 p = "ICMP";
                 b = "I";
                 break;
-            case 6:
+            case PROTOCOL_TCP:
                 p = "TCP";
                 b = "T";
                 break;
-            case 17:
+            case PROTOCOL_UDP:
                 p = "UDP";
                 b = "U";
                 break;
-            case 50:
+            case PROTOCOL_ESP:
                 p = "ESP";
                 b = "E";
                 break;
@@ -864,7 +877,7 @@ public class Util {
 
                 // Get version info
                 String version = getSelfVersionName(context);
-                sb.append(String.format("NetGuard: %s/%d\r\n", version, getSelfVersionCode(context)));
+                sb.append(String.format(context.getString(R.string.app_name)+": %s/%d\r\n", version, getSelfVersionCode(context)));
                 sb.append(String.format("Android: %s (SDK %d)\r\n", Build.VERSION.RELEASE, Build.VERSION.SDK_INT));
                 sb.append("\r\n");
 
@@ -994,20 +1007,20 @@ public class Util {
 
         try (Cursor cursor = DatabaseHelper.getInstance(context).getLog(true, true, true, true, true)) {
 
-            int colTime = cursor.getColumnIndex("time");
-            int colVersion = cursor.getColumnIndex("version");
-            int colProtocol = cursor.getColumnIndex("protocol");
-            int colFlags = cursor.getColumnIndex("flags");
-            int colSAddr = cursor.getColumnIndex("saddr");
-            int colSPort = cursor.getColumnIndex("sport");
-            int colDAddr = cursor.getColumnIndex("daddr");
-            int colDPort = cursor.getColumnIndex("dport");
-            int colDName = cursor.getColumnIndex("dname");
-            int colUid = cursor.getColumnIndex("uid");
-            int colData = cursor.getColumnIndex("data");
-            int colAllowed = cursor.getColumnIndex("allowed");
-            int colConnection = cursor.getColumnIndex("connection");
-            int colInteractive = cursor.getColumnIndex("interactive");
+            int colTime = cursor.getColumnIndex(Column.TIME.getValue());
+            int colVersion = cursor.getColumnIndex(Column.VERSION.getValue());
+            int colProtocol = cursor.getColumnIndex(Column.PROTOCOL.getValue());
+            int colFlags = cursor.getColumnIndex(Column.FLAGS.getValue());
+            int colSAddr = cursor.getColumnIndex(Column.SADDR.getValue());
+            int colSPort = cursor.getColumnIndex(Column.SPORT.getValue());
+            int colDAddr = cursor.getColumnIndex(Column.DADDR.getValue());
+            int colDPort = cursor.getColumnIndex(Column.DPORT.getValue());
+            int colDName = cursor.getColumnIndex(Column.DNAME.getValue());
+            int colUid = cursor.getColumnIndex(Column.UID.getValue());
+            int colData = cursor.getColumnIndex(Column.DATA.getValue());
+            int colAllowed = cursor.getColumnIndex(Column.ALLOWED.getValue());
+            int colConnection = cursor.getColumnIndex(Column.CONNECTION.getValue());
+            int colInteractive = cursor.getColumnIndex(Column.INTERACTIVE.getValue());
 
             DateFormat format = SimpleDateFormat.getDateTimeInstance();
 
