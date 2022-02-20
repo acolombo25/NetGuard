@@ -30,8 +30,6 @@ import android.os.IBinder;
 import android.os.RemoteException;
 import android.util.Log;
 
-import androidx.preference.PreferenceManager;
-
 import com.android.vending.billing.IInAppBillingService;
 
 import org.json.JSONException;
@@ -39,8 +37,6 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import eu.faircode.netguard.preference.Preferences;
 
 public class IAB implements ServiceConnection {
     private static final String TAG = "NetGuard.IAB";

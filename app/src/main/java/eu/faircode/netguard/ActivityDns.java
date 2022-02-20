@@ -43,11 +43,11 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Locale;
 
-import eu.faircode.netguard.serializer.Serializer;
 import eu.faircode.netguard.database.Column;
 import eu.faircode.netguard.database.Table;
 import eu.faircode.netguard.format.Files;
 import eu.faircode.netguard.reason.SimpleReason;
+import eu.faircode.netguard.serializer.Serializer;
 
 public class ActivityDns extends AppCompatActivity {
     private static final String TAG = "NetGuard.DNS";

@@ -94,7 +94,6 @@ public class AdapterRule extends RecyclerView.Adapter<AdapterRule.ViewHolder> im
     private final int colorOn;
     private final int colorOff;
     private final int colorGrayed;
-    private final int iconSize;
     private boolean wifiActive = true;
     private boolean otherActive = true;
     private boolean live = true;
@@ -295,7 +294,6 @@ public class AdapterRule extends RecyclerView.Adapter<AdapterRule.ViewHolder> im
         TypedValue typedValue = new TypedValue();
         context.getTheme().resolveAttribute(android.R.attr.listPreferredItemHeight, typedValue, true);
         int height = TypedValue.complexToDimensionPixelSize(typedValue.data, context.getResources().getDisplayMetrics());
-        this.iconSize = Math.round(height * context.getResources().getDisplayMetrics().density + 0.5f);
 
         setHasStableIds(true);
     }
@@ -896,9 +894,6 @@ public class AdapterRule extends RecyclerView.Adapter<AdapterRule.ViewHolder> im
     @Override
     public void onViewRecycled(@NonNull ViewHolder holder) {
         super.onViewRecycled(holder);
-
-        //Context context = holder.itemView.getContext();
-        //GlideApp.with(context).clear(holder.ivIcon);
 
         CursorAdapter adapter = (CursorAdapter) holder.lvAccess.getAdapter();
         if (adapter != null) {

@@ -94,13 +94,13 @@ import java.util.Set;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.parsers.SAXParserFactory;
 
-import eu.faircode.netguard.serializer.Serializer;
-import eu.faircode.netguard.serializer.SerializerType;
 import eu.faircode.netguard.database.Column;
 import eu.faircode.netguard.format.Files;
 import eu.faircode.netguard.preference.Preferences;
 import eu.faircode.netguard.reason.Changed;
 import eu.faircode.netguard.reason.SimpleReason;
+import eu.faircode.netguard.serializer.Serializer;
+import eu.faircode.netguard.serializer.SerializerType;
 
 public class ActivitySettings extends AppCompatActivity implements SharedPreferences.OnSharedPreferenceChangeListener {
     private static final String TAG = "NetGuard.Settings";
