@@ -92,6 +92,7 @@ public class ServiceExternal extends IntentService {
                     out = new FileOutputStream(tmp);
 
                     long size = 0;
+                    //noinspection CStyleArrayDeclaration
                     byte buffer[] = new byte[4096];
                     int bytes;
                     while ((bytes = in.read(buffer)) != -1) {

@@ -24,12 +24,8 @@ import android.content.SharedPreferences;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
-import android.graphics.drawable.Drawable;
-import android.net.Uri;
 import android.os.AsyncTask;
-import android.os.Build;
 import android.text.TextUtils;
-import android.util.Log;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -38,16 +34,15 @@ import android.widget.CursorAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import androidx.core.graphics.drawable.DrawableCompat;
 import androidx.core.view.ViewCompat;
 import androidx.preference.PreferenceManager;
 
 import java.net.InetAddress;
 import java.net.UnknownHostException;
-import java.text.SimpleDateFormat;
 import java.util.List;
 
 import eu.faircode.netguard.database.Column;
+import eu.faircode.netguard.format.DateFormats;
 import eu.faircode.netguard.preference.Preferences;
 
 public class AdapterLog extends CursorAdapter {
@@ -69,9 +64,6 @@ public class AdapterLog extends CursorAdapter {
     private final int colAllowed;
     private final int colConnection;
     private final int colInteractive;
-    private final int colorOn;
-    private final int colorOff;
-    private final int iconSize;
     private InetAddress dns1 = null;
     private InetAddress dns2 = null;
     private InetAddress vpn4 = null;
@@ -98,11 +90,7 @@ public class AdapterLog extends CursorAdapter {
 
         TypedValue tv = new TypedValue();
         context.getTheme().resolveAttribute(R.attr.colorOn, tv, true);
-        colorOn = tv.data;
         context.getTheme().resolveAttribute(R.attr.colorOff, tv, true);
-        colorOff = tv.data;
-
-        iconSize = Util.dips2pixels(24, context);
 
         try {
             List<InetAddress> lstDns = ServiceSinkhole.getDns(context);
@@ -163,7 +151,7 @@ public class AdapterLog extends CursorAdapter {
         ImageView ivInteractive = view.findViewById(R.id.ivInteractive);
 
         // Show time
-        tvTime.setText(new SimpleDateFormat("HH:mm:ss").format(time));
+        tvTime.setText(DateFormats.TIME.format(time));
 
         // Show connection type
         if (connection <= 0)
