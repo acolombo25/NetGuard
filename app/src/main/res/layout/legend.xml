@@ -1,36 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent"
-              android:orientation="vertical"
-              android:paddingBottom="40dp"
-              android:paddingEnd="16dp"
-              android:paddingLeft="16dp"
-              android:paddingRight="16dp"
-              android:paddingStart="16dp"
-              android:paddingTop="16dp">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:src="@drawable/ic_security_color_24dp"/>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:layout_marginLeft="8dp"
-            android:layout_marginStart="8dp"
-            android:text="@string/menu_legend"
-            android:textAppearance="@style/TextLarge"
-            android:textStyle="bold"/>
-    </LinearLayout>
+    <include layout="@layout/title_dialog" />
 
     <ScrollView
         android:layout_width="match_parent"
@@ -49,19 +25,18 @@
                 android:orientation="horizontal">
 
                 <ImageView
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
+                    android:layout_width="@dimen/icon_legend"
+                    android:layout_height="@dimen/icon_legend"
                     android:layout_gravity="center_vertical"
                     android:layout_margin="4dp"
-                    android:background="?attr/colorPrimary"
-                    android:src="@drawable/ic_security_white_24dp_60"/>
+                    android:alpha=".5"
+                    android:src="@drawable/ic_security"/>
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
-                    android:layout_marginLeft="8dp"
-                    android:layout_marginStart="8dp"
+                    android:layout_marginHorizontal="8dp"
                     android:text="@string/msg_inactive"
                     android:textAppearance="@style/TextMedium"/>
             </LinearLayout>
@@ -71,19 +46,18 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
-                <ImageView
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
+                <ProgressBar
+                    android:layout_width="@dimen/icon_legend"
+                    android:layout_height="@dimen/icon_legend"
                     android:layout_gravity="center_vertical"
                     android:layout_margin="4dp"
-                    android:src="?attr/iconQueue"/>
+                    android:indeterminate="true"/>
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
-                    android:layout_marginLeft="8dp"
-                    android:layout_marginStart="8dp"
+                    android:layout_marginHorizontal="8dp"
                     android:text="@string/msg_queue"
                     android:textAppearance="@style/TextMedium"/>
             </LinearLayout>
@@ -94,18 +68,17 @@
                 android:orientation="horizontal">
 
                 <ImageView
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
+                    android:layout_width="@dimen/icon_legend"
+                    android:layout_height="@dimen/icon_legend"
                     android:layout_gravity="center_vertical"
                     android:layout_margin="4dp"
-                    android:src="?attr/iconMetered"/>
+                    android:src="@drawable/ic_attach_money"/>
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
-                    android:layout_marginLeft="8dp"
-                    android:layout_marginStart="8dp"
+                    android:layout_marginHorizontal="8dp"
                     android:text="@string/msg_metered"
                     android:textAppearance="@style/TextMedium"/>
             </LinearLayout>
@@ -117,18 +90,18 @@
 
                 <ImageView
                     android:id="@+id/ivWifiOn"
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
+                    android:layout_width="@dimen/icon_legend"
+                    android:layout_height="@dimen/icon_legend"
                     android:layout_gravity="center_vertical"
                     android:layout_margin="4dp"
-                    android:src="@drawable/wifi_on"/>
+                    app:tint="?attr/colorOn"
+                    android:src="@drawable/ic_signal_wifi_4_bar"/>
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
-                    android:layout_marginLeft="8dp"
-                    android:layout_marginStart="8dp"
+                    android:layout_marginHorizontal="8dp"
                     android:text="@string/title_unmetered_allowed"
                     android:textAppearance="@style/TextMedium"/>
             </LinearLayout>
@@ -140,18 +113,18 @@
 
                 <ImageView
                     android:id="@+id/ivLockdownOn"
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
+                    android:layout_width="@dimen/icon_legend"
+                    android:layout_height="@dimen/icon_legend"
                     android:layout_gravity="center_vertical"
                     android:layout_margin="4dp"
-                    android:src="@drawable/lockdown_on"/>
+                    app:tint="?attr/colorOff"
+                    android:src="@drawable/ic_outline_lock"/>
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
-                    android:layout_marginLeft="8dp"
-                    android:layout_marginStart="8dp"
+                    android:layout_marginHorizontal="8dp"
                     android:text="@string/title_lockdown_enabled"
                     android:textAppearance="@style/TextMedium"/>
             </LinearLayout>
@@ -163,18 +136,18 @@
 
                 <ImageView
                     android:id="@+id/ivWifiOff"
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
+                    android:layout_width="@dimen/icon_legend"
+                    android:layout_height="@dimen/icon_legend"
                     android:layout_gravity="center_vertical"
                     android:layout_margin="4dp"
-                    android:src="@drawable/wifi_off"/>
+                    app:tint="?attr/colorOff"
+                    android:src="@drawable/ic_signal_wifi_off"/>
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
-                    android:layout_marginLeft="8dp"
-                    android:layout_marginStart="8dp"
+                    android:layout_marginHorizontal="8dp"
                     android:text="@string/title_unmetered_blocked"
                     android:textAppearance="@style/TextMedium"/>
             </LinearLayout>
@@ -185,18 +158,17 @@
                 android:orientation="horizontal">
 
                 <ImageView
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
+                    android:layout_width="@dimen/icon_legend"
+                    android:layout_height="@dimen/icon_legend"
                     android:layout_gravity="center_vertical"
                     android:layout_margin="4dp"
-                    android:src="@drawable/wifi_off_disabled"/>
+                    android:src="@drawable/ic_signal_wifi_off"/>
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
-                    android:layout_marginLeft="8dp"
-                    android:layout_marginStart="8dp"
+                    android:layout_marginHorizontal="8dp"
                     android:text="@string/title_unmetered_disabled"
                     android:textAppearance="@style/TextMedium"/>
             </LinearLayout>
@@ -208,18 +180,18 @@
 
                 <ImageView
                     android:id="@+id/ivOtherOn"
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
+                    android:layout_width="@dimen/icon_legend"
+                    android:layout_height="@dimen/icon_legend"
                     android:layout_gravity="center_vertical"
                     android:layout_margin="4dp"
-                    android:src="@drawable/other_on"/>
+                    app:tint="?attr/colorOn"
+                    android:src="@drawable/ic_signal_cellular_4_bar"/>
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
-                    android:layout_marginLeft="8dp"
-                    android:layout_marginStart="8dp"
+                    android:layout_marginHorizontal="8dp"
                     android:text="@string/title_metered_allowed"
                     android:textAppearance="@style/TextMedium"/>
             </LinearLayout>
@@ -231,18 +203,18 @@
 
                 <ImageView
                     android:id="@+id/ivOtherOff"
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
+                    android:layout_width="@dimen/icon_legend"
+                    android:layout_height="@dimen/icon_legend"
                     android:layout_gravity="center_vertical"
                     android:layout_margin="4dp"
-                    android:src="@drawable/other_off"/>
+                    app:tint="?attr/colorOff"
+                    android:src="@drawable/ic_signal_cellular_off"/>
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
-                    android:layout_marginLeft="8dp"
-                    android:layout_marginStart="8dp"
+                    android:layout_marginHorizontal="8dp"
                     android:text="@string/title_metered_blocked"
                     android:textAppearance="@style/TextMedium"/>
             </LinearLayout>
@@ -253,18 +225,17 @@
                 android:orientation="horizontal">
 
                 <ImageView
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
+                    android:layout_width="@dimen/icon_legend"
+                    android:layout_height="@dimen/icon_legend"
                     android:layout_gravity="center_vertical"
                     android:layout_margin="4dp"
-                    android:src="@drawable/other_off_disabled"/>
+                    android:src="@drawable/ic_signal_cellular_off"/>
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
-                    android:layout_marginLeft="8dp"
-                    android:layout_marginStart="8dp"
+                    android:layout_marginHorizontal="8dp"
                     android:text="@string/title_metered_disabled"
                     android:textAppearance="@style/TextMedium"/>
             </LinearLayout>
@@ -276,18 +247,18 @@
 
                 <ImageView
                     android:id="@+id/ivScreenOn"
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
+                    android:layout_width="@dimen/icon_legend"
+                    android:layout_height="@dimen/icon_legend"
                     android:layout_gravity="center_vertical"
                     android:layout_margin="4dp"
-                    android:src="@drawable/screen_on"/>
+                    app:tint="?attr/colorOn"
+                    android:src="@drawable/ic_perm_identity"/>
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
-                    android:layout_marginLeft="8dp"
-                    android:layout_marginStart="8dp"
+                    android:layout_marginHorizontal="8dp"
                     android:text="@string/title_interactive_allowed"
                     android:textAppearance="@style/TextMedium"/>
             </LinearLayout>
@@ -310,8 +281,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
-                    android:layout_marginLeft="8dp"
-                    android:layout_marginStart="8dp"
+                    android:layout_marginHorizontal="8dp"
                     android:text="@string/title_roaming_blocked"
                     android:textAppearance="@style/TextMedium"/>
             </LinearLayout>
@@ -323,18 +293,18 @@
 
                 <ImageView
                     android:id="@+id/ivHostAllowed"
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
+                    android:layout_width="@dimen/icon_legend"
+                    android:layout_height="@dimen/icon_legend"
                     android:layout_gravity="center_vertical"
                     android:layout_margin="4dp"
-                    android:src="@drawable/host_allowed"/>
+                    app:tint="?attr/colorOn"
+                    android:src="@drawable/ic_check"/>
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
-                    android:layout_marginLeft="8dp"
-                    android:layout_marginStart="8dp"
+                    android:layout_marginHorizontal="8dp"
                     android:text="@string/title_host_allowed"
                     android:textAppearance="@style/TextMedium"/>
             </LinearLayout>
@@ -346,18 +316,18 @@
 
                 <ImageView
                     android:id="@+id/ivHostBlocked"
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
+                    android:layout_width="@dimen/icon_legend"
+                    android:layout_height="@dimen/icon_legend"
                     android:layout_gravity="center_vertical"
                     android:layout_margin="4dp"
-                    android:src="@drawable/host_blocked"/>
+                    app:tint="?attr/colorOff"
+                    android:src="@drawable/ic_close"/>
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
-                    android:layout_marginLeft="8dp"
-                    android:layout_marginStart="8dp"
+                    android:layout_marginHorizontal="8dp"
                     android:text="@string/title_host_blocked"
                     android:textAppearance="@style/TextMedium"/>
             </LinearLayout>

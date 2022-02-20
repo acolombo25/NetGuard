@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:paddingTop="8dp"
     android:paddingEnd="4dp"
@@ -23,11 +24,11 @@
 
             <ImageView
                 android:id="@+id/ivExpander"
-                android:layout_width="32dp"
-                android:layout_height="32dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical|center_horizontal"
                 android:alpha="0.5"
-                android:src="?attr/expander" />
+                android:src="@drawable/expander" />
 
             <ImageView
                 android:id="@+id/ivIcon"
@@ -69,7 +70,7 @@
                 android:layout_width="24dp"
                 android:layout_height="24dp"
                 android:layout_centerInParent="true"
-                android:src="@drawable/lockdown" />
+                android:src="@drawable/ic_outline_lock" />
         </RelativeLayout>
 
         <LinearLayout
@@ -88,7 +89,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerInParent="true"
-                    android:button="@drawable/wifi" />
+                    android:button="@drawable/btn_wifi"
+                    android:buttonTint="@color/selector_check" />
             </RelativeLayout>
 
             <LinearLayout
@@ -102,7 +104,7 @@
                     android:layout_width="16dp"
                     android:layout_height="16dp"
                     android:layout_gravity="center_horizontal"
-                    android:src="@drawable/screen" />
+                    android:src="@drawable/ic_perm_identity" />
 
                 <View
                     android:layout_width="16dp"
@@ -128,7 +130,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerInParent="true"
-                    android:button="@drawable/other" />
+                    android:button="@drawable/btn_cellular"
+                    android:buttonTint="@color/selector_check" />
             </RelativeLayout>
 
             <LinearLayout
@@ -142,7 +145,7 @@
                     android:layout_width="16dp"
                     android:layout_height="16dp"
                     android:layout_gravity="center_horizontal"
-                    android:src="@drawable/screen" />
+                    android:src="@drawable/ic_perm_identity" />
 
                 <TextView
                     android:id="@+id/tvRoaming"
@@ -260,7 +263,7 @@
                 android:layout_gravity="center_vertical"
                 android:layout_marginEnd="8dp"
                 android:layout_marginRight="8dp"
-                android:src="?attr/iconDatasaver"
+                android:src="@drawable/ic_perm_data_setting"
                 android:visibility="gone" />
 
             <ImageButton
@@ -270,14 +273,14 @@
                 android:layout_gravity="center_vertical"
                 android:layout_marginEnd="8dp"
                 android:layout_marginRight="8dp"
-                android:src="?attr/iconSettings" />
+                android:src="@drawable/ic_settings" />
 
             <ImageButton
                 android:id="@+id/ibLaunch"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
-                android:src="?attr/iconLaunch" />
+                android:src="@drawable/ic_launch" />
         </LinearLayout>
 
         <CheckBox
@@ -306,7 +309,7 @@
                 android:layout_width="16dp"
                 android:layout_height="16dp"
                 android:layout_gravity="center_vertical"
-                android:src="@drawable/screen_on" />
+                android:src="@drawable/ic_perm_identity" />
 
             <CheckBox
                 android:id="@+id/cbScreenWifi"
@@ -328,7 +331,7 @@
                 android:layout_width="16dp"
                 android:layout_height="16dp"
                 android:layout_gravity="center_vertical"
-                android:src="@drawable/screen_on" />
+                android:src="@drawable/ic_perm_identity" />
 
             <CheckBox
                 android:id="@+id/cbScreenOther"
@@ -373,7 +376,7 @@
                 android:layout_width="16dp"
                 android:layout_height="16dp"
                 android:layout_gravity="center_vertical"
-                android:src="@drawable/lockdown_off" />
+                app:srcCompat="@drawable/ic_outline_lock" />
 
             <CheckBox
                 android:id="@+id/cbLockdown"
@@ -388,7 +391,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
-            android:src="?attr/iconDelete" />
+            android:src="@drawable/ic_delete" />
 
         <LinearLayout
             android:id="@+id/llFilter"
@@ -417,7 +420,7 @@
                     android:layout_gravity="center_vertical"
                     android:layout_marginEnd="8dp"
                     android:layout_marginRight="8dp"
-                    android:src="?attr/iconPause" />
+                    android:src="@drawable/ic_pause" />
             </LinearLayout>
 
             <LinearLayout
@@ -467,7 +470,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:layout_marginTop="4dp"
-                android:src="?attr/iconDelete" />
+                android:src="@drawable/ic_delete" />
 
             <TextView
                 android:layout_width="wrap_content"

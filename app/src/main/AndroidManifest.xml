@@ -185,7 +185,7 @@
         <service
             android:name=".ServiceTileMain"
             android:exported="true"
-            android:icon="@drawable/ic_security_white_24dp"
+            android:icon="@drawable/ic_security"
             android:label="@string/app_name"
             android:permission="android.permission.BIND_QUICK_SETTINGS_TILE">
             <intent-filter>
@@ -196,7 +196,7 @@
         <service
             android:name=".ServiceTileGraph"
             android:exported="true"
-            android:icon="@drawable/ic_equalizer_white_24dp"
+            android:icon="@drawable/ic_equalizer"
             android:label="@string/setting_stats_category"
             android:permission="android.permission.BIND_QUICK_SETTINGS_TILE">
             <intent-filter>
@@ -207,7 +207,7 @@
         <service
             android:name=".ServiceTileFilter"
             android:exported="true"
-            android:icon="@drawable/ic_filter_list_white_24dp"
+            android:icon="@drawable/ic_filter_list"
             android:label="@string/setting_filter"
             android:permission="android.permission.BIND_QUICK_SETTINGS_TILE">
             <intent-filter>
@@ -218,7 +218,7 @@
         <service
             android:name=".ServiceTileLockdown"
             android:exported="true"
-            android:icon="@drawable/ic_lock_outline_white_24dp"
+            android:icon="@drawable/ic_outline_lock"
             android:label="@string/setting_lockdown"
             android:permission="android.permission.BIND_QUICK_SETTINGS_TILE">
             <intent-filter>

@@ -524,21 +524,22 @@ public class Util {
     public static void setTheme(Context context) {
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
         boolean dark = prefs.getBoolean(Preferences.DARK.getKey(), false);
+        AppCompatDelegate.setDefaultNightMode(dark? AppCompatDelegate.MODE_NIGHT_YES : AppCompatDelegate.MODE_NIGHT_NO);
         String theme = prefs.getString(Preferences.THEME.getKey(), Preferences.THEME.getDefaultValue().getValue());
         if (theme.equals(Theme.Teal.getValue()))
-            context.setTheme(dark ? R.style.AppThemeTealDark : R.style.AppThemeTeal);
+            context.setTheme(R.style.AppThemeTeal);
         else if (theme.equals(Theme.Blue.getValue()))
-            context.setTheme(dark ? R.style.AppThemeBlueDark : R.style.AppThemeBlue);
+            context.setTheme(R.style.AppThemeBlue);
         else if (theme.equals(Theme.Purple.getValue()))
-            context.setTheme(dark ? R.style.AppThemePurpleDark : R.style.AppThemePurple);
+            context.setTheme(R.style.AppThemePurple);
         else if (theme.equals(Theme.Amber.getValue()))
-            context.setTheme(dark ? R.style.AppThemeAmberDark : R.style.AppThemeAmber);
+            context.setTheme(R.style.AppThemeAmber);
         else if (theme.equals(Theme.Orange.getValue()))
-            context.setTheme(dark ? R.style.AppThemeOrangeDark : R.style.AppThemeOrange);
+            context.setTheme(R.style.AppThemeOrange);
         else if (theme.equals(Theme.Green.getValue()))
-            context.setTheme(dark ? R.style.AppThemeGreenDark : R.style.AppThemeGreen);
+            context.setTheme(R.style.AppThemeGreen);
 
-        if (context instanceof Activity && Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP)
+        if (context instanceof Activity)
             setTaskColor(context);
     }
 

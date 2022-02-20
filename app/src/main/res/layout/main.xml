@@ -198,7 +198,7 @@
                     android:layout_width="32dp"
                     android:layout_height="32dp"
                     android:layout_gravity="center_vertical"
-                    android:src="@drawable/ic_security_color_24dp" />
+                    android:src="@drawable/ic_security" />
 
                 <TextView
                     android:id="@+id/tvSupport"

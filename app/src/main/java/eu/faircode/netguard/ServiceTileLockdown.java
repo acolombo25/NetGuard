@@ -56,7 +56,6 @@ public class ServiceTileLockdown extends TileService implements SharedPreference
         Tile tile = getQsTile();
         if (tile != null) {
             tile.setState(lockdown ? Tile.STATE_ACTIVE : Tile.STATE_INACTIVE);
-            tile.setIcon(Icon.createWithResource(this, lockdown ? R.drawable.ic_lock_outline_white_24dp : R.drawable.ic_lock_outline_white_24dp_60));
             tile.updateTile();
         }
     }

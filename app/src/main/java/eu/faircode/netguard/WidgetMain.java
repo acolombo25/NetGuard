@@ -51,9 +51,9 @@ public class WidgetMain extends AppWidgetProvider {
                 intent.setPackage(context.getPackageName());
                 PendingIntent pi = PendingIntent.getBroadcast(context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_MUTABLE);
                 for (int id : appWidgetIds) {
-                    RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.widgetmain);
+                    RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.widget);
                     views.setOnClickPendingIntent(R.id.ivEnabled, pi);
-                    views.setImageViewResource(R.id.ivEnabled, enabled ? R.drawable.ic_security_color_24dp : R.drawable.ic_security_white_24dp_60);
+                    views.setImageViewResource(R.id.ivEnabled, enabled ? R.drawable.ic_twotone_security : R.drawable.ic_security);
                     appWidgetManager.updateAppWidget(id, views);
                 }
             } catch (Throwable ex) {
