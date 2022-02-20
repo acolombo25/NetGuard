@@ -126,7 +126,8 @@ public class AdapterRule extends RecyclerView.Adapter<AdapterRule.ViewHolder> im
 
         final TextView tvHosts;
 
-        final RelativeLayout rlLockdown;
+        final View llInfo;
+        final ImageView ivInfo;
         final ImageView ivLockdown;
 
         final CheckBox cbWifi;
@@ -136,8 +137,8 @@ public class AdapterRule extends RecyclerView.Adapter<AdapterRule.ViewHolder> im
         final ImageView ivScreenOther;
         final TextView tvRoaming;
 
-        final TextView tvRemarkMessaging;
-        final TextView tvRemarkDownload;
+        final View ivMessaging;
+        final View ivDownload;
 
         final LinearLayout llConfiguration;
         final TextView tvUid;
@@ -187,7 +188,8 @@ public class AdapterRule extends RecyclerView.Adapter<AdapterRule.ViewHolder> im
 
             tvHosts = itemView.findViewById(R.id.tvHosts);
 
-            rlLockdown = itemView.findViewById(R.id.rlLockdown);
+            llInfo = itemView.findViewById(R.id.llInfo);
+            ivInfo = itemView.findViewById(R.id.ivInfo);
             ivLockdown = itemView.findViewById(R.id.ivLockdown);
 
             cbWifi = itemView.findViewById(R.id.cbWifi);
@@ -197,8 +199,8 @@ public class AdapterRule extends RecyclerView.Adapter<AdapterRule.ViewHolder> im
             ivScreenOther = itemView.findViewById(R.id.ivScreenOther);
             tvRoaming = itemView.findViewById(R.id.tvRoaming);
 
-            tvRemarkMessaging = itemView.findViewById(R.id.tvRemarkMessaging);
-            tvRemarkDownload = itemView.findViewById(R.id.tvRemarkDownload);
+            ivMessaging = itemView.findViewById(R.id.ivMessaging);
+            ivDownload = itemView.findViewById(R.id.ivDownload);
 
             llConfiguration = itemView.findViewById(R.id.llConfiguration);
             tvUid = itemView.findViewById(R.id.tvUid);
@@ -388,7 +390,7 @@ public class AdapterRule extends RecyclerView.Adapter<AdapterRule.ViewHolder> im
         if ((otherActive && !lockdown_other) || (wifiActive && !lockdown_wifi))
             lockdown = false;
 
-        holder.rlLockdown.setVisibility(lockdown && !rule.lockdown ? View.VISIBLE : View.GONE);
+        holder.ivLockdown.setVisibility(lockdown && !rule.lockdown ? View.VISIBLE : View.GONE);
         holder.ivLockdown.setEnabled(rule.apply);
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
             Drawable wrap = DrawableCompat.wrap(holder.ivLockdown.getDrawable());
@@ -451,8 +453,27 @@ public class AdapterRule extends RecyclerView.Adapter<AdapterRule.ViewHolder> im
         holder.tvRoaming.setAlpha(otherActive ? 1 : 0.5f);
         holder.tvRoaming.setVisibility(rule.roaming && (!rule.other_blocked || rule.screen_other) ? View.VISIBLE : View.INVISIBLE);
 
-        holder.tvRemarkMessaging.setVisibility(messaging.contains(rule.packageName) ? View.VISIBLE : View.GONE);
-        holder.tvRemarkDownload.setVisibility(download.contains(rule.packageName) ? View.VISIBLE : View.GONE);
+        boolean hasMessaging = messaging.contains(rule.packageName);
+        holder.ivMessaging.setVisibility(hasMessaging ? View.VISIBLE : View.INVISIBLE);
+        boolean hasDownload = download.contains(rule.packageName);
+        holder.ivDownload.setVisibility(hasDownload ? View.VISIBLE : View.INVISIBLE);
+        holder.llInfo.setVisibility(hasMessaging || hasDownload ? View.VISIBLE : View.GONE);
+        holder.ivInfo.setOnClickListener(v -> {
+            String message = "";
+            if (hasMessaging) {
+                message += context.getString(R.string.title_messaging);
+            }
+            if (hasDownload) {
+                if (hasMessaging) message += "\n\n";
+                message += context.getString(R.string.title_download);
+            }
+            if (message.isEmpty()) return;
+            new AlertDialog.Builder(context)
+                    .setMessage(message)
+                    .setCancelable(true)
+                    .create()
+                    .show();
+        });
 
         // Expanded configuration section
         holder.llConfiguration.setVisibility(rule.expanded ? View.VISIBLE : View.GONE);
