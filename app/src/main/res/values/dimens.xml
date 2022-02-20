@@ -4,4 +4,6 @@
     <dimen name="icon_legend">24dp</dimen>
     <dimen name="icon_action">24dp</dimen>
     <dimen name="icon_widget">36dp</dimen>
+    <dimen name="icon_rule_s">16dp</dimen>
+    <dimen name="spacing_rule">8dp</dimen>
 </resources>

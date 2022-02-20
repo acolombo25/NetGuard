@@ -7,11 +7,12 @@
     android:layout_marginHorizontal="8dp"
     android:orientation="vertical">
 
+    <!--Always visible part-->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:baselineAligned="true"
-        android:layout_marginVertical="8dp"
+        android:layout_marginVertical="@dimen/spacing_rule"
         android:orientation="horizontal">
 
         <LinearLayout
@@ -44,9 +45,47 @@
                 android:layout_weight="1"
                 android:ellipsize="end"
                 android:gravity="center_vertical"
-                android:paddingStart="8dp"
-                android:paddingLeft="8dp"
+                android:paddingHorizontal="@dimen/spacing_rule"
                 android:textAppearance="@style/TextMedium" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/llInfo"
+            android:alpha=".5"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginStart="@dimen/spacing_rule"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/ivInfo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_outline_info"
+                app:tint="?colorAccent" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:id="@+id/ivMessaging"
+                    android:layout_width="@dimen/icon_rule_s"
+                    android:layout_height="@dimen/icon_rule_s"
+                    android:visibility="invisible"
+                    tools:visibility="visible"
+                    android:src="@drawable/ic_outline_chat_bubble" />
+
+                <ImageView
+                    android:id="@+id/ivDownload"
+                    android:layout_width="@dimen/icon_rule_s"
+                    android:layout_height="@dimen/icon_rule_s"
+                    android:visibility="invisible"
+                    tools:visibility="visible"
+                    android:src="@drawable/ic_outline_file_download" />
+            </LinearLayout>
         </LinearLayout>
 
         <TextView
@@ -54,104 +93,81 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
+            android:visibility="gone"
             android:textAppearance="@style/TextSmall"
             android:textSize="12sp" />
 
-        <RelativeLayout
-            android:id="@+id/rlLockdown"
-            android:layout_width="24dp"
-            android:layout_height="?android:attr/listPreferredItemHeightSmall"
-            android:layout_marginStart="8dp"
-            android:layout_marginLeft="8dp">
-
-            <ImageView
-                android:id="@+id/ivLockdown"
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:layout_centerInParent="true"
-                android:src="@drawable/ic_outline_lock" />
-        </RelativeLayout>
+        <ImageView
+            android:id="@+id/ivLockdown"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/spacing_rule"
+            android:layout_gravity="center_vertical"
+            android:visibility="gone"
+            android:src="@drawable/ic_outline_lock" />
 
         <LinearLayout
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginStart="@dimen/spacing_rule"
+            android:gravity="center"
             android:orientation="horizontal">
 
-            <RelativeLayout
-                android:layout_width="24dp"
-                android:layout_height="?android:attr/listPreferredItemHeightSmall"
-                android:layout_marginStart="8dp"
-                android:layout_marginLeft="8dp">
-
-                <CheckBox
-                    android:id="@+id/cbWifi"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerInParent="true"
-                    android:button="@drawable/btn_wifi"
-                    android:buttonTint="@color/selector_check" />
-            </RelativeLayout>
+            <CheckBox
+                android:id="@+id/cbWifi"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:button="@drawable/btn_wifi"
+                android:buttonTint="@color/selector_check" />
 
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
                 android:orientation="vertical">
 
                 <ImageView
                     android:id="@+id/ivScreenWifi"
-                    android:layout_width="16dp"
-                    android:layout_height="16dp"
-                    android:layout_gravity="center_horizontal"
+                    android:layout_width="@dimen/icon_rule_s"
+                    android:layout_height="@dimen/icon_rule_s"
                     android:src="@drawable/ic_perm_identity" />
 
                 <View
-                    android:layout_width="16dp"
-                    android:layout_height="16dp"
-                    android:layout_gravity="center_horizontal"
+                    android:layout_width="@dimen/icon_rule_s"
+                    android:layout_height="@dimen/icon_rule_s"
                     android:visibility="invisible" />
             </LinearLayout>
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginStart="@dimen/spacing_rule"
+            android:gravity="center"
             android:orientation="horizontal">
 
-            <RelativeLayout
-                android:layout_width="24dp"
-                android:layout_height="?android:attr/listPreferredItemHeightSmall"
-                android:layout_marginStart="8dp"
-                android:layout_marginLeft="8dp">
-
-                <CheckBox
-                    android:id="@+id/cbOther"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerInParent="true"
-                    android:button="@drawable/btn_cellular"
-                    android:buttonTint="@color/selector_check" />
-            </RelativeLayout>
+            <CheckBox
+                android:id="@+id/cbOther"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:button="@drawable/btn_cellular"
+                android:buttonTint="@color/selector_check" />
 
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
                 android:orientation="vertical">
 
                 <ImageView
                     android:id="@+id/ivScreenOther"
-                    android:layout_width="16dp"
-                    android:layout_height="16dp"
-                    android:layout_gravity="center_horizontal"
+                    android:layout_width="@dimen/icon_rule_s"
+                    android:layout_height="@dimen/icon_rule_s"
                     android:src="@drawable/ic_perm_identity" />
 
                 <TextView
                     android:id="@+id/tvRoaming"
-                    android:layout_width="16dp"
-                    android:layout_height="16dp"
-                    android:layout_gravity="center_vertical"
-                    android:gravity="center_horizontal"
+                    android:layout_width="@dimen/icon_rule_s"
+                    android:layout_height="@dimen/icon_rule_s"
+                    android:gravity="center"
                     android:text="@string/title_roaming_symbol"
                     android:textAppearance="@style/TextSmall"
                     android:textColor="?attr/colorOff"
@@ -160,33 +176,13 @@
         </LinearLayout>
     </LinearLayout>
 
-    <TextView
-        android:id="@+id/tvRemarkMessaging"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:padding="8dp"
-        android:text="@string/title_messaging"
-        android:textAppearance="@style/TextSmall"
-        android:textStyle="italic"
-        android:visibility="gone" />
-
-    <TextView
-        android:id="@+id/tvRemarkDownload"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:padding="8dp"
-        android:text="@string/title_download"
-        android:textAppearance="@style/TextSmall"
-        android:textStyle="italic"
-        android:visibility="gone" />
-
+    <!--Expandable part-->
     <LinearLayout
         android:id="@+id/llConfiguration"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginStart="32dp"
-        android:layout_marginLeft="32dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginVertical="8dp"
         android:orientation="vertical"
         android:visibility="gone">
 
