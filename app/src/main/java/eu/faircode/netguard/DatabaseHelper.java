@@ -29,9 +29,9 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.os.Handler;
 import android.os.HandlerThread;
 import android.os.Message;
+import android.preference.PreferenceManager;
 import android.util.Log;
 
-import androidx.preference.PreferenceManager;
 
 import java.io.File;
 import java.text.SimpleDateFormat;
@@ -830,7 +830,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             try {
                 int ttl = rr.TTL;
 
-                int min = prefs.getInt(Preferences.TTL.getKey(), Preferences.TTL.getDefaultValue());
+                int min = Integer.parseInt(prefs.getString(Preferences.TTL.getKey(), Integer.toString(Preferences.TTL.getDefaultValue())));
                 if (ttl < min)
                     ttl = min;
 

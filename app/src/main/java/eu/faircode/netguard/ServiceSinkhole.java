@@ -74,7 +74,7 @@ import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
 import androidx.core.content.ContextCompat;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
-import androidx.preference.PreferenceManager;
+import android.preference.PreferenceManager;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -231,14 +231,14 @@ public class ServiceSinkhole extends VpnService implements SharedPreferences.OnS
 
         long record_size = 64;
         try {
-            record_size = prefs.getLong(Preferences.PCAP_RECORD_SIZE.getKey(), Preferences.PCAP_RECORD_SIZE.getDefaultValue());
+            record_size = Long.parseLong(prefs.getString(Preferences.PCAP_RECORD_SIZE.getKey(), Long.toString(Preferences.PCAP_RECORD_SIZE.getDefaultValue())));
         } catch (Throwable ex) {
             Log.e(TAG, ex.toString() + "\n" + Log.getStackTraceString(ex));
         }
 
         long file_size = 2 * 1024 * 1024;
         try {
-            file_size = prefs.getLong(Preferences.PCAP_FILE_SIZE.getKey(), Preferences.PCAP_FILE_SIZE.getDefaultValue()) * 1024 * 1024;
+            file_size = Long.parseLong(prefs.getString(Preferences.PCAP_FILE_SIZE.getKey(), Long.toString(Preferences.PCAP_FILE_SIZE.getDefaultValue()))) * 1024 * 1024;
         } catch (Throwable ex) {
             Log.e(TAG, ex.toString() + "\n" + Log.getStackTraceString(ex));
         }
@@ -403,7 +403,7 @@ public class ServiceSinkhole extends VpnService implements SharedPreferences.OnS
                 am.cancel(pi);
 
                 if (cmd != Command.stop) {
-                    long watchdog = prefs.getLong(Preferences.WATCHDOG.getKey(), Preferences.WATCHDOG.getDefaultValue());
+                    long watchdog = Long.parseLong(prefs.getString(Preferences.WATCHDOG.getKey(), Long.toString(Preferences.WATCHDOG.getDefaultValue())));
                     if (watchdog > 0) {
                         Log.i(TAG, "Watchdog " + watchdog + " minutes");
                         long minutes = watchdog * 60 * 1000;
@@ -928,11 +928,11 @@ public class ServiceSinkhole extends VpnService implements SharedPreferences.OnS
         private void updateStats() {
             RemoteViews remoteViews = new RemoteViews(getPackageName(), R.layout.traffic);
             SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(ServiceSinkhole.this);
-            long frequency = prefs.getLong(Preferences.STATS_FREQUENCY.getKey(), Preferences.STATS_FREQUENCY.getDefaultValue());
-            long samples = prefs.getLong(Preferences.STATS_SAMPLES.getKey(), Preferences.STATS_SAMPLES.getDefaultValue());
+            long frequency = Long.parseLong(prefs.getString(Preferences.STATS_FREQUENCY.getKey(), Long.toString(Preferences.STATS_FREQUENCY.getDefaultValue())));
+            long samples = Long.parseLong(prefs.getString(Preferences.STATS_SAMPLES.getKey(), Long.toString(Preferences.STATS_SAMPLES.getDefaultValue())));
             boolean filter = prefs.getBoolean(Preferences.FILTER.getKey(), Preferences.FILTER.getDefaultValue());
             boolean show_top = prefs.getBoolean(Preferences.SHOW_TOP.getKey(), Preferences.SHOW_TOP.getDefaultValue());
-            int loglevel = prefs.getInt(Preferences.LOG_LEVEL.getKey(), Preferences.LOG_LEVEL.getDefaultValue());
+            int loglevel = Integer.parseInt(prefs.getString(Preferences.LOG_LEVEL.getKey(), Integer.toString(Preferences.LOG_LEVEL.getDefaultValue())));
 
             // Schedule next update
             this.sendEmptyMessageDelayed(MSG_STATS_UPDATE, frequency);
@@ -1490,8 +1490,8 @@ public class ServiceSinkhole extends VpnService implements SharedPreferences.OnS
         }
 
         if (log || log_app || filter) {
-            int prio = prefs.getInt(Preferences.LOG_LEVEL.getKey(), Preferences.LOG_LEVEL.getDefaultValue());
-            final int rcode = prefs.getInt(Preferences.R_CODE.getKey(), Preferences.R_CODE.getDefaultValue());
+            int prio = Integer.parseInt(prefs.getString(Preferences.LOG_LEVEL.getKey(), Integer.toString(Preferences.LOG_LEVEL.getDefaultValue())));
+            final int rcode = Integer.parseInt(prefs.getString(Preferences.R_CODE.getKey(), Integer.toString(Preferences.R_CODE.getDefaultValue())));
             if (prefs.getBoolean(Preferences.SOCKS_5_ENABLED.getKey(), Preferences.SOCKS_5_ENABLED.getDefaultValue()))
                 jni_socks5(
                         prefs.getString(Preferences.SOCKS_5_ADDR.getKey(), Preferences.SOCKS_5_ADDR.getDefaultValue()),
@@ -2023,7 +2023,7 @@ public class ServiceSinkhole extends VpnService implements SharedPreferences.OnS
                         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(ServiceSinkhole.this);
                         int delay;
                         try {
-                            delay = prefs.getInt(Preferences.SCREEN_DELAY.getKey(), Preferences.SCREEN_DELAY.getDefaultValue());
+                            delay = Integer.parseInt(prefs.getString(Preferences.SCREEN_DELAY.getKey(), Integer.toString(Preferences.SCREEN_DELAY.getDefaultValue())));
                         } catch (NumberFormatException ignored) {
                             delay = 0;
                         }

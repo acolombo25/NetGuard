@@ -40,7 +40,7 @@ import android.widget.TextView;
 
 import androidx.core.graphics.drawable.DrawableCompat;
 import androidx.core.view.ViewCompat;
-import androidx.preference.PreferenceManager;
+import android.preference.PreferenceManager;
 
 import java.net.InetAddress;
 import java.net.UnknownHostException;

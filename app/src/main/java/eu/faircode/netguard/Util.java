@@ -58,7 +58,7 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.core.net.ConnectivityManagerCompat;
-import androidx.preference.PreferenceManager;
+import android.preference.PreferenceManager;
 
 import java.io.BufferedReader;
 import java.io.File;

@@ -31,7 +31,8 @@ import android.os.Build;
 import android.os.Process;
 import android.util.Log;
 
-import androidx.preference.PreferenceManager;
+import androidx.annotation.NonNull;
+import android.preference.PreferenceManager;
 
 import org.xmlpull.v1.XmlPullParser;
 

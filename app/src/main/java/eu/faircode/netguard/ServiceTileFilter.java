@@ -29,7 +29,7 @@ import android.service.quicksettings.TileService;
 import android.util.Log;
 import android.widget.Toast;
 
-import androidx.preference.PreferenceManager;
+import android.preference.PreferenceManager;
 
 import eu.faircode.netguard.preference.Preferences;
 import eu.faircode.netguard.reason.SimpleReason;
