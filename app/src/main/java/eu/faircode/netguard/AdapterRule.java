@@ -28,6 +28,8 @@ import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.content.res.TypedArray;
 import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
@@ -60,10 +62,13 @@ import android.widget.ListView;
 import android.widget.PopupMenu;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.core.app.NotificationManagerCompat;
 import androidx.core.content.ContextCompat;
+import androidx.core.content.pm.ShortcutInfoCompat;
+import androidx.core.content.pm.ShortcutManagerCompat;
+import androidx.core.graphics.drawable.IconCompat;
 import androidx.core.graphics.drawable.DrawableCompat;
 import androidx.core.widget.CompoundButtonCompat;
 import androidx.preference.PreferenceManager;
@@ -144,6 +149,7 @@ public class AdapterRule extends RecyclerView.Adapter<AdapterRule.ViewHolder> im
         public Button btnRelated;
         public ImageButton ibSettings;
         public ImageButton ibLaunch;
+        public ImageButton ibAddToHomeScreen;
 
         public CheckBox cbApply;
 
@@ -204,6 +210,7 @@ public class AdapterRule extends RecyclerView.Adapter<AdapterRule.ViewHolder> im
             btnRelated = itemView.findViewById(R.id.btnRelated);
             ibSettings = itemView.findViewById(R.id.ibSettings);
             ibLaunch = itemView.findViewById(R.id.ibLaunch);
+            ibAddToHomeScreen = itemView.findViewById(R.id.ibAddToHomeScreen);
 
             cbApply = itemView.findViewById(R.id.cbApply);
 
@@ -496,8 +503,9 @@ public class AdapterRule extends RecyclerView.Adapter<AdapterRule.ViewHolder> im
                     context.startActivity(settings);
                 }
             });
-        } else
+        } else {
             holder.ibSettings.setVisibility(View.GONE);
+        }
 
         // Launch application
         if (rule.expanded) {
@@ -512,8 +520,47 @@ public class AdapterRule extends RecyclerView.Adapter<AdapterRule.ViewHolder> im
                     context.startActivity(launch);
                 }
             });
-        } else
+        } else {
             holder.ibLaunch.setVisibility(View.GONE);
+        }
+
+        // Add shortcut
+        boolean isSupported = ShortcutManagerCompat.isRequestPinShortcutSupported(context);
+        if (rule.expanded && isSupported) {
+            Intent check = context.getPackageManager().getLaunchIntentForPackage(rule.packageName);
+            final Intent launch = (check == null || check.resolveActivity(context.getPackageManager()) == null ? null : check);
+
+            final Intent shortcut = new Intent(context, ActivityMain.class);
+            shortcut.setPackage(context.getPackageName());
+            shortcut.setAction(Intent.ACTION_MAIN);
+            shortcut.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            shortcut.putExtra(ActivityMain.EXTRA_SHORTCUT_PACKAGE, rule.packageName);
+
+            holder.ibAddToHomeScreen.setVisibility(launch == null ? View.GONE : View.VISIBLE);
+            holder.ibAddToHomeScreen.setOnClickListener(view -> {
+
+                Drawable drawable = Util.getAppIconDrawable(context, rule);
+                Bitmap bitmap;
+
+                if (drawable != null) {
+                    bitmap = Bitmap.createBitmap(drawable.getIntrinsicWidth(), drawable.getIntrinsicHeight(), Bitmap.Config.ARGB_8888);
+                    Canvas canvas = new Canvas(bitmap);
+                    drawable.setBounds(0, 0, canvas.getWidth(), canvas.getHeight());
+                    drawable.draw(canvas);
+                } else {
+                    bitmap = null;
+                }
+
+                ShortcutInfoCompat.Builder info = new ShortcutInfoCompat.Builder(context, "netguard-shorcut:" + rule.uid)
+                        .setIntent(shortcut)
+                        .setShortLabel(rule.name)
+                        .setAlwaysBadged();
+                if(bitmap != null) info.setIcon(IconCompat.createWithBitmap(bitmap));
+                ShortcutManagerCompat.requestPinShortcut(context, info.build(), null);
+            });
+        } else {
+            holder.ibAddToHomeScreen.setVisibility(View.GONE);
+        }
 
         // Apply
         holder.cbApply.setEnabled(rule.pkg && filter);
