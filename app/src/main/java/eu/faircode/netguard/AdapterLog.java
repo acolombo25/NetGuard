@@ -218,19 +218,8 @@ public class AdapterLog extends CursorAdapter {
 
         if (info == null)
             ivIcon.setImageDrawable(null);
-        else {
-            if (info.icon <= 0)
-                ivIcon.setImageResource(android.R.drawable.sym_def_app_icon);
-            else {
-                Uri uri = Uri.parse("android.resource://" + info.packageName + "/" + info.icon);
-                GlideApp.with(context)
-                        .load(uri)
-                        //.diskCacheStrategy(DiskCacheStrategy.NONE)
-                        //.skipMemoryCache(true)
-                        .override(iconSize, iconSize)
-                        .into(ivIcon);
-            }
-        }
+        else
+            ivIcon.setImageDrawable(Util.getAppIconDrawable(context, info));
 
         boolean we = (android.os.Process.myUid() == uid);
 

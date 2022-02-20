@@ -355,7 +355,6 @@ Attribution
 
 NetGuard uses:
 
-* [Glide](https://bumptech.github.io/glide/)
 * [Android Support Library](https://developer.android.com/tools/support-library/)
 
 License
