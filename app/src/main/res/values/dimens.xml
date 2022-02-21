@@ -8,4 +8,9 @@
     <dimen name="rule_spacing">8dp</dimen>
     <dimen name="rule_title_spacing">12dp</dimen>
     <dimen name="rule_sub_spacing">4dp</dimen>
+    <dimen name="dialog_spacing">16dp</dimen>
+    <dimen name="dialog_title_spacing">8dp</dimen>
+    <dimen name="legend_icon_spacing">4dp</dimen>
+    <dimen name="legend_text_spacing">8dp</dimen>
+    <dimen name="text_roaming">14sp</dimen>
 </resources>

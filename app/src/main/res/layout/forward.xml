@@ -4,10 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:paddingEnd="8dp"
-    android:paddingLeft="8dp"
-    android:paddingRight="8dp"
-    android:paddingStart="8dp"
+    android:padding="8dp"
     tools:context=".ActivityForwarding">
 
     <LinearLayout
@@ -26,7 +23,6 @@
             android:layout_width="48dp"
             android:layout_height="wrap_content"
             android:layout_gravity="end"
-            android:layout_marginLeft="4dp"
             android:layout_marginStart="4dp"
             android:textAlignment="textEnd"
             android:textAppearance="@style/TextSmall" />
@@ -35,7 +31,6 @@
             android:id="@+id/tvRAddr"
             android:layout_width="160dp"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="4dp"
             android:layout_marginStart="4dp"
             android:textAppearance="@style/TextSmall" />
 
@@ -44,7 +39,6 @@
             android:layout_width="48dp"
             android:layout_height="wrap_content"
             android:layout_gravity="end"
-            android:layout_marginLeft="4dp"
             android:layout_marginStart="4dp"
             android:textAlignment="textEnd"
             android:textAppearance="@style/TextSmall" />
@@ -55,7 +49,6 @@
         android:id="@+id/tvRUid"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="88dp"
         android:layout_marginStart="88dp"
         android:textAppearance="@style/TextSmall" />
 </LinearLayout>

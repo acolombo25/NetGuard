@@ -62,5 +62,8 @@
     <style name="TextLarge" parent="@android:style/TextAppearance.Material.Large" />
     <style name="TextMedium" parent="@android:style/TextAppearance.Material.Medium" />
     <style name="TextSmall" parent="@android:style/TextAppearance.Material.Small" />
+    <style name="TextExtraSmall" parent="@android:style/TextAppearance.Material.Small">
+        <item name="android:textSize">12sp</item>
+    </style>
     <style name="TextTitle" parent="@android:style/TextAppearance.Material.Title" />
 </resources>

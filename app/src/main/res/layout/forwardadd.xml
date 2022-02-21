@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="16dp"
+    android:padding="@dimen/dialog_spacing"
     tools:context=".ActivityForwarding">
 
     <include layout="@layout/title_dialog" />
@@ -40,7 +40,7 @@
                 android:layout_marginTop="8dp"
                 android:entries="@array/protocolNames"
                 android:prompt="@string/title_protocol"
-                android:textAppearance="@style/TextMedium" />
+                 />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -55,7 +55,7 @@
                 android:layout_height="wrap_content"
                 android:hint="53"
                 android:inputType="number"
-                android:textAppearance="@style/TextMedium" />
+                 />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -70,7 +70,7 @@
                 android:layout_height="wrap_content"
                 android:hint="127.0.0.1"
                 android:inputType="text"
-                android:textAppearance="@style/TextMedium" />
+                 />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -85,7 +85,7 @@
                 android:layout_height="wrap_content"
                 android:hint="5353"
                 android:inputType="number"
-                android:textAppearance="@style/TextMedium" />
+                 />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -108,7 +108,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:prompt="@string/title_ruid"
-                android:textAppearance="@style/TextMedium"
+
                 android:visibility="gone" />
 
             <TextView

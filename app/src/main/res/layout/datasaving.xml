@@ -3,14 +3,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="16dp">
+    android:padding="@dimen/dialog_spacing">
 
     <include layout="@layout/title_dialog" />
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="@dimen/dialog_spacing"
         android:orientation="vertical">
 
         <LinearLayout
@@ -22,15 +22,15 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/msg_datasaving"
-                android:textAppearance="@style/TextMedium" />
+                 />
 
             <CheckBox
                 android:id="@+id/cbDontAsk"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="@dimen/dialog_spacing"
                 android:text="@string/title_dontask"
-                android:textAppearance="@style/TextMedium" />
+                 />
         </LinearLayout>
     </ScrollView>
 </LinearLayout>

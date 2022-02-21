@@ -1,16 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="16dp">
+    android:padding="@dimen/dialog_spacing">
 
-    <include layout="@layout/title_dialog"/>
+    <include layout="@layout/title_dialog" />
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="@dimen/dialog_spacing"
         android:orientation="vertical">
 
         <LinearLayout
@@ -22,14 +23,14 @@
                 android:id="@+id/tvExplanation"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textAppearance="@style/TextMedium" />
+                tools:lines="3"
+                tools:text="@tools:sample/lorem/random" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:text="@string/msg_sure"
-                android:textAppearance="@style/TextMedium"
                 android:textStyle="bold" />
         </LinearLayout>
     </ScrollView>
