@@ -22,7 +22,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/msg_doze"
-                android:textAppearance="@style/TextMedium" />
+                 />
 
             <CheckBox
                 android:id="@+id/cbDontAsk"
@@ -30,7 +30,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:text="@string/title_dontask"
-                android:textAppearance="@style/TextMedium" />
+                 />
         </LinearLayout>
     </ScrollView>
 </LinearLayout>

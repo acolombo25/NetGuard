@@ -4,14 +4,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="16dp">
+    android:padding="@dimen/dialog_spacing">
 
     <include layout="@layout/title_dialog" />
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="@dimen/dialog_spacing"
         android:orientation="vertical">
 
         <LinearLayout
@@ -28,17 +28,16 @@
                     android:layout_width="@dimen/icon_legend"
                     android:layout_height="@dimen/icon_legend"
                     android:layout_gravity="center_vertical"
-                    android:layout_margin="4dp"
+                    android:layout_margin="@dimen/legend_icon_spacing"
                     android:alpha=".5"
-                    android:src="@drawable/ic_security"/>
+                    android:src="@drawable/ic_security" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
-                    android:layout_marginHorizontal="8dp"
-                    android:text="@string/msg_inactive"
-                    android:textAppearance="@style/TextMedium"/>
+                    android:layout_marginHorizontal="@dimen/legend_text_spacing"
+                    android:text="@string/msg_inactive" />
             </LinearLayout>
 
             <LinearLayout
@@ -50,16 +49,15 @@
                     android:layout_width="@dimen/icon_legend"
                     android:layout_height="@dimen/icon_legend"
                     android:layout_gravity="center_vertical"
-                    android:layout_margin="4dp"
-                    android:indeterminate="true"/>
+                    android:layout_margin="@dimen/legend_icon_spacing"
+                    android:indeterminate="true" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
-                    android:layout_marginHorizontal="8dp"
-                    android:text="@string/msg_queue"
-                    android:textAppearance="@style/TextMedium"/>
+                    android:layout_marginHorizontal="@dimen/legend_text_spacing"
+                    android:text="@string/msg_queue" />
             </LinearLayout>
 
             <LinearLayout
@@ -71,16 +69,15 @@
                     android:layout_width="@dimen/icon_legend"
                     android:layout_height="@dimen/icon_legend"
                     android:layout_gravity="center_vertical"
-                    android:layout_margin="4dp"
-                    android:src="@drawable/ic_attach_money"/>
+                    android:layout_margin="@dimen/legend_icon_spacing"
+                    android:src="@drawable/ic_attach_money" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
-                    android:layout_marginHorizontal="8dp"
-                    android:text="@string/msg_metered"
-                    android:textAppearance="@style/TextMedium"/>
+                    android:layout_marginHorizontal="@dimen/legend_text_spacing"
+                    android:text="@string/msg_metered" />
             </LinearLayout>
 
             <LinearLayout
@@ -93,17 +90,16 @@
                     android:layout_width="@dimen/icon_legend"
                     android:layout_height="@dimen/icon_legend"
                     android:layout_gravity="center_vertical"
-                    android:layout_margin="4dp"
-                    app:tint="?attr/colorOn"
-                    android:src="@drawable/ic_signal_wifi_4_bar"/>
+                    android:layout_margin="@dimen/legend_icon_spacing"
+                    android:src="@drawable/ic_signal_wifi_4_bar"
+                    app:tint="?attr/colorOn" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
-                    android:layout_marginHorizontal="8dp"
-                    android:text="@string/title_unmetered_allowed"
-                    android:textAppearance="@style/TextMedium"/>
+                    android:layout_marginHorizontal="@dimen/legend_text_spacing"
+                    android:text="@string/title_unmetered_allowed" />
             </LinearLayout>
 
             <LinearLayout
@@ -116,17 +112,16 @@
                     android:layout_width="@dimen/icon_legend"
                     android:layout_height="@dimen/icon_legend"
                     android:layout_gravity="center_vertical"
-                    android:layout_margin="4dp"
-                    app:tint="?attr/colorOff"
-                    android:src="@drawable/ic_outline_lock"/>
+                    android:layout_margin="@dimen/legend_icon_spacing"
+                    android:src="@drawable/ic_outline_lock"
+                    app:tint="?attr/colorOff" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
-                    android:layout_marginHorizontal="8dp"
-                    android:text="@string/title_lockdown_enabled"
-                    android:textAppearance="@style/TextMedium"/>
+                    android:layout_marginHorizontal="@dimen/legend_text_spacing"
+                    android:text="@string/title_lockdown_enabled" />
             </LinearLayout>
 
             <LinearLayout
@@ -139,17 +134,16 @@
                     android:layout_width="@dimen/icon_legend"
                     android:layout_height="@dimen/icon_legend"
                     android:layout_gravity="center_vertical"
-                    android:layout_margin="4dp"
-                    app:tint="?attr/colorOff"
-                    android:src="@drawable/ic_signal_wifi_off"/>
+                    android:layout_margin="@dimen/legend_icon_spacing"
+                    android:src="@drawable/ic_signal_wifi_off"
+                    app:tint="?attr/colorOff" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
-                    android:layout_marginHorizontal="8dp"
-                    android:text="@string/title_unmetered_blocked"
-                    android:textAppearance="@style/TextMedium"/>
+                    android:layout_marginHorizontal="@dimen/legend_text_spacing"
+                    android:text="@string/title_unmetered_blocked" />
             </LinearLayout>
 
             <LinearLayout
@@ -161,16 +155,15 @@
                     android:layout_width="@dimen/icon_legend"
                     android:layout_height="@dimen/icon_legend"
                     android:layout_gravity="center_vertical"
-                    android:layout_margin="4dp"
-                    android:src="@drawable/ic_signal_wifi_off"/>
+                    android:layout_margin="@dimen/legend_icon_spacing"
+                    android:src="@drawable/ic_signal_wifi_off" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
-                    android:layout_marginHorizontal="8dp"
-                    android:text="@string/title_unmetered_disabled"
-                    android:textAppearance="@style/TextMedium"/>
+                    android:layout_marginHorizontal="@dimen/legend_text_spacing"
+                    android:text="@string/title_unmetered_disabled" />
             </LinearLayout>
 
             <LinearLayout
@@ -183,17 +176,16 @@
                     android:layout_width="@dimen/icon_legend"
                     android:layout_height="@dimen/icon_legend"
                     android:layout_gravity="center_vertical"
-                    android:layout_margin="4dp"
-                    app:tint="?attr/colorOn"
-                    android:src="@drawable/ic_signal_cellular_4_bar"/>
+                    android:layout_margin="@dimen/legend_icon_spacing"
+                    android:src="@drawable/ic_signal_cellular_4_bar"
+                    app:tint="?attr/colorOn" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
-                    android:layout_marginHorizontal="8dp"
-                    android:text="@string/title_metered_allowed"
-                    android:textAppearance="@style/TextMedium"/>
+                    android:layout_marginHorizontal="@dimen/legend_text_spacing"
+                    android:text="@string/title_metered_allowed" />
             </LinearLayout>
 
             <LinearLayout
@@ -206,17 +198,16 @@
                     android:layout_width="@dimen/icon_legend"
                     android:layout_height="@dimen/icon_legend"
                     android:layout_gravity="center_vertical"
-                    android:layout_margin="4dp"
-                    app:tint="?attr/colorOff"
-                    android:src="@drawable/ic_signal_cellular_off"/>
+                    android:layout_margin="@dimen/legend_icon_spacing"
+                    android:src="@drawable/ic_signal_cellular_off"
+                    app:tint="?attr/colorOff" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
-                    android:layout_marginHorizontal="8dp"
-                    android:text="@string/title_metered_blocked"
-                    android:textAppearance="@style/TextMedium"/>
+                    android:layout_marginHorizontal="@dimen/legend_text_spacing"
+                    android:text="@string/title_metered_blocked" />
             </LinearLayout>
 
             <LinearLayout
@@ -228,16 +219,15 @@
                     android:layout_width="@dimen/icon_legend"
                     android:layout_height="@dimen/icon_legend"
                     android:layout_gravity="center_vertical"
-                    android:layout_margin="4dp"
-                    android:src="@drawable/ic_signal_cellular_off"/>
+                    android:layout_margin="@dimen/legend_icon_spacing"
+                    android:src="@drawable/ic_signal_cellular_off" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
-                    android:layout_marginHorizontal="8dp"
-                    android:text="@string/title_metered_disabled"
-                    android:textAppearance="@style/TextMedium"/>
+                    android:layout_marginHorizontal="@dimen/legend_text_spacing"
+                    android:text="@string/title_metered_disabled" />
             </LinearLayout>
 
             <LinearLayout
@@ -250,17 +240,16 @@
                     android:layout_width="@dimen/icon_legend"
                     android:layout_height="@dimen/icon_legend"
                     android:layout_gravity="center_vertical"
-                    android:layout_margin="4dp"
-                    app:tint="?attr/colorOn"
-                    android:src="@drawable/ic_perm_identity"/>
+                    android:layout_margin="@dimen/legend_icon_spacing"
+                    android:src="@drawable/ic_perm_identity"
+                    app:tint="?attr/colorOn" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
-                    android:layout_marginHorizontal="8dp"
-                    android:text="@string/title_interactive_allowed"
-                    android:textAppearance="@style/TextMedium"/>
+                    android:layout_marginHorizontal="@dimen/legend_text_spacing"
+                    android:text="@string/title_interactive_allowed" />
             </LinearLayout>
 
             <LinearLayout
@@ -269,21 +258,21 @@
                 android:orientation="horizontal">
 
                 <TextView
-                    android:layout_width="32dp"
-                    android:layout_height="32dp"
-                    android:gravity="center_horizontal|center_vertical"
+                    android:layout_width="@dimen/icon_legend"
+                    android:layout_height="@dimen/icon_legend"
+                    android:layout_margin="@dimen/legend_icon_spacing"
+                    android:gravity="center"
                     android:text="@string/title_roaming_symbol"
                     android:textAppearance="@style/TextSmall"
                     android:textColor="?attr/colorOff"
-                    android:textSize="14sp"/>
+                    android:textSize="@dimen/text_roaming" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
-                    android:layout_marginHorizontal="8dp"
-                    android:text="@string/title_roaming_blocked"
-                    android:textAppearance="@style/TextMedium"/>
+                    android:layout_marginHorizontal="@dimen/legend_text_spacing"
+                    android:text="@string/title_roaming_blocked" />
             </LinearLayout>
 
             <LinearLayout
@@ -296,17 +285,16 @@
                     android:layout_width="@dimen/icon_legend"
                     android:layout_height="@dimen/icon_legend"
                     android:layout_gravity="center_vertical"
-                    android:layout_margin="4dp"
-                    app:tint="?attr/colorOn"
-                    android:src="@drawable/ic_check"/>
+                    android:layout_margin="@dimen/legend_icon_spacing"
+                    android:src="@drawable/ic_check"
+                    app:tint="?attr/colorOn" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
-                    android:layout_marginHorizontal="8dp"
-                    android:text="@string/title_host_allowed"
-                    android:textAppearance="@style/TextMedium"/>
+                    android:layout_marginHorizontal="@dimen/legend_text_spacing"
+                    android:text="@string/title_host_allowed" />
             </LinearLayout>
 
             <LinearLayout
@@ -319,26 +307,24 @@
                     android:layout_width="@dimen/icon_legend"
                     android:layout_height="@dimen/icon_legend"
                     android:layout_gravity="center_vertical"
-                    android:layout_margin="4dp"
-                    app:tint="?attr/colorOff"
-                    android:src="@drawable/ic_close"/>
+                    android:layout_margin="@dimen/legend_icon_spacing"
+                    android:src="@drawable/ic_close"
+                    app:tint="?attr/colorOff" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
-                    android:layout_marginHorizontal="8dp"
-                    android:text="@string/title_host_blocked"
-                    android:textAppearance="@style/TextMedium"/>
+                    android:layout_marginHorizontal="@dimen/legend_text_spacing"
+                    android:text="@string/title_host_blocked" />
             </LinearLayout>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
-                android:layout_marginTop="8dp"
-                android:text="@string/title_metered"
-                android:textAppearance="@style/TextMedium"/>
+                android:layout_marginTop="@dimen/legend_text_spacing"
+                android:text="@string/title_metered" />
         </LinearLayout>
     </ScrollView>
 </LinearLayout>

@@ -44,10 +44,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
-                android:layout_marginLeft="8dp"
                 android:layout_marginStart="8dp"
-                android:text="@android:string/ok"
-                android:textAppearance="@style/TextSmall" />
+                android:text="@android:string/ok" />
         </LinearLayout>
 
         <LinearLayout
@@ -72,10 +70,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
-                android:layout_marginLeft="8dp"
                 android:layout_marginStart="8dp"
-                android:text="@android:string/ok"
-                android:textAppearance="@style/TextSmall" />
+                android:text="@android:string/ok"/>
         </LinearLayout>
 
         <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
@@ -116,7 +112,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
-                android:layout_marginLeft="8dp"
                 android:layout_marginStart="8dp"
                 android:text="@android:string/ok" />
         </LinearLayout>
@@ -144,7 +139,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
-                android:layout_marginLeft="8dp"
                 android:layout_marginStart="8dp"
                 android:text="@android:string/ok" />
         </LinearLayout>
@@ -172,7 +166,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
-                android:layout_marginLeft="8dp"
                 android:layout_marginStart="8dp"
                 android:text="@android:string/ok" />
         </LinearLayout>
@@ -197,6 +190,5 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true" />
+        android:layout_alignParentEnd="true" />
 </RelativeLayout>

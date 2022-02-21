@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="16dp"
+    android:padding="@dimen/dialog_spacing"
     tools:context=".ActivityMain">
 
     <include layout="@layout/title_dialog" />
@@ -12,7 +12,7 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="@dimen/dialog_spacing"
         android:orientation="vertical">
 
         <LinearLayout
@@ -29,9 +29,8 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="@dimen/dialog_spacing"
                 android:text="@string/app_xposed"
-                android:textAppearance="@style/TextMedium"
                 android:textColor="?attr/colorAccent"
                 android:textStyle="bold" />
         </LinearLayout>

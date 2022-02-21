@@ -40,13 +40,13 @@
 
             <TextView
                 android:id="@+id/tvName"
+                style="@style/TextAppearance.AppCompat.Medium"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
+                android:layout_marginHorizontal="@dimen/rule_spacing"
                 android:layout_weight="1"
                 android:ellipsize="end"
                 android:gravity="center_vertical"
-                android:layout_marginHorizontal="@dimen/rule_spacing"
-                android:textAppearance="@style/TextMedium"
                 tools:text="@tools:sample/lorem" />
         </LinearLayout>
 
@@ -94,8 +94,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
-            android:textAppearance="@style/TextSmall"
-            android:textSize="12sp"
+            android:textAppearance="@style/TextExtraSmall"
             android:visibility="gone" />
 
         <ImageView
@@ -172,7 +171,7 @@
                     android:text="@string/title_roaming_symbol"
                     android:textAppearance="@style/TextSmall"
                     android:textColor="?attr/colorOff"
-                    android:textSize="14sp" />
+                    android:textSize="@dimen/text_roaming" />
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>
@@ -374,11 +373,11 @@
                 android:layout_width="@dimen/icon_rule_s"
                 android:layout_height="@dimen/icon_rule_s"
                 android:layout_gravity="center_vertical"
-                android:gravity="center_horizontal"
+                android:gravity="center"
                 android:text="@string/title_roaming_symbol"
                 android:textAppearance="@style/TextSmall"
                 android:textColor="?attr/colorOff"
-                android:textSize="14sp" />
+                android:textSize="@dimen/text_roaming" />
 
             <CheckBox
                 android:id="@+id/cbRoaming"
