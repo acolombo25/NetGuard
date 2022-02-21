@@ -61,25 +61,27 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.PopupMenu;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.core.app.NotificationManagerCompat;
 import androidx.core.content.ContextCompat;
 import androidx.core.content.pm.ShortcutInfoCompat;
 import androidx.core.content.pm.ShortcutManagerCompat;
-import androidx.core.graphics.drawable.IconCompat;
 import androidx.core.graphics.drawable.DrawableCompat;
+import androidx.core.graphics.drawable.IconCompat;
 import androidx.core.widget.CompoundButtonCompat;
 import androidx.preference.PreferenceManager;
 import androidx.recyclerview.widget.RecyclerView;
+
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 import eu.faircode.netguard.database.Column;
+import eu.faircode.netguard.preference.DefaultPreferences;
 import eu.faircode.netguard.preference.Preferences;
 import eu.faircode.netguard.reason.SimpleReason;
 
@@ -100,7 +102,7 @@ public class AdapterRule extends RecyclerView.Adapter<AdapterRule.ViewHolder> im
     private List<Rule> listAll = new ArrayList<>();
     private List<Rule> listFiltered = new ArrayList<>();
 
-    private final List<String> messaging = Arrays.asList(
+    private static final String[] APPS_MESSAGING = {
             "com.discord",
             "com.facebook.mlite",
             "com.facebook.orca",
@@ -110,11 +112,11 @@ public class AdapterRule extends RecyclerView.Adapter<AdapterRule.ViewHolder> im
             "com.snapchat.android",
             "com.whatsapp",
             "com.whatsapp.w4b"
-    );
+    };
 
-    private final List<String> download = Arrays.asList(
+    private static final String[] APPS_DOWNLOAD = {
             "com.google.android.youtube"
-    );
+    };
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
         final View view;
@@ -453,18 +455,18 @@ public class AdapterRule extends RecyclerView.Adapter<AdapterRule.ViewHolder> im
         holder.tvRoaming.setAlpha(otherActive ? 1 : 0.5f);
         holder.tvRoaming.setVisibility(rule.roaming && (!rule.other_blocked || rule.screen_other) ? View.VISIBLE : View.INVISIBLE);
 
-        boolean hasMessaging = messaging.contains(rule.packageName);
-        holder.ivMessaging.setVisibility(hasMessaging ? View.VISIBLE : View.INVISIBLE);
-        boolean hasDownload = download.contains(rule.packageName);
-        holder.ivDownload.setVisibility(hasDownload ? View.VISIBLE : View.INVISIBLE);
-        holder.llInfo.setVisibility(hasMessaging || hasDownload ? View.VISIBLE : View.GONE);
+        boolean messaging = Arrays.asList(APPS_MESSAGING).contains(rule.packageName);
+        holder.ivMessaging.setVisibility(messaging ? View.VISIBLE : View.INVISIBLE);
+        boolean download = Arrays.asList(APPS_DOWNLOAD).contains(rule.packageName);
+        holder.ivDownload.setVisibility(download ? View.VISIBLE : View.INVISIBLE);
+        holder.llInfo.setVisibility(messaging || download ? View.VISIBLE : View.GONE);
         holder.ivInfo.setOnClickListener(v -> {
             String message = "";
-            if (hasMessaging) {
+            if (messaging) {
                 message += context.getString(R.string.title_messaging);
             }
-            if (hasDownload) {
-                if (hasMessaging) message += "\n\n";
+            if (download) {
+                if (messaging) message += "\n\n";
                 message += context.getString(R.string.title_download);
             }
             if (message.isEmpty()) return;
