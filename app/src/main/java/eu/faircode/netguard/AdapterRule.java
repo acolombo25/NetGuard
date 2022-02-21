@@ -67,7 +67,6 @@ import androidx.core.app.NotificationManagerCompat;
 import androidx.core.content.ContextCompat;
 import androidx.core.graphics.drawable.DrawableCompat;
 import androidx.core.widget.CompoundButtonCompat;
-import android.preference.PreferenceManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.load.DecodeFormat;
@@ -80,7 +79,7 @@ import java.util.List;
 
 import eu.faircode.netguard.database.Column;
 import eu.faircode.netguard.preference.Preferences;
-import eu.faircode.netguard.reason.Reason;
+import eu.faircode.netguard.preference.DefaultPreferences;
 import eu.faircode.netguard.reason.SimpleReason;
 
 public class AdapterRule extends RecyclerView.Adapter<AdapterRule.ViewHolder> implements Filterable {
@@ -265,12 +264,10 @@ public class AdapterRule extends RecyclerView.Adapter<AdapterRule.ViewHolder> im
     }
 
     public AdapterRule(Context context, View anchor) {
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
-
         this.anchor = anchor;
         this.inflater = LayoutInflater.from(context);
 
-        if (prefs.getBoolean(Preferences.DARK.getKey(), Preferences.DARK.getDefaultValue()))
+        if (DefaultPreferences.getBoolean(context, Preferences.DARK))
             colorChanged = Color.argb(128, Color.red(Color.DKGRAY), Color.green(Color.DKGRAY), Color.blue(Color.DKGRAY));
         else
             colorChanged = Color.argb(128, Color.red(Color.LTGRAY), Color.green(Color.LTGRAY), Color.blue(Color.LTGRAY));
@@ -343,10 +340,9 @@ public class AdapterRule extends RecyclerView.Adapter<AdapterRule.ViewHolder> im
     public void onBindViewHolder(final ViewHolder holder, int position) {
         final Context context = holder.itemView.getContext();
 
-        final SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
-        final boolean log_app = prefs.getBoolean(Preferences.LOG_APP.getKey(), Preferences.LOG_APP.getDefaultValue());
-        final boolean filter = prefs.getBoolean(Preferences.FILTER.getKey(), Preferences.FILTER.getDefaultValue());
-        final boolean notify_access = prefs.getBoolean(Preferences.NOTIFY_ACCESS.getKey(), Preferences.NOTIFY_ACCESS.getDefaultValue());
+        final boolean log_app = DefaultPreferences.getBoolean(context, Preferences.LOG_APP);
+        final boolean filter = DefaultPreferences.getBoolean(context, Preferences.FILTER);
+        final boolean notify_access = DefaultPreferences.getBoolean(context, Preferences.NOTIFY_ACCESS);
 
         // Get rule
         final Rule rule = listFiltered.get(position);
@@ -393,9 +389,9 @@ public class AdapterRule extends RecyclerView.Adapter<AdapterRule.ViewHolder> im
         holder.tvHosts.setText(Long.toString(rule.hosts));
 
         // Lockdown settings
-        boolean lockdown = prefs.getBoolean(Preferences.LOCKDOWN.getKey(), Preferences.LOCKDOWN.getDefaultValue());
-        boolean lockdown_wifi = prefs.getBoolean(Preferences.LOCKDOWN_WIFI.getKey(), Preferences.LOCKDOWN_WIFI.getDefaultValue());
-        boolean lockdown_other = prefs.getBoolean(Preferences.LOCKDOWN_OTHER.getKey(), Preferences.LOCKDOWN_OTHER.getDefaultValue());
+        boolean lockdown = DefaultPreferences.getBoolean(context, Preferences.LOCKDOWN);
+        boolean lockdown_wifi = DefaultPreferences.getBoolean(context, Preferences.LOCKDOWN_WIFI);
+        boolean lockdown_other = DefaultPreferences.getBoolean(context, Preferences.LOCKDOWN_OTHER);
         if ((otherActive && !lockdown_other) || (wifiActive && !lockdown_wifi))
             lockdown = false;
 
@@ -406,7 +402,7 @@ public class AdapterRule extends RecyclerView.Adapter<AdapterRule.ViewHolder> im
             DrawableCompat.setTint(wrap, rule.apply ? colorOff : colorGrayed);
         }
 
-        boolean screen_on = prefs.getBoolean(Preferences.SCREEN_ON.getKey(), Preferences.SCREEN_ON.getDefaultValue());
+        boolean screen_on = DefaultPreferences.getBoolean(context, Preferences.SCREEN_ON);
 
         // Wi-Fi settings
         holder.cbWifi.setEnabled(rule.apply);
@@ -660,11 +656,11 @@ public class AdapterRule extends RecyclerView.Adapter<AdapterRule.ViewHolder> im
                 cbLogging.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                     @Override
                     public void onCheckedChanged(CompoundButton compoundButton, boolean checked) {
-                        prefs.edit().putBoolean(Preferences.LOG_APP.getKey(), checked).apply();
+                        DefaultPreferences.putBoolean(context, Preferences.LOG_APP, checked);
                         cbNotify.setEnabled(checked);
                         if (!checked) {
                             cbNotify.setChecked(false);
-                            prefs.edit().putBoolean(Preferences.NOTIFY_ACCESS.getKey(), Preferences.NOTIFY_ACCESS.getDefaultValue()).apply();
+                            DefaultPreferences.resetBoolean(context, Preferences.NOTIFY_ACCESS);
                         }
                         ServiceSinkhole.reload(SimpleReason.ChangedNotify, context, false);
                         AdapterRule.this.notifyDataSetChanged();
@@ -676,7 +672,7 @@ public class AdapterRule extends RecyclerView.Adapter<AdapterRule.ViewHolder> im
                     public void onCheckedChanged(CompoundButton compoundButton, boolean checked) {
                         if (checked)
                             cbLogging.setChecked(true);
-                        prefs.edit().putBoolean(Preferences.FILTER.getKey(), checked).apply();
+                        DefaultPreferences.putBoolean(context, Preferences.FILTER, checked);
                         ServiceSinkhole.reload(SimpleReason.ChangedFilter, context, false);
                         AdapterRule.this.notifyDataSetChanged();
                     }
@@ -685,7 +681,7 @@ public class AdapterRule extends RecyclerView.Adapter<AdapterRule.ViewHolder> im
                 cbNotify.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                     @Override
                     public void onCheckedChanged(CompoundButton compoundButton, boolean checked) {
-                        prefs.edit().putBoolean(Preferences.NOTIFY_ACCESS.getKey(), checked).apply();
+                        DefaultPreferences.putBoolean(context, Preferences.NOTIFY_ACCESS, checked);
                         ServiceSinkhole.reload(SimpleReason.ChangedNotify, context, false);
                         AdapterRule.this.notifyDataSetChanged();
                     }
@@ -858,7 +854,7 @@ public class AdapterRule extends RecyclerView.Adapter<AdapterRule.ViewHolder> im
         });
 
         // Notify on access
-        holder.cbNotify.setEnabled(prefs.getBoolean(Preferences.NOTIFY_ACCESS.getKey(),Preferences.NOTIFY_ACCESS.getDefaultValue()) && rule.apply);
+        holder.cbNotify.setEnabled(DefaultPreferences.getBoolean(context, Preferences.NOTIFY_ACCESS) && rule.apply);
         holder.cbNotify.setOnCheckedChangeListener(null);
         holder.cbNotify.setChecked(rule.notify);
         holder.cbNotify.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -887,8 +883,7 @@ public class AdapterRule extends RecyclerView.Adapter<AdapterRule.ViewHolder> im
 
     private void markPro(Context context, MenuItem menu, String sku) {
         if (sku == null || !IAB.isPurchased(sku, context)) {
-            SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
-            boolean dark = prefs.getBoolean(Preferences.DARK.getKey(), Preferences.DARK.getDefaultValue());
+            boolean dark = DefaultPreferences.getBoolean(context, Preferences.DARK);
             SpannableStringBuilder ssb = new SpannableStringBuilder("  " + menu.getTitle());
             ssb.setSpan(new ImageSpan(context, dark ? R.drawable.ic_shopping_cart_white_24dp : R.drawable.ic_shopping_cart_black_24dp), 0, 1, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
             menu.setTitle(ssb);

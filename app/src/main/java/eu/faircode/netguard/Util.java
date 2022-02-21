@@ -27,7 +27,6 @@ import android.app.ApplicationErrorReport;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
@@ -58,7 +57,6 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.core.net.ConnectivityManagerCompat;
-import android.preference.PreferenceManager;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -82,7 +80,6 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
-import java.util.Date;
 import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.List;
@@ -91,6 +88,7 @@ import java.util.Set;
 
 import eu.faircode.netguard.database.Column;
 import eu.faircode.netguard.preference.Preferences;
+import eu.faircode.netguard.preference.DefaultPreferences;
 
 public class Util {
     private static final String TAG = "NetGuard.Util";
@@ -510,9 +508,8 @@ public class Util {
     }
 
     public static void setTheme(Context context) {
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
-        boolean dark = prefs.getBoolean(Preferences.DARK.getKey(), false);
-        String theme = prefs.getString(Preferences.THEME.getKey(), Preferences.THEME.getDefaultValue().getValue());
+        boolean dark = DefaultPreferences.getBoolean(context, Preferences.DARK);
+        String theme = DefaultPreferences.getTheme(context, Preferences.THEME);
         if (theme.equals(Theme.Teal.getValue()))
             context.setTheme(dark ? R.style.AppThemeTealDark : R.style.AppThemeTeal);
         else if (theme.equals(Theme.Blue.getValue()))
@@ -954,8 +951,7 @@ public class Util {
                 }
 
                 // Get settings
-                SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
-                Map<String, ?> all = prefs.getAll();
+                Map<String, ?> all = DefaultPreferences.getAll(context);
                 for (String key : all.keySet())
                     sb.append("Setting: ").append(key).append('=').append(all.get(key)).append("\r\n");
                 sb.append("\r\n");

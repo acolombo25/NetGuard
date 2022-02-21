@@ -20,7 +20,6 @@ package eu.faircode.netguard;
 */
 
 import android.content.Context;
-import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.graphics.Color;
 import android.view.LayoutInflater;
@@ -29,14 +28,12 @@ import android.view.ViewGroup;
 import android.widget.CursorAdapter;
 import android.widget.TextView;
 
-import android.preference.PreferenceManager;
-
-import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import eu.faircode.netguard.database.Column;
 import eu.faircode.netguard.format.DateFormats;
 import eu.faircode.netguard.preference.Preferences;
+import eu.faircode.netguard.preference.DefaultPreferences;
 
 public class AdapterDns extends CursorAdapter {
     private int colorExpired;
@@ -50,9 +47,7 @@ public class AdapterDns extends CursorAdapter {
     public AdapterDns(Context context, Cursor cursor) {
         super(context, cursor, 0);
 
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
-
-        if (prefs.getBoolean(Preferences.DARK.getKey(), Preferences.DARK.getDefaultValue())) //FIXME Remove
+        if (DefaultPreferences.getBoolean(context, Preferences.DARK)) //FIXME Remove
             colorExpired = Color.argb(128, Color.red(Color.DKGRAY), Color.green(Color.DKGRAY), Color.blue(Color.DKGRAY));
         else
             colorExpired = Color.argb(128, Color.red(Color.LTGRAY), Color.green(Color.LTGRAY), Color.blue(Color.LTGRAY));

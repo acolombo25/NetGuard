@@ -29,9 +29,8 @@ import android.service.quicksettings.TileService;
 import android.util.Log;
 import android.widget.Toast;
 
-import android.preference.PreferenceManager;
-
 import eu.faircode.netguard.preference.Preferences;
+import eu.faircode.netguard.preference.DefaultPreferences;
 import eu.faircode.netguard.reason.SimpleReason;
 
 @TargetApi(Build.VERSION_CODES.N)
@@ -40,8 +39,7 @@ public class ServiceTileFilter extends TileService implements SharedPreferences.
 
     public void onStartListening() {
         Log.i(TAG, "Start listening");
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
-        prefs.registerOnSharedPreferenceChangeListener(this);
+        DefaultPreferences.registerListener(this, this);
         update();
     }
 
@@ -52,8 +50,7 @@ public class ServiceTileFilter extends TileService implements SharedPreferences.
     }
 
     private void update() {
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
-        boolean filter = prefs.getBoolean(Preferences.FILTER.getKey(), Preferences.FILTER.getDefaultValue());
+        boolean filter = DefaultPreferences.getBoolean(this, Preferences.FILTER);
         Tile tile = getQsTile();
         if (tile != null) {
             tile.setState(filter ? Tile.STATE_ACTIVE : Tile.STATE_INACTIVE);
@@ -64,8 +61,7 @@ public class ServiceTileFilter extends TileService implements SharedPreferences.
 
     public void onStopListening() {
         Log.i(TAG, "Stop listening");
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
-        prefs.unregisterOnSharedPreferenceChangeListener(this);
+        DefaultPreferences.unregisterListener(this, this);
     }
 
     public void onClick() {
@@ -73,8 +69,7 @@ public class ServiceTileFilter extends TileService implements SharedPreferences.
 
         if (Util.canFilter(this)) {
             if (IAB.isPurchased(ActivityPro.SKU_FILTER, this)) {
-                SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
-                prefs.edit().putBoolean(Preferences.FILTER.getKey(), !prefs.getBoolean(Preferences.FILTER.getKey(), Preferences.FILTER.getDefaultValue())).apply();
+                DefaultPreferences.toggleBoolean(this, Preferences.FILTER);
                 ServiceSinkhole.reload(SimpleReason.Tile, this, false);
             } else
                 Toast.makeText(this, R.string.title_pro_feature, Toast.LENGTH_SHORT).show();

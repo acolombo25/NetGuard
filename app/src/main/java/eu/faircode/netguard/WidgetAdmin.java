@@ -23,8 +23,6 @@ import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.preference.PreferenceManager;
 import android.os.Build;
 import android.os.VibrationEffect;
 import android.os.Vibrator;
@@ -33,7 +31,7 @@ import android.util.Log;
 import java.util.Date;
 
 import eu.faircode.netguard.preference.Preferences;
-import eu.faircode.netguard.reason.Reason;
+import eu.faircode.netguard.preference.DefaultPreferences;
 import eu.faircode.netguard.reason.SimpleReason;
 
 public class WidgetAdmin extends ReceiverAutostart {
@@ -54,8 +52,6 @@ public class WidgetAdmin extends ReceiverAutostart {
         Log.i(TAG, "Received " + intent);
         Util.logExtras(intent);
 
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
-
         // Cancel set alarm
         AlarmManager am = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
         Intent i = new Intent(INTENT_ON);
@@ -75,14 +71,14 @@ public class WidgetAdmin extends ReceiverAutostart {
         try {
             if (INTENT_ON.equals(intent.getAction()) || INTENT_OFF.equals(intent.getAction())) {
                 boolean enabled = INTENT_ON.equals(intent.getAction());
-                prefs.edit().putBoolean(Preferences.ENABLED.getKey(), enabled).apply();
+                DefaultPreferences.putBoolean(context, Preferences.ENABLED, enabled);
                 if (enabled)
                     ServiceSinkhole.start(SimpleReason.Widget, context);
                 else
                     ServiceSinkhole.stop(SimpleReason.Widget, context, false);
 
                 // Auto enable
-                int auto = Integer.parseInt(prefs.getString(Preferences.AUTO_ENABLE.getKey(), Integer.toString(Preferences.AUTO_ENABLE.getDefaultValue())));
+                int auto = DefaultPreferences.getBoxedInt(context, Preferences.AUTO_ENABLE);
                 if (!enabled && auto > 0) {
                     Log.i(TAG, "Scheduling enabled after minutes=" + auto);
                     if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M)
@@ -93,7 +89,7 @@ public class WidgetAdmin extends ReceiverAutostart {
 
             } else if (INTENT_LOCKDOWN_ON.equals(intent.getAction()) || INTENT_LOCKDOWN_OFF.equals(intent.getAction())) {
                 boolean lockdown = INTENT_LOCKDOWN_ON.equals(intent.getAction());
-                prefs.edit().putBoolean(Preferences.LOCKDOWN.getKey(), lockdown).apply();
+                DefaultPreferences.putBoolean(context, Preferences.LOCKDOWN, lockdown);
                 ServiceSinkhole.reload(SimpleReason.Widget, context, false);
                 WidgetLockdown.updateWidgets(context);
             }
