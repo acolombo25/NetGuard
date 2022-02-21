@@ -370,74 +370,71 @@ public class ActivityMain extends AppCompatActivity implements SharedPreferences
     }
 
     private boolean start() {
-        if (!DefaultPreferences.getBoolean(this, Preferences.ENABLED)) {
-            try {
-                String alwaysOn = Settings.Secure.getString(getContentResolver(), "always_on_vpn_app");
-                Log.i(TAG, "Always-on=" + alwaysOn);
-                if (!TextUtils.isEmpty(alwaysOn))
-                    if (getPackageName().equals(alwaysOn)) {
-                        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.Q &&
-                                DefaultPreferences.getBoolean(ActivityMain.this, Preferences.FILTER)) {
-                            int lockdown = Settings.Secure.getInt(getContentResolver(), "always_on_vpn_lockdown", 0);
-                            Log.i(TAG, "Lockdown=" + lockdown);
-                            if (lockdown != 0) {
-                                swEnabled.setChecked(false);
-                                Toast.makeText(ActivityMain.this, R.string.msg_always_on_lockdown, Toast.LENGTH_LONG).show();
-                                return false;
-                            }
+        try {
+            String alwaysOn = Settings.Secure.getString(getContentResolver(), "always_on_vpn_app");
+            Log.i(TAG, "Always-on=" + alwaysOn);
+            if (!TextUtils.isEmpty(alwaysOn))
+                if (getPackageName().equals(alwaysOn)) {
+                    if (Build.VERSION.SDK_INT < Build.VERSION_CODES.Q &&
+                            DefaultPreferences.getBoolean(ActivityMain.this, Preferences.FILTER)) {
+                        int lockdown = Settings.Secure.getInt(getContentResolver(), "always_on_vpn_lockdown", 0);
+                        Log.i(TAG, "Lockdown=" + lockdown);
+                        if (lockdown != 0) {
+                            swEnabled.setChecked(false);
+                            Toast.makeText(ActivityMain.this, R.string.msg_always_on_lockdown, Toast.LENGTH_LONG).show();
+                            return false;
                         }
-                    } else {
-                        swEnabled.setChecked(false);
-                        Toast.makeText(ActivityMain.this, R.string.msg_always_on, Toast.LENGTH_LONG).show();
-                        return false;
                     }
-            } catch (Throwable ex) {
-                Util.logException(TAG, ex);
-            }
-
-            boolean filter = DefaultPreferences.getBoolean(ActivityMain.this, Preferences.FILTER);
-            if (filter && Util.isPrivateDns(ActivityMain.this))
-                Toast.makeText(ActivityMain.this, R.string.msg_private_dns, Toast.LENGTH_LONG).show();
-
-            try {
-                final Intent prepare = VpnService.prepare(ActivityMain.this);
-                if (prepare == null) {
-                    Log.i(TAG, "Prepare done");
-                    onActivityResult(REQUEST_VPN, RESULT_OK, null);
-                    return true;
                 } else {
-                    // Show dialog
-                    LayoutInflater inflater = LayoutInflater.from(ActivityMain.this);
-                    View view = inflater.inflate(R.layout.vpn, null, false);
-                    dialogVpn = new AlertDialog.Builder(ActivityMain.this)
-                            .setView(view)
-                            .setCancelable(false)
-                            .setPositiveButton(android.R.string.yes, (dialog, which) -> {
-                                if (running) {
-                                    Log.i(TAG, "Start intent=" + prepare);
-                                    try {
-                                        // com.android.vpndialogs.ConfirmDialog required
-                                        startActivityForResult(prepare, REQUEST_VPN);
-                                    } catch (Throwable ex) {
-                                        Util.logException(TAG, ex);
-                                        onActivityResult(REQUEST_VPN, RESULT_CANCELED, null);
-                                        DefaultPreferences.resetBoolean(this, Preferences.ENABLED);
-                                    }
-                                }
-                            })
-                            .setOnDismissListener(dialogInterface -> dialogVpn = null)
-                            .create();
-                    dialogVpn.show();
+                    swEnabled.setChecked(false);
+                    Toast.makeText(ActivityMain.this, R.string.msg_always_on, Toast.LENGTH_LONG).show();
                     return false;
                 }
-            } catch (Throwable ex) {
-                // Prepare failed
-                Util.logException(TAG, ex);
-                DefaultPreferences.resetBoolean(this, Preferences.ENABLED);
+        } catch (Throwable ex) {
+            Util.logException(TAG, ex);
+        }
+
+        boolean filter = DefaultPreferences.getBoolean(ActivityMain.this, Preferences.FILTER);
+        if (filter && Util.isPrivateDns(ActivityMain.this))
+            Toast.makeText(ActivityMain.this, R.string.msg_private_dns, Toast.LENGTH_LONG).show();
+
+        try {
+            final Intent prepare = VpnService.prepare(ActivityMain.this);
+            if (prepare == null) {
+                Log.i(TAG, "Prepare done");
+                onActivityResult(REQUEST_VPN, RESULT_OK, null);
+                return true;
+            } else {
+                // Show dialog
+                LayoutInflater inflater = LayoutInflater.from(ActivityMain.this);
+                View view = inflater.inflate(R.layout.vpn, null, false);
+                dialogVpn = new AlertDialog.Builder(ActivityMain.this)
+                        .setView(view)
+                        .setCancelable(false)
+                        .setPositiveButton(android.R.string.yes, (dialog, which) -> {
+                            if (running) {
+                                Log.i(TAG, "Start intent=" + prepare);
+                                try {
+                                    // com.android.vpndialogs.ConfirmDialog required
+                                    startActivityForResult(prepare, REQUEST_VPN);
+                                } catch (Throwable ex) {
+                                    Util.logException(TAG, ex);
+                                    onActivityResult(REQUEST_VPN, RESULT_CANCELED, null);
+                                    DefaultPreferences.resetBoolean(this, Preferences.ENABLED);
+                                }
+                            }
+                        })
+                        .setOnDismissListener(dialogInterface -> dialogVpn = null)
+                        .create();
+                dialogVpn.show();
                 return false;
             }
+        } catch (Throwable ex) {
+            // Prepare failed
+            Util.logException(TAG, ex);
+            DefaultPreferences.resetBoolean(this, Preferences.ENABLED);
+            return false;
         }
-        return true;
     }
 
     @Override
