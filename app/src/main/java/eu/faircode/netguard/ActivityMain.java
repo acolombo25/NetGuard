@@ -243,7 +243,7 @@ public class ActivityMain extends AppCompatActivity implements SharedPreferences
         btnUsage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                DefaultPreferences.resetBoolean(ActivityMain.this, Preferences.HINT_USAGE);
+                DefaultPreferences.toggleBoolean(ActivityMain.this, Preferences.HINT_USAGE);
                 llUsage.setVisibility(View.GONE);
                 showHints();
             }
@@ -258,7 +258,7 @@ public class ActivityMain extends AppCompatActivity implements SharedPreferences
         btnFairEmail.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                DefaultPreferences.resetBoolean(ActivityMain.this, Preferences.HINT_FAIR_EMAIL);
+                DefaultPreferences.toggleBoolean(ActivityMain.this, Preferences.HINT_FAIR_EMAIL);
                 llFairEmail.setVisibility(View.GONE);
             }
         });

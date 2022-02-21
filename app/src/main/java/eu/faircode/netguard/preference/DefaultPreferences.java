@@ -45,7 +45,7 @@ public class DefaultPreferences {
     }
 
     public static void toggleBoolean(Context context, Preference<Boolean> preference) {
-        putBoolean(context, preference, getBoolean(context, preference));
+        putBoolean(context, preference, !getBoolean(context, preference));
     }
 
     public static boolean isNotDefault(Context context, Preference<Boolean> preference) {
