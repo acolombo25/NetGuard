@@ -24,14 +24,13 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Build;
-import android.preference.PreferenceManager;
 import android.util.Log;
 
 
 import java.util.Map;
 
-import eu.faircode.netguard.database.Column;
 import eu.faircode.netguard.preference.Preferences;
+import eu.faircode.netguard.preference.DefaultPreferences;
 import eu.faircode.netguard.preference.Sort;
 import eu.faircode.netguard.reason.SimpleReason;
 
@@ -50,10 +49,9 @@ public class ReceiverAutostart extends BroadcastReceiver {
                 upgrade(true, context);
 
                 // Start service
-                SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
-                if (prefs.getBoolean(Preferences.ENABLED.getKey(), Preferences.ENABLED.getDefaultValue()))
+                if (DefaultPreferences.getBoolean(context, Preferences.ENABLED))
                     ServiceSinkhole.start(SimpleReason.Receiver, context);
-                else if (prefs.getBoolean(Preferences.SHOW_STATS.getKey(), false))
+                else if (DefaultPreferences.getBoolean(context, Preferences.SHOW_STATS))
                     ServiceSinkhole.run(SimpleReason.Receiver, context);
 
                 if (Util.isInteractive(context))
@@ -65,21 +63,21 @@ public class ReceiverAutostart extends BroadcastReceiver {
 
     public static void upgrade(boolean initialized, Context context) {
         synchronized (context.getApplicationContext()) {
-            SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
-            int oldVersion = prefs.getInt("version", -1);
+            int oldVersion = DefaultPreferences.getInt(context, Preferences.VERSION);
             int newVersion = Util.getSelfVersionCode(context);
             if (oldVersion == newVersion)
                 return;
             Log.i(TAG, "Upgrading from version " + oldVersion + " to " + newVersion);
 
-            SharedPreferences.Editor editor = prefs.edit();
+            SharedPreferences.Editor editor = DefaultPreferences.Editor.get(context);
 
             if (initialized) {
                 if (oldVersion < 38) {
                     Log.i(TAG, "Converting screen wifi/mobile");
-                    editor.putBoolean(Preferences.SCREEN_WIFI.getKey(), prefs.getBoolean(Preferences.UNUSED.getKey(), Preferences.UNUSED.getDefaultValue()));
-                    editor.putBoolean(Preferences.SCREEN_WIFI.getKey(), prefs.getBoolean(Preferences.UNUSED.getKey(), prefs.getBoolean(Preferences.UNUSED.getKey(), Preferences.UNUSED.getDefaultValue())));
-                    editor.remove(Preferences.UNUSED.getKey());
+                    boolean isUnused = DefaultPreferences.getBoolean(context, Preferences.UNUSED);
+                    DefaultPreferences.Editor.putBoolean(editor, Preferences.SCREEN_WIFI, isUnused);
+                    DefaultPreferences.Editor.putBoolean(editor, Preferences.SCREEN_OTHER, isUnused);
+                    DefaultPreferences.Editor.remove(editor, Preferences.UNUSED);
 
                     SharedPreferences unused = context.getSharedPreferences(Preferences.UNUSED.getKey(), Context.MODE_PRIVATE);
                     SharedPreferences screen_wifi = context.getSharedPreferences(Preferences.SCREEN_WIFI.getKey(), Context.MODE_PRIVATE);
@@ -100,37 +98,37 @@ public class ReceiverAutostart extends BroadcastReceiver {
 
             } else {
                 Log.i(TAG, "Initializing sdk=" + Build.VERSION.SDK_INT);
-                editor.putBoolean(Preferences.FILTER_UDP.getKey(), Preferences.FILTER_UDP.getDefaultValue());
-                editor.putBoolean(Preferences.WHITELIST_WIFI.getKey(), !Preferences.WHITELIST_WIFI.getDefaultValue());
-                editor.putBoolean(Preferences.WHITELIST_OTHER.getKey(), !Preferences.WHITELIST_OTHER.getDefaultValue());
+                DefaultPreferences.Editor.resetBoolean(editor, Preferences.FILTER_UDP);
+                DefaultPreferences.Editor.putBoolean(editor, Preferences.WHITELIST_WIFI, !Preferences.WHITELIST_WIFI.getDefaultValue());
+                DefaultPreferences.Editor.putBoolean(editor, Preferences.WHITELIST_OTHER, !Preferences.WHITELIST_OTHER.getDefaultValue());
                 if (Build.VERSION.SDK_INT == Build.VERSION_CODES.LOLLIPOP)
-                    editor.putBoolean(Preferences.FILTER.getKey(), !Preferences.FILTER.getDefaultValue()); // Optional
+                    DefaultPreferences.Editor.putBoolean(editor, Preferences.FILTER, !Preferences.FILTER.getDefaultValue()); // Optional
             }
 
             if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP)
-                editor.putBoolean(Preferences.FILTER.getKey(), !Preferences.FILTER.getDefaultValue()); // Mandatory
+                DefaultPreferences.Editor.putBoolean(editor, Preferences.FILTER, !Preferences.FILTER.getDefaultValue()); // Mandatory
 
             if (!Util.canFilter()) {
-                editor.putBoolean(Preferences.LOG_APP.getKey(), Preferences.LOG_APP.getDefaultValue());
-                editor.putBoolean(Preferences.FILTER.getKey(), Preferences.FILTER.getDefaultValue());
+                DefaultPreferences.Editor.resetBoolean(editor, Preferences.LOG_APP);
+                DefaultPreferences.Editor.resetBoolean(editor, Preferences.FILTER);
             }
 
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-                editor.remove(Preferences.SHOW_TOP.getKey());
-                if (Sort.Data.getValue().equals(prefs.getString(Preferences.SORT.getKey(), Preferences.SORT.getDefaultValue().getValue())))
-                    editor.remove(Preferences.SORT.getKey());
+                DefaultPreferences.Editor.remove(editor, Preferences.SHOW_TOP);
+                if (Sort.Data.getValue().equals(DefaultPreferences.getSort(context, Preferences.SORT)))
+                    DefaultPreferences.Editor.remove(editor, Preferences.SORT);
             }
 
             if (Util.isPlayStoreInstall(context)) {
-                editor.remove(Preferences.UPDATE_CHECK.getKey());
-                editor.remove(Preferences.USE_HOSTS.getKey());
-                editor.remove(Preferences.HOSTS_URL.getKey());
+                DefaultPreferences.Editor.remove(editor, Preferences.UPDATE_CHECK);
+                DefaultPreferences.Editor.remove(editor, Preferences.USE_HOSTS);
+                DefaultPreferences.Editor.remove(editor, Preferences.HOSTS_URL);
             }
 
             if (!Util.isDebuggable(context))
-                editor.remove(Preferences.LOG_LEVEL.getKey());
+                DefaultPreferences.Editor.remove(editor, Preferences.LOG_LEVEL);
 
-            editor.putInt(Column.VERSION.getValue(), newVersion);
+            DefaultPreferences.Editor.putInt(editor, Preferences.VERSION, newVersion);
             editor.apply();
         }
     }

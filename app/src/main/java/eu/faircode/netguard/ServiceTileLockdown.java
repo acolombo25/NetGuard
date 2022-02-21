@@ -27,9 +27,8 @@ import android.service.quicksettings.Tile;
 import android.service.quicksettings.TileService;
 import android.util.Log;
 
-import android.preference.PreferenceManager;
-
 import eu.faircode.netguard.preference.Preferences;
+import eu.faircode.netguard.preference.DefaultPreferences;
 import eu.faircode.netguard.reason.SimpleReason;
 
 @TargetApi(Build.VERSION_CODES.N)
@@ -38,8 +37,7 @@ public class ServiceTileLockdown extends TileService implements SharedPreference
 
     public void onStartListening() {
         Log.i(TAG, "Start listening");
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
-        prefs.registerOnSharedPreferenceChangeListener(this);
+        DefaultPreferences.registerListener(this, this);
         update();
     }
 
@@ -50,8 +48,7 @@ public class ServiceTileLockdown extends TileService implements SharedPreference
     }
 
     private void update() {
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
-        boolean lockdown = prefs.getBoolean(Preferences.LOCKDOWN.getKey(), Preferences.LOCKDOWN.getDefaultValue());
+        boolean lockdown = DefaultPreferences.getBoolean(this, Preferences.LOCKDOWN);
         Tile tile = getQsTile();
         if (tile != null) {
             tile.setState(lockdown ? Tile.STATE_ACTIVE : Tile.STATE_INACTIVE);
@@ -61,15 +58,13 @@ public class ServiceTileLockdown extends TileService implements SharedPreference
 
     public void onStopListening() {
         Log.i(TAG, "Stop listening");
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
-        prefs.unregisterOnSharedPreferenceChangeListener(this);
+        DefaultPreferences.unregisterListener(this, this);
     }
 
     public void onClick() {
         Log.i(TAG, "Click");
 
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
-        prefs.edit().putBoolean(Preferences.LOCKDOWN.getKey(), !prefs.getBoolean(Preferences.LOCKDOWN.getKey(), Preferences.LOCKDOWN.getDefaultValue())).apply();
+        DefaultPreferences.toggleBoolean(this, Preferences.LOCKDOWN);
         ServiceSinkhole.reload(SimpleReason.Tile, this, false);
         WidgetLockdown.updateWidgets(this);
     }

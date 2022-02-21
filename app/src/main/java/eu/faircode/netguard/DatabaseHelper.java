@@ -29,7 +29,6 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.os.Handler;
 import android.os.HandlerThread;
 import android.os.Message;
-import android.preference.PreferenceManager;
 import android.util.Log;
 
 
@@ -47,6 +46,7 @@ import eu.faircode.netguard.database.Column;
 import eu.faircode.netguard.database.Index;
 import eu.faircode.netguard.database.Table;
 import eu.faircode.netguard.preference.Preferences;
+import eu.faircode.netguard.preference.DefaultPreferences;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String TAG = "NetGuard.Database";
@@ -103,7 +103,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     private DatabaseHelper(Context context) {
         super(context, DB_NAME, null, DB_VERSION);
-        prefs = PreferenceManager.getDefaultSharedPreferences(context);
+        prefs = DefaultPreferences.getPreferences(context);
 
         if (!once) {
             once = true;
@@ -825,7 +825,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             try {
                 int ttl = rr.TTL;
 
-                int min = Integer.parseInt(prefs.getString(Preferences.TTL.getKey(), Integer.toString(Preferences.TTL.getDefaultValue())));
+                int min = DefaultPreferences.getBoxedInt(prefs, Preferences.TTL);
                 if (ttl < min)
                     ttl = min;
 

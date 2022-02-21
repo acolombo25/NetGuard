@@ -45,7 +45,6 @@ import android.preference.Preference;
 import android.preference.PreferenceFragment;
 import android.preference.PreferenceGroup;
 import android.preference.PreferenceScreen;
-import android.preference.PreferenceManager;
 import android.preference.TwoStatePreference;
 import android.text.SpannableStringBuilder;
 import android.text.Spanned;
@@ -97,6 +96,7 @@ import javax.xml.parsers.SAXParserFactory;
 import eu.faircode.netguard.database.Column;
 import eu.faircode.netguard.format.Files;
 import eu.faircode.netguard.preference.Preferences;
+import eu.faircode.netguard.preference.DefaultPreferences;
 import eu.faircode.netguard.reason.Changed;
 import eu.faircode.netguard.reason.SimpleReason;
 import eu.faircode.netguard.serializer.Serializer;
@@ -139,7 +139,6 @@ public class ActivitySettings extends AppCompatActivity implements SharedPrefere
     protected void onPostCreate(Bundle savedInstanceState) {
         super.onPostCreate(savedInstanceState);
         final PreferenceScreen screen = getPreferenceScreen();
-        final SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
 
         PreferenceGroup cat_options = (PreferenceGroup) ((PreferenceGroup) screen.findPreference("screen_options")).findPreference("category_options");
         PreferenceGroup cat_network = (PreferenceGroup) ((PreferenceGroup) screen.findPreference("screen_network_options")).findPreference("category_network_options");
@@ -149,15 +148,15 @@ public class ActivitySettings extends AppCompatActivity implements SharedPrefere
 
         // Handle auto enable
         Preference pref_auto_enable = screen.findPreference(Preferences.AUTO_ENABLE.getKey());
-        pref_auto_enable.setTitle(getString(R.string.setting_auto, Integer.parseInt(prefs.getString(Preferences.AUTO_ENABLE.getKey(), Integer.toString(Preferences.AUTO_ENABLE.getDefaultValue())))));
+        pref_auto_enable.setTitle(getString(R.string.setting_auto, DefaultPreferences.getBoxedInt(this, Preferences.AUTO_ENABLE)));
 
         // Handle screen delay
         Preference pref_screen_delay = screen.findPreference(Preferences.SCREEN_DELAY.getKey());
-        pref_screen_delay.setTitle(getString(R.string.setting_delay, Integer.parseInt(prefs.getString(Preferences.SCREEN_DELAY.getKey(), Integer.toString(Preferences.SCREEN_DELAY.getDefaultValue())))));
+        pref_screen_delay.setTitle(getString(R.string.setting_delay, DefaultPreferences.getBoxedInt(this, Preferences.SCREEN_DELAY)));
 
         // Handle theme
         Preference pref_screen_theme = screen.findPreference(Preferences.THEME.getKey());
-        String theme = prefs.getString(Preferences.THEME.getKey(), Preferences.THEME.getDefaultValue().getValue());
+        String theme = DefaultPreferences.getTheme(this, Preferences.THEME);
         String[] themeNames = getResources().getStringArray(R.array.themeNames);
         String[] themeValues = getResources().getStringArray(R.array.themeValues);
         for (int i = 0; i < themeNames.length; i++)
@@ -171,7 +170,7 @@ public class ActivitySettings extends AppCompatActivity implements SharedPrefere
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O_MR1)
             cat_network.removePreference(pref_wifi_homes);
         else {
-            Set<String> ssids = prefs.getStringSet(Preferences.WIFI_HOMES.getKey(), Preferences.WIFI_HOMES.getDefaultValue());
+            Set<String> ssids = DefaultPreferences.getStringSet(this, Preferences.WIFI_HOMES);
             if (ssids.size() > 0)
                 pref_wifi_homes.setTitle(getString(R.string.setting_wifi_home, TextUtils.join(", ", ssids)));
             else
@@ -191,8 +190,7 @@ public class ActivitySettings extends AppCompatActivity implements SharedPrefere
         }
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
-            TwoStatePreference pref_handover =
-                    (TwoStatePreference) screen.findPreference("handover");
+            TwoStatePreference pref_handover = (TwoStatePreference) screen.findPreference(Preferences.HANDOVER.getKey());
             cat_advanced.removePreference(pref_handover);
         }
 
@@ -255,29 +253,29 @@ public class ActivitySettings extends AppCompatActivity implements SharedPrefere
         }
 
         // VPN parameters
-        screen.findPreference(Preferences.VPN4.getKey()).setTitle(getString(R.string.setting_vpn4, prefs.getString(Preferences.VPN4.getKey(), Preferences.VPN4.getDefaultValue())));
-        screen.findPreference(Preferences.VPN6.getKey()).setTitle(getString(R.string.setting_vpn6, prefs.getString(Preferences.VPN6.getKey(), Preferences.VPN6.getDefaultValue())));
+        screen.findPreference(Preferences.VPN4.getKey()).setTitle(getString(R.string.setting_vpn4, DefaultPreferences.getString(this, Preferences.VPN4)));
+        screen.findPreference(Preferences.VPN6.getKey()).setTitle(getString(R.string.setting_vpn6, DefaultPreferences.getString(this, Preferences.VPN6)));
         EditTextPreference pref_dns1 = (EditTextPreference) screen.findPreference(Preferences.DNS1.getKey());
         EditTextPreference pref_dns2 = (EditTextPreference) screen.findPreference(Preferences.DNS2.getKey());
         EditTextPreference pref_validate = (EditTextPreference) screen.findPreference(Preferences.VALIDATE.getKey());
         EditTextPreference pref_ttl = (EditTextPreference) screen.findPreference(Preferences.TTL.getKey());
-        pref_dns1.setTitle(getString(R.string.setting_dns, prefs.getString(Preferences.DNS1.getKey(), Preferences.DNS1.getDefaultValue())));
-        pref_dns2.setTitle(getString(R.string.setting_dns, prefs.getString(Preferences.DNS2.getKey(), Preferences.DNS2.getDefaultValue())));
-        pref_validate.setTitle(getString(R.string.setting_validate, prefs.getString(Preferences.VALIDATE.getKey(), Preferences.VALIDATE.getDefaultValue())));
-        pref_ttl.setTitle(getString(R.string.setting_ttl, Integer.parseInt(prefs.getString(Preferences.TTL.getKey(), Integer.toString(Preferences.TTL.getDefaultValue())))));
+        pref_dns1.setTitle(getString(R.string.setting_dns, DefaultPreferences.getString(this, Preferences.DNS1)));
+        pref_dns2.setTitle(getString(R.string.setting_dns, DefaultPreferences.getString(this, Preferences.DNS2)));
+        pref_validate.setTitle(getString(R.string.setting_validate, DefaultPreferences.getString(this, Preferences.VALIDATE)));
+        pref_ttl.setTitle(getString(R.string.setting_ttl, DefaultPreferences.getBoxedInt(this, Preferences.TTL)));
 
         // SOCKS5 parameters
-        screen.findPreference(Preferences.SOCKS_5_ADDR.getKey()).setTitle(getString(R.string.setting_socks5_addr, prefs.getString(Preferences.SOCKS_5_ADDR.getKey(), Preferences.SOCKS_5_ADDR.getDefaultValue())));
-        screen.findPreference(Preferences.SOCKS_5_PORT.getKey()).setTitle(getString(R.string.setting_socks5_port, prefs.getString(Preferences.SOCKS_5_PORT.getKey(), Preferences.SOCKS_5_PORT.getDefaultValue())));
-        screen.findPreference(Preferences.SOCKS_5_USERNAME.getKey()).setTitle(getString(R.string.setting_socks5_username, prefs.getString(Preferences.SOCKS_5_USERNAME.getKey(), Preferences.SOCKS_5_USERNAME.getDefaultValue())));
-        screen.findPreference(Preferences.SOCKS_5_PASSWORD.getKey()).setTitle(getString(R.string.setting_socks5_password, TextUtils.isEmpty(prefs.getString(Preferences.SOCKS_5_PASSWORD.getKey(), Preferences.SOCKS_5_PASSWORD.getDefaultValue())) ? "-" : "*****"));
+        screen.findPreference(Preferences.SOCKS_5_ADDR.getKey()).setTitle(getString(R.string.setting_socks5_addr, DefaultPreferences.getString(this, Preferences.SOCKS_5_ADDR)));
+        screen.findPreference(Preferences.SOCKS_5_PORT.getKey()).setTitle(getString(R.string.setting_socks5_port, DefaultPreferences.getString(this, Preferences.SOCKS_5_PORT)));
+        screen.findPreference(Preferences.SOCKS_5_USERNAME.getKey()).setTitle(getString(R.string.setting_socks5_username, DefaultPreferences.getString(this, Preferences.SOCKS_5_USERNAME)));
+        screen.findPreference(Preferences.SOCKS_5_PASSWORD.getKey()).setTitle(getString(R.string.setting_socks5_password, TextUtils.isEmpty(DefaultPreferences.getString(this, Preferences.SOCKS_5_PASSWORD)) ? "-" : "*****"));
 
         // PCAP parameters
-        screen.findPreference(Preferences.PCAP_RECORD_SIZE.getKey()).setTitle(getString(R.string.setting_pcap_record_size, Long.parseLong(prefs.getString(Preferences.PCAP_RECORD_SIZE.getKey(), Long.toString(Preferences.PCAP_RECORD_SIZE.getDefaultValue())))));
-        screen.findPreference(Preferences.PCAP_FILE_SIZE.getKey()).setTitle(getString(R.string.setting_pcap_file_size, Long.parseLong(prefs.getString(Preferences.PCAP_FILE_SIZE.getKey(), Long.toString(Preferences.PCAP_FILE_SIZE.getDefaultValue())))));
+        screen.findPreference(Preferences.PCAP_RECORD_SIZE.getKey()).setTitle(getString(R.string.setting_pcap_record_size, DefaultPreferences.getBoxedLong(this, Preferences.PCAP_RECORD_SIZE)));
+        screen.findPreference(Preferences.PCAP_FILE_SIZE.getKey()).setTitle(getString(R.string.setting_pcap_file_size, DefaultPreferences.getBoxedLong(this, Preferences.PCAP_FILE_SIZE)));
 
         // Watchdog
-        screen.findPreference(Preferences.WATCHDOG.getKey()).setTitle(getString(R.string.setting_watchdog, Long.parseLong(prefs.getString(Preferences.WATCHDOG.getKey(), Long.toString(Preferences.WATCHDOG.getDefaultValue())))));
+        screen.findPreference(Preferences.WATCHDOG.getKey()).setTitle(getString(R.string.setting_watchdog, DefaultPreferences.getBoxedLong(this, Preferences.WATCHDOG)));
 
         // Show resolved
         Preference pref_show_resolved = screen.findPreference(Preferences.SHOW_RESOLVED.getKey());
@@ -297,8 +295,8 @@ public class ActivitySettings extends AppCompatActivity implements SharedPrefere
             cat_stats.removePreference(screen.findPreference(Preferences.SHOW_TOP.getKey()));
         EditTextPreference pref_stats_frequency = (EditTextPreference) screen.findPreference(Preferences.STATS_FREQUENCY.getKey());
         EditTextPreference pref_stats_samples = (EditTextPreference) screen.findPreference(Preferences.STATS_SAMPLES.getKey());
-        pref_stats_frequency.setTitle(getString(R.string.setting_stats_frequency, Long.parseLong(prefs.getString(Preferences.STATS_FREQUENCY.getKey(), Long.toString(Preferences.STATS_FREQUENCY.getDefaultValue())))));
-        pref_stats_samples.setTitle(getString(R.string.setting_stats_samples, Long.parseLong(prefs.getString(Preferences.STATS_SAMPLES.getKey(), Long.toString(Preferences.STATS_SAMPLES.getDefaultValue())))));
+        pref_stats_frequency.setTitle(getString(R.string.setting_stats_frequency, DefaultPreferences.getBoxedLong(this, Preferences.STATS_FREQUENCY)));
+        pref_stats_samples.setTitle(getString(R.string.setting_stats_samples, DefaultPreferences.getBoxedLong(this, Preferences.STATS_SAMPLES)));
 
         // Handle export
         Preference pref_export = screen.findPreference(Preferences.EXPORT.getKey());
@@ -330,7 +328,7 @@ public class ActivitySettings extends AppCompatActivity implements SharedPrefere
         EditTextPreference pref_hosts_url = (EditTextPreference) screen.findPreference(Preferences.HOSTS_URL.getKey());
         final Preference pref_hosts_download = screen.findPreference(Preferences.HOSTS_DOWNLOAD.getKey());
 
-        pref_rcode.setTitle(getString(R.string.setting_rcode, Integer.parseInt(prefs.getString(Preferences.R_CODE.getKey(), Integer.toString(Preferences.R_CODE.getDefaultValue())))));
+        pref_rcode.setTitle(getString(R.string.setting_rcode, DefaultPreferences.getBoxedInt(this, Preferences.R_CODE)));
 
         if (Util.isPlayStoreInstall(this) || !Util.hasValidFingerprint(this))
             cat_options.removePreference(screen.findPreference(Preferences.UPDATE_CHECK.getKey()));
@@ -346,8 +344,8 @@ public class ActivitySettings extends AppCompatActivity implements SharedPrefere
             cat_backup.removePreference(pref_hosts_download);
 
         } else {
-            String last_import = prefs.getString(Preferences.HOSTS_LAST_IMPORT.getKey(), Preferences.HOSTS_LAST_DOWNLOAD.getDefaultValue());
-            String last_download = prefs.getString(Preferences.HOSTS_LAST_DOWNLOAD.getKey(), Preferences.HOSTS_LAST_DOWNLOAD.getDefaultValue());
+            String last_import = DefaultPreferences.getString(this, Preferences.HOSTS_LAST_IMPORT);
+            String last_download = DefaultPreferences.getString(this, Preferences.HOSTS_LAST_DOWNLOAD);
             if (last_import != null)
                 pref_hosts_import.setSummary(getString(R.string.msg_import_last, last_import));
             if (last_download != null)
@@ -394,7 +392,7 @@ public class ActivitySettings extends AppCompatActivity implements SharedPrefere
                                 tmp.renameTo(hosts);
 
                                 String last = SimpleDateFormat.getDateTimeInstance().format(new Date());
-                                prefs.edit().putString(Preferences.HOSTS_LAST_DOWNLOAD.getKey(), last).apply();
+                                DefaultPreferences.putString(ActivitySettings.this, Preferences.HOSTS_LAST_DOWNLOAD, last);
 
                                 if (running) {
                                     pref_hosts_download.setSummary(getString(R.string.msg_download_last, last));
@@ -461,8 +459,7 @@ public class ActivitySettings extends AppCompatActivity implements SharedPrefere
         checkPermissions(null);
 
         // Listen for preference changes
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
-        prefs.registerOnSharedPreferenceChangeListener(this);
+        DefaultPreferences.registerListener(this, this);
 
         // Listen for interactive state changes
         IntentFilter ifInteractive = new IntentFilter();
@@ -480,8 +477,7 @@ public class ActivitySettings extends AppCompatActivity implements SharedPrefere
     protected void onPause() {
         super.onPause();
 
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
-        prefs.unregisterOnSharedPreferenceChangeListener(this);
+        DefaultPreferences.unregisterListener(this, this);
 
         unregisterReceiver(interactiveStateReceiver);
         unregisterReceiver(connectivityChangedReceiver);
@@ -514,26 +510,26 @@ public class ActivitySettings extends AppCompatActivity implements SharedPrefere
     public void onSharedPreferenceChanged(SharedPreferences prefs, String name) {
         // Pro features
         if (Preferences.THEME.getKey().equals(name)) {
-            if (!Preferences.THEME.getDefaultValue().getValue().equals(prefs.getString(name, Preferences.THEME.getDefaultValue().getValue())) && !IAB.isPurchased(ActivityPro.SKU_THEME, this)) {
-                prefs.edit().putString(name, Preferences.THEME.getDefaultValue().getValue()).apply();
+            if (!DefaultPreferences.isThemeDefault(this, Preferences.THEME) && !IAB.isPurchased(ActivityPro.SKU_THEME, this)) {
+                DefaultPreferences.resetTheme(this, Preferences.THEME);
                 ((ListPreference) getPreferenceScreen().findPreference(name)).setValue(Preferences.THEME.getDefaultValue().getValue());
                 startActivity(new Intent(this, ActivityPro.class));
                 return;
             }
         } else if (Preferences.INSTALL.getKey().equals(name)) {
-            if (prefs.getBoolean(name, Preferences.INSTALL.getDefaultValue()) && !IAB.isPurchased(ActivityPro.SKU_NOTIFY, this)) {
-                prefs.edit().putBoolean(name, Preferences.INSTALL.getDefaultValue()).apply();
+            if (DefaultPreferences.isNotDefault(this, Preferences.INSTALL) && !IAB.isPurchased(ActivityPro.SKU_NOTIFY, this)) {
+                DefaultPreferences.resetBoolean(this, Preferences.INSTALL);
                 ((TwoStatePreference) getPreferenceScreen().findPreference(name)).setChecked(Preferences.INSTALL.getDefaultValue());
                 startActivity(new Intent(this, ActivityPro.class));
                 return;
             }
         } else if (Preferences.SHOW_STATS.getKey().equals(name)) {
-            if (prefs.getBoolean(name, Preferences.SHOW_STATS.getDefaultValue()) && !IAB.isPurchased(ActivityPro.SKU_SPEED, this)) {
-                prefs.edit().putBoolean(name, Preferences.SHOW_STATS.getDefaultValue()).apply();
+            if (DefaultPreferences.isNotDefault(this, Preferences.SHOW_STATS) && !IAB.isPurchased(ActivityPro.SKU_SPEED, this)) {
+                DefaultPreferences.resetBoolean(this, Preferences.SHOW_STATS);
                 startActivity(new Intent(this, ActivityPro.class));
                 return;
             }
-            ((TwoStatePreference) getPreferenceScreen().findPreference(name)).setChecked(prefs.getBoolean(name, false));
+            ((TwoStatePreference) getPreferenceScreen().findPreference(name)).setChecked(DefaultPreferences.getBoolean(this, Preferences.SHOW_STATS));
         }
 
         Object value = prefs.getAll().get(name);
@@ -556,10 +552,10 @@ public class ActivitySettings extends AppCompatActivity implements SharedPrefere
             ServiceSinkhole.reload(new Changed(name), this, false);
 
         else if (Preferences.AUTO_ENABLE.getKey().equals(name))
-            getPreferenceScreen().findPreference(name).setTitle(getString(R.string.setting_auto, Integer.parseInt(prefs.getString(name, Integer.toString(Preferences.AUTO_ENABLE.getDefaultValue())))));
+            getPreferenceScreen().findPreference(name).setTitle(getString(R.string.setting_auto, DefaultPreferences.getBoxedInt(this, Preferences.AUTO_ENABLE)));
 
         else if (Preferences.SCREEN_DELAY.getKey().equals(name))
-            getPreferenceScreen().findPreference(name).setTitle(getString(R.string.setting_delay, Integer.parseInt(prefs.getString(name, Integer.toString(Preferences.SCREEN_DELAY.getDefaultValue())))));
+            getPreferenceScreen().findPreference(name).setTitle(getString(R.string.setting_delay, DefaultPreferences.getBoxedInt(this, Preferences.SCREEN_DELAY)));
 
         else if (Preferences.THEME.getKey().equals(name) || Preferences.DARK.getKey().equals(name))
             recreate();
@@ -578,7 +574,7 @@ public class ActivitySettings extends AppCompatActivity implements SharedPrefere
 
         else if (Preferences.WIFI_HOMES.getKey().equals(name)) {
             MultiSelectListPreference pref_wifi_homes = (MultiSelectListPreference) getPreferenceScreen().findPreference(name);
-            Set<String> ssid = prefs.getStringSet(name, new HashSet<String>());
+            Set<String> ssid = DefaultPreferences.getStringSet(this, Preferences.WIFI_HOMES);
             if (ssid.size() > 0)
                 pref_wifi_homes.setTitle(getString(R.string.setting_wifi_home, TextUtils.join(", ", ssid)));
             else
@@ -600,7 +596,7 @@ public class ActivitySettings extends AppCompatActivity implements SharedPrefere
             ServiceSinkhole.reload(new Changed(name), this, false);
 
         else if (Preferences.DISABLE_ON_CALL.getKey().equals(name)) {
-            if (prefs.getBoolean(name, false)) {
+            if (DefaultPreferences.getBoolean(this, Preferences.DISABLE_ON_CALL)) {
                 if (checkPermissions(name))
                     ServiceSinkhole.reload(new Changed(name), this, false);
             } else
@@ -610,9 +606,9 @@ public class ActivitySettings extends AppCompatActivity implements SharedPrefere
             ServiceSinkhole.reload(new Changed(name), this, false);
 
         else if (Preferences.MANAGE_SYSTEM.getKey().equals(name)) {
-            boolean manage = prefs.getBoolean(name, false);
-            if (!manage) prefs.edit().putBoolean(Preferences.SHOW_USER.getKey(), Preferences.SHOW_USER.getDefaultValue()).apply();
-            prefs.edit().putBoolean(Preferences.SHOW_SYSTEM.getKey(), manage).apply();
+            boolean manage = DefaultPreferences.getBoolean(this, Preferences.MANAGE_SYSTEM);
+            if (!manage) DefaultPreferences.resetBoolean(this, Preferences.SHOW_USER);
+            DefaultPreferences.putBoolean(this, Preferences.SHOW_SYSTEM, manage);
             ServiceSinkhole.reload(new Changed(name), this, false);
 
         } else if (Preferences.LOG_APP.getKey().equals(name)) {
@@ -625,7 +621,7 @@ public class ActivitySettings extends AppCompatActivity implements SharedPrefere
 
         else if (Preferences.FILTER.getKey().equals(name)) {
             // Show dialog
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP && prefs.getBoolean(name, false)) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP && DefaultPreferences.getBoolean(this, Preferences.FILTER)) {
                 LayoutInflater inflater = LayoutInflater.from(ActivitySettings.this);
                 View view = inflater.inflate(R.layout.filter, null, false);
                 dialogFilter = new AlertDialog.Builder(ActivitySettings.this)
@@ -645,12 +641,12 @@ public class ActivitySettings extends AppCompatActivity implements SharedPrefere
                         })
                         .create();
                 dialogFilter.show();
-            } else if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP && !prefs.getBoolean(name, false)) {
-                prefs.edit().putBoolean(name, true).apply();
+            } else if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP && !DefaultPreferences.getBoolean(this, Preferences.FILTER)) {
+                DefaultPreferences.putBoolean(ActivitySettings.this, Preferences.FILTER, true);
                 Toast.makeText(ActivitySettings.this, R.string.msg_filter4, Toast.LENGTH_SHORT).show();
             }
 
-            ((TwoStatePreference) getPreferenceScreen().findPreference(name)).setChecked(prefs.getBoolean(name, false));
+            ((TwoStatePreference) getPreferenceScreen().findPreference(name)).setChecked(DefaultPreferences.getBoolean(this, Preferences.FILTER));
 
             ServiceSinkhole.reload(new Changed(name), this, false);
 
@@ -658,31 +654,31 @@ public class ActivitySettings extends AppCompatActivity implements SharedPrefere
             ServiceSinkhole.reload(new Changed(name), this, false);
 
         else if (Preferences.VPN4.getKey().equals(name)) {
-            String vpn4 = prefs.getString(name, null);
+            String vpn4 = DefaultPreferences.getString(this, Preferences.VPN4, null);
             try {
                 checkAddress(vpn4, false);
-                prefs.edit().putString(name, vpn4.trim()).apply();
+                DefaultPreferences.putString(this, Preferences.VPN4, vpn4.trim());
             } catch (Throwable ex) {
-                prefs.edit().remove(name).apply();
+                DefaultPreferences.remove(this, Preferences.VPN4);
                 ((EditTextPreference) getPreferenceScreen().findPreference(name)).setText(null);
                 if (!TextUtils.isEmpty(vpn4))
                     Toast.makeText(ActivitySettings.this, ex.toString(), Toast.LENGTH_LONG).show();
             }
-            getPreferenceScreen().findPreference(name).setTitle(getString(R.string.setting_vpn4, prefs.getString(name, Preferences.VPN4.getDefaultValue())));
+            getPreferenceScreen().findPreference(name).setTitle(getString(R.string.setting_vpn4, DefaultPreferences.getString(this, Preferences.VPN4)));
             ServiceSinkhole.reload(new Changed(name), this, false);
 
         } else if (Preferences.VPN6.getKey().equals(name)) {
-            String vpn6 = prefs.getString(name, null);
+            String vpn6 = DefaultPreferences.getString(this, Preferences.VPN6, null);
             try {
                 checkAddress(vpn6, false);
-                prefs.edit().putString(name, vpn6.trim()).apply();
+                DefaultPreferences.putString(this, Preferences.VPN6, vpn6.trim());
             } catch (Throwable ex) {
-                prefs.edit().remove(name).apply();
+                DefaultPreferences.remove(this, Preferences.VPN6);
                 ((EditTextPreference) getPreferenceScreen().findPreference(name)).setText(null);
                 if (!TextUtils.isEmpty(vpn6))
                     Toast.makeText(ActivitySettings.this, ex.toString(), Toast.LENGTH_LONG).show();
             }
-            getPreferenceScreen().findPreference(name).setTitle(getString(R.string.setting_vpn6, prefs.getString(name, Preferences.VPN6.getDefaultValue())));
+            getPreferenceScreen().findPreference(name).setTitle(getString(R.string.setting_vpn6, DefaultPreferences.getString(this, Preferences.VPN6)));
             ServiceSinkhole.reload(new Changed(name), this, false);
 
         } else if (Preferences.DNS1.getKey().equals(name) || Preferences.DNS2.getKey().equals(name)) {
@@ -699,61 +695,61 @@ public class ActivitySettings extends AppCompatActivity implements SharedPrefere
             getPreferenceScreen().findPreference(name).setTitle(getString(R.string.setting_dns, prefs.getString(name, Preferences.DNS1.getDefaultValue())));
             ServiceSinkhole.reload(new Changed(name), this, false);
 
-        } else if (Preferences.VALIDATE.getDefaultValue().equals(name)) {
-            String host = prefs.getString(name, Preferences.VALIDATE.getDefaultValue());
+        } else if (Preferences.VALIDATE.getKey().equals(name)) {
+            String host = DefaultPreferences.getString(this, Preferences.VALIDATE);
             try {
                 checkDomain(host);
-                prefs.edit().putString(name, host.trim()).apply();
+                DefaultPreferences.putString(this, Preferences.VALIDATE, host.trim());
             } catch (Throwable ex) {
-                prefs.edit().remove(name).apply();
+                DefaultPreferences.remove(this, Preferences.VALIDATE);
                 ((EditTextPreference) getPreferenceScreen().findPreference(name)).setText(null);
                 if (!TextUtils.isEmpty(host))
-                    Toast.makeText(ActivitySettings.this, ex.toString(), Toast.LENGTH_LONG).show();
+                    Toast.makeText(this, ex.toString(), Toast.LENGTH_LONG).show();
             }
-            getPreferenceScreen().findPreference(name).setTitle(getString(R.string.setting_validate, prefs.getString(name, Preferences.VALIDATE.getDefaultValue())));
+            getPreferenceScreen().findPreference(name).setTitle(getString(R.string.setting_validate, DefaultPreferences.getString(this, Preferences.VALIDATE)));
             ServiceSinkhole.reload(new Changed(name), this, false);
 
         } else if (Preferences.TTL.getKey().equals(name))
-            getPreferenceScreen().findPreference(name).setTitle(getString(R.string.setting_ttl, Integer.parseInt(prefs.getString(name, Integer.toString(Preferences.TTL.getDefaultValue())))));
+            getPreferenceScreen().findPreference(name).setTitle(getString(R.string.setting_ttl, DefaultPreferences.getBoxedInt(this, Preferences.TTL)));
 
         else if (Preferences.R_CODE.getKey().equals(name)) {
-            getPreferenceScreen().findPreference(name).setTitle(getString(R.string.setting_rcode, Integer.parseInt(prefs.getString(name, Integer.toString(Preferences.R_CODE.getDefaultValue())))));
+            getPreferenceScreen().findPreference(name).setTitle(getString(R.string.setting_rcode, DefaultPreferences.getBoxedInt(this, Preferences.R_CODE)));
             ServiceSinkhole.reload(new Changed(name), this, false);
 
         } else if (Preferences.SOCKS_5_ENABLED.getKey().equals(name))
             ServiceSinkhole.reload(new Changed(name), this, false);
 
         else if (Preferences.SOCKS_5_ADDR.getKey().equals(name)) {
-            String socks5_addr = prefs.getString(name, null);
+            String socks5_addr = DefaultPreferences.getString(this, Preferences.SOCKS_5_ADDR, null);
             try {
                 if (!TextUtils.isEmpty(socks5_addr) && !Util.isNumericAddress(socks5_addr))
                     throw new IllegalArgumentException(ERROR_BAD_ADDRESS);
             } catch (Throwable ex) {
-                prefs.edit().remove(name).apply();
+                DefaultPreferences.remove(this, Preferences.SOCKS_5_ADDR);
                 ((EditTextPreference) getPreferenceScreen().findPreference(name)).setText(null);
                 if (!TextUtils.isEmpty(socks5_addr))
-                    Toast.makeText(ActivitySettings.this, ex.toString(), Toast.LENGTH_LONG).show();
+                    Toast.makeText(this, ex.toString(), Toast.LENGTH_LONG).show();
             }
-            getPreferenceScreen().findPreference(name).setTitle(getString(R.string.setting_socks5_addr, prefs.getString(name, Preferences.SOCKS_5_ADDR.getDefaultValue())));
+            getPreferenceScreen().findPreference(name).setTitle(getString(R.string.setting_socks5_addr, DefaultPreferences.getString(this, Preferences.SOCKS_5_ADDR)));
             ServiceSinkhole.reload(new Changed(name), this, false);
 
         } else if (Preferences.SOCKS_5_PORT.getKey().equals(name)) {
-            getPreferenceScreen().findPreference(name).setTitle(getString(R.string.setting_socks5_port, prefs.getString(name, Preferences.SOCKS_5_PORT.getDefaultValue())));
+            getPreferenceScreen().findPreference(name).setTitle(getString(R.string.setting_socks5_port, DefaultPreferences.getString(this, Preferences.SOCKS_5_PORT)));
             ServiceSinkhole.reload(new Changed(name), this, false);
 
         } else if (Preferences.SOCKS_5_USERNAME.getKey().equals(name)) {
-            getPreferenceScreen().findPreference(name).setTitle(getString(R.string.setting_socks5_username, prefs.getString(name, Preferences.SOCKS_5_USERNAME.getDefaultValue())));
+            getPreferenceScreen().findPreference(name).setTitle(getString(R.string.setting_socks5_username, DefaultPreferences.getString(this, Preferences.SOCKS_5_USERNAME)));
             ServiceSinkhole.reload(new Changed(name), this, false);
 
         } else if (Preferences.SOCKS_5_PASSWORD.getKey().equals(name)) {
-            getPreferenceScreen().findPreference(name).setTitle(getString(R.string.setting_socks5_password, TextUtils.isEmpty(Preferences.SOCKS_5_PASSWORD.getDefaultValue()) ? "-" : "*****"));
+            getPreferenceScreen().findPreference(name).setTitle(getString(R.string.setting_socks5_password, TextUtils.isEmpty(DefaultPreferences.getString(this, Preferences.SOCKS_5_PASSWORD)) ? "-" : "*****"));
             ServiceSinkhole.reload(new Changed(name), this, false);
 
         } else if (Preferences.PCAP_RECORD_SIZE.getKey().equals(name) || Preferences.PCAP_FILE_SIZE.getKey().equals(name)) {
             if (Preferences.PCAP_RECORD_SIZE.getKey().equals(name))
-                getPreferenceScreen().findPreference(name).setTitle(getString(R.string.setting_pcap_record_size, Long.parseLong(prefs.getString(name, Long.toString(Preferences.PCAP_RECORD_SIZE.getDefaultValue())))));
+                getPreferenceScreen().findPreference(name).setTitle(getString(R.string.setting_pcap_record_size, DefaultPreferences.getBoxedLong(this, Preferences.PCAP_RECORD_SIZE)));
             else if (Preferences.PCAP_FILE_SIZE.getKey().equals(name))
-                getPreferenceScreen().findPreference(name).setTitle(getString(R.string.setting_pcap_file_size, Long.parseLong(prefs.getString(name, Long.toString(Preferences.PCAP_FILE_SIZE.getDefaultValue())))));
+                getPreferenceScreen().findPreference(name).setTitle(getString(R.string.setting_pcap_file_size, DefaultPreferences.getBoxedLong(this, Preferences.PCAP_FILE_SIZE)));
 
             ServiceSinkhole.setPcap(false, this);
 
@@ -761,24 +757,24 @@ public class ActivitySettings extends AppCompatActivity implements SharedPrefere
             if (pcap_file.exists() && !pcap_file.delete())
                 Log.w(TAG, "Delete PCAP failed");
 
-            if (prefs.getBoolean(Preferences.PCAP.getKey(), Preferences.PCAP.getDefaultValue()))
+            if (DefaultPreferences.getBoolean(this, Preferences.PCAP))
                 ServiceSinkhole.setPcap(true, this);
 
         } else if (Preferences.WATCHDOG.getKey().equals(name)) {
-            getPreferenceScreen().findPreference(name).setTitle(getString(R.string.setting_watchdog, Long.parseLong(prefs.getString(name, Long.toString(Preferences.WATCHDOG.getDefaultValue())))));
+            getPreferenceScreen().findPreference(name).setTitle(getString(R.string.setting_watchdog, DefaultPreferences.getBoxedLong(this, Preferences.WATCHDOG)));
             ServiceSinkhole.reload(new Changed(name), this, false);
 
         } else if (Preferences.SHOW_STATS.getKey().equals(name))
             ServiceSinkhole.reloadStats(new Changed(name), this);
 
         else if (Preferences.STATS_FREQUENCY.getKey().equals(name))
-            getPreferenceScreen().findPreference(name).setTitle(getString(R.string.setting_stats_frequency, Long.parseLong(prefs.getString(name, Long.toString(Preferences.STATS_FREQUENCY.getDefaultValue())))));
+            getPreferenceScreen().findPreference(name).setTitle(getString(R.string.setting_stats_frequency, DefaultPreferences.getBoxedLong(this, Preferences.STATS_FREQUENCY)));
 
         else if (Preferences.STATS_SAMPLES.getKey().equals(name))
-            getPreferenceScreen().findPreference(name).setTitle(getString(R.string.setting_stats_samples, Long.parseLong(prefs.getString(name, Long.toString(Preferences.STATS_SAMPLES.getDefaultValue())))));
+            getPreferenceScreen().findPreference(name).setTitle(getString(R.string.setting_stats_samples, DefaultPreferences.getBoxedLong(this, Preferences.STATS_SAMPLES)));
 
         else if (Preferences.HOSTS_URL.getKey().equals(name))
-            getPreferenceScreen().findPreference(name).setSummary(prefs.getString(name, BuildConfig.HOSTS_FILE_URI));
+            getPreferenceScreen().findPreference(name).setSummary(DefaultPreferences.getString(this, Preferences.HOSTS_URL, BuildConfig.HOSTS_FILE_URI));
 
         else if (Preferences.LOG_LEVEL.getKey().equals(name))
             ServiceSinkhole.reload(new Changed(name), this, false);
@@ -787,13 +783,12 @@ public class ActivitySettings extends AppCompatActivity implements SharedPrefere
     @TargetApi(Build.VERSION_CODES.M)
     private boolean checkPermissions(String name) {
         PreferenceScreen screen = getPreferenceScreen();
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
 
         // Check if permission was revoked
-        if ((name == null || Preferences.DISABLE_ON_CALL.getKey().equals(name)) && prefs.getBoolean(Preferences.DISABLE_ON_CALL.getKey(), Preferences.DISABLE_ON_CALL.getDefaultValue()))
+        if ((name == null || Preferences.DISABLE_ON_CALL.getKey().equals(name)) && DefaultPreferences.getBoolean(this, Preferences.DISABLE_ON_CALL))
             if (!Util.hasPhoneStatePermission(this)) {
-                prefs.edit().putBoolean(Preferences.DISABLE_ON_CALL.getKey(), Preferences.DISABLE_ON_CALL.getDefaultValue()).apply();
-                ((TwoStatePreference) screen.findPreference(Preferences.DISABLE_ON_CALL.getKey())).setChecked(false);
+                DefaultPreferences.resetBoolean(this, Preferences.DISABLE_ON_CALL);
+                ((TwoStatePreference) screen.findPreference(Preferences.DISABLE_ON_CALL.getKey())).setChecked(Preferences.DISABLE_ON_CALL.getDefaultValue());
 
                 requestPermissions(new String[]{Manifest.permission.READ_PHONE_STATE}, REQUEST_CALL);
 
@@ -806,12 +801,11 @@ public class ActivitySettings extends AppCompatActivity implements SharedPrefere
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         PreferenceScreen screen = getPreferenceScreen();
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
 
         boolean granted = (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED);
 
         if (requestCode == REQUEST_CALL) {
-            prefs.edit().putBoolean(Preferences.DISABLE_ON_CALL.getKey(), granted).apply();
+            DefaultPreferences.putBoolean(this, Preferences.DISABLE_ON_CALL, granted);
             ((TwoStatePreference) screen.findPreference(Preferences.DISABLE_ON_CALL.getKey())).setChecked(granted);
         }
 
@@ -1032,9 +1026,8 @@ public class ActivitySettings extends AppCompatActivity implements SharedPrefere
             protected void onPostExecute(Throwable ex) {
                 if (running) {
                     if (ex == null) {
-                        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(ActivitySettings.this);
                         String last = SimpleDateFormat.getDateTimeInstance().format(new Date());
-                        prefs.edit().putString(Preferences.HOSTS_LAST_IMPORT.getKey(), last).apply();
+                        DefaultPreferences.putString(ActivitySettings.this, Preferences.HOSTS_LAST_IMPORT, last);
 
                         if (running) {
                             getPreferenceScreen().findPreference(Preferences.HOSTS_IMPORT.getKey()).setSummary(getString(R.string.msg_import_last, last));
@@ -1100,7 +1093,7 @@ public class ActivitySettings extends AppCompatActivity implements SharedPrefere
         serializer.startTag(null, appName);
 
         serializer.startTag(null, TAG_APPLICATION);
-        xmlExport(PreferenceManager.getDefaultSharedPreferences(this), serializer);
+        xmlExport(DefaultPreferences.getPreferences(this), serializer);
         serializer.endTag(null, TAG_APPLICATION);
 
         String keyWifi = Preferences.WIFI.getKey();
@@ -1256,9 +1249,8 @@ public class ActivitySettings extends AppCompatActivity implements SharedPrefere
     }
 
     private void xmlImport(InputStream in) throws IOException, SAXException, ParserConfigurationException {
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
-        prefs.unregisterOnSharedPreferenceChangeListener(this);
-        prefs.edit().putBoolean(Preferences.ENABLED.getKey(), Preferences.ENABLED.getDefaultValue()).apply();
+        DefaultPreferences.unregisterListener(this, this);
+        DefaultPreferences.resetBoolean(this, Preferences.ENABLED);
         ServiceSinkhole.stop(SimpleReason.Import, this, false);
 
         XMLReader reader = SAXParserFactory.newInstance().newSAXParser().getXMLReader();
@@ -1266,7 +1258,7 @@ public class ActivitySettings extends AppCompatActivity implements SharedPrefere
         reader.setContentHandler(handler);
         reader.parse(new InputSource(in));
 
-        xmlImport(handler.application, prefs);
+        xmlImport(handler.application, DefaultPreferences.getPreferences(this));
         xmlImport(handler.wifi, getSharedPreferences(Preferences.OTHER.getKey(), Context.MODE_PRIVATE));
         xmlImport(handler.mobile, getSharedPreferences(Preferences.WIFI.getKey(), Context.MODE_PRIVATE));
         xmlImport(handler.screen_wifi, getSharedPreferences(Preferences.SCREEN_WIFI.getKey(), Context.MODE_PRIVATE));
@@ -1282,8 +1274,8 @@ public class ActivitySettings extends AppCompatActivity implements SharedPrefere
         DatabaseHelper.clearCache();
 
         // Refresh UI
-        prefs.edit().putBoolean(Preferences.IMPORTED.getKey(), Preferences.IMPORTED.getDefaultValue()).apply();
-        prefs.registerOnSharedPreferenceChangeListener(this);
+        DefaultPreferences.resetBoolean(this, Preferences.IMPORTED);
+        DefaultPreferences.registerListener(this, this);
     }
 
     private void xmlImport(Map<String, Object> settings, SharedPreferences prefs) {

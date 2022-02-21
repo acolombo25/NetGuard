@@ -38,6 +38,9 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
+import eu.faircode.netguard.preference.Preferences;
+import eu.faircode.netguard.preference.DefaultPreferences;
+
 public class IAB implements ServiceConnection {
     private static final String TAG = "NetGuard.IAB";
 

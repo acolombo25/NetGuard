@@ -20,7 +20,6 @@ package eu.faircode.netguard;
 */
 
 import android.content.Context;
-import android.content.SharedPreferences;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
@@ -35,7 +34,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.core.view.ViewCompat;
-import android.preference.PreferenceManager;
 
 import java.net.InetAddress;
 import java.net.UnknownHostException;
@@ -44,6 +42,7 @@ import java.util.List;
 import eu.faircode.netguard.database.Column;
 import eu.faircode.netguard.format.DateFormats;
 import eu.faircode.netguard.preference.Preferences;
+import eu.faircode.netguard.preference.DefaultPreferences;
 
 public class AdapterLog extends CursorAdapter {
     private static final String TAG = "NetGuard.Log";
@@ -96,9 +95,8 @@ public class AdapterLog extends CursorAdapter {
             List<InetAddress> lstDns = ServiceSinkhole.getDns(context);
             dns1 = (lstDns.size() > 0 ? lstDns.get(0) : null);
             dns2 = (lstDns.size() > 1 ? lstDns.get(1) : null);
-            SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
-            vpn4 = InetAddress.getByName(prefs.getString(Preferences.VPN4.getKey(), Preferences.VPN4.getDefaultValue()));
-            vpn6 = InetAddress.getByName(prefs.getString(Preferences.VPN6.getKey(), Preferences.VPN6.getDefaultValue()));
+            vpn4 = InetAddress.getByName(DefaultPreferences.getString(context, Preferences.VPN4));
+            vpn6 = InetAddress.getByName(DefaultPreferences.getString(context, Preferences.VPN6));
         } catch (UnknownHostException ex) {
             Util.logException(TAG, ex);
         }

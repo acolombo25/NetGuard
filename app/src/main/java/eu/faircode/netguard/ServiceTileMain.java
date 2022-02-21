@@ -31,11 +31,10 @@ import android.service.quicksettings.Tile;
 import android.service.quicksettings.TileService;
 import android.util.Log;
 
-import android.preference.PreferenceManager;
-
 import java.util.Date;
 
 import eu.faircode.netguard.preference.Preferences;
+import eu.faircode.netguard.preference.DefaultPreferences;
 import eu.faircode.netguard.reason.SimpleReason;
 
 @TargetApi(Build.VERSION_CODES.N)
@@ -44,8 +43,7 @@ public class ServiceTileMain extends TileService implements SharedPreferences.On
 
     public void onStartListening() {
         Log.i(TAG, "Start listening");
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
-        prefs.registerOnSharedPreferenceChangeListener(this);
+        DefaultPreferences.registerListener(this, this);
         update();
     }
 
@@ -56,8 +54,7 @@ public class ServiceTileMain extends TileService implements SharedPreferences.On
     }
 
     private void update() {
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
-        boolean enabled = prefs.getBoolean(Preferences.ENABLED.getKey(), Preferences.ENABLED.getDefaultValue());
+        boolean enabled = DefaultPreferences.getBoolean(this, Preferences.ENABLED);
         Tile tile = getQsTile();
         if (tile != null) {
             tile.setState(enabled ? Tile.STATE_ACTIVE : Tile.STATE_INACTIVE);
@@ -67,8 +64,7 @@ public class ServiceTileMain extends TileService implements SharedPreferences.On
 
     public void onStopListening() {
         Log.i(TAG, "Stop listening");
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
-        prefs.unregisterOnSharedPreferenceChangeListener(this);
+        DefaultPreferences.unregisterListener(this, this);
     }
 
     public void onClick() {
@@ -82,16 +78,15 @@ public class ServiceTileMain extends TileService implements SharedPreferences.On
         am.cancel(pi);
 
         // Check state
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
-        boolean enabled = !prefs.getBoolean(Preferences.ENABLED.getKey(), Preferences.ENABLED.getDefaultValue());
-        prefs.edit().putBoolean(Preferences.ENABLED.getKey(), enabled).apply();
+        boolean enabled = !DefaultPreferences.getBoolean(this, Preferences.ENABLED);
+        DefaultPreferences.putBoolean(this, Preferences.ENABLED, enabled);
         if (enabled)
             ServiceSinkhole.start(SimpleReason.Tile, this);
         else {
             ServiceSinkhole.stop(SimpleReason.Tile, this, false);
 
             // Auto enable
-            int auto = Integer.parseInt(prefs.getString(Preferences.AUTO_ENABLE.getKey(), Integer.toString(Preferences.AUTO_ENABLE.getDefaultValue())));
+            int auto = DefaultPreferences.getBoxedInt(this, Preferences.AUTO_ENABLE);
             if (auto > 0) {
                 Log.i(TAG, "Scheduling enabled after minutes=" + auto);
                 if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M)

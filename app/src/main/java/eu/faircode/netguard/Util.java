@@ -27,7 +27,6 @@ import android.app.ApplicationErrorReport;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
@@ -62,7 +61,6 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.core.content.ContextCompat;
 import androidx.core.net.ConnectivityManagerCompat;
-import android.preference.PreferenceManager;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -94,6 +92,7 @@ import java.util.Set;
 
 import eu.faircode.netguard.database.Column;
 import eu.faircode.netguard.preference.Preferences;
+import eu.faircode.netguard.preference.DefaultPreferences;
 
 public class Util {
     private static final String TAG = "NetGuard.Util";
@@ -465,8 +464,7 @@ public class Util {
         if (isPlayStoreInstall(context)) {
             return true;
         } else if (isDebuggable(context)) {
-            SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
-            return prefs.getBoolean(Preferences.DEBUG_IAB.getKey(), Preferences.DEBUG_IAB.getDefaultValue());
+            return DefaultPreferences.getBoolean(context, Preferences.DEBUG_IAB);
         } else{
             return false;
         }
@@ -532,10 +530,9 @@ public class Util {
     }
 
     public static void setTheme(Context context) {
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
-        boolean dark = prefs.getBoolean(Preferences.DARK.getKey(), false);
+        boolean dark = DefaultPreferences.getBoolean(context, Preferences.DARK);
         AppCompatDelegate.setDefaultNightMode(dark? AppCompatDelegate.MODE_NIGHT_YES : AppCompatDelegate.MODE_NIGHT_NO);
-        String theme = prefs.getString(Preferences.THEME.getKey(), Preferences.THEME.getDefaultValue().getValue());
+        String theme = DefaultPreferences.getTheme(context, Preferences.THEME);
         if (theme.equals(Theme.Teal.getValue()))
             context.setTheme(R.style.AppThemeTeal);
         else if (theme.equals(Theme.Blue.getValue()))
@@ -994,8 +991,7 @@ public class Util {
                 }
 
                 // Get settings
-                SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
-                Map<String, ?> all = prefs.getAll();
+                Map<String, ?> all = DefaultPreferences.getAll(context);
                 for (String key : all.keySet())
                     sb.append("Setting: ").append(key).append('=').append(all.get(key)).append("\r\n");
                 sb.append("\r\n");

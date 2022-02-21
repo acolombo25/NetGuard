@@ -25,12 +25,11 @@ import android.appwidget.AppWidgetProvider;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
+import android.util.Log;
 import android.widget.RemoteViews;
 
-import android.preference.PreferenceManager;
-
 import eu.faircode.netguard.preference.Preferences;
+import eu.faircode.netguard.preference.DefaultPreferences;
 
 public class WidgetLockdown extends AppWidgetProvider {
     private static final String TAG = "NetGuard.WidgetLock";
@@ -41,8 +40,7 @@ public class WidgetLockdown extends AppWidgetProvider {
     }
 
     private static void update(int[] appWidgetIds, AppWidgetManager appWidgetManager, Context context) {
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
-        boolean lockdown = prefs.getBoolean(Preferences.LOCKDOWN.getKey(), Preferences.LOCKDOWN.getDefaultValue());
+        boolean lockdown = DefaultPreferences.getBoolean(context, Preferences.LOCKDOWN);
 
         try {
             try {
