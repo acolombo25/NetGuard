@@ -23,11 +23,9 @@ import android.app.IntentService;
 import android.app.Notification;
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.util.Log;
 
 import androidx.core.app.NotificationCompat;
-import android.preference.PreferenceManager;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -42,7 +40,7 @@ import java.util.Date;
 
 import eu.faircode.netguard.format.Files;
 import eu.faircode.netguard.preference.Preferences;
-import eu.faircode.netguard.reason.Reason;
+import eu.faircode.netguard.preference.DefaultPreferences;
 import eu.faircode.netguard.reason.SimpleReason;
 
 public class ServiceExternal extends IntentService {
@@ -64,9 +62,7 @@ public class ServiceExternal extends IntentService {
             Util.logExtras(intent);
 
             if (ACTION_DOWNLOAD_HOSTS_FILE.equals(intent.getAction())) {
-                final SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
-
-                String hosts_url = prefs.getString(Preferences.HOSTS_URL.getKey(), Preferences.HOSTS_URL.getDefaultValue());
+                String hosts_url = DefaultPreferences.getString(this, Preferences.HOSTS_URL);
                 if (Files.URL_HOSTS.equals(hosts_url))
                     hosts_url = BuildConfig.HOSTS_FILE_URI;
 
@@ -107,7 +103,7 @@ public class ServiceExternal extends IntentService {
                     tmp.renameTo(hosts);
 
                     String last = SimpleDateFormat.getDateTimeInstance().format(new Date());
-                    prefs.edit().putString(Preferences.HOSTS_LAST_DOWNLOAD.getKey(), last).apply();
+                    DefaultPreferences.putString(this, Preferences.HOSTS_LAST_DOWNLOAD, last);
 
                     ServiceSinkhole.reload(SimpleReason.HostsFileDownload, this, false);
 

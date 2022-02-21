@@ -29,10 +29,8 @@ import android.service.quicksettings.TileService;
 import android.util.Log;
 import android.widget.Toast;
 
-import android.preference.PreferenceManager;
-
 import eu.faircode.netguard.preference.Preferences;
-import eu.faircode.netguard.reason.Reason;
+import eu.faircode.netguard.preference.DefaultPreferences;
 import eu.faircode.netguard.reason.SimpleReason;
 
 @TargetApi(Build.VERSION_CODES.N)
@@ -41,8 +39,7 @@ public class ServiceTileGraph extends TileService implements SharedPreferences.O
 
     public void onStartListening() {
         Log.i(TAG, "Start listening");
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
-        prefs.registerOnSharedPreferenceChangeListener(this);
+        DefaultPreferences.registerListener(this, this);
         update();
     }
 
@@ -53,8 +50,7 @@ public class ServiceTileGraph extends TileService implements SharedPreferences.O
     }
 
     private void update() {
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
-        boolean stats = prefs.getBoolean(Preferences.SHOW_STATS.getKey(), Preferences.SHOW_STATS.getDefaultValue());
+        boolean stats = DefaultPreferences.getBoolean(this, Preferences.SHOW_STATS);
         Tile tile = getQsTile();
         if (tile != null) {
             tile.setState(stats ? Tile.STATE_ACTIVE : Tile.STATE_INACTIVE);
@@ -65,20 +61,18 @@ public class ServiceTileGraph extends TileService implements SharedPreferences.O
 
     public void onStopListening() {
         Log.i(TAG, "Stop listening");
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
-        prefs.unregisterOnSharedPreferenceChangeListener(this);
+        DefaultPreferences.unregisterListener(this, this);
     }
 
     public void onClick() {
         Log.i(TAG, "Click");
 
         // Check state
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
-        boolean stats = !prefs.getBoolean(Preferences.SHOW_STATS.getKey(), Preferences.SHOW_STATS.getDefaultValue());
+        boolean stats = !DefaultPreferences.getBoolean(this, Preferences.SHOW_STATS);
         if (stats && !IAB.isPurchased(ActivityPro.SKU_SPEED, this))
             Toast.makeText(this, R.string.title_pro_feature, Toast.LENGTH_SHORT).show();
         else
-            prefs.edit().putBoolean(Preferences.SHOW_STATS.getKey(), stats).apply();
+            DefaultPreferences.putBoolean(this, Preferences.SHOW_STATS, stats);
         ServiceSinkhole.reloadStats(SimpleReason.Tile, this);
     }
 }

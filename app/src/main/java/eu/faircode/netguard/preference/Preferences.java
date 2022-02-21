@@ -8,6 +8,8 @@ import java.util.Set;
 import eu.faircode.netguard.Theme;
 
 public interface Preferences {
+    Preference<Integer> VERSION = new Preference<>("version", -1); ///
+    Preference<Boolean> HANDOVER = new Preference<>("handover", false); /// id
 
     Preference<Boolean> ENABLED = new Preference<>("enabled", false); ///
     Preference<Boolean> INITIALIZED = new Preference<>("initialized", false); ///
@@ -118,8 +120,8 @@ public interface Preferences {
     Preference<Long> WATCHDOG = new Preference<>("watchdog", 0L); /// id
     Preference<Long> STATS_FREQUENCY = new Preference<>("stats_frequency", 1000L); /// id
     Preference<Long> STATS_SAMPLES = new Preference<>("stats_samples", 90L); /// id
-    Preference<Integer> PCAP_RECORD_SIZE = new Preference<>("pcap_record_size", 64); /// id
-    Preference<Integer> PCAP_FILE_SIZE = new Preference<>("pcap_file_size", 2); /// id
+    Preference<Long> PCAP_RECORD_SIZE = new Preference<>("pcap_record_size", 64L); /// id
+    Preference<Long> PCAP_FILE_SIZE = new Preference<>("pcap_file_size", 2L); /// id
 
     // KEY ONLY (id)
     Preference<Boolean> FORWARDING = new Preference<>("forwarding", false); /// id, reason

@@ -25,13 +25,11 @@ import android.appwidget.AppWidgetProvider;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.util.Log;
 import android.widget.RemoteViews;
 
-import android.preference.PreferenceManager;
-
 import eu.faircode.netguard.preference.Preferences;
+import eu.faircode.netguard.preference.DefaultPreferences;
 
 public class WidgetMain extends AppWidgetProvider {
     private static final String TAG = "NetGuard.Widget";
@@ -42,8 +40,7 @@ public class WidgetMain extends AppWidgetProvider {
     }
 
     private static void update(int[] appWidgetIds, AppWidgetManager appWidgetManager, Context context) {
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
-        boolean enabled = prefs.getBoolean(Preferences.ENABLED.getKey(), Preferences.ENABLED.getDefaultValue());
+        boolean enabled = DefaultPreferences.getBoolean(context, Preferences.ENABLED);
 
         try {
             try {

@@ -31,9 +31,6 @@ import android.os.Build;
 import android.os.Process;
 import android.util.Log;
 
-import androidx.annotation.NonNull;
-import android.preference.PreferenceManager;
-
 import org.xmlpull.v1.XmlPullParser;
 
 import java.text.Collator;
@@ -48,6 +45,7 @@ import java.util.Map;
 
 import eu.faircode.netguard.database.Column;
 import eu.faircode.netguard.preference.Preferences;
+import eu.faircode.netguard.preference.DefaultPreferences;
 import eu.faircode.netguard.preference.Sort;
 
 public class Rule {
@@ -209,7 +207,6 @@ public class Rule {
 
     public static List<Rule> getRules(final boolean all, Context context) {
         synchronized (context.getApplicationContext()) {
-            SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
             SharedPreferences wifi = context.getSharedPreferences(Preferences.WIFI.getKey(), Context.MODE_PRIVATE);
             SharedPreferences other = context.getSharedPreferences(Preferences.OTHER.getKey(), Context.MODE_PRIVATE);
             SharedPreferences screen_wifi = context.getSharedPreferences(Preferences.SCREEN_WIFI.getKey(), Context.MODE_PRIVATE);
@@ -220,18 +217,18 @@ public class Rule {
             SharedPreferences notify = context.getSharedPreferences(Preferences.NOTIFY.getKey(), Context.MODE_PRIVATE);
 
             // Get settings
-            boolean default_wifi = prefs.getBoolean(Preferences.WHITELIST_WIFI.getKey(), Preferences.WHITELIST_WIFI.getDefaultValue());
-            boolean default_other = prefs.getBoolean(Preferences.WHITELIST_OTHER.getKey(), Preferences.WHITELIST_OTHER.getDefaultValue());
-            boolean default_screen_wifi = prefs.getBoolean(Preferences.SCREEN_WIFI.getKey(), Preferences.SCREEN_WIFI.getDefaultValue());
-            boolean default_screen_other = prefs.getBoolean(Preferences.SCREEN_OTHER.getKey(), Preferences.SCREEN_OTHER.getDefaultValue());
-            boolean default_roaming = prefs.getBoolean(Preferences.WHITELIST_ROAMING.getKey(), Preferences.WHITELIST_ROAMING.getDefaultValue());
+            boolean default_wifi = DefaultPreferences.getBoolean(context, Preferences.WHITELIST_WIFI);
+            boolean default_other = DefaultPreferences.getBoolean(context, Preferences.WHITELIST_OTHER);
+            boolean default_screen_wifi = DefaultPreferences.getBoolean(context, Preferences.SCREEN_WIFI);
+            boolean default_screen_other = DefaultPreferences.getBoolean(context, Preferences.SCREEN_OTHER);
+            boolean default_roaming = DefaultPreferences.getBoolean(context, Preferences.WHITELIST_ROAMING);
 
-            boolean manage_system = prefs.getBoolean(Preferences.MANAGE_SYSTEM.getKey(), Preferences.MANAGE_SYSTEM.getDefaultValue());
-            boolean screen_on = prefs.getBoolean(Preferences.SCREEN_ON.getKey(), Preferences.SCREEN_ON.getDefaultValue());
-            boolean show_user = prefs.getBoolean(Preferences.SHOW_USER.getKey(), Preferences.SHOW_USER.getDefaultValue());
-            boolean show_system = prefs.getBoolean(Preferences.SHOW_SYSTEM.getKey(), Preferences.SHOW_SYSTEM.getDefaultValue());
-            boolean show_nointernet = prefs.getBoolean(Preferences.SHOW_NO_INTERNET.getKey(), Preferences.SHOW_NO_INTERNET.getDefaultValue());
-            boolean show_disabled = prefs.getBoolean(Preferences.SHOW_DISABLED.getKey(), Preferences.SHOW_DISABLED.getDefaultValue());
+            boolean manage_system = DefaultPreferences.getBoolean(context, Preferences.MANAGE_SYSTEM);
+            boolean screen_on = DefaultPreferences.getBoolean(context, Preferences.SCREEN_ON);
+            boolean show_user = DefaultPreferences.getBoolean(context, Preferences.SHOW_USER);
+            boolean show_system = DefaultPreferences.getBoolean(context, Preferences.SHOW_SYSTEM);
+            boolean show_nointernet = DefaultPreferences.getBoolean(context, Preferences.SHOW_NO_INTERNET);
+            boolean show_disabled = DefaultPreferences.getBoolean(context, Preferences.SHOW_DISABLED);
 
             default_screen_wifi = default_screen_wifi && screen_on;
             default_screen_other = default_screen_other && screen_on;
@@ -407,7 +404,7 @@ public class Rule {
             final Collator collator = Collator.getInstance(Locale.getDefault());
             collator.setStrength(Collator.SECONDARY); // Case insensitive, process accents etc
 
-            String sort = prefs.getString(Preferences.SORT.getKey(), Preferences.SORT.getDefaultValue().getValue());
+            String sort = DefaultPreferences.getSort(context, Preferences.SORT);
             if (Sort.Uid.getValue().equals(sort))
                 Collections.sort(listRules, new Comparator<Rule>() {
                     @Override
@@ -448,11 +445,10 @@ public class Rule {
     }
 
     public void updateChanged(Context context) {
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
-        boolean screen_on = prefs.getBoolean(Preferences.SCREEN_ON.getKey(), !Preferences.SCREEN_ON.getDefaultValue());
-        boolean default_wifi = prefs.getBoolean(Preferences.WHITELIST_WIFI.getKey(), Preferences.WHITELIST_WIFI.getDefaultValue()) && screen_on;
-        boolean default_other = prefs.getBoolean(Preferences.WHITELIST_OTHER.getKey(), Preferences.WHITELIST_OTHER.getDefaultValue()) && screen_on;
-        boolean default_roaming = prefs.getBoolean(Preferences.WHITELIST_ROAMING.getKey(), Preferences.WHITELIST_ROAMING.getDefaultValue());
+        boolean screen_on = DefaultPreferences.getBooleanNotDefault(context, Preferences.SCREEN_ON);
+        boolean default_wifi = DefaultPreferences.getBoolean(context, Preferences.WHITELIST_WIFI) && screen_on;
+        boolean default_other = DefaultPreferences.getBoolean(context, Preferences.WHITELIST_OTHER) && screen_on;
+        boolean default_roaming = DefaultPreferences.getBoolean(context, Preferences.WHITELIST_ROAMING);
         updateChanged(default_wifi, default_other, default_roaming);
     }
 
