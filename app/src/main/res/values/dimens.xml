@@ -5,5 +5,7 @@
     <dimen name="icon_action">24dp</dimen>
     <dimen name="icon_widget">36dp</dimen>
     <dimen name="icon_rule_s">16dp</dimen>
-    <dimen name="spacing_rule">8dp</dimen>
+    <dimen name="rule_spacing">8dp</dimen>
+    <dimen name="rule_title_spacing">12dp</dimen>
+    <dimen name="rule_sub_spacing">4dp</dimen>
 </resources>

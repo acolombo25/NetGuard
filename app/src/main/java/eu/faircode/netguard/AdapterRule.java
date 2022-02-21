@@ -170,7 +170,7 @@ public class AdapterRule extends RecyclerView.Adapter<AdapterRule.ViewHolder> im
         final ImageButton btnClear;
 
         final LinearLayout llFilter;
-        final ImageView ivLive;
+        final ImageView btnLive;
         final TextView tvLogging;
         final Button btnLogging;
         final ListView lvAccess;
@@ -232,7 +232,7 @@ public class AdapterRule extends RecyclerView.Adapter<AdapterRule.ViewHolder> im
             btnClear = itemView.findViewById(R.id.btnClear);
 
             llFilter = itemView.findViewById(R.id.llFilter);
-            ivLive = itemView.findViewById(R.id.ivLive);
+            btnLive = itemView.findViewById(R.id.btnLive);
             tvLogging = itemView.findViewById(R.id.tvLogging);
             btnLogging = itemView.findViewById(R.id.btnLogging);
             lvAccess = itemView.findViewById(R.id.lvAccess);
@@ -672,11 +672,11 @@ public class AdapterRule extends RecyclerView.Adapter<AdapterRule.ViewHolder> im
         holder.llFilter.setVisibility(Util.canFilter() ? View.VISIBLE : View.GONE);
 
         // Live
-        holder.ivLive.setOnClickListener(new View.OnClickListener() {
+        holder.btnLive.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 live = !live;
-                holder.ivLive.setImageResource(live ? R.drawable.ic_pause : R.drawable.ic_play_arrow);
+                holder.btnLive.setImageResource(live ? R.drawable.ic_pause : R.drawable.ic_play_arrow);
                 if (live) AdapterRule.this.notifyDataSetChanged();
             }
         });
