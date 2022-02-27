@@ -13,4 +13,5 @@
     <dimen name="legend_icon_spacing">4dp</dimen>
     <dimen name="legend_text_spacing">8dp</dimen>
     <dimen name="text_roaming">14sp</dimen>
+    <dimen name="log_spacing">8dp</dimen>
 </resources>

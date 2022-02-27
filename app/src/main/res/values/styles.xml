@@ -59,6 +59,21 @@
         <item name="colorOff">@color/colorGreenOff</item>
     </style>
 
+    <style name="TextWarning">
+        <item name="android:padding">8dp</item>
+        <item name="android:elevation">8dp</item>
+        <item name="android:textColor">?android:attr/textColorPrimaryInverse</item>
+        <item name="android:background">?attr/colorAccent</item>
+    </style>
+
+    <style name="TextRoaming">
+        <item name="android:gravity">center</item>
+        <item name="android:text">@string/title_roaming_symbol</item>
+        <item name="android:textAppearance">@style/TextSmall</item>
+        <item name="android:textColor">?attr/colorOff</item>
+        <item name="android:textSize">@dimen/text_roaming</item>
+    </style>
+
     <style name="TextLarge" parent="@android:style/TextAppearance.Material.Large" />
     <style name="TextMedium" parent="@android:style/TextAppearance.Material.Medium" />
     <style name="TextSmall" parent="@android:style/TextAppearance.Material.Small" />

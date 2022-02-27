@@ -261,11 +261,7 @@
                     android:layout_width="@dimen/icon_legend"
                     android:layout_height="@dimen/icon_legend"
                     android:layout_margin="@dimen/legend_icon_spacing"
-                    android:gravity="center"
-                    android:text="@string/title_roaming_symbol"
-                    android:textAppearance="@style/TextSmall"
-                    android:textColor="?attr/colorOff"
-                    android:textSize="@dimen/text_roaming" />
+                    style="@style/TextRoaming" />
 
                 <TextView
                     android:layout_width="wrap_content"

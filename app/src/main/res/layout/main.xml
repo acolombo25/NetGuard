@@ -13,15 +13,12 @@
 
         <TextView
             android:id="@+id/tvDisabled"
+            style="@style/TextWarning"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="8dp"
             android:text="@string/msg_disabled"
-            android:elevation="8dp"
-            android:textColor="?android:attr/textColorPrimaryInverse"
-            android:background="?attr/colorAccent"
-            tools:visibility="visible"
-            android:visibility="gone" />
+            android:visibility="gone"
+            tools:visibility="visible" />
 
         <LinearLayout
             android:id="@+id/llUsage"
