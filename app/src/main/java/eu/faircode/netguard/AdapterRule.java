@@ -29,8 +29,6 @@ import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.content.res.TypedArray;
 import android.database.Cursor;
-import android.graphics.Bitmap;
-import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
@@ -67,10 +65,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.core.app.NotificationManagerCompat;
 import androidx.core.content.ContextCompat;
-import androidx.core.content.pm.ShortcutInfoCompat;
-import androidx.core.content.pm.ShortcutManagerCompat;
 import androidx.core.graphics.drawable.DrawableCompat;
-import androidx.core.graphics.drawable.IconCompat;
 import androidx.core.widget.CompoundButtonCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -80,9 +75,9 @@ import java.util.Arrays;
 import java.util.List;
 
 import eu.faircode.netguard.database.Column;
+import eu.faircode.netguard.features.shortcut.ShortcutManager;
 import eu.faircode.netguard.preference.DefaultPreferences;
 import eu.faircode.netguard.preference.Preferences;
-import eu.faircode.netguard.preference.DefaultPreferences;
 import eu.faircode.netguard.reason.SimpleReason;
 
 public class AdapterRule extends RecyclerView.Adapter<AdapterRule.ViewHolder> implements Filterable {
@@ -517,11 +512,8 @@ public class AdapterRule extends RecyclerView.Adapter<AdapterRule.ViewHolder> im
 
         // Launch application
         if (rule.expanded) {
-            Intent intent = context.getPackageManager().getLaunchIntentForPackage(rule.packageName);
-            final Intent launch = (intent == null ||
-                    intent.resolveActivity(context.getPackageManager()) == null ? null : intent);
-
-            holder.ibLaunch.setVisibility(launch == null ? View.GONE : View.VISIBLE);
+            final Intent launch = rule.getLaunchIntent(context);
+            holder.ibLaunch.setVisibility(launch != null ? View.VISIBLE : View.GONE);
             holder.ibLaunch.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -533,39 +525,10 @@ public class AdapterRule extends RecyclerView.Adapter<AdapterRule.ViewHolder> im
         }
 
         // Add shortcut
-        boolean isSupported = ShortcutManagerCompat.isRequestPinShortcutSupported(context);
-        if (rule.expanded && isSupported) {
-            Intent check = context.getPackageManager().getLaunchIntentForPackage(rule.packageName);
-            final Intent launch = (check == null || check.resolveActivity(context.getPackageManager()) == null ? null : check);
-
-            final Intent shortcut = new Intent(context, ActivityMain.class);
-            shortcut.setPackage(context.getPackageName());
-            shortcut.setAction(Intent.ACTION_MAIN);
-            shortcut.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            shortcut.putExtra(ActivityMain.EXTRA_SHORTCUT_PACKAGE, rule.packageName);
-
-            holder.ibAddToHomeScreen.setVisibility(launch == null ? View.GONE : View.VISIBLE);
-            holder.ibAddToHomeScreen.setOnClickListener(view -> {
-
-                Drawable drawable = Util.getAppIconDrawable(context, rule);
-                Bitmap bitmap;
-
-                if (drawable != null) {
-                    bitmap = Bitmap.createBitmap(drawable.getIntrinsicWidth(), drawable.getIntrinsicHeight(), Bitmap.Config.ARGB_8888);
-                    Canvas canvas = new Canvas(bitmap);
-                    drawable.setBounds(0, 0, canvas.getWidth(), canvas.getHeight());
-                    drawable.draw(canvas);
-                } else {
-                    bitmap = null;
-                }
-
-                ShortcutInfoCompat.Builder info = new ShortcutInfoCompat.Builder(context, "netguard-shorcut:" + rule.uid)
-                        .setIntent(shortcut)
-                        .setShortLabel(rule.name)
-                        .setAlwaysBadged();
-                if(bitmap != null) info.setIcon(IconCompat.createWithBitmap(bitmap));
-                ShortcutManagerCompat.requestPinShortcut(context, info.build(), null);
-            });
+        if (rule.expanded && ShortcutManager.canRequestPinShortcut(context)) {
+            boolean canLaunch = rule.canLaunch(context);
+            holder.ibAddToHomeScreen.setVisibility(canLaunch ? View.VISIBLE : View.GONE);
+            holder.ibAddToHomeScreen.setOnClickListener(v -> ShortcutManager.requestPinShortcut(context, rule));
         } else {
             holder.ibAddToHomeScreen.setVisibility(View.GONE);
         }

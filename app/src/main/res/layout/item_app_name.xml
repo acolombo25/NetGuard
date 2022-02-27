@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center_vertical"
+    android:orientation="horizontal"
+    android:padding="@dimen/rule_spacing"
+    android:weightSum="1">
+
+    <ImageView
+        android:id="@+id/ivAppIcon"
+        android:layout_width="@dimen/icon_widget"
+        android:layout_height="@dimen/icon_widget"
+        tools:src="@tools:sample/avatars" />
+
+    <TextView
+        android:id="@+id/tvAppName"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/rule_spacing"
+        android:layout_weight="1"
+        android:ellipsize="marquee"
+        android:orientation="vertical"
+        android:singleLine="true"
+        tools:text="@tools:sample/lorem" />
+
+</LinearLayout>

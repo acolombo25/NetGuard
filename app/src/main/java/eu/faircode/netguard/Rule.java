@@ -21,6 +21,7 @@ package eu.faircode.netguard;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
@@ -125,6 +126,14 @@ public class Rule {
         if (!cacheEnabled.containsKey(info))
             cacheEnabled.put(info, Util.isEnabled(info, context));
         return cacheEnabled.get(info);
+    }
+
+    public boolean canLaunch(Context context) {
+        return getLaunchIntent(context) != null;
+    }
+
+    public Intent getLaunchIntent(Context context) {
+        return Util.getLaunchIntent(context, packageName);
     }
 
     public static void clearCache(Context context) {

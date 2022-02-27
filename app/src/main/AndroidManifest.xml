@@ -163,6 +163,18 @@
             </intent-filter>
         </activity>
 
+        <activity android:name=".features.shortcut.ShortcutConfigurationActivity"
+            android:theme="@style/AppDialog"
+            android:label="@string/title_add_shortcut"
+            android:icon="@drawable/ic_add_to_home_screen"
+            android:finishOnCloseSystemDialogs="true"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.CREATE_SHORTCUT"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+        </activity>
+
         <service
             android:name=".ServiceSinkhole"
             android:exported="true"

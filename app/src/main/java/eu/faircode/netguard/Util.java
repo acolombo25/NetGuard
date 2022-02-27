@@ -47,6 +47,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Debug;
 import android.os.PowerManager;
+import android.preference.PreferenceManager;
 import android.provider.Settings;
 import android.telephony.TelephonyManager;
 import android.text.TextUtils;
@@ -890,6 +891,11 @@ public class Util {
             e.printStackTrace();
             return ContextCompat.getDrawable(context, android.R.drawable.sym_def_app_icon);
         }
+    }
+
+    public static Intent getLaunchIntent(Context context, String packageName) {
+        Intent check = context.getPackageManager().getLaunchIntentForPackage(packageName);
+        return check==null || check.resolveActivity(context.getPackageManager())==null ? null:check;
     }
 
     @TargetApi(Build.VERSION_CODES.M)

@@ -318,4 +318,5 @@ Your internet traffic is not being sent to a remote VPN server.</string>
         <item>UDP</item>
         <item>TCP</item>
     </string-array>
+    <string name="title_add_shortcut">Add app shortcut</string>
 </resources>
