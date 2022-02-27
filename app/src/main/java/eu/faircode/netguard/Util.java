@@ -35,6 +35,7 @@ import android.content.res.Resources;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.drawable.Drawable;
 import android.net.ConnectivityManager;
 import android.net.LinkProperties;
 import android.net.Network;
@@ -47,6 +48,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Debug;
 import android.os.PowerManager;
+import android.preference.PreferenceManager;
 import android.provider.Settings;
 import android.telephony.TelephonyManager;
 import android.text.TextUtils;
@@ -56,9 +58,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.TextView;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
+import androidx.core.content.ContextCompat;
 import androidx.core.net.ConnectivityManagerCompat;
-import androidx.preference.PreferenceManager;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -838,6 +841,28 @@ public class Util {
             sb.setLength(sb.length() - 2);
 
         return sb.toString();
+    }
+
+    public static @Nullable Drawable getAppIconDrawable(Context context, Rule rule) {
+        return getAppIconDrawable(context, rule.packageName);
+    }
+
+    public static @Nullable Drawable getAppIconDrawable(Context context, ApplicationInfo info) {
+        return getAppIconDrawable(context, info.packageName);
+    }
+
+    private static @Nullable Drawable getAppIconDrawable(Context context, String packageName) {
+        try {
+            return context.getPackageManager().getApplicationIcon(packageName);
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
+            return ContextCompat.getDrawable(context, android.R.drawable.sym_def_app_icon);
+        }
+    }
+
+    public static Intent getLaunchIntent(Context context, String packageName) {
+        Intent check = context.getPackageManager().getLaunchIntentForPackage(packageName);
+        return check==null || check.resolveActivity(context.getPackageManager())==null ? null:check;
     }
 
     @TargetApi(Build.VERSION_CODES.M)

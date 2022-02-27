@@ -496,9 +496,8 @@ public class ActivityMain extends AppCompatActivity implements SharedPreferences
         if (intent.hasExtra(EXTRA_SHORTCUT_PACKAGE)) {
             String extraPackage = getIntent().getStringExtra(EXTRA_SHORTCUT_PACKAGE);
             if (!extraPackage.isEmpty()) {
-                Intent launch = getPackageManager().getLaunchIntentForPackage(extraPackage);
-                boolean canLaunch = launch != null && launch.resolveActivity(getPackageManager()) != null;
-                if (canLaunch && start()) startActivity(launch);
+                Intent launch = Util.getLaunchIntent(this,extraPackage );
+                if (launch != null && start()) startActivity(launch);
             }
         }
     }
