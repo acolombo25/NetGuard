@@ -165,13 +165,9 @@
 
                 <TextView
                     android:id="@+id/tvRoaming"
+                    style="@style/TextRoaming"
                     android:layout_width="@dimen/icon_rule_s"
-                    android:layout_height="@dimen/icon_rule_s"
-                    android:gravity="center"
-                    android:text="@string/title_roaming_symbol"
-                    android:textAppearance="@style/TextSmall"
-                    android:textColor="?attr/colorOff"
-                    android:textSize="@dimen/text_roaming" />
+                    android:layout_height="@dimen/icon_rule_s" />
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>
@@ -186,37 +182,38 @@
         android:layout_marginEnd="@dimen/rule_spacing"
         android:orientation="vertical"
         android:visibility="gone"
-        tools:visibility="gone">
+        tools:visibility="visible">
 
         <TextView
             android:id="@+id/tvUid"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/rule_sub_spacing"
-            android:textAppearance="@style/TextSmall" />
+            tools:text="100000"/>
 
         <TextView
             android:id="@+id/tvPackage"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/rule_sub_spacing"
-            android:textAppearance="@style/TextSmall" />
+            tools:text="com.android.application" />
 
         <TextView
             android:id="@+id/tvVersion"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/rule_sub_spacing"
-            android:textAppearance="@style/TextSmall" />
+            tools:text="3.100" />
 
         <TextView
             android:id="@+id/tvDescription"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/rule_sub_spacing"
-            android:textAppearance="@style/TextSmall"
             android:textStyle="italic"
-            android:visibility="gone" />
+            android:visibility="gone"
+            tools:text="@tools:sample/lorem"
+            tools:visibility="visible" />
 
         <TextView
             android:id="@+id/tvInternet"
@@ -224,9 +221,9 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/rule_sub_spacing"
             android:text="@string/title_internet"
-            android:textAppearance="@style/TextSmall"
             android:textStyle="italic"
-            android:visibility="gone" />
+            android:visibility="gone"
+            tools:visibility="visible" />
 
         <TextView
             android:id="@+id/tvDisabled"
@@ -234,9 +231,9 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/rule_sub_spacing"
             android:text="@string/title_disabled"
-            android:textAppearance="@style/TextSmall"
             android:textStyle="italic"
-            android:visibility="gone" />
+            android:visibility="gone"
+            tools:visibility="visible" />
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -246,7 +243,6 @@
 
             <Button
                 android:id="@+id/btnRelated"
-                style="@style/Widget.AppCompat.Button.Borderless.Colored"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
@@ -337,8 +333,7 @@
                 android:id="@+id/cbScreenWifi"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/title_screen_wifi"
-                android:textAppearance="@style/TextSmall" />
+                android:text="@string/title_screen_wifi" />
         </LinearLayout>
 
         <LinearLayout
@@ -359,8 +354,7 @@
                 android:id="@+id/cbScreenOther"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/title_screen_other"
-                android:textAppearance="@style/TextSmall" />
+                android:text="@string/title_screen_other" />
         </LinearLayout>
 
         <LinearLayout
@@ -370,21 +364,15 @@
             android:orientation="horizontal">
 
             <TextView
+                style="@style/TextRoaming"
                 android:layout_width="@dimen/icon_rule_s"
-                android:layout_height="@dimen/icon_rule_s"
-                android:layout_gravity="center_vertical"
-                android:gravity="center"
-                android:text="@string/title_roaming_symbol"
-                android:textAppearance="@style/TextSmall"
-                android:textColor="?attr/colorOff"
-                android:textSize="@dimen/text_roaming" />
+                android:layout_height="@dimen/icon_rule_s" />
 
             <CheckBox
                 android:id="@+id/cbRoaming"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/title_roaming"
-                android:textAppearance="@style/TextSmall" />
+                android:text="@string/title_roaming" />
         </LinearLayout>
 
         <LinearLayout
@@ -404,8 +392,7 @@
                 android:id="@+id/cbLockdown"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/title_lockdown"
-                android:textAppearance="@style/TextSmall" />
+                android:text="@string/title_lockdown" />
         </LinearLayout>
 
         <LinearLayout
@@ -458,7 +445,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:layout_weight="1"
-                    android:textAppearance="@style/TextSmall" />
+                    tools:text="@string/title_logging_disabled" />
 
                 <Button
                     android:id="@+id/btnLogging"
@@ -476,7 +463,6 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/rule_sub_spacing"
                 android:text="@string/title_precedence"
-                android:textAppearance="@style/TextSmall"
                 android:textStyle="italic" />
 
             <eu.faircode.netguard.ExpandedListView
@@ -516,8 +502,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/rule_sub_spacing"
-                android:text="@string/title_notify"
-                android:textAppearance="@style/TextSmall" />
+                android:text="@string/title_notify" />
         </LinearLayout>
     </LinearLayout>
 </LinearLayout>
