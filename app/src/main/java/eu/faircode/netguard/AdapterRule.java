@@ -60,10 +60,11 @@ import android.widget.ListView;
 import android.widget.PopupMenu;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.core.app.NotificationManagerCompat;
 import androidx.core.content.ContextCompat;
+import androidx.core.graphics.drawable.IconCompat;
 import androidx.core.graphics.drawable.DrawableCompat;
 import androidx.core.widget.CompoundButtonCompat;
 import androidx.preference.PreferenceManager;
@@ -76,6 +77,8 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+
+import eu.faircode.netguard.features.shortcut.ShortcutManager;
 
 public class AdapterRule extends RecyclerView.Adapter<AdapterRule.ViewHolder> implements Filterable {
     private static final String TAG = "NetGuard.Adapter";
@@ -144,6 +147,7 @@ public class AdapterRule extends RecyclerView.Adapter<AdapterRule.ViewHolder> im
         public Button btnRelated;
         public ImageButton ibSettings;
         public ImageButton ibLaunch;
+        public ImageButton ibAddToHomeScreen;
 
         public CheckBox cbApply;
 
@@ -204,6 +208,7 @@ public class AdapterRule extends RecyclerView.Adapter<AdapterRule.ViewHolder> im
             btnRelated = itemView.findViewById(R.id.btnRelated);
             ibSettings = itemView.findViewById(R.id.ibSettings);
             ibLaunch = itemView.findViewById(R.id.ibLaunch);
+            ibAddToHomeScreen = itemView.findViewById(R.id.ibAddToHomeScreen);
 
             cbApply = itemView.findViewById(R.id.cbApply);
 
@@ -496,24 +501,37 @@ public class AdapterRule extends RecyclerView.Adapter<AdapterRule.ViewHolder> im
                     context.startActivity(settings);
                 }
             });
-        } else
+        } else {
             holder.ibSettings.setVisibility(View.GONE);
+        }
 
         // Launch application
         if (rule.expanded) {
-            Intent intent = context.getPackageManager().getLaunchIntentForPackage(rule.packageName);
-            final Intent launch = (intent == null ||
-                    intent.resolveActivity(context.getPackageManager()) == null ? null : intent);
-
-            holder.ibLaunch.setVisibility(launch == null ? View.GONE : View.VISIBLE);
+            final Intent launch = rule.getLaunchIntent(context);
+            holder.ibLaunch.setVisibility(launch != null ? View.VISIBLE : View.GONE);
             holder.ibLaunch.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     context.startActivity(launch);
                 }
             });
-        } else
+        } else {
             holder.ibLaunch.setVisibility(View.GONE);
+        }
+
+        // Add shortcut
+        if (rule.expanded && ShortcutManager.canRequestPinShortcut(context)) {
+            boolean canLaunch = rule.canLaunch(context);
+            holder.ibAddToHomeScreen.setVisibility(canLaunch ? View.VISIBLE : View.GONE);
+            holder.ibAddToHomeScreen.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    ShortcutManager.requestPinShortcut(context, rule);
+                }
+            });
+        } else {
+            holder.ibAddToHomeScreen.setVisibility(View.GONE);
+        }
 
         // Apply
         holder.cbApply.setEnabled(rule.pkg && filter);
