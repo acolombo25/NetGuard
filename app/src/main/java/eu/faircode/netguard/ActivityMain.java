@@ -199,12 +199,7 @@ public class ActivityMain extends AppCompatActivity implements SharedPreferences
             public boolean onLongClick(View view) {
                 int location[] = new int[2];
                 actionView.getLocationOnScreen(location);
-                Toast toast = Toast.makeText(ActivityMain.this, R.string.msg_metered, Toast.LENGTH_LONG);
-                toast.setGravity(
-                        Gravity.TOP | Gravity.LEFT,
-                        location[0] + ivMetered.getLeft(),
-                        Math.round(location[1] + ivMetered.getBottom() - toast.getView().getPaddingTop()));
-                toast.show();
+                Toast.makeText(ActivityMain.this, R.string.msg_metered, Toast.LENGTH_LONG).show();
                 return true;
             }
         });
