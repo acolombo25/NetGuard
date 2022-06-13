@@ -19,6 +19,9 @@ package eu.faircode.netguard;
     Copyright 2015-2019 by Marcel Bokhorst (M66B)
 */
 
+import static eu.faircode.netguard.Util.PROTOCOL_TCP;
+import static eu.faircode.netguard.Util.PROTOCOL_UDP;
+
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -505,17 +508,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             String query = "SELECT ID AS _id, *"+
                     " FROM " + Table.LOG.getValue() +
                     " WHERE (0 = 1";
-            if (udp)
-                query += " OR protocol = 17";
-            if (tcp)
-                query += " OR protocol = 6";
-            if (other)
-                query += " OR (protocol <> 6 AND protocol <> 17)";
+            if (udp) query += " OR protocol = " + PROTOCOL_UDP;
+            if (tcp) query += " OR protocol = " + PROTOCOL_TCP;
+            if (other) query += " OR (protocol <> " + PROTOCOL_TCP + " AND protocol <> " + PROTOCOL_UDP + ")";
             query += ") AND (0 = 1";
-            if (allowed)
-                query += " OR allowed = 1";
-            if (blocked)
-                query += " OR allowed = 0";
+            if (allowed) query += " OR allowed = 1";
+            if (blocked) query += " OR allowed = 0";
             query += ")";
             query += " ORDER BY "+Column.TIME+" DESC";
             return db.rawQuery(query, new String[]{});

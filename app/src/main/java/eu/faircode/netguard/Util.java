@@ -98,6 +98,7 @@ import eu.faircode.netguard.preference.DefaultPreferences;
 public class Util {
     private static final String TAG = "NetGuard.Util";
     public static final String LIBRARY = "netguard";
+    private static final String DEVELOPER_EMAIL = "marcel+netguard@faircode.eu";
     // Roam like at home
     private static final List<String> listEU = Arrays.asList(
             "AT", // Austria
@@ -1020,8 +1021,8 @@ public class Util {
                 // Build intent
                 Intent sendEmail = new Intent(Intent.ACTION_SEND);
                 sendEmail.setType("message/rfc822");
-                sendEmail.putExtra(Intent.EXTRA_EMAIL, new String[]{"marcel+netguard@faircode.eu"});
-                sendEmail.putExtra(Intent.EXTRA_SUBJECT, "NetGuard " + version + " logcat");
+                sendEmail.putExtra(Intent.EXTRA_EMAIL, new String[]{DEVELOPER_EMAIL});
+                sendEmail.putExtra(Intent.EXTRA_SUBJECT, context.getString(R.string.app_name) + version + " logcat");
                 sendEmail.putExtra(Intent.EXTRA_TEXT, sb.toString());
                 sendEmail.putExtra(Intent.EXTRA_STREAM, uri);
                 return sendEmail;
