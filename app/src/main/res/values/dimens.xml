@@ -14,4 +14,10 @@
     <dimen name="legend_text_spacing">8dp</dimen>
     <dimen name="text_roaming">14sp</dimen>
     <dimen name="log_spacing">8dp</dimen>
+
+    <dimen name="stroke_s">1dp</dimen>
+    <dimen name="stroke_m">2dp</dimen>
+
+    <dimen name="chart_height">96dp</dimen>
+    <dimen name="chart_width">480dp</dimen> <!--96x5-->
 </resources>
