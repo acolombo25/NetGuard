@@ -1,13 +1,13 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion = 31
+    compileSdkVersion = 32
 
     defaultConfig {
         applicationId = "eu.faircode.netguard"
         versionName = "2.301"
         minSdkVersion 22
-        targetSdkVersion 31
+        targetSdkVersion 32
         versionCode = 2022060401
         archivesBaseName = "NetGuard-v$versionName"
 
@@ -70,7 +70,7 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
     // https://developer.android.com/jetpack/androidx/releases/
-    implementation 'androidx.appcompat:appcompat:1.4.1'
+    implementation 'androidx.appcompat:appcompat:1.4.2'
     implementation 'androidx.swiperefreshlayout:swiperefreshlayout:1.1.0'
     implementation 'androidx.recyclerview:recyclerview:1.2.1'
     implementation 'androidx.localbroadcastmanager:localbroadcastmanager:1.1.0'
