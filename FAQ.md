@@ -531,6 +531,9 @@ Make sure you are not running NetGuard in allow (whitelist) mode (check the NetG
 Make sure you didn't enable the Always-On VPN sub option '*Block connections without VPN*' (Android 8 Oreo or later).
 This will block resolving domain names too (is it a bug or feature?).
 
+Some internet providers block all DNS requests except via their own DNS servers.
+So, if you configured custom DNS servers, try to undo this.
+
 Some Android versions, including LineageOS and /e/ for some devices, contain a bug resulting in all internet traffic being blocked.
 Mostly, you can workaround this bug by enabling filtering in NetGuard's *Advanced options*.
 If this doesn't solve the issue, the problem can unfortunately not be fixed or worked around by NetGuard.
@@ -544,8 +547,8 @@ except for applications with the condition *'Allow in lockdown mode'* enabled.
 You can use this mode to limit battery usage or network usage,
 for example, when your battery is almost empty or when your data allotment is almost exhausted.
 
-Note that Lockdown mode applies only if the corresponding option is also set in "Network options" 
-(one for Wi-Fi mode, one for Mobile data), allowing to have lockdown in only one of the two network modes 
+Note that Lockdown mode applies only if the corresponding option is also set in "Network options"
+(one for Wi-Fi mode, one for Mobile data), allowing to have lockdown in only one of the two network modes
 and not in the other (eg. Lock down if mobile data are active, but not if Wi-Fi is currently used).
 
 Note also that system applications will only be blocked in this mode
@@ -678,13 +681,13 @@ Be sure to enter and confirm the addresses and to set two DNS server addresses.
 If you enter just one DNS server address, it will be used in addition to the default DNS server addresses.
 
 <a name="faq64"></a>
-**(64) Can you add DNS over TLS?**
+**(64) Can you add DNS over TLS/HTTP?**
 
-If you mean to intercept [DNS over TLS](https://en.wikipedia.org/wiki/DNS_over_TLS) requests to resolve domain names,
-this is not possible because DNS over TLS traffic is encrypted, which is the whole point of DNS over TLS.
+If you mean to intercept [DNS over HTTP](https://en.wikipedia.org/wiki/DNS_over_HTTPS) (DoH)
+or [DNS over TLS](https://en.wikipedia.org/wiki/DNS_over_TLS) (DoT) requests to resolve domain names,
+this is not possible because DoH/DoT traffic is encrypted, which is the whole point of DoH/DoT.
 
-If you mean to translate plain DNS to DNS over TLS, Android 9 Pie and later already support DNS over TLS out of the box,
-so it isn't worth the significant effort to add this.
+Please [see here](https://github.com/Ch4t4r/Nebulo/blob/master/docs/NONVPNMODE.md) about how you can use DoH/DoT with NetGuard anyway.
 
 <br />
 
@@ -711,6 +714,10 @@ and to save on battery power and to prevent crashes blocking NetGuard with itsel
 **(66) Why is a blocked app still accessing the internet?**
 
 Blocked apps cannot access the internet. There are no exceptions to this.
+All app and system traffic flows through the [Android VPN service](https://developer.android.com/guide/topics/connectivity/vpn),
+which is a *must* for companies with high security requirements.
+This also means that all apps will be treated in the same way
+and that the global access log (*Show log* in the three-dots overflow menu) will show all traffic.
 
 However:
 
