@@ -558,10 +558,6 @@ public class Util {
         ((Activity) context).setTaskDescription(new ActivityManager.TaskDescription(null, null, tv.data));
     }
 
-    public static int dips2pixels(int dips, Context context) {
-        return Math.round(dips * context.getResources().getDisplayMetrics().density + 0.5f);
-    }
-
     private static int calculateInSampleSize(
             BitmapFactory.Options options, int reqWidth, int reqHeight) {
         int height = options.outHeight;

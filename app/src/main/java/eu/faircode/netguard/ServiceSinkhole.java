@@ -1007,8 +1007,8 @@ public class ServiceSinkhole extends VpnService implements SharedPreferences.OnS
             rx = trx;
 
             // Create bitmap
-            int height = Util.dips2pixels(96, ServiceSinkhole.this); //FIXME Extract dimension
-            int width = Util.dips2pixels(96 * 5, ServiceSinkhole.this); //FIXME Extract dimension
+            int height = Math.round(getResources().getDimension(R.dimen.chart_height));
+            int width = Math.round(getResources().getDimension(R.dimen.chart_width));
             Bitmap bitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
 
             // Create canvas
@@ -1056,13 +1056,13 @@ public class ServiceSinkhole extends VpnService implements SharedPreferences.OnS
             paint.setStyle(Paint.Style.STROKE);
 
             // Draw scale line
-            paint.setStrokeWidth(Util.dips2pixels(1, ServiceSinkhole.this));
+            paint.setStrokeWidth(getResources().getDimension(R.dimen.stroke_s));
             paint.setColor(ContextCompat.getColor(ServiceSinkhole.this, R.color.colorGrayed));
             float y = height / 2f;
             canvas.drawLine(0, y, width, y, paint);
 
             // Draw paths
-            paint.setStrokeWidth(Util.dips2pixels(2, ServiceSinkhole.this));
+            paint.setStrokeWidth(getResources().getDimension(R.dimen.stroke_m));
             paint.setColor(ContextCompat.getColor(ServiceSinkhole.this, R.color.colorSend));
             canvas.drawPath(ptx, paint);
             paint.setColor(ContextCompat.getColor(ServiceSinkhole.this, R.color.colorReceive));
