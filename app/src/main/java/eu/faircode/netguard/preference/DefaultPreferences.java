@@ -32,6 +32,10 @@ public class DefaultPreferences {
         return getPreferences(context).getBoolean(preference.getKey(), preference.getDefaultValue());
     }
 
+    public static boolean getBoolean(Context context, Preference<Boolean> preference, boolean defaultValue) {
+        return getPreferences(context).getBoolean(preference.getKey(), defaultValue);
+    }
+
     public static boolean getBooleanNotDefault(Context context, Preference<Boolean> preference) {
         return getPreferences(context).getBoolean(preference.getKey(), !preference.getDefaultValue());
     }

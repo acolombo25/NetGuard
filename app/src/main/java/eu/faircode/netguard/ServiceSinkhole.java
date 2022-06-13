@@ -114,6 +114,7 @@ import eu.faircode.netguard.format.DateFormats;
 import eu.faircode.netguard.format.Files;
 import eu.faircode.netguard.preference.Preferences;
 import eu.faircode.netguard.preference.DefaultPreferences;
+import eu.faircode.netguard.reason.LaunchShortcut;
 import eu.faircode.netguard.reason.Reason;
 import eu.faircode.netguard.reason.SimpleReason;
 
@@ -160,6 +161,7 @@ public class ServiceSinkhole extends VpnService implements SharedPreferences.OnS
     private volatile Looper commandLooper;
     private volatile Looper logLooper;
     private volatile Looper statsLooper;
+    private volatile Looper launchShortcutLooper;
     private volatile CommandHandler commandHandler;
     private volatile LogHandler logHandler;
     private volatile StatsHandler statsHandler;
@@ -183,6 +185,7 @@ public class ServiceSinkhole extends VpnService implements SharedPreferences.OnS
     public static final String EXTRA_BLOCKED = "Blocked";
     public static final String EXTRA_INTERACTIVE = "Interactive";
     public static final String EXTRA_TEMPORARY = "Temporary";
+    private static final String EXTRA_SHORTCUT_PACKAGE = "Shortcut_Package";
 
     public static final String EXTRA_NETWORK_WIFI = "wifi";
     public static final String EXTRA_NETWORK_OTHER = "other";
@@ -3260,6 +3263,14 @@ public class ServiceSinkhole extends VpnService implements SharedPreferences.OnS
         Intent intent = new Intent(context, ServiceSinkhole.class);
         intent.putExtra(EXTRA_COMMAND, Command.start);
         intent.putExtra(EXTRA_REASON, reason.getReason());
+        ContextCompat.startForegroundService(context, intent);
+    }
+
+    public static void start(Reason reason, Context context, @NonNull String shortcutPackageName) {
+        Intent intent = new Intent(context, ServiceSinkhole.class);
+        intent.putExtra(EXTRA_COMMAND, Command.start);
+        intent.putExtra(EXTRA_REASON, reason.getReason());
+        intent.putExtra(EXTRA_SHORTCUT_PACKAGE, shortcutPackageName);
         ContextCompat.startForegroundService(context, intent);
     }
 

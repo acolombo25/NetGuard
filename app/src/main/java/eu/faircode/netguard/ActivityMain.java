@@ -57,6 +57,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
@@ -72,6 +73,8 @@ import java.util.List;
 import eu.faircode.netguard.preference.DefaultPreferences;
 import eu.faircode.netguard.preference.Preferences;
 import eu.faircode.netguard.preference.Sort;
+import eu.faircode.netguard.reason.LaunchShortcut;
+import eu.faircode.netguard.reason.Reason;
 import eu.faircode.netguard.reason.SimpleReason;
 
 public class ActivityMain extends AppCompatActivity implements SharedPreferences.OnSharedPreferenceChangeListener {
@@ -147,7 +150,7 @@ public class ActivityMain extends AppCompatActivity implements SharedPreferences
         // Upgrade
         ReceiverAutostart.upgrade(initialized, this);
 
-        if (!getIntent().hasExtra(EXTRA_APPROVE)) {
+        if (!getIntent().hasExtra(EXTRA_APPROVE) && !getIntent().hasExtra(EXTRA_SHORTCUT_PACKAGE)) {
             if (enabled)
                 ServiceSinkhole.start(SimpleReason.UI, this);
             else
@@ -177,12 +180,14 @@ public class ActivityMain extends AppCompatActivity implements SharedPreferences
         swEnabled.setChecked(enabled);
         swEnabled.setOnCheckedChangeListener((buttonView, isChecked) -> {
             Log.i(TAG, "Switch=" + isChecked);
-            DefaultPreferences.putBoolean(ActivityMain.this, Preferences.ENABLED, isChecked);
+            if (isChecked == DefaultPreferences.getBoolean(this, Preferences.ENABLED, !isChecked)) return;
+
+            DefaultPreferences.putBoolean(this, Preferences.ENABLED, isChecked);
 
             if (isChecked) {
                 start();
             } else
-                ServiceSinkhole.stop(SimpleReason.SwitchOff, ActivityMain.this, false);
+                ServiceSinkhole.stop(SimpleReason.SwitchOff, this, false);
             }
         );
         if (enabled)
@@ -457,13 +462,29 @@ public class ActivityMain extends AppCompatActivity implements SharedPreferences
         checkExtras(intent);
     }
 
-    private void checkExtrasAndLaunchShortcut(Intent intent) {
-        if (intent.hasExtra(EXTRA_SHORTCUT_PACKAGE)) {
+    private String getPackageToLaunchOrNull(Intent extrasIntent) {
+        if (extrasIntent.hasExtra(EXTRA_SHORTCUT_PACKAGE)) {
             String extraPackage = getIntent().getStringExtra(EXTRA_SHORTCUT_PACKAGE);
-            if (!extraPackage.isEmpty()) {
-                Intent launch = Util.getLaunchIntent(this,extraPackage );
-                if (launch != null && start()) startActivity(launch);
-            }
+            if (!extraPackage.isEmpty()) return extraPackage;
+        }
+        return null;
+    }
+
+    @Nullable
+    private Intent getLaunchShortcutIntent(Intent extrasIntent) {
+        String extrasPackage = getPackageToLaunchOrNull(extrasIntent);
+        if (extrasPackage != null) {
+            return Util.getLaunchIntent(this, extrasPackage);
+        } else {
+            return null;
+        }
+    }
+
+    private void checkExtrasAndLaunchShortcut(Intent intent) {
+        Intent launch = getLaunchShortcutIntent(intent);
+        if (launch != null) {
+            boolean isEnabled = DefaultPreferences.getBoolean(this, Preferences.ENABLED);
+            if (isEnabled || start()) startActivity(launch);
         }
     }
 
@@ -565,8 +586,12 @@ public class ActivityMain extends AppCompatActivity implements SharedPreferences
             // Handle VPN approval
             DefaultPreferences.putBoolean(this, Preferences.ENABLED, resultCode == RESULT_OK);
             if (resultCode == RESULT_OK) {
-                ServiceSinkhole.start(SimpleReason.Prepared, this);
-                checkExtrasAndLaunchShortcut(getIntent());
+                String shortcutPackage = getPackageToLaunchOrNull(getIntent());
+                if (shortcutPackage == null) {
+                    ServiceSinkhole.start(SimpleReason.Prepared, this);
+                } else {
+                    ServiceSinkhole.start(SimpleReason.Prepared, this, shortcutPackage);
+                }
 
                 Toast on = Toast.makeText(ActivityMain.this, R.string.msg_on, Toast.LENGTH_LONG);
                 on.setGravity(Gravity.CENTER, 0, 0);
