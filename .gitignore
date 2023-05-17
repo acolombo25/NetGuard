@@ -13,3 +13,4 @@
 /app/play
 keystore.properties
 .cxx/
+crowdin.properties

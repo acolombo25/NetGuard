@@ -49,7 +49,7 @@
     <string name="title_rport">Porta de destino</string>
     <string name="title_ruid">Aplicativo de destino</string>
     <string name="title_external">Para um servidor externo, selecione \'ninguém\'</string>
-    <string name="setting_defaults">Padrões (white/blacklist)</string>
+    <string name="setting_defaults">Padrões (lista branca/negra)</string>
     <string name="setting_whitelist_wifi">Bloquear Wi-Fi</string>
     <string name="setting_whitelist_other">Bloquear Dados Móveis</string>
     <string name="setting_screen_wifi">Permitir Wi-Fi ao ligar a tela</string>
@@ -61,7 +61,7 @@
     <string name="setting_install">Notificar sobre novas instalações</string>
     <string name="setting_screen_on">Aplicar regras \'quando tela estiver ligada\'</string>
     <string name="setting_auto">Auto habilitar após %1$d minutos</string>
-    <string name="setting_delay">Delay de %1$d minutos após desligar a tela</string>
+    <string name="setting_delay">Atraso de %1$d minutos após desligar o ecrã</string>
     <string name="setting_update">Procurar por atualizações</string>
     <string name="setting_network_options">Opções de rede</string>
     <string name="setting_subnet">Roteamento de subrede</string>
@@ -171,7 +171,6 @@ O seu tráfego de internet não está sendo enviado para um servidor VPN remoto.
     <string name="msg_terms">Doando, você concorda com os <a href="http://www.netguard.me/#terms">termos &amp; condições</a></string>
     <string name="msg_dimming">Caso não consiga pressionar OK no dialogo a seguir, então provavelmente algum aplicativo está manipulando a tela (sobreposição sobre outros apps, aplicativos que diminuem o brilho ou alteram a coloração da tela).</string>
     <string name="msg_mbday">± %1$.3f▲ %2$.3f▼ MB/dia</string>
-
 
     <string name="msg_doze">Para resultados consistentes, as otimizações de bateria Android devem ser desabilitadas para NetGuard. \n\nNa próxima caixa de diálogo, selecione \"Todos os apps\" na parte superior, toque no NetGuard na lista e selecione e confirme \"Não otimizar\".</string>
     <string name="msg_datasaving">Para resultados consistentes, as opções de guardar dados do Android devem ser desabilitadas para o NetGuard \n\nNa próxima caixa de diálogo, ative as opções \"dados em segundo plano\" e \"uso de dados sem restrições\"</string>

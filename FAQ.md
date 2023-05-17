@@ -3,6 +3,8 @@ NetGuard
 
 Please scroll down if you want to ask a question, request a feature, or report a bug.
 
+[Deutsche Übersetzung](https://raw.githubusercontent.com/M66B/NetGuard/master/FAQ-de.txt)
+
 Frequently Asked Questions (FAQ)
 --------------------------------
 
@@ -48,6 +50,7 @@ then no, because NetGuard needs to use this service. Android allows only one app
 
 NetGuard is a firewall application, so there is no intention to add VPN support.
 However, NetGuard supports a [SOCKS5 proxy](https://en.wikipedia.org/wiki/SOCKS) to chain VPN applications.
+You can find one possible community contributed solution [here](https://itsignacioportal.github.io/netguard-pdnsf-any-vpn-combo/).
 
 <a name="faq3"></a>
 **(3) Can I use NetGuard on any Android version?**
